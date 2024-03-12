@@ -6,11 +6,11 @@ $$\frac{\partial f}{\partial x}_{+} = \lim _ {x \to x_0} \frac{f(x + h) - f(x)}{
 
 If
 
-$$\frac{\partial f}{\partial x}_{-} = \frac{\partial f}{\partial x}_{+}$$
+$${\frac{\partial f}{\partial x}}_{-} = {\frac{\partial f}{\partial x}}_{+}$$
 
 then
 
-$$\frac{\partial f}{\partial x} = \frac{\partial f}{\partial x}_{-} = \frac{\partial f}{\partial x}_{+}$$
+$$\frac{\partial f}{\partial x} = {\frac{\partial f}{\partial x}}_{-} = {\frac{\partial f}{\partial x}}_{+}$$
 
 ```python
 import numpy as np

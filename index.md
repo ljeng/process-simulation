@@ -1,9 +1,11 @@
-# ChE 352
 # Process Simulation and Mathematical Techniques for Chemical Engineers
 
+* [Real Analysis](real-analysis.md)
+* [Big-O](big-O.md)
 * [Root Finding](root-finding.md)
 * [Interpolation](interpolation.md)
 * [Integration & Differentiation](integration-differentiation.md)
-* [Intro to IVPs](intro-ivps.md)
 * [PRNG Secrets](prng-secrets.md)
-* [IVPs & RK4](ivps-rk4.md)
+* [Intro to IVPs & RK4](intro-ivps-rk4.md)
+* [IVP Systems Final](ivp-systems-final.md)
+* [Linear Systems](linear-systems.md)
