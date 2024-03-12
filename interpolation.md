@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 # Interpolation
 
 ## Lagrange Code
@@ -19,9 +23,9 @@ def lagrange_P(x, x_data, y_data):
     return sum(y_data[j] * lagrange_Lj(x, j, x_data) for j in range(n))
 ```
 
-Write a function `my_lin_interp(x, y, X)`, where `x` and `y` are arrays containing experimental data points, and `X` is an array. Assume that `x` and `X` are in ascending order and have unique elements. The output argument, `Y`, should be an array, the same size as `X`, where `Y[i]` is the linear interpolation of `X[i]`. You should not use `interp` from numpy or `interp1d` from scipy.
-
 ---
+
+Write a function `my_lin_interp(x, y, X)`, where `x` and `y` are arrays containing experimental data points, and `X` is an array. Assume that `x` and `X` are in ascending order and have unique elements. The output argument, `Y`, should be an array, the same size as `X`, where `Y[i]` is the linear interpolation of `X[i]`. You should not use `interp` from numpy or `interp1d` from scipy.
 
 ```python
 import bisect

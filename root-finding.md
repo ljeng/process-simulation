@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 # Root Finding
 
 ```python
@@ -9,7 +13,7 @@ import math
 def bisect(lo, hi, tolerance):
     if math.isclose(lo, 0):
         return lo
-    elif math.isclose(lo, 0):
+    elif math.isclose(hi, 0):
         return hi
     f_lo, f_hi = map(f, (lo, hi))
     if f_lo < 0 < f_hi:
@@ -36,11 +40,13 @@ def newtonRaphson(x, tolerance, f_prime=None):
     return x
 ```
 
+---
+
 Consider the problem of building a pipeline from an offshore oil platform, a distance `H` miles from the shoreline, to an oil refinery station on land, a distance `L` miles along the shore. The cost of building the pipe is `C_ocean` while the pipe is under the ocean and `C_land` while the pipe is on land. The pipe will be built in a straight line toward the shore where it will make contact at some point, *x* between 0 and `L`. It will continue along the shore on land until it reaches the oil refinery. See the figure for clarification.
 
 ![Oil platform](https://pythonnumericalmethods.berkeley.edu/_images/19.05.01-Oil-platform.png)
 
-Write a function `my_pipe_builder(C_ocean, C_land, L, H)`, where the input arguments are as described earlier, and *x* is the x-value that minimizes the total cost of the pipeline. You should use the bisection method to determine this value to within a tolerance of `1e-6` starting at an initial bound of *a = 0* and *b = L*.
+Write a function `my_pipe_builder(C_ocean, C_land, L, H)`, where the input arguments are as described earlier, and $$x$$ is the *x*-value that minimizes the total cost of the pipeline. You should use the bisection method to determine this value to within a tolerance of `1e-6` starting at an initial bound of $$a = 0$$ and $$b = L$$.
 
 Test Cases:
 ```

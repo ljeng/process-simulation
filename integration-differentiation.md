@@ -1,16 +1,20 @@
+---
+layout: default
+---
+
 ## Differentiation
 
-$$\frac{\partial f}{\partial x}_{-} = \lim _ {x \to x_0} \frac{f(x) - f(x - h)}{h}$$
+$$\frac{\partial f}{\partial x}\_- = \lim _ {x \to x_0} \frac{f(x) - f(x - h)}{h}$$
 
-$$\frac{\partial f}{\partial x}_{+} = \lim _ {x \to x_0} \frac{f(x + h) - f(x)}{h}$$
+$$\frac{\partial f}{\partial x}\_+ = \lim _ {x \to x_0} \frac{f(x + h) - f(x)}{h}$$
 
 If
 
-$${\frac{\partial f}{\partial x}}_{-} = {\frac{\partial f}{\partial x}}_{+}$$
+$$\frac{\partial f}{\partial x}\_- = \frac{\partial f}{\partial x}\_+$$
 
 then
 
-$$\frac{\partial f}{\partial x} = {\frac{\partial f}{\partial x}}_{-} = {\frac{\partial f}{\partial x}}_{+}$$
+$$\frac{\partial f}{\partial x} = \frac{\partial f}{\partial x}\_- = \frac{\partial f}{\partial x}\_+$$
 
 ```python
 import numpy as np
@@ -51,6 +55,8 @@ df = 2*x*cos(k + x**2)
 
 ## Integration
 
-$$\int_a^b f(x) \, dx = \lim_{n \to \infty} \summation_{i = 1}^n h f(a + ih)$$
+$$\int_a^b f(x) \, dx = \lim_{n \to \infty} \sum_{i = 1}^n h f(a + ih)$$
+
 where
+
 $$h = \frac{b - a}{n}$$

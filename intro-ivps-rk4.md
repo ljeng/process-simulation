@@ -1,25 +1,36 @@
+---
+layout: default
+---
+
 # Intro to IVPs
 
 ## Well-Posed IVPs
 
-$\frac{\partial y}{\partial t} = f(t, y)$ for $a \leq t \leq b$ with $y (a) = \alpha$
+$$\frac{\partial y}{\partial t} = f(t, y)$$ for $$a \leq t \leq b$$ with $$y (a) = \alpha$$
 
-State the problem below in the standard form of an IVP (aka: define $y$, $t$, $f$, $a$, and $\alpha$)
+State the problem below in the standard form of an IVP (aka: define $$y$$, $$t$$, $$f$$, $$a$$, and $$\alpha$$)
 
 $$a = 0$$
+
 $$\alpha = C_{EB}^0$$
+
 $$t = \tau$$
+
 $$y = C_{EB}$$
+
 $$f (t, y) = -k_f y$$
 
 $$\frac{\partial C_{EB}}{\partial \tau} = k_f C_{EB}$$
+
 $$C_{EB} (\tau = 0) = C_{EB}^0$$
 
 Then, check whether your IVP meets the conditions for having a unique solution.
 
 $$f: \mathbb R^2 \to \mathbb R$$
-$f$ is continuous.
-$\frac{\partial f}{\partial y} = -kf$ is continuous.
+
+$$f$$ is continuous.
+
+$$\frac{\partial f}{\partial y} = -kf$$ is continuous.
 
 # IVPs
 
