@@ -64,51 +64,6 @@ Let $$f (x) = 1.013 x^5 - 5.262 x^3 - 0.01732 x^2 + 0.8389 x - 1.912$$.
 
 1. Evaluate $$f (2.279)$$ by first calculating $${(2.279)}^2$$, $${(2.279)}^3$$, $${(2.279)}^4$$, and $${(2.279)}^5$$ using four-digit rounding arithmetic.
 
-    ```python
-    x = 2.279
-    print(f(x))
-    A = [-1.912, 0.8389, -0.01732, -5.262, 0, 1.013]
-    fa = round(sum(round(a * round(x**i, 4), 4) for i, a in enumerate(A)), 4)
-    print(f'f(2.279) = {fa}')
-    ```
-
-    ```
-    f(2.279) = -0.0978
-    ```
-
 1. Evaluate $$f (2.279)$$ using the formula $$f (x) = (((1.013 x^2 - 5.262) x - 0.01732) x + 0.8389) x - 1.912$$ and four-digit rounding arithmetic.
 
-    ```python
-    fb = 0
-    for i in reversed(range(len(A))):
-      fb = round(fb + constants[i], 4)
-      if not i:
-        break
-      fb = round(fb * x, 4)
-    print(f'f(2.279) = {fb}')
-    ```
-
-    ```
-    f(2.279) = -0.0984
-    ```
-
 1. Compute the absolute and relative errors in *(1)* and *(2)*.
-
-    ```python
-    fc = 1.013 * x**5 - 5.262 * x**3 - 0.01732 * x**2 + 0.8389 * x - 1.912
-    a_absolute = abs(fa - fc)
-    a_relative = abs(fc / fa - 1)
-    b_absolute = abs(fb - fc)
-    b_relative = abs(fb / fa - 1)
-    print(f'a) absolute error = {a_absolute:.4f}')
-    print(f'a) relative error = {a_relative:.4%}')
-    print(f'b) absolute error = {b_absolute:.4f}')
-    print(f'b) relative error = {b_relative:.4%}')
-    ```
-
-    ```
-    1) absolute error = 0.0001
-    1) relative error = 0.1342%
-    2) absolute error = 0.0007
-    2) relative error = 0.6135%
-    ```

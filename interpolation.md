@@ -61,3 +61,7 @@ def my_lin_interp(x, y, X):
   else:
     raise IndexError
 ```
+
+---
+
+Suppose you need to construct eight-decimal-place tables for the common, or base-10, logarithm function from $$x = 1$$ to $$x = 10$$ in such a way that linear interpolation is accurate to within $${10}^{-6}$$. Determine a bound for the step size for this table. What choice of step size would you make to ensure that $$x = 10$$ is included in the table?

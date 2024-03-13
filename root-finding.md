@@ -6,7 +6,11 @@ layout: default
 
 ```python
 import math
+```
 
+## Bisection
+
+```python
 # def f(x):
 #     ...
 
@@ -29,15 +33,6 @@ def bisect(lo, hi, tolerance):
         else:
             hi = mid
     return lo
-
-def newtonRaphson(x, tolerance, f_prime=None):
-    previous = float('inf')
-    while not math.isclose(previous, x, abs_tol=tolerance):
-        y = f(x)
-        y_prime = (f(x + tolerance) - f(x - tolerance)) / tolerance / 2 if f_prime is None else f_prime(x)
-        previous = x
-        x -= y / y_prime
-    return x
 ```
 
 ---
@@ -61,8 +56,6 @@ Out: 7.071067392826080
 ```
 
 ```python
-import math
-
 def my_pipe_builder(C_ocean, C_land, L, H, tolerance=1e-6):
   a, b = 0, L
   cost = lambda x: C_ocean * math.sqrt(H**2 + x**2) + C_land * (L - x)
@@ -83,4 +76,38 @@ print(my_pipe_builder(30, 10, 100, 20))
 28.867513686418533
 17.67766997218132
 7.07106813788414
+```
+
+## Newton-Raphson
+
+```python
+def newtonRaphson(x, tolerance, f_prime=None):
+    previous = float('inf')
+    while not math.isclose(previous, x, abs_tol=tolerance):
+        y = f(x)
+        y_prime = (f(x + tolerance) - f(x - tolerance)) / tolerance / 2 if f_prime is None else f_prime(x)
+        previous = x
+        x -= y / y_prime
+    return x
+```
+
+---
+
+Use Newton's method to find a solution accurate to within $$10^{-4}$$.
+
+$$x - \cos x = 0$$ on $$[0, \frac{\pi}{2}]$$
+
+```python
+previous = float('inf')
+x = (0 + math.pi) / 2
+while not math.isclose(previous, x, abs_tol=10e-4):
+    y = x - math.cos(x)
+    y_prime = 1 + math.sin(x)
+    previous = x
+    x -= y / y_prime
+print(x)
+```
+
+```
+0.7390851781060102
 ```

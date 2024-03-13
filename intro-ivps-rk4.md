@@ -50,6 +50,46 @@ def euler(kf, C0_EB, tau_final, h, f):
     plt.plot(tau, y, label='Euler')
 ```
 
+A projectile of mass $$m = 11$$ kg shot vertically upward with initial velocity $$v (0) = 8$$ m/s is slowed due to the force of gravity $$F_g = mg$$ and due to air resistance $$F_r = -kv|v|$$ where $$g = -9.8$$ m/s^2 and $$k = 0.002$$ kg/m. The differential equation for the velocity $$v$$ is given by
+
+$$mv' = mg - kv|v|$$
+
+1. Find the velocity after 0.1, 0.2, ..., 1.0 s.
+
+    $$v' = g - \frac{kv|v|}{m}$$
+
+    ```python
+    import math
+
+    m = 11
+    v = 8
+    g = -9.8
+    k = 0.002
+    time = 0
+    h = 0.1
+    while not math.isclose(time, 1.0):
+        time += h
+        v += h * (g - k * v * abs(v) / m)
+        print(f'time = {time:.1f}, velocity = {v}')
+    ```
+
+    ```
+    time = 0.1, velocity = 7.018836363636364
+    time = 0.2, velocity = 6.037940653383646
+    time = 0.3, velocity = 5.057277803795759
+    time = 0.4, velocity = 4.076812784545126
+    time = 0.5, velocity = 3.096510595409122
+    time = 0.6, velocity = 2.1163362612660768
+    time = 0.7, velocity = 1.1362548270993358
+    time = 0.8, velocity = 0.15623135300784285
+    time = 0.9, velocity = -0.8237690907782602
+    time = 1.0, velocity = -1.8037567526779892
+    ```
+
+1. To the nearest tenth of a second, determine when the projectile reaches its maximum height and begins falling.
+
+$$0.8$$ s
+
 ## RK2
 
 ```python
