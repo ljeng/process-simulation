@@ -1,0 +1,149 @@
+The Cooper Union for the Advancement of Science and Art 
+ChE352 
+Numerical Techniques for Chemical Engineers 
+Professor Stevenson 
+Lecture 9 The Cooper Union for the Advancement of Science and Art 
+Homework #5: groups of 2-3 
+Please sort yourselves into groups of 2-3 
+before the next homework, and send me the 
+names (each group only has to send once) The Cooper Union for the Advancement of Science and Art 
+Classical dynamics: Asteroids 
+Given an asteroid with a position, velocity, 
+and forces, how does it move? 
+Position = x 
+ Velocity = dx/dt 
+    Force = m(d2x/dt2)
+If we know the initial values  of the variables, 
+we can find their values at later times too 
+using a form of numerical integration The Cooper Union for the Advancement of Science and Art 
+Classical dynamics: Molecules 
+Given a set of atoms with positions, velocities, 
+and forces, how do they move? 
+Position = x 
+ Velocity = d x/dt
+    Force = m(d2x/dt2)
+If we know the initial values  of the variables, 
+we can find their values at later times too 
+using a form of numerical integration 
+Each atom 
+has its own 
+vectors x, 
+d x/dt, and 
+m(d2x/dt2)The Cooper Union for the Advancement of Science and Art 
+Initial Value Problems 
+What is the independent  variable in f(t, y)? 
+What about on this graph? WE 
+HAVE 
+The Cooper Union for the Advancement of Science and Art 
+What makes it an IVP? 
+•When you know how a value starts , and you 
+know how it changes , but you do not know  
+the values after the start 
+•Classic example: predator/prey population 
+–Easy to see how the derivatives are related 
+•More prey ➜ more predators 
+•More predators ➜ fewer prey 
+–But how do these changes add up over time? 
+–Example: exercise 5.7.5 (pg 221) in F&B The Cooper Union for the Advancement of Science and Art 
+Predator/prey IVP 
+Either dynamic equilibrium, or both predator & 
+prey go extinct, depending on IVP properties. The Cooper Union for the Advancement of Science and Art 
+Functions vs function values 
+•We can use the values f (xi) without 
+knowing the function f (x ) in total 
+•If we only need discrete f (xi) values, an 
+array such that y[i] = f (xi) is fine 
+f (x ) f (x0) 
+f (x1) 
+f (x2) f (x3) f (x4) 
+x0 x1 x2 x3 x4The Cooper Union for the Advancement of Science and Art 
+Example: Styrene Reactor Design 
+•Scenario: you’re a chemical engineer for a 
+company that makes styrofoam 
+•You notice a shortage of styrene  ("S"), the 
+monomer of styrofoam, so you want to make 
+it from ethylbenzene  
+("EB"), a cheap oil 
+refinery byproduct, 
+instead of buying it 
+What do you call this kind of reaction? The Cooper Union for the Advancement of Science and Art 
+Simplified reactor equations 
+What variables here give the yield of S? 
+Can we solve for yield analytically? 
+What aspects of reality are missing? 
+1st order 2nd order First you would need to calculate the yield of S as 
+a function of distance & reactor length (z, v) The Cooper Union for the Advancement of Science and Art 
+More realistic equations: 𝜌 varies 
+Still doesn’t account for temperature change, side 
+products (benzene and toluene), coking... 
+Can we solve this analytically? 
+The Cooper Union for the Advancement of Science and Art 
+“Well-posed” IVPs 
+•An IVP (in 1D) is well-posed if: 
+and f, df are continuous for all relevant t & y: 
+•A well-posed IVP has a unique solution y(t) 
+•Opposite is ill-posed  (no unique solution) initial condition The Cooper Union for the Advancement of Science and Art 
+Activity: Well-posed IVPs 
+Then, check whether your IVP meets the 
+conditions for having a unique solution. 
+(Why do we care that the solution is unique?) 
+Standard 
+form of 
+an IVP 
+Styrene 
+synthesis 
+reaction 
+(irreversible) State the problem below in the standard 
+form of an IVP (aka: define y, t, f, a, and 𝜶)The Cooper Union for the Advancement of Science and Art 
+Answer: Well-posed IVPs 
+IVP is well-posed and has a unique solution 
+The Cooper Union for the Advancement of Science and Art 
+Error bounds for well-posed IVPs 
+Then the difference (error) between z(t) and y(t) 
+is always proportional to the size of δ(t) 
+Why does that help us? A well-posed IVP solution y can be approximated 
+with bounded error . If we define a perturbed  
+problem  z using the same function f(t, y): The Cooper Union for the Advancement of Science and Art 
+How do we solve IVPs? 
+1st-order Taylor expansion of y at point ti:
+If we define a step size h = (ti+1– ti) and 
+evaluate at a nearby point ti+1:
+Estimate a small step with a Taylor series! 
+What order is 
+the error for 
+solution y(b)? The Cooper Union for the Advancement of Science and Art 
+Euler’s Method 
+•Dropping the error term (proportional to h2):
+•Define a variable w for our approximation: 
+•Simplifying notation: 
+•"Asteroids" code: 
+x += dt * x_speed 
+x_speed += dt * x_acceleration The Cooper Union for the Advancement of Science and Art 
+①Stock price IVPs  ②???  ③Profit 
+●Do not pick individual stocks unless you 
+have money to set on fire 
+●Those who do bet on stock prices (like 
+hedge funds) do it with IVPs 
+●Typical model: the Black-Scholes  equation 
+S is the stock price, V is the price of an option  to buy 
+the stock at a future time, r is the risk-free interest 
+rate, σ is the volatility  of the stock price, t is time 
+The Cooper Union for the Advancement of Science and Art 
+①Stock price IVPs  ②???  ③Profit 
+Black-Scholes assumes that 
+prices follow Brownian Motion  
+(also used to model molecular 
+dynamics with a PRNG) Volatility σ is higher for 
+smaller companies, so 
+prices tend to have lower 
+lows & higher highs The Cooper Union for the Advancement of Science and Art 
+Valentine's Math: PRNG Secrets 
+●Pseudo-Random Number Generator 
+●The output of a PRNG is repeatable as 
+long as it has the same state (aka seed )
+●If you and another person share a secret, 
+you can each use it to seed a PRNG, 
+giving identical  random-looking outputs 
+●This lets you share secret messages 
+●https://www.kaggle.com/allaboutchemistry/
+prng-encryption 

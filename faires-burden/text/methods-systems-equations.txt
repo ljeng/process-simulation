@@ -1,0 +1,392 @@
+214 C H A P T E R 5 Numerical Solution ofInitial -Value Problems
+2. Theinitial -value problem
+y=—y+1— j,for1<t<2,with y(l)=1
+hastheexact solution y(f)=14-(el~‘— l)/-1.
+a.UsetheRunge -Kutta-Fehlberg method with tolerance TOL=10~3tofind wiandw^.Compare
+theapproximate solutions totheactual values .
+b.Use theAdams Variable -Step-Size Predictor -Corrector method with tolerance TOL=0.002
+andstarting values from theRunge -Kutta method oforder 4tofind*v4andw5.Compare the
+approximate solutions totheactual values.
+3. UsetheRunge -Kutta -Fehlberg method with tolerance TOL=104toapproximate thesolution tothe
+following initial-value problems .
+a.y'= for1<t<1.2,with y(l)=1,hmax =0.05,andhmin=0.02.
+b.y=sinf+e~\for0<t<1,with y(0)=0,hmax =0.25 ,andhmin=0.02.
+c.y'— (y2+y)t~l,for1<t<3,with y(l)=— 2,hmax— 0.5,andhmin— 0.02.
+d.y=— ty+4ty~\for0<t<1,with y(0)=1,hmax=0.2,andhmin=0.01.
+4. UsetheRunge -Kutta -Fehlberg method with tolerance TOL=106,hmax =0.5,andhmin =0.05
+toapproximate thesolutions tothefollowing initial -value problems .Compare theresults totheactual
+values .
+a.y=j- for1<t<4,with y(l)=1;actual solution y(t)=f/(l4-Inf).
+b.y=1+j+ ,for1<t<3,with y(l)=0;actual solution y{t)=ttan(lnf).
+c.y=— l)(>-l-3),for0<f<3,with>(0)=-2;actual solution .y(/)=— 3+2(1+e-2,)_
+l.
+d.y=(f+2/3)y3-f)\for0<t<2,with y(0)= actual solution y(t)=(3+2f2+6«/*)“ ,/2.
+5. UsetheAdams Variable -Step-Size Predictor -Corrector method with TOL=104toapproximate the
+solutions totheinitial-value problems inExercise 3.
+6. UsetheAdams Variable -Step-Size Predictor -Corrector method with tolerance TOL=10~6,hmax =
+0.5,andhmin=0.02 toapproximate thesolutions totheinitial-value problems inExercise 4.
+7. Anelectrical circuit consists ofacapacitor ofconstant capacitance C=1.1farads inseries with a
+resistor ofconstant resistance Ro=2.1ohms .Avoltage E(t)=110sin/isapplied attime t=0.
+When theresistor heats up,theresistance becomes afunction ofthecurrent i,
+R(t)=R0-fki,where k=0.9,
+andthedifferential equation foribecomes
+/1+2*.\d«+_1__.=\dS
+y R{))dt RQC R0Cdt
+Find thecurrent iafter 2s,assuming i(0)=0.
+5.7Methods forSystems ofEquations
+The most common application ofnumerical methods forapproximating thesolution of
+initial -value problems concerns notasingle problem ,butalinked system ofdifferential
+equations .Why,then,have wespent themajority ofthischapter considering thesolution
+ofasingle equation ?Theanswer issimple :toapproximate thesolution ofasystem of
+initial -value problems ,wesuccessively apply thetechniques thatweused tosolve problems
+involving asingle equation .Asissooften thecase inmathematics ,thekeytothemethods
+Cop>?i£tu2012 Cc«£»fcLearn in*.AIR.(huRocncd Mayr*xbecopied ,canned ,o*daplicaied.»whole o»mpan.Doctoelectronic rifhu.*wcthird pony contcac may besuppreved Trent theeBook and/orcCh<xcn»l.Editorial roiew h*>
+deemed CutanyMpprcucd content dec>notimtctlaly alTca theoverall leamir*experience .C'cttitape Learnmp re\me»thertpht 10renxyve additional conceal atanytime i iwtoeqjcni npht »rotrictionc require It5.7 Methods forSystems ofEquations 215
+forsystems canbefound byexamining theeasier problem andthen logically modifying it
+totreat themore complicated situation .
+Anmth-order system offirst-order initial -value problems hastheform
+dui
+dt
+du2
+Itf\(*,U\,U2,
+^**1»**2»   »**m)»
+fora<t<b,with theinitial conditions
+u\(a)=au u2(a)=a2,. ...um(a)=otm.
+Theobject istofindmfunctions u\tu2,.. .,umthatsatisfy thesystem ofdifferential
+equations together with alltheinitial conditions .
+Methods tosolve systems offirst -order differential equations aregeneralizations ofthe
+methods forasingle first-order equation presented earlier inthischapter .Forexample ,the
+classical Runge -Kutta method oforder 4given by
+w0=cr,
+*i=hfOh wi)»
+k2=hf
+^ti-I- w,+
+*3=hf\
+^tj+ Wi+ ,
+*4=hffa+uWi+*3),
+and
+w,+1=w,+~[k\+2k2+2ki+*4],o
+foreach i=0,1,.. .,N— 1,isused tosolve thefirst-order initial -value problem
+y'=f(t,y),fora<t<b,with y(a)=or.
+Itisgeneralized forsystems asfollows .
+Letaninteger N>0bechosen and seth=(b— a)/N.Partition theinterval [a,b]
+into Nsubintervals with themesh points
+t j=a+jh foreach j=0,1,...,N.
+Use thenotation w yforeach j=0,1,. . .,Na n d i=1,2,. . .,mtodenote an
+approximation to!*,(*,);thatis,w yapproximates theithsolution U j(t)ofthesystem atthe
+y'thmesh point t j.Fortheinitial conditions ,set
+wi,0=oi. W2,O=C*2,....wm>0=ofm.
+Figure 5.4gives anillustration ofthisnotation .
+Copyright 2012 Cengagc Learn in*.AIRights Reserved May r*xbecopied .scanned .orduplicated .inwhole orinpar.Doc toelectronic rights .some third puny content may besuppressed rrom theeBook aml/oreChaptcnnl .Editorial review h*>
+deemed Cutanysuppressed content does nottnaxrUXy alTcct theioera .1learning experience .('engage [.camon reserves theright 10remove additional conceal atanytime ifsubvcqjem rights restrictions require It216 CHAPTER 5 Numerical Solution ofInitial-Value Problems
+Figure 5.4
+1
+1
+1
+1
+—>\
+nmy
+-
+ "23--"«\ (a)=U'(0"’ 'i, y,
+:s ^1-
+u2(a)=a2i
+ 
+a~*o*\hh1 a~*o hh* a— tot\*2h*
+Suppose thatthevalues w2jt  ,wm.jhave been computed .Weobtain w\j+\,
+W2j+u-  »wm,j+ibyfirstcalculatings foreach i=1,2,...,m,
+k\j=hfi(tjtW\tj%W2J Wmj ),
+andthen finding ,foreach i,
+, h 1, 1, 1,\*2.»=hfiitj +-,Wij+-k\titW 2,j+2*1.2.   »Wm,j+2*1.1«) 
+Wenext determine alltheterms
+*3.i=hfi
+^tj+ W\j+“ *2.1,w2,j+2^2.2.   .WmJ+-jk2,m
+and,finally ,calculate alltheterms
+*4,i=hfi(tj+h,W\j+*3.1."2.;+*3.2.   ."m./+*3.m)-
+Combining these values gives
+Theprogram RK04SY57
+implements the
+Rungc-Kutta method of
+order 4forsystems ."i,y+1=wiJ+
+^[*l,i+2*2.I+ <+*4.i]
+foreach i=1,2,...m.
+Note thatallthevalues*1.1,*1.2*-- .*i.mmust becomputed before anyoftheterms
+oftheform*2,/canbedetermined .Ingeneral ,each*/.1**/.2»   .*/.mmust becomputed
+before anyoftheexpressions*/+itl.
+Example 1Kirchhoff ’sLaw states thatthesum ofallinstantaneous voltage changes around aclosed
+electrical circuit iszero.This implies thatthecurrent ,/(/),inaclosed circuit containing a
+resistance ofRohms ,acapacitance ofCfarads ,aninductance ofLhenrys ,andavoltage
+source ofE(t)volts must satisfy theequation
+LI\t)+RI(t)+^jI(t)dt=E(t).
+Thecurrents I\(t)andl2{t)intheleftandright loops ,respectively ,ofthecircuit shown in
+Figure 5.5arcthesolutions tothesystem ofequations
+2/,(0+6[/1(0-/2(0]+2/i'(0=12,
+LJi2(t)dt+4/2(0+6[/2(0-/1(»)]=0.
+Copyright 2012 Cengagc Learn in*.AIRights Reserved May rotbecopied ,canned ,ocimplicated ,inwhole orinpar.Doctocjectronie right..some third pur.ycontent may besupplied rican theeBook and/orcChapccnM .Editorial review h*>
+deemed Cutany Mjppic-cdcontent does notmaxrUXy alTcct theiAera .1learning experience .('engage [.camonreserve,theright 10remove additional eonteatatanytime iisubvcqjem right,restriction,require It.Figure 5.55.7 Methods forSystems ofEquations 217
+211 0.5F
+K i— ^11.(0
+6(I 412 12V— 
+2H
+Suppose that theswitch inthecircuit isclosed attime t=0.This implies that/,(0)
+and/2(0)=0.Solve for/((/)inthefirstequation ,differentiate thesecond equation ,and
+substitute forI[(t)toget
+/,'=/,(f,/,,/2)=-4/,+3/2+6,with/,(0)=0,
+/2=/2O.h J i )=0.6/,'-0.2/2=-2.4/,+I.6/2+3.6,with/2(0)=0.
+Theexact solution tothissystem is
+/,(t)=-3.375 e-2'+1.87V0-*+1.5 and /2(r)=-2.25e“ 2'+2.25e-°-4'.
+Wewillapply theRunge -Kutta method oforder 4tothissystem with h=0.1.Since
+Who=/.(0)=0andw2.o=/2(0)=0,
+*1.1=*/ifo.W1.0,*2.0)=o.l/,(0,0,0)=0.1[-4(0)+3(0)+6]=0.6,
+*i.2=hf2(to,wi.o,w2.o)=0.1/2(0.0,0)=0.1[-2.4(0)+1.6(0)+3.6]=0.36,
+*2.1=*/i(to+2^’wi.o+2*1.1*w2.o+2*i.2
+^=0*1/i(0.05,0.3,0.18 )
+*2,2=hf20.1[— 4(0.3)+3(0.18 )+6]=0.534 ,
+1(to+
+^*»W|,o+-*1.1 »^2,0+2*1.2
+^0.1/2(0.05,0.3,0.18 )
+0.1[— 2.4(0.3)+1.6(0.18)+3.6]=0.3168 .
+Generating theremaining entries inasimilar manner produces
+*3f,=(0.1)/,(0.05 ,0.267 ,0.1584 )=0.54072 ,
+*3.2=(0.1)/2(0.05 ,0.267 ,0.1584 )=0.321264 ,
+*4.1=(0.1)/,(0.1,0.54072 ,0.321264 )=0.4800912 ,
+*4.2=(0.1)/2(0.1,0.54072 ,0.321264 )=0.28162944 .
+Copyright 2012 Cengagc Learning .AIRights Reversed May notbecopied ,canned ,orduplicated .inwhole orinpar.Doctoelectronic rights.xvnc third pur.ycontent may bevuppftv *drrom theeBook amtar cCh<xcn»l.Editorial roiew h*>
+deemed Cutanysuppressed content does nottnaxrUXy alTect theoverall learning experience .Ccagagc [.camonreserve*theright 10remose additional conteatatanytime iisubseqjcnt right*restriction*require It218 C H A P T E R 5 Numerical Solution ofInitial-Value Problems
+Asaconsequence ,
+/1(0.1)«wu=wi ,o+ +2*2,I+2*3.1+*4.i]
+=0+-[0.6+2(0.534 )+2(0.54072 )+0.4800912 ]=0.53825526
+and
+/2(0.1)%w2,i=w2,o+g[*i,2+2*2.2+2*3,2+^4.2]=0.3196263 .
+Theremaining entries inTable 5.15 aregenerated inasimilar manner .
+Table 5.15t j W UW2J \h(t j)-w2j\
+0.0 0 0 0 0
+0.1 0.5382550 0.3196263 0.8285 xlO'50.5803 x10“ 5
+0.2 0.9684983 0.5687817 0.1514 x1040.9596 x10~5
+0.3 1.310717 0.7607328 0.1907 x1040.1216 x104
+0.4 1.581263 0.9063208 0.2098 x10~40.1311 x104
+0.5 1.793505 1.014402 0.2193 xlO"40.1240 x10~4
+Any ofthemethods implemented inMATLAB canbeused forsystems ofdifferential
+equations .Forexample ,touseode45tosolve oursystem given inExample 1wefirstdefine
+theright -hand sides using anM-filecalled F.mthatcontains thestatements
+function dy=F(t,y)
+dy=zeros (2,1);
+dy(1)=-4*y(1)+3*y(2)+6;
+dy(2)=-2 . 4*y(l)+l.6*y(2)+3 . 6;
+Then make theright -hand sideofthesystem ofdifferential equations known toMATLAB
+with
+FF=OF
+Wenow define thetvalues atwhich wewant toapproximate thesolutions
+tspan =[00.1 0.2 0.30.4 0 . 5]
+The following command computes thesolution tothesystem atthegiven values oft.The
+initial conditions I\(0)=0and/2(0)=0aregiven as[00].
+[T,YY]=ode45(FF,tspan ,[00])
+The MATLAB response places thetvalues inthearray Tand theapproximate solution
+values inYY,with theapproximations forI\(t)inthefirstcolumn and/2(f)inthesecond .
+0
+0.100000000000000
+0.200000000000000
+0.300000000000000
+0.400000000000000
+0.5000000000000000
+0.538263922676270
+0.968513005638230
+1.310736555252393
+1.581284356153020
+1.7935270443890290
+0.319632054268176
+0.568791683477228
+0.760744806883952
+0.906333359733513
+1.014415449337470
+Copyright 2012 Cengagc Learn in*.AIRights Reversed Mayr*xbecopied.scanned .ocimplicated ,inwhole orinpar.Doctocjectronie rlghtv.some third pur.ycontent may besupplied ftem theeBook and/orcChapccriM .Editorial review h*>
+deemed Cutanysuppressed content does notnuxtlaly alTcct theioera .1learning experience .('engage [.camonreserves theright 10remove additional eonteatatanytime iisuhvcqjcM rights restrictions require It5.7 Methods forSystems ofEquations 219
+Higher -Order Differential Equations
+Many important physical problems — forexample ,electrical circuits andvibrating systems — 
+involve initial -value problems whose equations have order higher than 1.New techniques
+arenotrequired forsolving these problems .Byrelabeling thevariables wecanreduce
+ahigher -order differential equation intoasystem offirst-order differential equations and
+then apply oneofthemethods wehave already discussed .
+Ageneral mth-order initial -value problem hastheform
+/">(»)=/(»,*/y—'o,
+fora<t<b,with initial conditions
+y(a)=ctuy'(a)=a2 y(m~[)(a)=am.
+Toconvert thisintoasystem offirst-order differential equations ,define
+mW=yd).u2(t)=y\t) um(t)=/—»«.
+Using thisnotation ,weobtain thefirst-order system
+duidy— =— =“ 2,dt dt
+dui
+dtdy
+dt=w3,
+dum— \
+dtdy(m— 2)
+dt=Um»
+and
+dum
+dtdy(ml)
+=v(m)
+dty y{ml))=f(t,u u u 2 u m).
+with initial conditions
+u,(a)=y(a)=or,,u2(a)=y’(a)=a2 um(a)=y(ml)(a)=am.
+Example 2Transform thesecond -order initial -value problem
+y” — 2y'+2y=e*sinf, forO <t<1,with y(0)=— 0.4,>'(0)=— 0.6
+intoasystem offirstorder initial -value problems ,andusetheRunge -Kutta method oforder
+4with h=0.1toapproximate thesolution .
+Solution Let wi(f)=y(f)and 112(f)=/(/).This transforms thesecond -order equation
+intothesystem
+*<5(0=«2(f)»
+u'2(t)=e2tsinf-2u\(t)+2u2(t),
+with initial conditions wj(0)=-0.4,u2(0)=— 0.6.
+Copyrifht 2012 Cc«£»fcLearn !#*.AIRights Reversed May notbecopied ,canned ,ordedicated .»whole oempar.Doc toelectronic rtghtv .xvtic third pur.yconcern .may bevuppftved riom theeBook amtar eOncxcnnl .Editorial roiew h*>
+deemed Cutanysuppressed content does notimtetlaly alTecc theoverall learning experience .Ccagagc [.cammu reserve*theRIGHTK >remote additional contort atanytimeiivubveqjcnt rights restrictions require It220 C H A P T E R 5 Numerical Solution ofInitial-Value Problems
+The initial conditions give wio=— 0.4and w2io=— 0.6.The Runge -Kutta method
+oforder 4forsystems described onpage 216with j=0give
+*i.i=Vi(lb,wit0,w2,o)=hw 2,o=-0.06 ,
+*1.2=V2fo>.wi.o,w2.o)=hlf*sin/o-2w1>0+2w2>0]=-0.04 ,
+*2.1=Vl
+*2*[*2.0+-*1.2( h 1 1.\Uo+2»wi.o+2*1.1 »w2.o+2*1.2J=
+,2=*/2
+^*0+ Wi,o+-*1.1»2,0+2*1>2
+^ =hj^*005*sin(r0+0.05 )-2
+^wi.0+
+^*1,1
+^+2
+^w2,0+
+^*1.2
+^j-0.062 ,
+=-0.03247644757 ,
+*3,1=*w2,o+
+^*2,2-0.06162832238 ,
+e2(r0-o.o5)sin^+Q05)-2
+^wi.o+
+^*2.1
+^+2
+^w2,o+2*2-2)] *3,2=h
+=-0.03152409237 ,
+*4.1=h[w2.o+*3.2]=-0.06315240924 ,
+and
+*4.2=*[e2(tQ+0A)sin(lb+0.1)-2(w,
+t0+*3.1)+2(w2.0+*3.2)]=-0.02178637298 .
+So
+Wj.i=W|,o+— (*1,1+2AT2.1+2*3.1“ H*4,1)=— 0.4617333423 and6
+W2.1=w2.o+|(*,.2+2*2.2+2*3.2+*«)=-0.6316312421 .
+The value wj.iapproximates wj(0.1)=y(0.1)=0.2e2(OI)(sin0.1— 2cos0.1),and
+W2.1approximates «2(0.1)=>'(0.1)=0.2^2(0,)(4sin0.1— 3cos0.1).
+The setofvalues w\jand w>2jtfor7=0,1,. ..»10,arepresented inTable 5.16 and
+arecompared totheactual values of«i(/)=0.2^2,(sint — 2cos/)and«2(r)=«!(/)=
+0.2e21(4sin/— 3cos/).
+Table 5.16
+tj yitj)=u1(tj)WUy%)=u2(tj)” 2J
+0.0 <B1P!7!Tr?!S-0.40000000 -0.60000000 BTSTiTiTW 0 0
+0.1 -0.46173297 -0.46173334 -0.63163105 -0.63163124 3.72x10-71.92 x10-7
+0.2 -0.52555905 -0.52555988 -0.64014866 -0.64014895 8.36 x10-72.84 x10-7
+0.3 -0.58860005 -0.58860144 -0.61366361 -0.61366381 1.39x10-61.99 x107
+0.4 -0.64661028 -0.64661231 -0.53658220 -0.53658203 2.02x10-61.68 x10-7
+0.5 -0.69356395 -0.69356666 -0.38873906 -0.38873810 2.71x10“ 9.58 x10~7
+0.6 -0.72114849 -0.72115190 -0.14438322 -0.14438087 3.41x10"62.35 x106
+0.7 -0.71814890 -0.71815295 0.22899243 0.22899702 4.06 x10"64.59 x10"6
+0.8 -0.66970677 -0.66971133 0.77198383 0.77199180 4.55x10"67.97 x10"6
+0.9 -0.55643814 -0.55644290 1.5347686 1.5347815 4.77x10-61.29 x105
+1.0 -0.35339436 -0.35339886 2.5787466 2.5787663 4.50x10~61.97 xIQ5
+Copyright 2012 Callage Learning .AIRighto Reversed May ncnbecopied ,canned ,o*dedicated.»whole o tmpar.Doc 10electronic righto.some third pur.ycontent may bevupprtved Itam theeBook and/oreOncxcnnl .Editorial toiew h*>
+deemed Cut ait)vupprc"Cdconteendocs notmaterial yalTcct themcra’Iteamireexperience .('engage Learn reserve!theright n>remove additional conceal atanytime i!vuhvcqjcM right,restrictions require It.5.7 Methods forSystems ofEquations 221
+Other one-stepapproximation methods canbeextended tosystems .IftheRunge -Kutta -
+Fehlberg method isextended ,then each component ofthenumerical solution w\j,w2j>..
+wmjmust beexamined foraccuracy .Ifanyofthecomponents failtobesufficiently accurate ,
+theentire numerical solution must berecomputed .
+Themulti step methods andpredictor -corrector techniques canalso beextended easily
+tosystems .Again ,iferror control isused,each component must beaccurate .Theextension
+oftheextrapolation technique tosystems canalso bedone ,butthenotation becomes quite
+involved .
+E X E R C I S E S E T 5 . 7
+1. Use theRunge -Kutta method oforder 4forsystems toapproximate thesolutions ofthefollowing
+systems offirst-order differential equations andcompare theresults totheactual solutions .
+a.u\=3i*|4-2M2— (2/2+lie2',f o r O </<lwith «,(0)=l;
+«2=4u\4-u24-(/2-1-2/— 4)e2',for0</<1with «2(0)=1;
+h=0.2;actual solutions «!(/)=\e5‘- +e21and «2(/)=\e51+\e~*4-t2e21.
+b. — 4«j— 2M2+cosr -f4sinr,f o r0</<2with «!(())=0;
+«2=3«i4-«2-3sin/,for0<t<2with «2(0)=— 1;
+h=0.1;actual solutions uj(f)=2e~l— 2e-2/4-sin/and u2(/)=— 3e-'4-2e-2/.
+c.u\=«2,for0</<2with «i(0)=l;
+«2=—«i—2^+1,forO </<2with «2(0)=0;
+«3=— «i— e'-1-1,for0</<2with «3(0)=1;
+h=0.5;actual solutions «i(/)=cos/4-sin/— e‘4-1,«2(f)=-sin/4-cos/-eand
+«3(/)=-sin/4-cos/.
+d.u\=«2-«34-/,for0</<1with «i(0)=1;
+«2=3r2,forO </<1with «2(0)=1;
+M3=«24-e_
+l,f o r0</<lwith «3(0)=— 1;
+h=0.1;actual solutions «i(/)=— 0.05 /54-0.25 /44-/4-2— e~\ «2(0=t34-1,and
+M3(/)=0.25 /44-/-e~'.
+2. UsetheRunge -Kutta method forsystems toapproximate thesolutions ofthefollowing higher -order
+differential equations andcompare theresults totheactual solutions .
+a.y"— 2y'4-y=te‘— /,for0</<1with y(0)=y'(0)=0andh=0.1;actual solution
+y(0=i/3e'-tel4-2e‘-/-2.
+b.t2y"-2/y'4-2y=/3In/,for1</<2with y(l)=1,y'(l)=0,andh=0.1;actual solution
+y(0=^+^3l n/-|/3.
+c.ym4-2y"-/-2y= for0</<3with y(0)=1,y'(0)=2,y"(0)=0,andh=0.2;
+actual solution y(/)= 4- — ^e-2/-I-lte‘.
+d./3yw-t2y"4-3ty'-4y=5/3In/+91\for1</<2with y(l)=0,/(1)=1,/'(1)=3,
+andh=0.1;actual solution y(/)=— /24-/cos(ln/)4-/sin(ln/)4-/3I n/.
+3. Change theAdams Fourth -Order Predictor -Corrector method toobtain approximate solutions to
+systems offirst-order equations .
+4. Repeat Exercise 1using themethod developed inExercise 3.
+5. Thestudy ofmathematical models forpredicting thepopulation dynamics ofcompeting species hasits
+origin inindependent works published intheearly partofthiscentury byA.J.Lotka andV.Volterra .
+Consider theproblem ofpredicting thepopulation oftwospecies ,oneofwhich isapredator ,whose
+population attime /is*2(/),feeding ontheother ,which istheprey,whose population is*,(/).We
+willassume thattheprey always hasanadequate food supply andthatitsbirth rateatanytime is
+proportional tothenumber ofprey alive atthattime;thatis,birth rate (prey )isk\X\(t).Thedeath
+rateoftheprey depends onboth thenumber ofprey andpredators alive atthattime.Forsimplicity ,
+weassume death rate(prey)=k2xi(/)x2(/).Thebirth rateofthepredator ,ontheother hand ,depends
+onitsfood supply ,X\(/),aswellasonthenumber ofpredators available forreproduction purposes .
+Cop>?i£tu2012 Cc«£»fcLearn in*.AIR.(huRocncd Mayr*xbecopied ,canned ,o*daplicaied.»whole o»mpan .Doctoelectronic rifhu.*wcthird pony contcac may besoppre ^tedftem theeBook and/orcCh<xcn»l.Editorial roiew h*>
+deemed CutanyMpprcucd content dee>notnuxtiily alTect theoverall leamir*experience .C'cnitapc [.camon roentt thety-ht»renxyve additional conceal atanytime i itutoeqjroi nght »rotrictionc require It222 C H A P T E R 5 Numerical Solution ofInitial -Value Problems
+Forthisreason ,weassume thatthebirth rate(predator )iskyXi(0*2(0-’Thedeath rateofthepredator
+willbetaken assimply proportional tothenumber ofpredators alive atthetime;thatis,death rate
+(predator )=kiX 2(t).
+Since xj(0andxj(0represent thechange intheprey andpredator populations ,respectively ,
+with respect totime ,theproblem isexpressed bythesystem ofnonlinear differential equations
+*J(0=*i*i(0-Mi(0*2(0and*2(0=Mi(0*2(0-*4*2(0.
+UseRunge -Kutta oforder 4forsystems tosolve thissystem for0<t<4,assuming thattheinitial
+population oftheprey is1000 andofthepredators is500 andthattheconstants arek\=3,k2=
+0.002 ,*3=0.0006 .andk4=0.5.Isthere astable solution tothispopulation model ?Ifso,forwhat
+values x\andxzisthesolution stable ?
+6. InExercise 5weconsidered theproblem ofpredicting thepopulation inapredator -prey model .
+Another problem ofthistype isconcerned with twospecies competing forthesame food supply .
+Ifthenumbers ofspecies alive attime taredenoted by*i(/)and xj(/),itisoften assumed that,
+although thebirth raleofeach ofthespecies issimply proportional tothenumber ofspecies alive
+atthattime ,thedeath rateofeach species depends onthepopulation ofbothspecies .Wewillassume
+thatthepopulation ofaparticular pairofspecies isdescribed bytheequations
+=*,(/)[4-0.0003 *,(1)-0.0004 *i(r)]
+and
+dx]{,)=*2(r)[2-0.0002 *,(f)-0.0001 *2(1)).at
+Ifitisknown thattheinitial population ofeach species is10,000,findthesolution tothissystem for
+0<t<4.Isthere astable solution tothispopulation model ?Ifso,forwhat values ofx,andx2is
+thesolution stable ?
+5.8 StiffDifferential Equations
+Stiff systems derive their name
+from themotion ofspring and
+mass systems thathave large
+spring constants .Allthemethods forapproximating thesolution toinitial -value problems have error terms
+thatinvolve ahigher derivative ofthesolution oftheequation .Ifthederivative canbe
+reasonably bounded ,then themethod willhave apredictable error bound thatcanbeused
+toestimate theaccuracy oftheapproximation .Even ifthederivative grows asthestepsizes
+increase ,theerror canbekept inrelative control ,provided that thesolution also grows
+inmagnitude .Problems frequently arise,however ,where themagnitude ofthederivative
+increases ,butthesolution does not.Inthissituation ,theerror cangrow solarge that
+itdominates thecalculations .Initial -value problems forwhich thisislikely tooccur are
+called stifTequations andarequite common ,particularly inthestudy ofvibrations ,chemical
+reactions ,andelectrical circuits .
+Stiff differential equations have anexact solution with aterm oftheform e~c\where
+cisalarge positive constant .This isusually only apartofthesolution ,called thetransient
+solution ;themore important portion ofthesolution iscalled thesteady -state solution .A
+transient portion ofastiff equation willrapidly decay tozeroastincreases ,butsince the
+nthderivative ofthisterm hasmagnitude cne~c\thederivative does notdecay asquickly ,
+andforlarge values ofcitcangrow very large.Inaddition ,thederivative intheerror
+term isevaluated notatf,butatanumber between zero and f,sothederivative terms may
+increase astincreases — andvery rapidly indeed .Fortunately ,stiffequations cangenerally
+bepredicted from thephysical problem from which theequation isderived ,andwith care
+theerror canbekept under control .Themanner inwhich thisisdone isconsidered inthis
+section .
+Copyright 2012 Cengagc Learn in*.AIRights Reserved Mayr*xbecopied.scanned .ocimplicated ,inwhole orinpar.Doctocjectronie lights.some third puny content may besupplied rican theeBook and/orcChapccmi .Editorial review h*>
+deemed Cutanysuppressed content does notmaterial yalTcct theovera’.Ilearning experience .('engage l.cammureserves theright 10remove additional conceal atanytime ifsubsequent nghts restrictions require It

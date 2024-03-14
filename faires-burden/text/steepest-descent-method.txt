@@ -1,0 +1,244 @@
+427 10.4 TheSteepest Descent Method
+Itcanbeshown thatifA_
+lexists andx,yR",then (A+xy')~lexists ifandonly ify'A~1x^—l.Use
+thisresult toverify theSherman -Morrison formula :IfA1exists andy'A1x^-1,then (A+xy')
+exists ,and9.-l
+A'lxy'A
+1+y,A-1x‘-l
+(A+xy')1=A1
+10.4 TheSteepest Descent Method
+Theadvantage oftheNewton andquasi-Newton methods forsolving systems ofnonlinear
+equations istheir speed ofconvergence once asufficiently accurate approximation isknown .
+Aweakness ofthese methods isthatanaccurate initial approximation tothesolution is
+needed toensure convergence .Themethod ofSteepest Descent willgenerally converge
+only linearly tothesolution ,butitisglobal innature ,thatis,nearly anystarting value will
+give convergence .Asaconsequence ,itisoften used tofindsufficiently accurate starting
+approximations fortheNewton -based techniques .
+Themethod ofSteepest Descent determines alocal minimum foramultivariable func-
+tionoftheform g:R"-R.The method isvaluable quite apart from providing starting
+values forsolving nonlinear systems ,butwewillconsider only thisapplication .
+Theconnection between theminimization ofafunction from R"toRandthesolution
+ofasystem ofnonlinear equations isduetothefactthatasystem oftheform
+/l(*l.*2 *<)=0,
+/2(*l.*2 X„)=0,Thename fortheSteepest
+Descent method follows from the
+three-dimensional application of
+pointing inthesteepest
+downward direction .
+f n(X\,X2 X n)=0,
+hasasolution atx=(JCJ,*2,   .x„yprecisely when thefunction gfrom R"toRdefined
+by
+Xn)= .*n)]2g(x1,*2,.. »
+1-1
+hastheminimal value zero.
+Themethod ofSteepest Descent forfinding alocal minimum foranarbitrary function
+gfrom R"intoRcanbeintuitively described asfollows :
+ Evaluate gataninitial approximation p())=(pj0),p f\...,p<0))f.
+ Determine adirection from p(0)thatresults inadecrease inthevalue ofg.
+ Move anappropriate amount inthisdirection andcallthenewvalue p[).
+ Repeat thesteps with p(0)replaced byp11}.
+TheGradient ofaFunction
+Before describing howtochoose thecorrect direction andtheappropriate distance tomove
+inthisdirection ,weneed toreview some results from calculus .TheExtreme Value Theorem
+implies thatadifferentiable single -variable function canhave arelative minimum within
+Copyright 2012 Cengagc Learn in*.AIRight*Reversed Mayr*xbecopied.v.-aitned.o*implicated ,inwhole orinpar.Doctocjectronie rifhu.*wcthird pur.ycontent may besupplied rican theeBook and/orcChaptcnM .Editorial roiew h*>
+deemed CutanyMpprccscd content dce>notnuetlaXy afTcct theoverall learnire experience .Cette jpeLearn xiercsenn theright Mremove additional conceal atanytime i!vutoeqjrni right*rotrictiots require It.428 C H A P T E R 10 Systems ofNonlinear Equations
+The rootofgradient comes from theinterval only when thederivative iszero.Toextend thisresult tomultivariable functions ,
+theLatin word gradi,meaning
+“towalk ”.Inthissense ,the
+gradient ofasurface istherateat
+which it“walks uphill ”.weneed thefollowing definition .
+Ifg:Rn-¥R,wedefine thegradient ofgatx=(*i,x2,..., Vg(x),by
+v*(x)=(S(x)’
+The gradient foramultivariable function isanalogous tothederivative ofasingle
+variable function inthesense thatadifferentiable multivariable function canhave arelative
+minimum atxonly when thegradient atxisthezero vector.
+Thegradient hasanother important property connected with theminimization ofmul-
+tivariable functions .Suppose v=(uj,V2,...,vnYisavector inR”with ||v||2=1.The
+directional derivative ofgatxinthedirection ofvisdefined byS' d g
+*“’dx
+Dvg (x)=limi[g(x+h\)-g(x)]=v*Vg(x)=^^x)*d g
+i=l
+Thedirectional derivative ofgatxinthedirection ofvmeasures thechange inthevalue of
+thefunction grelative tothechange inthevariable inthedirection ofv.
+Astandard result from thecalculus ofmultivariable functions states thatthedirection
+thatproduces themaximum increase forthedirectional derivative occurs when vischosen
+inthedirection ofVg(x),provided thatVg(x)^0.Sothemaximum decrease will bein
+thedirection of—Vg(x).
+ Thedirection ofgreatest decrease inthevalue ofgatxisthedirection given by-Vg(x).
+SecFigure 10.2foranillustration when gisafunction oftwovariables .
+Figure 10.2
+z
+Theobjective istoreduce g(x)toitsminimal value ofzero,sogiven theinitial approx -
+imation p(0),wechoose
+p'D_
+p(0)_
+QfVgCp '0*) (10.2)
+forsome constant a>0.
+Copyright 2012 Cc«£»fcLearn in*.AIR.(huReversed Mayr*xbecopied ,canned ,orduplicated.»whole ormpan.Doctoelectronic rifhu.vonte third pony content may besuppressed ftem theeBook and/orcCh<xcn»l.Editorial review h*>
+deemed Cut artysuppressed content dees notimtetlaly affect theoverall teamireexperience .Cenitapc Learn xiprcsenn thenjht Mremove additional conceal atanytime i!suhvenjcni nphts restrictions require it429 10.4 TheSteepest Descent Method
+Theproblem now reduces tochoosing orsothatg(p!1})willbesignificantly lessthan
+g(p(0)).Todetermine anappropriate choice forthevalue or,weconsider thesingle -variable
+function
+*(«)=S(P<0)-aVg (p(0»)).
+Thevalue ofathatminimizes histhevalue needed forp=p(0)—aVg(p(0)).
+Finding aminimal value forhdirectly would require differentiating handthen solving
+aroot-finding problem todetermine thecritical points ofh.This procedure isgenerally too
+costly.Instead ,wechoose three numbers a\<0*2<«3that,wehope ,areclose towhere
+theminimum value ofh(a)occurs .Then weconstruct thequadratic polynomial P(x)that
+interpolates hatoq,«2»and 0*3.Wedefine ain[ct\,«3]sothatP(a)isaminimum in[a\,«3]
+anduseP(a)toapproximate theminimal value ofh(a).Then aisused todetermine the
+newiterate forapproximating theminimal value ofg:
+(0)-aVg (p(0>).(1)P'=p
+Since g(p,0))isavailable ,wefirstchoose a\=0tominimize thecomputation .Next a
+number 0*3isfound with h{a3)<h(a\).(Since a\does notminimize h,such anumber «3
+does exist.)Finally ,«2ischosen tobe0*3/2.
+Theminimum value aofP(x)on[aj,0*3]occurs either attheonly critical point ofP
+orattheright endpoint 0*3because ,byassumption ,P(ot))=h(a3)<h(a\)=P(ct\).The
+critical point iseasily determined because P(x)isaquadratic polynomial .
+Program STPDC 103applies themethod ofSteepest Descent toapproximate themin-
+imal value ofg(x).Tobegin each iteration ,thevalue 0isassigned toot],andthevalue 1is
+assigned to0*3.If/1(0*3)>/1(0*1),then successive divisions of0*3by2areperformed and
+thevalue of**3isreassigned until /1(0*3)</*(<*i)-
+Toemploy themethod toapproximate thesolution tothesystemTheprogram STPDC 103
+implements theSteepest
+Descent method .
+/i(xi,x2,...,X„)=0,
+/2(^1»-*2»    xn)=
+/n(*l,*2,...,*n)=0,
+wesimply replace thefunction gwithYH=\J7-
+Example 1Use theSteepest Descent method with pl0)=(0,0,0)'tofindareasonable starting ap-
+proximation tothesolution ofthenonlinear system
+:/l(Xj,X2,*3)=3*!-COS(x2X3)”2=0’
+/2(*1»*2,*3)=x\-81(X2+0.1)2-fsin*3+1.06=0,
+10TT-3M*1,*2,*3)=eX l X2+20X3+ =0.3
+Copyright 2012 Cengagc Learn in*.AIRighto Reversed May rotbecopied.wanned .o*implicated ,inwhole orinpar.Doctocjevtronie rightv.some third pur.yCOMCK may besupplied ftem theeBook and/orcChapccriM .Editorial review h*>
+deemed Cutanysupprewed content doev notimtetlaly afTcct theoverall Ieamir .itexperience Ccnit jpeLearning roervev theright Mremove additional conceal atanytime i!vuhvajjcM nghtv rotrictions require It.430 C H A P T E R 10 Systems ofNonlinear Equations
+Solution Letg (xi,x2,x3)=[/i(x,,x2,x3)]2+[/2U1,x2,x3)]2+[/3U1,*2»X3)]2.Then
+=(2/,(X)^(X)+2/2(X)^(X)+2/3(X)^(X), V«(JT1,^2,*3)=Vg(x)3A:, 3AC,
+3/, 3/2 3/32/,(x) (x)+2/2(x) (x)+2/3(x) (X).3*2 3X2 dx2
+(x)j3/i 3/2 3/32/1(X)—(x)+2/2(x) (x)+2/3(X)9X3 9x3 9x3
+=2J(x)'F(x).
+Forp0)=(0,0,0)',wehave
+8(P(0))=/.(0,0,0)2+/2(0t0,0)2+/3(0,0,0)2
+2
++(-81(0.01)+1.06)2+(^=111.975 ,
+and
+Zo=l|Vg(p<0>)||2=l|2J(0)'F(0)||2=419.554 .
+Let
+1z=-Vg(p(0>)=(-0.0214514 ,—0.0193062 ,0.999583 )'.zo
+With ai=0,wehave gi=g(pl0)-a\Z)=g(p<0))=111.975 .Wearbitrarily leta3=1
+sothat
+(0)-a3z)=93.5649 . S3=s(p
+Because <g\,weaccept <*3andseta2=a3/2=0.5.Evaluating gatp(0)—a2zgives
+82=«(P<0)-a2z)=2.53557 .
+Wenow find thequadratic polynomial that interpolates thedata (0,111.975 ),
+(1,93.5649 ),and (0.5,2.53557 ).Itismost convenient touseNewton ’sforward divided -
+difference interpolating polynomial forthispurpose ,which hastheform
+P{(*)=Si+h\ct+h-sct{a-a2).
+This interpolates
+S(P(0)-aVg (p(0)))=g(plU)-az)
+atafi=0,(*2=0.5,anda3=1asfollows :
+«i=0, Si=111.975 ,
+8 2-8 1«2=0.5,g2=2.53557 ,/z,= =-218.878 ,«2«1
+h2-h\ 83-82=93.5649 ,h2= =182.059 , h3= =400.937 . «3=1,«3-«2 «3-«i
+This gives
+P(a)=111.975-218.878 a+400.937 a(a-0.5)=400.937 a2-419.346 a+111.975
+Copyright 2012 Cengagc Learning .AIRtghb Reversed May rotbecopied ,canned ,ordaplicated.»whole ormpan.Doctoelectronic right*.vonte third pony content may bevupprcvscd riom theeBook and/orcCh<xcn»l.Editorial roiew h*>
+deemed Cutanyvuppicwed content doev notimtctlaly alTect theoverall learning experience .Ceng age[.cammgroentt theright 10remote additional conceal atanytime ifsubvoyjem nght >rotrictionv requite It431 10.4 TheSteepest Descent Method
+so
+P\a)=801.874 a-419.346
+and P(a)=0when a=oro=0.522959 .Since
+g(p<0)-a0z)=2.32762
+issmaller than g]and#3,weset
+p<'>=p<°>-a0z=p<0)-0.522959 Z=(0.0112182 ,0.0100964 ,-0.522741 )I
+and
+g(p(,))=2.32762 .
+Table 10.3contains theremainder oftheresults .Atruesolution isp=(0.5,0,-0.5235988 )',
+sop'2)would likely beadequate asaninitial approximation forNewton ’smethod or
+Broyden ’smethod .One ofthese quicker converging techniques would beappropriate
+atthisstage because 70iterations oftheSteepest Descent method arerequired tofind
+llp(*>-Plloo <0.01.
+Table 10.3k_(*)Pi P?>_
+<*>P)
+2 0.137860
+0.266959
+0.272734
+0.308689
+0.314308
+0.324267-0.205453
+0.00551102-0.00811751-0.0204026-0.0147046-0.00852549-0.522059-0.558494-0.522006-0.533112-0.520923-0.5284311.27406
+1.06813
+0.468309
+0.381087
+0.318837
+0.2870243
+4
+5
+6
+7
+EXERCISE SET 10.4
+l. Use themethod ofSteepest Descent toapproximate asolution ofthefollowing nonlinear systems ,
+iterating until||plA)—plt_,)||oc<0.05.
+1Ax]-20x,+-xf+8=0
+5x2+8=0a.
+1-x\x$+2xi-
+3*?-4
+3*,xf-*,3-1=0
+c.ln(xf+x\)—sin(xiX 2>=In2+ln;r
+e*i~*2+cos(xi*2)=0
+sin(47rxijc 2)—2JC2 x\=0
+(e2*1-e)4-Aex\-2ex\=0
+Usetheresults inExercise 1andNewton ’smethod toapproximate thesolutions ofthenonlinear
+systems inExercise 1,iterating until||p(A)-p(i_
+l>||oc<10~6.b. =0
+d.
+(TT)
+2.
+Copyright 2012 Cengagc Learning .AIRights Reversed May notbecopied ,canned ,orduplicated .inwhole orinpar.Doctoelectronic rights.xvtic third pur.ycontent may bevuppreved riom theeBook amtar cCh<xcn»l.Editorial roiew h*>
+deemed Cutanysuppressed content does nottnaxrUXy alTcct theoverall learning experience .Collage [.cammereserve*theright*>rerrxyve additional conteatatanytime iisubseqjcnt right*restrictions require It432 CHAPTER 10 Systems ofNonlinear Equations
+3. Use themethod ofSteepest Descent toapproximate asolution ofthefollowing nonlinear systems ,
+iterating until \\p(k)-p(*_1)||oc<005.
+a.15*i+*2“4*3=13
+*f+10*2_*3=11
+x\-25*3=—22
+C.*^-fx]x2—*1*3+6=0
+exi+e**-x3=0
+x\—2*1*3=410*i—2*|+*2—2*3—5=0
+8*|+4*f-9=0
+8*2*34"4=0b.
+*i4-cos(*i*2*3)-1=0
+(1-*,),/4+*2+0.05*3-0.15 JC3-1=0
+—x\—0.1*1+0.01*2+*3—1=0
+Use theresults ofExercise 3andNewton ’smethod toapproximate thesolutions ofthenonlinear
+systems inExercise 3,iterating until||p|A>—p'*“,)||00<106.
+Use themethod ofSteepest Descent toapproximate minima forthefollowing functions ,iterating
+until flp(4)-pt*~,)||00<0.005 .
+a.g(xt,x2)=cos(x,4-*2)4-sin*,4-cos*2
+b.g(*i,*2)=100(*f-*2)24-(1-*i)2
+c.g(*i,*2,*3)=*2+2x\4-*2-2*,*2+2*i-2.5*2-*34-2
+d.g(*j,*2,*3)=*44~2*44"3*44"1.01
+a.Show thatthequadratic polynomial thatinterpolates thefunction
+h(a)=s(p,0)-aVg (p(0>»d.
+4.
+5.
+6.
+ator=0,a2,anda3is
+P(a)=g(p(0))4-h\a4-/i3or(a-or2)
+where
+g(p<0)-a2z)-g(p0))ha2
+g(p<0>—a3z)—g(p<0)—ar2z) h2-h i,and A3= h2=a3-a2
+b.Show thattheonly critical point ofPoccurs atoro=0.5(or2—/11//13).«3
+— 10.5 Homotopy andContinuation Methods
+Homotopy ,orcontinuation ,methods fornonlinear systems embed theproblem tobesolved
+within acollection ofproblems .Specifically ,tosolve aproblem oftheform
+F(x)=0,
+which hastheunknown solution p,weconsider afamily ofproblems described using a
+parameter kthatassumes values in[0,1].Aproblem with aknown solution x(0)corresponds
+tok=0,andtheproblem with theunknown solution x(l)=pcorresponds tok=1.
+Suppose x(0)isaninitial approximation tothesolution pofF(x)=0.Define
+G:[0,1]xR" R"
+by
+G(k,x)=*F(x)4-(1-k)[F(x)-F(x(0))]=F(x)4-(k-l)F(x(0)).
+Copyright 2012 Cengagc Learn in*.AIRights Reversed Mayr*xbecopied.scanned .ocimplicated ,inwhole orinpar.Doctocjectronie rights.some third pur.yCOMCK may besupplied rican theeBook and/orcChapccriM .Editorial review h*>
+deemed Cutanysuppressed content does nottnaxrUXy alTcct theoverall learning experience .('engage [.camonreserves theright 10remove additional eonteatatanytime ifsubsequent nghts restrictions require It

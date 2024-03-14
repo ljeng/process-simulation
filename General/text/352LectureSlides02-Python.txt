@@ -1,0 +1,171 @@
+The Cooper Union for the Advancement of Science and Art 
+ChE352 
+Numerical Techniques for Chemical Engineers 
+Professor Stevenson 
+Lecture 2 The Cooper Union for the Advancement of Science and Art 
+Computer programming ✅
+Biochemistry ⏳
+Food science 🗳
+Linguistics ⏳
+Machine learning ⏳
+Power plants 🗳
+Research skills ⏳
+Sustainability 🗳
+Optimization algorithms ⏳
+Materials science 🗳
+Renewable energy 🗳
+Nuclear engineering 🗳
+Geochemistry 🗳
+Electrochemistry 🗳
+Cosmetic sciences ⏳
+Data analysis ⏳
+Engineering management ⏳
+Environmental chemistry 🗳
+Electrical & mechanical eng. 🗳
+Process Simulation ⏳
+How many licks does it take to 
+get to the center of a tootsie 
+pop? 🍭
+Engineering topics of interest 
+Numerical methods apply to all parts of engineering The Cooper Union for the Advancement of Science and Art 
+Important data types for this class 
+1  # integer 
+3.14  # floating point (key to this class) 
+'3.14'  # string 
+[1, 2.0, '3']  # list (any types) 
+np.array([ 1, 2, 3])  # array (one type) 
+{1, 2, '3'}  # set
+{"H": 1, "He": 2, "Li": '3'}  # dictionary 
+What is each type good for? The Cooper Union for the Advancement of Science and Art 
+Test-driven design 
+Example: find Z (compressibility) in the 
+Soave-Redlich-Kwong equation of state: 
+Plugging in values of Z, A, B as a test is very 
+simple. You can write a test function right now, 
+without knowing anything about solver code. ●Testing is easier than writing correct code 
+●Automated testing is the best kind 
+●The Cooper Union for the Advancement of Science and Art 
+Testing can be all you need 
+def is_srk_solution (Z, A, B):
+  srk = Z**3 - Z**2 + (A - B - B**2)*Z - A*B
+  return abs(srk) < 1e-3
+The Cooper Union for the Advancement of Science and Art 
+Testing can be all you need 
+def is_srk_solution (Z, A, B):
+  srk = Z**3 - Z**2 + (A - B - B**2)*Z - A*B
+  return abs(srk) < 1e-3
+A, B = 2.0, 3.0  # inputs 
+low, high, step = 0.0, 10.0, 1e-4
+for Z in np.arange(low, high, step):
+  if is_srk_solution (Z, A, B):
+      print('Found solution:' , Z)Run the test on a range of possible solutions: The Cooper Union for the Advancement of Science and Art 
+Python error messages 
+for Z in np.arange(low, high, step):
+  if is_sk_solution (Z, A, B):
+      print('Found solution:' , Z)
+Running this code gives: 
+NameError:  name 'is_sk_solution' is not defined 
+What went wrong? The Cooper Union for the Advancement of Science and Art 
+Python error message tips 
+●Google your error messages 
+○Especially the class of exception 
+●Run your code often, so you know which 
+change caused any new errors 
+○This is much easier if your code is fast 
+●print() key variables to show more details 
+○If there's no output at all, add print 
+statements early in the code, see which 
+outputs appear The Cooper Union for the Advancement of Science and Art 
+Program for Readability 
+•Readable code is 
+about empathy 
+•Put yourself in a 
+reader’s place 
+•Describe your 
+assumptions clearly 
+•The code says what  
+you’re doing - the 
+comments say why 
+# Bad programmers 
+# comment their code 
+# like this diagram The Cooper Union for the Advancement of Science and Art 
+Readability example 
+def relerr(p, r, eps=1e-6):
+   return (p - r) / (abs(r) + eps)
+How can we make it more readable? What do you think this function does? The Cooper Union for the Advancement of Science and Art 
+Readability example 
+# Relative error of prediction vs reference 
+def relative_error (prediction ,
+                   reference ,
+                   epsilon=1e-6):
+   error = prediction  - reference 
+   # epsilon prevents divide-by-zero issues 
+   return error / (abs(reference ) + epsilon)The Cooper Union for the Advancement of Science and Art 
+You don’t have to code from scratch 
+•Start with a basic example 
+–Cite your code sources! 
+•Slowly change it into what you want 
+•Run it every few minutes 
+import matplotlib .pyplot as plt
+plt.plot([1, 2, 3, 4])
+plt.ylabel('some numbers' )
+plt.show()# https://matplotlib.org/stable/tutorials/introductory/pyplot.html 
+# Not the code I wanted, but enough to help 
+# So I will copy it and cite it at the top The Cooper Union for the Advancement of Science and Art 
+You don’t have to code from scratch 
+Open up Google Colab, make a new 
+notebook, and try the example below. 
+Then, modify it to plot something else 
+import matplotlib .pyplot as plt
+plt.plot([1, 2, 3, 4])
+plt.ylabel('some numbers' )
+plt.show()# https://matplotlib.org/stable/tutorials/introductory/pyplot.html 
+# Not the code I wanted, but enough to help 
+# So I will copy it and cite it at the top The Cooper Union for the Advancement of Science and Art 
+import time 
+print( 'Lecture paused' )
+time.sleep( 600)  # seconds 
+print( 'More Python' )The Cooper Union for the Advancement of Science and Art 
+NumPy = Numerical Python 
+●Python is designed to be flexible  to use 
+○mixed_type_list  = [1, 2.0, '3']
+●Numpy is a package for doing math (especially 
+linear algebra) fast
+○eigenvalues , eigenvectors  = eig(A) 
+○Can calculate eigenvectors of a million-entry 
+matrix in seconds 
+○Great tool for turning science & math into code The Cooper Union for the Advancement of Science and Art 
+Numpy arrays 
+import numpy as np
+x = np.array([1, 4, 3])
+y = np.array([[1, 4, 3], [9, 2, 7]])
+print('x.shape:' , x.shape, ' x.size:' , x.size)
+print('y.shape:' , y.shape, ' y.size:' , y.size)
+x.shape: (3,)  x.size: 3 
+y.shape: (2, 3)  y.size: 6 
+tuple of ints intnp.array of ints The Cooper Union for the Advancement of Science and Art 
+Loss of precision 
+How many real numbers are there? 
+How much information can be stored 
+in a single real number? The Cooper Union for the Advancement of Science and Art 
+What is floating point? 
+•Computer math is almost always floating point  
+•Like scientific notation on binary numbers 
+•Not every real number can be represented 
+What numbers can’t be represented? How many decimal digits can we store in 23 bits? The Cooper Union for the Advancement of Science and Art 
+What is floating point? 
+•np.float32 holds ~7 decimal digits 
+•np.float64 holds ~16 decimal digits 
+•Not every real number can be represented 
+•Too big = overflow, too small = underflow 
+•Only binary fractions (no exact 1/3, 1/5, etc) 
+•Computer math is almost always floating point  
+•Like scientific notation on binary numbers The Cooper Union for the Advancement of Science and Art 
+Python warmup continued 
+●I will provide class time and help to work on 
+kaggle.com/learn/python  - today and at office 
+hours 
+●Graded by automated tests: you need all right 
+answers, but the only penalty is to keep trying 
+●Any parts you don't finish in class will become 
+HW #1 

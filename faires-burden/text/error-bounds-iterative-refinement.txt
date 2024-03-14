@@ -1,0 +1,331 @@
+302 C H A P T E R 7 Iterative Methods forSolving Linear Systems
+b.Solve thissystem using n=10,50,and100.
+c.Change theprobabilities toaand1-aformovement totheleftandright,respectively ,and
+derive thelinear system similar totheonein(a).
+d.Repeat (b)using thesystem in(c)witha=^.
+5. Theforces onthebridge truss shown here satisfy theequations inthefollowing table:
+:f* /.
+h
+7T h h V4Fx 6o * * *A2 h /5
+10.000 N
+Fi
+Joint Horizontal Component Vertical Component
+(D-fi+^/i+/2=of/,-F2=0
+®-^/.+^/4=0-f/.-/3-1/4=0
+®— fl+/5=0 /3-10,000=0
+@—£/4-/5=0|/«-F,=0
+This linear system canbeplaced inthematrix form
+-1 0 0 f1 0 0
+0-1 0^0 0 0
+0 0 -1 0 0 0 i
+0 0 0 0-1 i
+0 0 0 0 -1 0 0
+0 0 0 0 0 1 0
+0 0 0 -^0 0^ 0 0 0 0 0 0 -^Fl'0
+F2 0
+F3 0
+/« 0
+/2 0
+/3 10,000/4 0
+/5J 0
+Approximate thesolution oftheresulting linear system towithin 102inthelxnorm using asinitial
+approximation thevector allofwhose entries areIsand(i)theGauss -Seidel method ,(ii)theJacobi
+method ,and(iii)theSOR method witho=1.25.
+7.6 Error Bounds andIterative Refinement
+This section considers theerrors inapproximation thatarelikely tooccur when solving linear
+systems byboth direct anditerative methods .There isnouniversally superior technique
+forapproximating thesolution tolinear systems ,butsome methods willgive better results
+than others when thematrix satisfies certain conditions .
+Copyright 2012 Cengagc Learn in*.AIRights Reversed Mayr*xbecopied.scanned .ocdefeated ,inwhole orinpar.Doctoelectronic rights.some third pur.ycontent may besuppressed rrom theeBook and/oreChaptcnnl .Editorial review h*>
+deemed Cutany suppic-edcontent does nottnaxrUXy alTcct theoverall learning experience .('engage Leantncreserves theright 10remove additional conceal atanytimeiisubsequent nghts restrictions require It7.6 Error Bounds andIterative Refinement 303
+Itseems intuitively reasonable thatifxisanapproximation tothesolution xofAx=b
+andtheresidual vector ,defined by
+r=b-AS,
+hastheproperty thatif||r||issmall ,then ||x— S||should besmall aswell.This isoften the
+case,butcertain systems ,which occur quite often inpractice ,failtohave thisproperty .
+Example 1Thelinear system Ax=bgiven by
+1 2
+1.0001 2x\
+*23
+3.0001
+hastheunique solution x=(1,1)'.Determine theresidual vector forthepoor approximation
+x=(3,-o.oooiy .
+Solution Wehave
+r=b-Ax=3 1 21[ 3 0.0002
+3.0001 1.0001 2J[-0.0001 0
+soHrlloc=0.0002 .Although thenorm oftheresidual vector issmall ,theapproximation
+x=(3,-0.0001 Visobviously quite poor ;infact,||x—£||oo=2.
+Thedifficulty inExample 1isexplained quite simply bynoting thatthesolution tothe
+system represents theintersection ofthelines
+l\:*1+2*2=3andh:1.0001 *1+2*2=3.0001 .
+The point (3,— 0.0001 )lieson/2,and thelines arenearly thesame.This means that
+(3,— 0.0001 )also liesclose totheline /1,even though itdiffers significantly from the
+solution ofthesystem ,which istheintersection point (1,1).(SeeFigure 7.6.)
+Figure 7.6
+X2\a i )
+1*
+NSJ (3,0)
+1(3,-0.0001uN*14 *1
+Example 1wasclearly constructed toshow thedifficulties thatmight— and,infact,
+do—arise.Hadthelines notbeen nearly coincident ,wewould expect asmall residual vector
+toimply anaccurate approximation .Inthegeneral situation ,wecannot relyonthegeometry
+ofthesystem togiveanindication ofwhen problems might occur .Wecan,however ,obtain
+thisinformation byconsidering thenorms ofthematrix anditsinverse .
+Copyright 2012 Cenpapc Learn in*.AIR.phtvReversed Mayr*xbecopied ,canned ,ocduplicated.»whole oempan.Doctoelectronic rtphiv.vomc third pony content may besuppressed ftem theeBook and/orcCh<xcn»l.Editorial roiew h*>
+deemed Cutanysuppressed content dees notimxttaly alTect theoverall Icamir .itexperience .C'crtitape Learnmp reserves thertpltt 10renxwe additional conceal atanytime i isubsequent nphts restrictions require It.304 C H A P T E R 7 Iterative Methods forSolving Linear Systems
+Residual Vector Error Bounds
+Ifxisanapproximation tothesolution ofAx=band Aisanonsingular matrix ,then
+foranynatural norm ,
+II*-*11lib->4*||-1|A"11|
+and
+II*— *11 „ .-I„ l|b-i4x||— —— — <||A| | ||A| |— — — ,provided x^0andb^0.
+This result implies that||A_1||and \\A\\ ||A_
+I||provide anindication oftheconnec -
+tion between theresidual vector and theaccuracy oftheapproximation .Ingeneral ,the
+relative error ||x— x||/||x||isofmost interest .Any convenient norm canbeused forthis
+approximation ;theonly requirement isthatitbeused consistently throughout .
+Condition Numbers
+Thecondition number ,K(A),ofthenonsingular matrix Arelative toanorm|| | |is
+*(A)=IIAIHIA-'ll.
+Note thatforanynonsingular matrix Aandnatural norm || ||,
+l=||/|=| |AA-,||<||A| |.||A-,||=^(A).
+With thisnotation ,wecanreexpress theinequalities intheprevious result as
+andx-x||
+x<K(A)lib-Ax||
+llbll
+Amatrix Aiswell-behaved (called well-conditioned )iftf(A)isclose to1,and A
+isnotwell-behaved (called ill-conditioned )when K(A)issignificantly greater than 1.
+Conditioning inthisinstance refers totherelative security thatasmall residual vector
+implies acorrespondingly accurate approximate solution .
+Example 2Determine thecondition number forthematrix
+A— [1 2
+1.0001 2
+Solution WesawinExample 1thatthevery poor approximation (3,— 0.0001 )'totheexact
+solution (1,1)'hadaresidual vector with small norm ,soweshould expect thecondition
+number ofAtobelarge.Wehave||A||=max{|l|+|2|,11.0011 +|2|}=3.0001 ,which
+would notbeconsidered large.However ,
+so IIA-'lloo=20000 ,
+andfortheinfinity norm ,
+Koo(A)=(20000 )(3.0001 )=60002.
+Thesizeofthecondition number forthisexample should certainly keep usfrom making
+hasty accuracy decisions based ontheresidual ofanapproximation .-10000 10000
+5000.5 -5000
+Copyright 2012 Cc«£»fcLearn in*.AIR.(huReversed May n«becopied ,canned ,o*duplicated.»whole oempan .Doctoelectronic rifhu.vomc third pony content may besupposed ftem theeBook and/orcCh<xcn»l.Editorial roiew h*>
+deemed Cutanyvuppicwcd content dee>nottmxtlaly alTecc theoverall Icamir .itexperience .C'criitapeLearn xiprexxvev therljtlu lorenxwe additional conceal atanytime i ivutoeqjrni nghtv rotrictionv require It7.6 Error Bounds andIterative Refinement 305
+Theprogram ITREF 74
+implements theIterative
+Refinement method .
+IllustrationInMATLAB ,thecondition number /^(A)forthematrix inExample 2canbecom-
+puted using thecommand cond .Toobtain thelxcondition number ,usethecommand
+cond (A,Inf)
+MATLAB responds with
+arts=6.000199999999003*+004
+Thedefault forcond isthel2condition number ,andeither ofthecommands cond (A)or
+cond (A,2)gives
+K2(A)=5.000100002987370*+004.
+Iterative Refinement
+Theresidual ofanapproximation canalso beused toimprove theaccuracy oftheapprox -
+imation .Suppose thatxisanapproximation tothesolution ofthelinear system Ax=b
+andthatr=b-Axistheresidual vector associated with x.Consider y,theapproximate
+solution tothesystem Ay=r.Then
+y%A“ *r=A-1(b-Ax)=A“ !b-A"1Ax=x-x
+So
+x%i+y.
+This new approximation x+yisoften much closer tothesolution ofAx=bthan
+isx,andyiseasy todetermine because itinvolves thesame matrix ,A,astheoriginal
+system .This technique iscalled iterative refinement ,oriterative improvement ,andis
+shown inthefollowing Illustration .Toincrease accuracy ,theresidual vector iscomputed
+using double -digit arithmetic .
+Thelinear system given by
+'3.3330 15920 -10.333'
+-*1"15913'
+2.2220 16.710 9.6120*2— 28.544
+1.5611 5.1791 1.6852 .*3.8.4254
+hastheexact solution x=(1,1,1)'.
+Using Gaussian elimination andfive-digit rounding arithmetic leads successively to
+theaugmented matrices
+and'3.3330 15920-10.333 : 15913'
+0-10596 16.501 : 10580
+0-7451.4 6.5250 :-7444.9
+'3.3330 15920-10.333 : 15913'
+0-10596 16.501 :-10580
+0 0 -5.0790 :-4.7000
+Theapproximate solution tothissystem is
+x=(1.2001 ,0.99991 ,0.92538 )'.
+Copyright 2012 Cc«£»fcLearn in*.AIR.(huReversed Mayr*xbecopied ,canned ,o*duplicated.»whole o tmpan .Doctoelectronic rifhu.vomc third pony content may bevuppftv «dftem theeBook and/orcCh<xcn»l.Editorial roiew h*>
+deemed Cutanyvuppicwed content dee>notimxttaly alTect theoverall Icamir .itexperience .C'criitapeLearnnsrexxvev therljtlu lorenxwe additional conceal atanytime i ivuhvcyjcw nghtv rotrictionv require It306 C H A P T E R 7 Iterative Methods forSolving Linear Systems
+Theresidual vector corresponding toxiscomputed indouble precision tobe
+r=b-Ax
+15913'3.3330 15920 -10.333‘1.2001
+— 28.544 — 2.2220 16.710 9.6120 0.99991
+8.4254 1.5611 5.1791 1.6852 0.92538
+15913‘ '15913.00518'-0.00518
+= 28.544— 28.26987086 = 0.27412914
+8.4254 8.611560367 -0.186160367
+so
+Moo=||b-Atloo=0.27413 .
+Touseiterative refinement toimprove thisapproximation ,wenow solve thesystem
+Ay=rfory.Using five-digit arithmetic andGaussian elimination ,theapproximate solution
+ytotheequation Ay=ris
+y=(-0.20008 ,8.9987 x1(T3,0.074607 )'
+andwehave theimproved approximation tothesystem Ax=bgiven by
+x+y=(1.2001 ,0.99991 ,0.92538 )'+(-0.20008 ,8.9987 xHT3,0.074607 )'
+=(1.0000 ,1.0000 ,0.99999 )'.
+This approximation hastheresidual vector
+IlfHoc=lib-A(xH-y)!!^=0.0001 .
+Ifwewere continuing theiteration processes ,wewould ,ofcourse ,usex-fyasourstarting
+values rather than x.
+E X E R C I S E S E T 7 . 6
+1. Compute the condition numbers ofthefollowing matrices .
+1I1 3.9 1.6
+a.2 3
+iIb.6.8 2.9
+3 4J
+1 2A 1.003 58.09c.1.0001 2Q.5.550 321.8
+1-1-1' ‘0.04 0.01--0.01'
+e. 0 1-1 f. 0.2 0.5 -0.2
+0 0 -1 1 2 4
+2. Thefollowing linear systems Ax=bhave xastheactual solution andxasanapproximate solution .
+Using theresults ofExercise 1,compute ||x— *11«and
+/^(A)||b-AX||*
+IIAHoc
+Copyright 2012 Cc«£»fcLearn in*.AIRighb Rocncd May n«becopied ,canned ,ocduplicated.»whole oezyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBAmpan .Doc 10electronic tlfht ».*wtcthird pony content may besuppressed ftem theeBook and/orcClupccnM .Editorial toiew h*>
+deemed Cutanysuppressed content dee>nottnatetlaly alTcct theiAera .1leamir*experience .C'cnitapc [.camon reserves thert|>luloremose additional conceal atanytime ifsubvcqjem nRhts restrictions require IL7.6 Error Bounds andIterative Refinement 307
+1 1 1
+“  2*1+3^=6 3-
+1 1 1
+3*1+4*=IS*
+x=Q.-g).«=(0.142 ,-0.166 )'.
+b.3.9 jC|+1.6x2=5.5,
+6.8xi+2.9*2=9.7,
+x=(1,1)',x=(0.98,1.1)'.
+c. *,+2*2=3,
+1.0001*!+2*2=3.0001 ,
+x=(1,1)',*=(0.96 ,1.02)'.
+d.1.003*,+58.09*2=68.12 ,
+5.550*,+321.8*2=377.3,
+x=(10,1)'.x=(— 10,1)'.
+e.*i— *2— *3=2JT,
+*2“ *3=0,
+— *3=71,
+x=(0,-71,-7T)',S=(-0.1,-3.15 ,-3.14 )'.
+f.0.04*,+0.01*2-0.01*3=0.06,
+0.2*,+0.5*2_
+0.2*3=0.3,
+*,+ 2*2+ 4*3=11,
+x=(1.827586 ,0.6551724 ,1.965517 )',*=(1.8,0.64 ,1.9)'.
+3. Thelinear system
+1 2 3
+[1.0001 2 *2.3.0001
+hasthesolution (1,1)'.Change Aslightly to
+1 2
+0.9999 2
+andconsider thelinear system
+1 2 1_[3
+0.9999 2 *2J[3.0001
+Compute thenewsolution using five-digit rounding arithmetic ,andcompare thechange inAtothe
+change inx.
+4. Thelinear system Ax=bgiven by
+1 2 X\ 3
+1.00001 2 *2.3.00001
+hasthesolution (1,1)'.Use seven -digit rounding arithmetic tofind thesolution oftheperturbed
+system
+1 21[ 1_ 3.00001
+1.000011 2Jl*2J3.00003
+andcompare thechange inAandbtothechange inx.
+5. (i)UseGaussian elimination andthree-digit rounding arithmetic toapproximate thesolutions tothe
+following linear systems ,(ii)Then useoneiteration ofiterative refinement toimprove theapproxi -
+mation ,andcompare theapproximations totheactual solutions .
+Copyright 2012 Cc«£»fcLearn in*.AIR.(huReversed May n«becopied ,canned ,o*duplicated.»whole oempan .Doctoelectronic rifhu.vomc third pony content may besupposed ftem theeBook and/orcCh<xcn»l.Editorial roiew h*>
+deemed Cutanyvuppicwed content dee>notimxttaly alTect theoverall Icamir .itexperience .Ccri|tapeLearn aipre\«ve»therljtlu lorenxyve additional conceal atanytime i ivutoeqjrni nghtv rotrictionv require It308 C H A P T E R 7 Iterative Methods forSolving Linear Systems
+a.0.03*1+58.9*2=59.2
+5.31*,-6.10*2=47.0
+Actual solution (10,1)'.
+b. 3.3330 *i+15920 *2+10.333 *3=7953
+2.2220 *,+16.710 *2+9.6120 *3=0.965-1.5611 *,+5.1792 *2-1.6855*3=2.714
+Actual solution (1,0.5,-1)'.
+c.1.19*,+2.11*2-100*3+*4=1.12
+14.2*i-0.122*2+12.2*3-*4=3.44
+100*2-99.9*3+*4=2.15
+15.3*,+0.110*2-13.1*3-*4=4.16
+Actual solution (0.17682530 ,0.01269269 ,-0.02065405 ,-1.18260870 )'.
+d. TT*I— e*2+\/2*3— >/3x4=VTT
+3
+7T:*1+e*2-e2*3+-*4=o
+>/5*1-V6*2+*3-\/2*4=7T
+7T3*1+e2*2->/7*3+^*4=y/2
+Actual solution (0.78839378 ,-3.12541367 ,0.16759660 ,4.55700252 )'.
+6. Repeat Exercise 5using four-digit rounding arithmetic .
+7. ThenxnHilbert matrix ,H(n\defined by
+8.L/(«)1<i,j<n
+isanill-conditioned matrix thatarises when solving forthecoefficients ofleast squares polynomials
+(seeSection 8.3,page 331).
+a.Show that
+[Hwri16-120 240-140-120 1200 -2700 1680
+240-2700 6480-4200-140 1680-4200 2800
+andcompute K x(H'i]).
+b.Show that
+[tf®]"125-300 1050 -1400 630-300 4800-18900 26880-12600
+1050-18900 79380 -117600 56700-1400 26880 -117600 179200 -88200
+630-12600 56700 -88200 44100
+andcompute AT:x>(//(5)).
+c.Solve thelinear system
+1
+0
+0
+1H( *)*1
+*2
+X3
+*4
+using three-digit rounding arithmetic ,andcompare theactual error totheresidual vector error
+bound .
+a.Usefour-digit rounding arithmetic tocompute theinverse H1ofthe3x3Hilbert matrix H.
+b.Usefour-digit rounding arithmetic tocompute H=(//',)_
+l.
+c.Determine \\H— H\\x.
+Copyright 2012 Cenfajc Learn in*.AIRights Reversed May natbecopied.scanned.o*duplicated .inwhole orinpar.Doctociecironie tights.some third pur.yCOMCK may bevuppreved rrom theeBook aml/orcCh<xcn»l.Editorial review h*>
+deemed Cutany vuppic-cdcontent does notmaterial yalTcct theoverall learning experience .Ccagagc [.camonreserves therightK >remove additional conteatatanytime ifsubsequent rights restrictions require IL7.7 TheConjugate Gradient Method 309
+7.7 TheConjugate Gradient Method
+Magnus Hcstcnes (1906-1991 )
+andEduard Stiefcl (1907-1998 )
+published theoriginal paper on
+theconjugate gradient method in
+1952 while working atthe
+Institute forNumerical Analysis
+onthecampus ofUCLA .Theconjugate gradient method ofHestenes andStiefel [HS]wasoriginally developed asa
+direct method designed tosolve a n n x n positive definite linear system .Asadirect method
+itisgenerally inferior toGaussian elimination with pivoting because both methods require
+nsteps todetermine asolution ,andthesteps oftheconjugate gradient method aremore
+computationally expensive than those inGaussian elimination .
+However ,theconjugate gradient method isuseful when employed asaniterative ap-
+proximation method forsolving large sparse systems with nonzero entries occurring in
+predictable patterns .These problems frequently arise inthesolution ofboundary -value
+problems ,andtoomuch computation isrequired fordirect methods inthese situations .
+When thematrix hasbeen preconditioned tomake thecalculations more effective ,good
+results areobtained inonly about y/nsteps.Employed inthisway,themethod ispreferred
+over Gaussian elimination andthepreviously discussed iterative methods .
+Throughout thissection weassume thatthematrix Aispositive definite .Wewilluse
+theinner product notation
+(x,y)=x'y, (7.4)
+where xandyaren-dimensional vectors .Wewillalsoneed some additional standard results
+from linear algebra .Areview ofthismaterial isfound inSection 9.2.
+The next result follows easily from theproperties oftransposes (seeExercise 12).
+Inner Product Properties
+Foranyvectors x,y,andzandanyrealnumber a,wehave
+(i)(x.y)=(y.x);
+(ii)(ax,y)=(x,ay)=a(x,y);
+(iii)(x+z,y)=(x,y)+<z,y);
+(iv)(x,x>>0;
+(v)(x,x)=0ifandonly ifx=0.
+When Aispositive definite ,(x.Ax)=x'Ax>0unless x=0.Also ,because Ais
+symmetric ,wehave
+(x,Ay)=x'Ay=x'A'y=(Ax)'y=(Ax,y). (7.5)
+Thefollowing result isabasic toolinthedevelopment oftheconjugate gradient method .
+Minimization Condition forPositive Definite Matrices
+The vector xisasolution tothepositive definite linear system Ax=bifandonly ifx
+minimizes
+g(x)=(x,Ax)—2(x,b).
+Toshow thisresult wefixthevectors xandvandconsider thesingle-variable function
+h(t)=g(x-Frv).
+Copyright 2012 Cenfajc Learn in*.AIRighb Reserved May neabecopied.scanned .ordefeated.»whole o tmpan.Doctoelectronic rifhu .some third pony content may besuppressed (tarn theeBook and/orcCIwpccmi .Editorial review h*>
+deemed Cut artysuppressed content dees notmaterial',yafTcct theoverall teamireexperience .Ccngjgc [.cam/inreserves thenjht Mremove additional conceal atanytime i!subsequent nfihtv restrictions require It.

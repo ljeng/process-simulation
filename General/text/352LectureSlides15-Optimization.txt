@@ -1,0 +1,155 @@
+The Cooper Union for the Advancement of Science and Art 
+ChE352 
+Numerical Techniques for Chemical Engineers 
+Professor Stevenson 
+Lecture 15 The Cooper Union for the Advancement of Science and Art 
+Questions about pseudocode? 
+•Follows the structure of code 
+•Intended for human reading, not machine 
+•Must be clear  and logically correct 
+•No points off for simple syntax errors 
+•Example: 
+x = [0, 1, 2]  # comments help 
+for i in range(0, len(x)): 
+    print sign(x[i])  # eg +/- The Cooper Union for the Advancement of Science and Art 
+The optimal topic to learn 
+•Many problems in engineering (and life?) can 
+be phrased as optimization: 
+–Optimal conditions for a reactor 
+–Optimal choice of reactor for a plant 
+–Optimal plant for the world economy 
+–Optimal studying for your GPA 
+Other examples? The Cooper Union for the Advancement of Science and Art 
+A friendly objective function 
+•QALY the lightbulb 
+•Mascot of EA 
+(Effective Altruism) 
+•"Quality-Adjusted 
+Life Years" are a 
+popular objective 
+function for public 
+health charities The Cooper Union for the Advancement of Science and Art 
+Optimization formalism 
+Optimization problems are typically stated as: 
+Objective 
+function 
+Constraint set 
+Why “minimize”? The Cooper Union for the Advancement of Science and Art 
+Optimization formalism 
+Optimization problems are typically stated as: 
+Or abbreviated as: 
+Optimal value Objective 
+function 
+Constraint set 
+Problem 
+name The Cooper Union for the Advancement of Science and Art 
+Simple Minimization Example 
+Optimal 
+solution If we constrain 
+this problem to 
+some bounds, 
+what does the 
+Extreme Value 
+Theorem say? 
+The Cooper Union for the Advancement of Science and Art 
+•If Ω is all of Rn, then we have an unconstrained  
+optimization problem : g(x) = h(x) = Ø (often we 
+don’t even write the Ω for unconstrained) 
+•If g(x) and/or h(x) are non-zero, then we have a 
+constrained optimization problem 
+•Most problems in engineering have constraints  
+•There are tricks to turn constrained problems 
+into unconstrained problems to solve them 
+more easily What is constrained optimization? The Cooper Union for the Advancement of Science and Art 
+Multi-dimensional optimization 
+•Typically more than one 
+variable to optimize 
+•Eg: why is this reactor 
+this exact shape? 
+•Make a geometric 
+representation of the 
+shape (many variables) 
+•Optimize all variables 
+together 
+The Cooper Union for the Advancement of Science and Art 
+Gradient-based optimization 
+•If we have the gradient ∇f (x), we can optimize 
+functions up to trillions  of variables 
+•Without the gradient, even 100 is tough The Cooper Union for the Advancement of Science and Art 
+Defining the gradient 
+•First derivative for a scalar function in n dims 
+•Same shape ( n) as the input vector x 
+•(What’s the derivative of a vector  function?) 
+"Nabla" 
+aka "del" The Cooper Union for the Advancement of Science and Art 
+Solve Linear Systems via Gradients 
+•We can pose the solution to Ax = b as an  
+optimization problem  of finding a vector   
+r = Ax – b which is zero (if A is invertible) 
+or with norm(r) as small as possible 
+•We call r the residual vector :
+The Cooper Union for the Advancement of Science and Art 
+Rearrange & simplify ||r|| ... 
+What's "argmin"? The Cooper Union for the Advancement of Science and Art 
+Making an Equivalent Problem 
+Since we don’t care what the actual value of 
+the residual is, just where it is minimized, 
+we can ignore the constant bTb: 
+Let P = ATA
+Let c = 2ATbThe Cooper Union for the Advancement of Science and Art 
+Iterative optimizers 
+•xk+1 is the next guess 
+•xk is the current guess 
+•dk is the search direction  (e.g. the gradient) 
+•tk is the step siz eThe Cooper Union for the Advancement of Science and Art 
+The Cooper Union for the Advancement of Science and Art 
+Method of Steepest Descent 
+•The simplest gradient-based optimizer is 
+steepest descent 
+•Search direction = negative of gradient 
+•This direction is guaranteed to be a descent  
+direction  (f goes down, by definition) 
+•Obviously effective: we go in the direction in 
+which f goes down the fastest The Cooper Union for the Advancement of Science and Art 
+Molecule shape discovery 
+•Preferred shape is near 
+minimum energy ΔU 
+(aka E) 
+–Why just E not ΔG? 
+–ΔG = ΔH - TΔS 
+–ΔH = ΔU + PΔV 
+–ΔG ≈ ΔH ≈ ΔU = E 
+•Can calculate E( x) and 
+∇E(x) with quantum 
+mechanics 
+•Given E( x) and ∇E(x), 
+how can we find xmin?
+The Cooper Union for the Advancement of Science and Art 
+Follow the forces ⇨ ﬁnd xmin
+•Coords vector x 
+represents all atoms 
+•Potential energy 
+E(x) is a scalar 
+• ∇E(x) has same 
+dimensions as x
+•Each component of -
+∇E(x) is a force 
+•Follow the forces: 
+gradient descent 
+x =
+ x y z
+C2.80  0.45 0.01 
+C2.00 -0.12 0.00 
+C3.61 -0.12 0.03 
+C2.30 -1.07 0.01 
+C3.30 -1.07 0.00 
+H2.80  1.07 0.02 
+H1.41  0.06 0.00 
+H4.20  0.06 0.01 
+H1.94 -1.58 0.00 
+H3.67 -1.58 0.01 The Cooper Union for the Advancement of Science and Art 
+https://www.kaggle.com/allaboutchemistry/xtb-water-ivp 
+Where do we get F? 
+To view, download the xyz file 
+and open it using: 
+https://molstar.org/viewer/ 

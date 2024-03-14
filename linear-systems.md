@@ -13,7 +13,7 @@ import math
 
 ![Mole/Mass Balance](mole-mass-balance.png)
 
-Set up the mole balance equations for this PFD, given that $R$, $S$ operate so $x_3 = R x_2$ and $x_6 + x_7 = S x_4$. Then arrange in the form $Ax = b$.
+Set up the mole balance equations for this PFD, given that $$R$$, $$S$$ operate so $$x_3 = R x_2$$ and $$x_6 + x_7 = S x_4$$. Then arrange in the form $$Ax = b$$.
 
 $$\begin{bmatrix}
     -1 & 1 & 0 & 0 & -1 & 0 & 0 \\

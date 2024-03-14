@@ -1,0 +1,153 @@
+The Cooper Union for the Advancement of Science and Art 
+ChE352 
+Numerical Techniques for Chemical Engineers 
+Professor Stevenson 
+Lecture 12 The Cooper Union for the Advancement of Science and Art 
+k2 > k1IVPs for springs The Cooper Union for the Advancement of Science and Art 
+IVPs for springs 
+k2 > k1
+When k1 and k2 are 
+very different, this 
+IVP becomes 
+numerically difficult The Cooper Union for the Advancement of Science and Art 
+What happens when f(t, y) is very sensitive 
+to y, so small errors in wi have a big effect? 
+Common for chemical reactions, especially 
+when a system has both fast & slow reactions. 
+Where does exp() appear in chemistry? Stiff IVPs The Cooper Union for the Advancement of Science and Art 
+Stiff IVPs 
+•When the derivatives of f grow rapidly, higher 
+order methods can have INCREASING error. 
+These IVPs are called stiff (after stiff springs, 
+which have equations with this property). 
+•Problems with e-ct in their solutions, for large c, 
+are often stiff ( How is this like a spring? )
+•How do we know if our IVP is stiff? 
+•Stiff IVPs require tiny steps or stable methods The Cooper Union for the Advancement of Science and Art 
+Runge-Kutta-Fehlberg, RK45 
+•Error bound (ε) is chosen by the user 
+•Uses Runge-Kutta order 5 to estimate the 
+error in a Runge-Kutta order 4 step 
+○Shares some ks for efficiency 
+○Only six di fferent evaluations of f per step 
+○Why not just use RK6? 
+•Fast, versatile, and returns correct answers 
+if it returns at all: great algorithm 
+•Could RK45 still be dangerous in an 
+engineering situation? How? The Cooper Union for the Advancement of Science and Art 
+•An adaptive method  uses “big” steps when f is 
+well-behaved and “small” ones when it isn’t 
+•For RKF45, the step size ti+1 – ti is qh, where: 
+What’s ε? ~~RK45 Step Size The Cooper Union for the Advancement of Science and Art 
+•Error for a given h is O(h5), but since the method is 
+adaptive, it will shrink h to get local error below your 
+user-set tolerance ε 
+•RK45 uses qh to find k1 
+through k5, uses those to 
+get order 4 approx. (wi+1), 
+calculates order 5 step 
+     (ŵi+1), then calculates 
+     q from h and (ŵi+1 - wi+1)
+•If the steps get too small, RK45 may suffer from 
+numerical errors. It may also simply run out of time. 
+Reactor design 
+IVP example RK45 in practice The Cooper Union for the Advancement of Science and Art 
+One-step & explicit IVP methods 
+•All methods we've seen so far (Euler, RK2, 
+RK4) are explicit , one-step  methods 
+•A one-step method  gives the next step yi+1 
+using only the previous step yi (not yi-1 etc)
+•An explicit  method is a formula for yi+1 = ... 
+...How can we use a method that is 
+not an explicit formula for yi+1?The Cooper Union for the Advancement of Science and Art 
+Implicit & multistep IVP methods 
+•All methods we've seen so far (Euler, RK2, 
+RK4) are explicit , one-step  methods 
+•A one-step method  gives the next step yi+1 
+using only the previous step yi (not yi-1 etc)
+•An explicit method is a formula for yi+1 = ...
+•Implicit methods  require solving a system of 
+algebraic equations within  each step, in terms 
+of f(ti+1, yi+1) & yi+1 - slow, but very reliable 
+•Multistep methods  increase accuracy using 
+more old steps yi-1, yi-2, etc (example: BDF) The Cooper Union for the Advancement of Science and Art 
+For Stiff IVPs, higher RK = Bad 
+•Stiff equations often have less error with low 
+order methods - Why? 
+•But they will still be sensitive to step size – 
+needs to be “small enough” 
+•For Euler, h < 2 / |c| will be stable, where c 
+comes from the solution form e-ct
+•Implicit methods  are the most reliable 
+•Try sensitivity analysis (e.g. RK45 vs BDF) The Cooper Union for the Advancement of Science and Art 
+Solving Stiff IVPs in Python 
+•Use scipy.integrate.solve_ivp 
+○sol = solve_ivp(fun, (t0, tmax), [y0]) 
+•If default (RK45) doesn’t work (slow, blows 
+up, or has unusual oscillations), IVP is likely 
+stiff. Try method='Radau' or 'BDF'. 
+○sol = solve_ivp(fun, (t0, tmax), [y0], 
+method='BDF') 
+○Implicit multistep methods, good for stiff IVPs The Cooper Union for the Advancement of Science and Art 
+Higher-Order IVPs 
+Let's say we have an mth order problem instead 
+of a first order problem: we want y(t), y'(t), etc: 
+•How many initial conditions do we need? 
+•What is a physical example of this? 
+•How could we solve this IVP? You want each of these The Cooper Union for the Advancement of Science and Art 
+Higher-Order IVPs 
+Let's say we have an mth order problem instead 
+of a first order problem: we want y(t), y'(t), etc: 
+You want each of these 
+Take advantage of the fact that each y(i)(t) is the 
+derivative of the one below it y(i-1)(t), so you can 
+treat this as an IVP system instead The Cooper Union for the Advancement of Science and Art 
+mth Order IVP Example 
+Now we can solve for u1 & u2We can calculate y'' if we have 
+the rest, so use that as our f(t, u) Initial conditions 
+Two dependent variables The Cooper Union for the Advancement of Science and Art 
+Activity: Higher Order IVPs 
+5 min to do, 5 min discuss 
+Set up the IVP system for the following third 
+order ODE: 
+State the components of u and f: 
+u1, u2, . . . um
+f1, f2, . . . fm
+The Cooper Union for the Advancement of Science and Art 
+Answer: Higher Order IVPs 
+The Cooper Union for the Advancement of Science and Art 
+Differential-Algebraic Systems 
+•What if we have an IVP system containing an 
+unknown , and a constraint  on the unknown? 
+•How many initial conditions do we need? 
+•How do we solve this IVP system? Green v 
+here is new 
+C C
+The Cooper Union for the Advancement of Science and Art 
+Higher Order IVP example: F = ma 
+●Dynamics (F = ma) is a second-order IVP 
+●We want to know x(t) & v(t) 
+●We have a(t) = F/m = v'(t) = x''(t) 
+●If F is constant ( example? ), this is an integral 
+●But usually F = f(x) or f(x, v) - examples? 
+●We can solve this if we know initial position x 
+and initial velocity v 
+●You might see intuitively why we need initial 
+conditions for both position & velocity The Cooper Union for the Advancement of Science and Art 
+Where do we get F? 
+To calculate forces on a system of molecules, 
+you either use quantum mechanics, or this: 
+This kind of approximation is called a "force field" 
+The Cooper Union for the Advancement of Science and Art 
+https://www.kaggle.com/allaboutchemistry/xtb-water-ivp 
+Where do we get F? 
+To view, download the xyz 
+file and open it using: 
+https://molstar.org/viewer/ The Cooper Union for the Advancement of Science and Art 
+Next week: numerical linear algebra 
+Pre-reading for next week: 
+Matrix solvers, 
+eigenvectors, & norms: 
+PNM 14.1-7, 15.1 & 15.4 
+More math: 
+F&B 7.1-7.3, 6.2, 6.4-6.6. 

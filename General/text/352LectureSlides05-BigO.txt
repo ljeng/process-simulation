@@ -1,0 +1,157 @@
+The Cooper Union for the Advancement of Science and Art 
+ChE352 
+Numerical Techniques for Chemical Engineers 
+Professor Stevenson 
+Lecture 5 The Cooper Union for the Advancement of Science and Art 
+Why is finding catalysts difficult? 
+●The Schrödinger equation lets us calculate energy 
+barriers for any reaction 
+●But catalysts are still an open question - Why?  The Cooper Union for the Advancement of Science and Art 
+How can we reason about speed? 
+●Each computer's 
+speed is different 
+●Even on the same 
+computer, timing 
+will vary randomly 
+●There is a way to 
+describe speed that 
+avoids all of this... 
+The Cooper Union for the Advancement of Science and Art 
+How can we reason about speed? 
+●Each computer's 
+speed is different 
+●Even on the same 
+computer, timing 
+will vary randomly 
+●There is a way to 
+describe speed that 
+avoids all of this... 
+Big-O Notation The Cooper Union for the Advancement of Science and Art 
+Big-O notation 
+Big-O simplifies an expression by discarding 
+everything but the largest term in the limit of 
+large N, also dropping constant prefactors 
+Run time Big-O Description 
+   t = N/2 + 999 ? ?
+   t = 3N2 + 5N ? ?
+   t = 7N3 + 8N2 ? ?
+   t = 2N + N9999 ? ?
+This gets rid of computer speed & noise The Cooper Union for the Advancement of Science and Art 
+Big-O notation 
+Big-O simplifies an expression by discarding 
+everything but the largest term in the limit of 
+large N, also dropping constant prefactors 
+Run time Big-O Description 
+   t = N/2 + 999 O(N) Linear 
+   t = 3N2 + 5N O(N2) Quadratic 
+   t = 7N3 + 8N2 O(N3) Cubic 
+   t = 2N + N9999 O(2N) Exponential 
+This gets rid of computer speed & noise The Cooper Union for the Advancement of Science and Art 
+Big-O notation examples 
+O(N) algorithms act on each input a 
+constant number of times 
+How might an O(N2) algorithm arise? The Cooper Union for the Advancement of Science and Art 
+Big-O notation examples 
+O(N) algorithms act on each input a 
+constant number of times 
+How might an O(N2) algorithm arise? 
+Doing N*N things, like building an NxN matrix The Cooper Union for the Advancement of Science and Art 
+Big-O notation examples 
+Doing N*N things, like building an NxN matrix The Cooper Union for the Advancement of Science and Art 
+Big-O notation examples 
+How might an O(2N), or 
+worse, algorithm arise? The Cooper Union for the Advancement of Science and Art 
+Big-O notation examples 
+Trying every permutation (Traveling Salesman, 
+Knapsack Problem, Schrödinger equation )How might an O(2N), or 
+worse, algorithm arise? 
+The Cooper Union for the Advancement of Science and Art 
+Constant factors 
+Big-O notation ignores constant factors: 
+If you wait an hour at every step, 
+your big-O stays the same! 
+(You should still try not to do this) Run time Big-O 
+ t ∝ 1,000,000  N O(N) 
+ t ∝ 1,000,000  N2 O(N2)The Cooper Union for the Advancement of Science and Art 
+What is fast and what is slow? 
+Modern computer architecture from a speed 
+perspective ( really fast, fast, medium,  slow)Memory  
+(“RAM”) CPU 
+(a “core”) GPU 
+(“graphics card”) 
+CPU 
+(a “core”) CPU 
+(a “core”) CPU 
+(a “core”) CPU 
+(a “core”) CPU 
+(“cores”) Storage 
+SSDDisk
+Cache Internet The Cooper Union for the Advancement of Science and Art 
+Why is code slow? 
+•Big-O is too high (bad algorithm) 
+–How would you find big-O? 
+•Too much input/output (especially files) 
+–Why is I/O slower than calculations? 
+•Too much task switching 
+–Not vectorized  (needs more numpy) 
+• Convergence  is poor (algorithm issue) The Cooper Union for the Advancement of Science and Art 
+Why is code slow? 
+import timeit
+def arithmetic_answer ():
+   return 2 + 2
+def file_answer ():
+   with open('data.txt' , 'w') as f:
+       f.write(f'{4}')
+   with open('data.txt' , 'r') as f:
+       answer = int(f.read())
+   return answerWhat is "timeit"? 
+What do these 
+two functions do? 
+Which one is 
+faster? The Cooper Union for the Advancement of Science and Art 
+Why is code slow? 
+import timeit
+def arithmetic_answer ():
+   return 2 + 2
+def file_answer ():
+   with open('data.txt' , 'w') as f:
+       f.write(f'{4}')
+   with open('data.txt' , 'r') as f:
+       answer = int(f.read())
+   return answer
+arithmetic_time  = timeit.timeit(arithmetic_answer , number=1000)
+file_time  = timeit.timeit(file_answer , number=1000)
+print(f'{arithmetic_time =:.1e}, {file_time =:.1e}')Try this code in 
+Colab 
+What % of 
+file_time is the 
+file writing vs the 
+file reading? The Cooper Union for the Advancement of Science and Art 
+Big-O for Getting Smaller 
+•Big-O also works for numbers getting smaller, 
+such as error α - αn shrinking as n grows 
+○O(1/n + 1/n2) = ?The Cooper Union for the Advancement of Science and Art 
+Big-O for Getting Smaller 
+•Big-O also works for numbers getting smaller, 
+such as error α - αn shrinking as n grows 
+○O(1/n + 1/n2) = O(1/n) as n ➔ ∞
+•Same idea if real-valued input h goes to zero: 
+○O(h2 + h4) = ?For some K The Cooper Union for the Advancement of Science and Art 
+Big-O for Getting Smaller 
+•Big-O also works for numbers getting smaller, 
+such as error α - αn shrinking as n grows 
+○O(1/n + 1/n2) = O(1/n) as n ➔ ∞
+•Same idea if real-valued input h goes to zero: 
+○O(h2 + h4) = O(h2) as h ➔ 0For some K 
+For some K The Cooper Union for the Advancement of Science and Art 
+●Open Python Numerical Methods, go to 
+Chapter 8.4: Summary and Problems 
+https://pythonnumericalmethods.berkeley.edu
+/notebooks/chapter08.04-Summary-and-Prob
+lems.html 
+●Do the first three problems, starting with: Summary and Problems 
+○How would you define the size of the following tasks? 
+■Solving a jigsaw puzzle. 
+■Passing a handout to a class. 
+■Walking to class. 
+■Finding a name in dictionary. 

@@ -1,0 +1,400 @@
+5.3 Runge -Kutta Methods 183
+f.Usetheanswers generated in(e)andpiecewise cubic Hermite interpolation toapproximate yat
+thefollowing values andcompare them totheactual values ofy.
+i. y(1.04) ii.>(1.55) iii.>(1.97)
+9. Given theinitial -value problem
+y'=}i-*-y2'i<»<2.:y(U=-i
+with theexact solution >(/)=-1/f.
+a.UseEuler ’smethod with h=0.05 toapproximate thesolution andcompare itwith theactual
+values of>.
+b.Usetheanswers generated in(a)andlinear interpolation toapproximate thefollowing values of
+>andcompare them totheactual values .
+i.>(1.052 ) ii.>(1.555 ) iii.>(1.978 )
+c.UseTaylor ’smethod oforder 2with h=0.05 toapproximate thesolution andcompare itwith
+theactual values of>.
+d.Usetheanswers generated in(c)andlinear interpolation toapproximate thefollowing values of
+>andcompare them totheactual values.
+i.>(1.052 ) ii.>(1.555 ) iii.>(1.978 )
+e.UseTaylor ’smethod oforder 4with h=0.05 toapproximate thesolution andcompare itwith
+theactual values of>.
+f.Usetheanswers generated in(e)andpiecewise cubic Hermite interpolation toapproximate the
+following values of>andcompare them totheactual values .
+i.>(1.052 ) ii.>(1.555 ) iii.>(1.978 )
+10. Inanelectrical circuit with impressed voltage £,having resistance R,inductance L,andcapacitance
+Cinparallel ,thecurrent isatisfies thedifferential equation
+di d2£ 1d£ 1
+dt~C~d^+R~
+dt+L£'
+Suppose i(0)=0,C=0.3farads ,R=1.4ohms ,L=1 . 7henries ,andthevoltage isgiven by
+£(t)=eoab"sin(2f-jr).
+UseEuler ’smethod tofindthecurrent iforthevalues t=0.1j,j=0,1,...,100.
+11. Aprojectile ofmass m=0.11 kgshot vertically upward with initial velocity u(0)=8m/sisslowed
+duetotheforce ofgravity FK=mgandduetoairresistance Fr=— w h e r e g=— 9.8m/s2
+andk=0.002 kg/m.Thedifferential equation forthevelocity t;isgiven by
+mu'=mg-&v|v|.
+a.Find thevelocity after 0.1,0.2,...,1.0s.
+b.Tothenearest tenth ofasecond ,determine when theprojectile reaches itsmaximum height and
+begins falling.
+5.3 Runge -Kutta Methods
+Inthelastsection wesaw how Taylor methods ofarbitrary high order canbegenerated .
+However ,theapplication ofthese high-order methods toaspecific problem iscomplicated
+bytheneed todetermine andevaluate high-order derivatives with respect totontheright
+side ofthedifferential equation .The widespread useofcomputer algebra systems has
+simplified thisprocess ,butitstillremains cumbersome .
+Copyright 2012 Cengagc Learn in*.AIRights Reserved Mayr*xbecopied.scanned .o*implicated ,inwhole orinpar.Doctocjectronie rifhu.*wethird pur.ycontent may besupprc-icdftem theeBook and/orcChaptcnM .Editorial roiew h*>
+deemed CutanyMpprcucd content does notmaterialy alTcct theoverall Icamir*experience .Ceagage l.cammu reserves theright*>remove additional conceal atanytime ifvutoeqjeni nghtv restrictions require It184 C H A P T E R 5 Numerical Solution ofInitial -Value Problems
+Inthelater 1800 s,Carl Runge
+(1856-1927 )used methods
+similar tothose inthissection to
+derive numerous formulas for
+approximating thesolution to
+initial-value problems .Inthissection weconsider Runge -Kutta methods ,which modify theTaylor methods so
+thatthehigh-order error bounds arepreserved ,buttheneed todetermine andevaluate the
+high-order partial derivatives iseliminated .The strategy behind these techniques involves
+approximating aTaylor method withamethod thatiseasier toevaluate .This approximation
+might increase theerror,buttheincrease does notexceed theorder ofthetruncation error
+thatisalready present intheTaylor method .Asaconsequence ,thenewerror does not
+significantly influence thecalculations .
+In1901,Marlin Wilhelm Kutta
+(1867-1944 )generalized the
+methods thatRunge developed in
+1895 toincorporate systems of
+first-order differential equations .
+These techniques differ slightly
+from those wecurrently call
+Runge -Kutta methods .Runge -Kutta Methods ofOrder Two
+TheRunge -Kutta techniques make useoftheTaylor expansion of/,thefunction onthe
+right side ofthedifferential equation .Since/isafunction oftwovariables ,tandy,we
+must firstconsider thegeneralization ofTaylor ’sTheorem tofunctions ofthistype.This
+generalization appears more complicated than thesingle -variable form ,butthisisonly
+because ofallthepartial derivatives ofthefunction /.
+Taylor 'sTheorem forTwo Variables
+If/andallitspartial derivatives oforder lessthan orequal ton+1arecontinuous on
+D={(f,y)|a<t<b,c<y<d]and(t,y)and(f+or,y+p)both belong toD,
+then
+/(/+<*,y+0)»/(f,y)+
+a2d2f
+2dt2r3/ a/
++32f B232f
+(tJy )+a PW7jr(t,y)+~^j(t,y)313y 23y+
+Theerror term inthisapproximation issimilar tothatgiven inTaylor ’sTheorem ,with
+theadded complications thatarise because oftheincorporation ofallthepartial derivatives
+oforder n+1.
+Toillustrate theuseofthisformula indeveloping theRunge -Kutta methods ,letus
+consider aRunge -Kutta method oforder 2.Wesawintheprevious section thattheTaylor
+method oforder 2comes from
+yft+i)=y(t.)+hy'(u)+y/'(»,)+y/"(£)
+=y{ti)+hf(t„ym+y/'te,>(»,))+y/'tt),
+or,since
+/'(»,.yft))=y(l,))'
+andy'fa)=/fe,y(t,)),wehave
+yOi+i)=y(tj)+h/(»..yM )+~ (t„yM )+\yft)) fdi,y(t,))
+h3
++3!y'"(?)-
+Copyright 2012 Cenfajc Lcarni #*.AIRights Reversed May notbecopied .scanned .ordaplicmed .towhole ortopan .Doc 10electronic rights .>onic third pur.ycontent may bevupprtved riom theeBook and/orcCh<xcn»l.Editorial toiew h*>
+deemed Cutanysuppressed cement does notmaxrUXy allcet theoverall learning experience .Ccagagc [.camonreserves theright 10remove additional conteat*anytime iisubsequent rights restrictions require It5.3 Runge -Kutta Methods 185
+Taylor ’sTheorem oftwovariables permits ustoreplace theterm inthebraces with a
+multiple ofafunction evaluation of/oftheform a\/(f,+a,y(fr)+P).Ifweexpand this
+term using Taylor ’sTheorem with n=1,wehave
+a x f {t i+ar,y(/,)+/3)%a,f(ti>yW )+ yfc))+ yfc))
+df df= y(ti))+axa-^(tny(ti))+ y(tf)).
+Equating thisexpression with theterms enclosed inthebraces inthepreceding equation
+implies thatai,or,andpshould bechosen sothat
+1=au -=a\a,and-/(r,,y(t,))=a\P\
+thatis,
+a\=1,a=
+^,^0=x/ft.?(0)-
+Theerror introduced byreplacing theterm intheTaylor method with itsapproximation
+hasthesame order astheerror term forthemethod ,sotheRunge -Kutta method produced
+inthisway,called theMidpoint method ,isalsoasecond -order method .Asaconsequence ,
+thelocal error ofthemethod isproportional toA3,andtheglobal error isproportional {oh2.
+Midpoint Method
+w0=Of
+W,+1=W,+h|/~,W/+ ,
+where i=0,1,...,N—1,with local error0(hy)andglobal error0(h2).
+Using a\f(t+a,y+p)toreplace theterm intheTaylor method istheeasiest choice ,
+butitisnottheonly one.Ifweinstead useaterm oftheform
+a\fit,y)+a2f(t+a,y+Pf(t,y)),
+theextra parameter inthisformula provides aninfinite number ofsecond -order Runge -Kutta
+formulas .When a\=a2=\anda=p=/z,wehave theModified Euler method .
+Modified Euler Method
+w0=a
+Wi+,=w,-I--[/(/,,w,)+/(/,+1,w,-I-hfOi,W,))]
+where i=0,1,...,N— 1,with local error0(h3)andglobal error0(h2).
+Example 1UsetheMidpoint method andtheModified Euler method with N=10,h=0.2,t,=0.2*,
+andwo=0.5toapproximate thesolution toourusual example ,
+y'=y-t2+1,0<f<2,y(0)=0.5.
+Copyright 2012 Certfajc Learning .AIRighb Rocncd May ncabecopied ,canned ,ordaplicatod .»whole oempar.Doc 10electronic itfhu.*wcthird pur.ycontent may besuppreved Tiom theeBook and/orcCh<xcn»l.Editorial toiew h*.
+deemed CutanyMpprcucd cement dee>notimxtlaly alTcct theioera .1leamir*experience .C'cnitasc [.camon roervei theright loremwe additional contort atanytime i iwtoeqjcoi nght »rotrietionc require It.186 C H A P T E R 5 Numerical Solution ofInitial -Value Problems
+Table 5.6
+Karl Heun (1859-1929 )wasa
+professor attheTechnical
+University ofKarlsruhe .He
+introduced thistechnique ina
+paper published in1900 [Hcu].
+Heun 'sMethodSolution Thedifference equations produced from thevarious formulas are
+Midpoint method :w,+i=1.22w;— 0.0088 /2— 0.008 /+0.218 ;
+Modified Euler method :wi+\— 1.22w,-0.0088 /2— 0.008 /+0.216 ,
+foreach /=0,1,. ..,9.The firsttwosteps ofthese methods give
+Midpoint method :w,=1.22(0.5)-0.0088 (0)2-0.008 (0)+0.218 =0.828 ;
+Modified Euler method :wx=1.22(0.5)-0.0088 (0)2-0.008 (0)+0.216 =0.826 ,
+and
+Midpoint method :w2=1.22 (0.828 )-0.0088 (0.2)2-0.008 (0.2)+0.218
+=1.21136 ;
+Modified Euler method :w2=1.22(0.826 )-0.0088 (0.2)2-0.008 (0.2)+0.216
+=1.20692 ,
+Table 5.6listsalltheresults ofthecalculations .Forthisproblem ,theMidpoint method
+issuperior totheModified Euler method .
+t, yiOMidpoint
+Method ErrorModified Euler
+Method Error
+0.0 0.5000000 0.5000000 0 0.5000000 0
+0.2 0.8292986 0.8280000 0.0012986 0.8260000 0.0032986
+0.4 1.2140877 1.2113600 0.0027277 1.2069200 0.0071677
+0.6 1.6489406 1.6446592 0.0042814 1.6372424 0.0116982
+0.8 2.1272295 2.1212842 0.0059453 2.1102357 0.0169938
+1.0 2.6408591 2.6331668 0.0076923 2.6176876 0.0231715
+1.2 3.1799415 3.1704634 0.0094781 3.1495789 0.0303627
+1.4 3.7324000 3.7211654 0.0112346 3.6936862 0.0387138
+1.6 4.2834838 4.2706218 0.0128620 4.2350972 0.0483866
+1.8 4.8151763 4.8009586 0.0142177 4.7556185 0.0595577
+2.0 5.3054720 5.2903695 0.0151025 5.2330546 0.0724173
+Higher -Order Runge -Kutta Methods
+The term T(3)(/,y)canbeapproximated with global error0{h?)byanexpression ofthe
+form
+fit+ ,y-I-<$if{t+a2,y+8 2fit,y))),
+involving four parameters ,butthealgebra involved inthedetermination oforj,$1,ar2,and
+<$2isquite involved .The most common 0(h*)isHeun ’smethod .
+w0=a
+W/+1= l(/(*i»W i)+3(/(t,+y,W,+y/(r,+|,w,+1/(*,,H',))))),
+for1=0,1,. ..,N— 1,with local error0(h4)andglobal error0(h}).
+Copyright 2012 Cc«£»fcLcirni #*.AIRighb Rocrscd May ncabecopied.N-anncd.orduplicated.»whole oempar.Doc 10electronic ttfht ».*wtethird pur.ycontent may besuppreved riom theeBook and/orcCh<xcn»l.Editorial toiew h*>
+deemed Cutany suppiC'iedcontent dee>notimxtlaly alTcct theoverall learning experience .Ccnitasc[.cammu rexrvei theri|>httorenxyve additional contort atanytimeiiwtoeqjcoi ngh*»rcMrictionc require It5.3 Runge -Kutta Methods 187
+Illustration Applying Heun ’smethod with N=10,h=0.2,f,=0.2i,andwo=0.5toapproximate
+thesolution toourusual example ,
+y'=y-t2+1,0<t<2,y(0)=0.5
+gives thevalues inTable 5.7.Note thedecreased error throughout therange over theMidpoint
+andModified Euler approximations .
+Table 5.7
+ti y(ti)Heun ’s
+Method Error
+0.0 0.5000000 0.5000000 0
+0.2 0.8292986 0.8292444 0.0000542
+0.4 1.2140877 1.2139750 0.0001127
+0.6 1.6489406 1.6487659 0.0001747
+0.8 2.1272295 2.1269905 0.0002390
+1.0 2.6408591 2.6405555 0.0003035
+1.2 3.1799415 3.1795763 0.0003653
+1.4 3.7324000 3.7319803 0.0004197
+1.6 4.2834838 4.2830230 0.0004608
+1.8 4.8151763 4.8146966 0.0004797
+2.0 5.3054720 5.3050072 0.0004648
+Theprogram RK04M52
+implements the
+Rungc -Kulta Order 4
+method .Runge -Kutta Order Four
+Runge -Kutta methods oforder 3arenotgenerally used .The most common Runge -Kutta
+method inuseisoforder 4.Itisgiven bythefollowing .
+Runge -Kutta Method ofOrder 4
+w0=a,
+*i=h f(t i,W j),
+k2=hffti + Wi+
+*3=A/(f,+£,W,+K),
+*4= +k3).
+w/+1=wi+ +2k2+2k$+£4),
+where 1=0,1,.. .,N— 1,with local error0(/z5)andglobal error0(/i4).
+Example 2Use theRunge -Kutta method oforder 4with h=0.2,N=10,andt,=0.2itoobtain
+approximations tothesolution oftheinitial -value problem
+y'=y-t2+1,0<r<2,y(0)=0.5 .
+Copyright 2012 Cenfajc Lcarnin*.AIRighb Rocrscd May ncabecopied ,canned ,ordaplica '.cd.»whole oempar.Doc 10electronic itfhu .*wethird pur.ycontent may besuppreved Tiom theeBook and/orcCh<xcn»l.Editorial toiew h*.
+deemed CutanyMpprcucd ctrncot dee>notimxttaly alTcct theioera .1Icamir*experience .C'cnitasc [.camon roervei theright loremwe additional conceal atanytime i iwtoeqjcni right*restriction*require It.188 C H A P T E R 5 Numerical Solution ofInitial-Value Problems
+Solution Theapproximation to>(0.2)isobtained by
+wo=0.5
+*i=0.2/(0,0.5)=0.2(1.5)=0.3
+*2=0.2/(0.1,0.65 )=0.328
+*3=0.2/(0.1,0.664 )=0.3308
+*4=0.2/(0.2,0.8308 )=0.35816
+w,=0.5+4(0.3+2(0.328 )+2(0.3308 )+0.35816 )=0.8292933 .6
+Theremaining results andtheir errors arelisted inTable 5.8.
+Table 5.8
+tiExact
+y<=y(t/)Runge -Kutta
+Order 4
+w,Error
+1>t~w/l
+0.0 0.5000000 0.5000000 0
+0.2 0.8292986 0.8292933 0.0000053
+0.4 1.2140877 1.2140762 0.0000114
+0.6 1.6489406 1.6489220 0.0000186
+0.8 2.1272295 2.1272027 0.0000269
+1.0 2.6408591 2.6408227 0.0000364
+1.2 3.1799415 3.1798942 0.0000474
+1.4 3.7324000 3.7323401 0.0000599
+1.6 4.2834838 4.2834095 0.0000743
+1.8 4.8151763 4.8150857 0.0000906
+2.0 5.3054720 5.3053630 0.0001089
+Computational Comparisons
+The main computational effort inapplying theRunge -Kutta methods involves thefunction
+evaluations of/.Inthesecond -order methods ,thelocal error is0(h3)andthecost is
+two functional evaluations perstep.The Runge -Kutta method oforder 4requires four
+evaluations perstep andthelocal error is0(h5).Therelationship between thenumber of
+evaluations perstepandtheorder oftheglobal error isshown inTable 5.9.Because ofthe
+relative decrease intheorder forngreater than 4,themethods oforder lessthan 5with
+smaller stepsizeareused inpreference tothehigher -order methods using alarger stepsize.
+Table 5.9Evaluations perstep: 2 3 4 5<n<7 8<n<9 10<n
+Best possible global error:o(/i2) O(A’)o(h*)0{hH~x) 0(hH~2)0{hn~3)
+One way tocompare thelower -order Runge -Kutta methods isdescribed asfollows :
+TheRunge -Kutta method oforder 4requires four evaluations perstep,sotobesuperior to
+Euler ’smethod ,which requires only oneevaluation perstep,itshould givemore accurate
+answers than when Euler ’smethod uses one-fourth theRunge -Kutta step size.Similarly ,
+iftheRunge -Kutta method oforder 4istobesuperior tothesecond -order Runge -Kutta
+methods ,which require twoevaluations perstep,itshould give more accuracy with step
+sizehthan asecond -order method with stepsize\h.Thefollowing Illustration indicates
+thesuperiority oftheRunge -Kutta method oforder 4bythismeasure .
+Copyright 2012 Cengagc Learning .AIRight*Reserved May ncabecopied ,canned ,orimplicated ,inwhole orinpar.Doctocjevironie rights.some third pur.ycontent may besupplied rrom theeBook and/oreChaptcnnl .Editorial review h*>
+deemed Cutanysuppressed content does notmaterial yalTcct theoverall teamireexperience .('engage [.camonreserves (heright n>remove additional conteatatanytime i!subsequent right*restrictions require It.5.3 Runge -Kutta Methods 189
+111ustrati on Fortheproblem
+y'=y-t2+l,0<t<2,y(0)=0.5,
+Euler ’smethod with h=0.025 ,theMidpoint method with h=0.05,andtheRunge -
+Kutta fourth -order method with h=0.1arccompared atthecommon mesh points of
+these methods 0.1,0.2,0.3,0.4,and0.5.Each ofthese techniques requires 20function
+evaluations todetermine thevalues listed inTable 5.10 toapproximate,y(0.5).Inthis
+example ,thefourth -order method isclearly superior .
+Table 5.10
+ti ExactEuler
+h=0.025Modified
+Euler
+h=0.05Runge -Kutta
+Order 4
+h=0.1
+0.0 0.5000000 0.5000000 0.5000000 0.5000000
+0.1 0.6574145 0.6554982 0.6573085 0.6574144
+0.2 0.8292986 0.8253385 0.8290778 0.8292983
+0.3 1.0150706 1.0089334 1.0147254 1.0150701
+0.4 1.2140877 1.2056345 1.2136079 1.2140869
+0.5 1.4256394 1.4147264 1.4250141 1.4256384
+MATLAB uses methods toapproximate thesolutions toordinary differential equations
+thataremore sophisticated than thestandard Runge -Kutta techniques .Anintroduction to
+methods ofthistype isconsidered inSection 5.6.
+E X E R C I S E S E T 5 . 3
+1. Use theModified Euler method toapproximate thesolutions toeach ofthefollowing initial -value
+problems ,andcompare theresults totheactual values .
+a.y'— te*'-2y,0<t<1,y(0)=0,with /i=0.5;actual solution y(f)=Ife3/— ~e3’+T*"2' 25C*
+b.y'=1+(f— y)2,2</<3,y(2)=1,with h=0.5;actual solution y(t)=/4-
+c.y'=1+y/f,1<t<2,y(l)=2,with h=0.25;actual solution y(r)=tint+2t.
+d.y'=cos2f+sin3/,0<t<1,y(0)=1,with h=0.25;actual solution y(f)=1sin2/-Icos3/+
+2. UsetheModified Euler method toapproximate thesolutions toeach ofthefollowing initial-value
+problems ,andcompare theresults totheactual values .
+a.y'=y/t— (y/f)2,1<t<2,y(l)=1,withh=0.1;actual solution y(f)=//(1+In/).
+b.y'— l+y/f+(y/02,1<f<3,y(l)=0,withh=0.2;actual solution y(/)=ftan(lnf).
+c.y'=— (y4*l)(y+3),0</<2,y(0)=— 2,with h=0.2;actual solution y(f)=
+— 3+2(14-e~2/)"1.
+d.y'=— 5y4-5/2+2f,0<t<1,y(0)= with /?=0.1;actual solution y(t)=t2+\e~il.
+3. Use theModified Euler method toapproximate thesolutions toeach ofthefollowing initial -value
+problems ,andcompare theresults totheactual values .
+22^,2^^|
+a.y'=^ ^,0</<1,y(0)=1,with h=0.1;actual solution y(/)=^ ^.
+V2 -1b.y'=,1<t<2,y(l)= with h=0.1;actual solution y(f)=— — .14-/ln~ ln(r+1)
+Copyright 2012 Certfajc Lcarni #*.AIRighb Rocncd May ncabecopied.N/anncd.orduplicated.»whole oempan .Doc 10electronic rifhu.>onic third pur.ycontent may besuppteved riom theeBook and/orcClupccnM .Editorial toiew h*>
+deemed Cutany Mjppic-cdctrncnt dee>notmaxrUXy alTcct theoverall Icamir .itexperience .Ccnitasc[.camon roetve*therljtlu loremwe additional contort atanytime i iwtoeqjcoi right*rotriction*require It190 C H A P T E R 5 Numerical Solution ofInitial -Value Problems
+4.
+5.
+6.
+7.
+8.
+9.
+10.
+11.
+12.
+13.
+14.
+15.
+16.
+17.
+18.
+19.c.y'=(y2+y)/f,1<t<3,y(l)=— 2,with h=0.2;actual solution y(/)=-— -.
+d.y'=— t y+4t/y,0</<1,y(0)=1,with /i=0.1;actual solution y(t)=\A— 3e_,\
+Repeat Exercise 1using theMidpoint method .
+Repeat Exercise 2using theMidpoint method .
+Repeat Exercise 3using theMidpoint method .
+Repeat Exercise 1using Heun ’smethod .
+Repeat Exercise 2using Heun ’smethod .
+Repeat Exercise 3using Heun ’smethod .
+Repeat Exercise 1using theRunge -Kutta method oforder 4.
+Repeat Exercise 2using theRunge -Kutta method oforder 4.
+Repeat Exercise 3using theRunge -Kutta method oforder 4.
+Usetheresults ofExercise 2andlinear interpolation toapproximate values ofy(f),andcompare the
+results totheactual values .
+a.y(1.25)andy(1.93) b.y(2.1)andy(2.75)
+c.y(1.3)andy(1.93 ) d.>(0.54)and>(0.94)
+Usetheresults ofExercise 3andlinear interpolation toapproximate values ofy(f),andcompare the
+results totheactual values .
+a.>(0.54 )and>(0.94 ) b.>(1.25)and>(1.93)
+c.>(1.3)and>(2.93 ) d.>(0.54)and>(0.94)
+Use theresults ofExercise 11andCubic Hermite interpolation toapproximate values of>(/),and
+compare theapproximations totheactual values ,
+a.>(1.25 )and>(1.93 ) b.>(2.1)and>(2.75)
+c.>(1.3)and>(1.93 ) d.>(0.54)and>(0.94)
+Usetheresults ofExercise 12andCubic Hermite interpolation toapproximate values of>(f),and
+compare theapproximations totheactual values ,
+a.>(0.54 )and>(0.94 ) b.>(1.25)and>(1.93)
+c.>(1.3)and>(2.93 ) d.>(0.54)and>(0.94)
+Show thattheMidpoint method andtheModified Euler method give thesame approximations tothe
+initial -value problem
+>'=->+r+l,0<f<1,>(0)=1,
+foranychoice ofh.Why isthistrue?
+Water flows from aninverted conical tank with acircular orifice attherate
+ft=
+where ristheradius oftheorifice ,xistheheight oftheliquid level from thevertex ofthecone ,
+and A(x)isthearea ofthecross-section ofthetank xunits above theorifice .Suppose r=0.1ft,
+g=32.1 ft/s2,andthetank hasaninitial water level of8ftandinitial volume of512(7r/3)ft3.Use
+theRunge -Kutta method oforder 4tofindthefollowing .
+a.The water level after 10minwith h=20s
+b.When thetank willbeempty ,towithin 1min.
+Theirreversible chemical reaction inwhich twomolecules ofsolid potassium dichromate (KzC^O?),
+twomolecules ofwater (H20),andthree atoms ofsolid sulfur (S)combine toyield three molecules of
+thegassulfur dioxide (S02),four molecules ofsolid potassium hydroxide (KOH ),andtwomolecules
+ofsolid chromic oxide (Cr203)canberepresented symbolically bythestoichiometric equation :
+2K2Cr207+2H20+3S— >4KOH +2Cr2Oj+3SO..
+Copyright 2012 Cenfajc Learn in*.AIR.(huRocncd May notbecopied ,canned ,otimplicated ,inwhole orinpar.Doctocjectronie rifhu.*wcthird pur.ycontent may besupplied rican theeBook and/orcChaptcnM .Editorial roiew h*>
+deemed CutanyMpprcucd content does notmaterialy alTcct theoverall Icamir*experience .Ceagage [.cammu reserves theright*>rerrxyve additional conceal atanytime ifvuhvcyjem nghtv rotrictionv require It5.4 Predictor -Corrector Methods 191
+Ifn!molecules ofK2Cr207,n2molecules ofH20,andn3molecules ofSareoriginally available ,the
+following differential equation describes theamount x(r)ofKOH after time t:
+dx
+dt
+where kisthevelocity constant ofthereaction .Ifk=6.22 x10-19,nj=n2=2x103,and
+=3x103,usetheRunge -Kutta method oforder 4todetermine how many units ofpotassium
+hydroxide willhave been formed after 0.2s.
+20. Show thatHeun’sMethod canbeexpressed indifference form,similar tothatoftheRunge -Kutta
+method oforder 4,as
+w0=or.
+*2=hf
+^t,+ w,+-*|J,
+*3=h f +y,w,+ ,
+w.+i=W,+\(k{+3*3),
+foreachi=0,1,...,N-1.
+5.4 Predictor -Corrector Methods
+TheTaylor andRunge -Kutta methods areexamples ofone-stepmethods forapproximating
+thesolution toinitial -value problems .These methods usew,intheapproximation w,+i
+to butdonotinvolve anyoftheprior approximations WQ,w w,*_|.Generally
+some functional evaluations of/arerequired atintermediate points ,butthese arediscarded
+assoon asw,+iisobtained .
+Since \y(tj)-Wj|decreases inaccuracy asjincreases ,better approximation methods
+canbederived if,when approximating y(4+j),weinclude inthemethod some ofthe
+approximations prior tow,.Methods developed using thisphilosophy arecalled multistep
+methods .Inbrief ,one-step methods consider what occurred atonly oneprevious step;
+multistep methods consider what happened atmore than oneprevious step.
+Toderive amultistep method ,suppose thatthesolution totheinitial-value problem
+dy—=fit,y),fora<t<b,with y{a)=a,at
+isintegrated over theinterval [4,4+1].Then
+/ */+1 ru+1
+y(4+i)-y(ti)=/y\t)dt=/fit,y(t) )dt,
+Jtj Jti
+and
+ru+1
+y(4+i)=yM+/fit,yit))dt.
+Ju
+Since wecannot integrate /(/,yit) )without knowing yit),which isthesolution tothe
+problem ,weinstead integrate aninterpolating polynomial ,Pit),forfit,yit))determined
+Copyright 2012 Cengage Learn in*.AIRighto Reversed Mayr*xbecopied.wanned .orduplicated .inwhole ormpart.Doctoelectronic richtv.vonte third pur.ycontent may bevupprtved from theeBook and/oreChaptcnnl .Editorial review h*>
+deemed Cutanyvupprevsed content docs notmaterial yafreet theoverall teamIncexperience .Cenit ape[.cam/inroenti theright Mremove additional conceal atanytime i!vubveqjrnt nghtv restrictions require It.

@@ -1,0 +1,166 @@
+The Cooper Union for the Advancement of Science and Art 
+ChE352 
+Numerical Techniques for Chemical Engineers 
+Professor Stevenson 
+Lecture 11 The Cooper Union for the Advancement of Science and Art 
+Recall: IVP Systems in Python 
+from scipy.integrate  import solve_ivp 
+def fun(t, u):  # 3-D IVP 
+   C_A, C_B, C_C = u
+   ... calculate derivatives here ... 
+   return dAdt, dBdt, dCdt 
+sol = solve_ivp (fun, (t0, t_final), u0) 
+plt.plot(sol.t, sol.y[0], label='[A]')
+plt.plot(sol.t, sol.y[1], label='[B]')
+plt.plot(sol.t, sol.y[2], label='[C]')The Cooper Union for the Advancement of Science and Art 
+•If all of the following are true, the IVP system  
+is well-posed  (unique solution, bounded error 
+with respect to changes in f): 
+•f must be a vector function & continuous 
+○What is a vector function? How is it continuous? 
+•All the partial first derivatives of f must be 
+continuous in all dimensions (t, u1, u2, etc.) 
+•u and t must live in convex spaces 
+○For any two points (t1, u1) & (t2, u2), all points on 
+the line between them are also valid for the IVP 
+○Example non-convex space: IVP of volatile liquids n-Dimensional "Well-Posed" IVPs The Cooper Union for the Advancement of Science and Art 
+Non-convex example IVP 
+Mole fraction of component A ●Imagine solving 
+an IVP for a 
+reaction A ➞B 
+as a liquid 
+●Want CA and T 
+●Between some 
+good CA and T, 
+you can draw a 
+line where VLE 
+is present (so 
+you need P too) The Cooper Union for the Advancement of Science and Art 
+●Imagine solving 
+an IVP for a 
+reaction A ➞B 
+as a liquid 
+●Want CA and T 
+●Between some 
+good CA and T, 
+you can draw a 
+line where VLE 
+is present (so 
+you need P too) Non-convex example IVP 
+Mole fraction of component A The Cooper Union for the Advancement of Science and Art 
+Activity: define an IVP system 
+Put this system, two sequential reactions with 
+three species, into the general form for an IVP 
+system by stating t, u, and f(t, u). Also state 
+the initial conditions. How might we pick tend?The Cooper Union for the Advancement of Science and Art 
+Activity: define an IVP system 
+Choice of tend depends 
+on whether you’re 
+modeling  or designing The Cooper Union for the Advancement of Science and Art 
+Answer: define an IVP system 
+Can define f(t, u) to give a 
+single vector or multiple 
+scalars (same thing) 
+Vector function f(t, u) 
+maps R4 onto R3.
+  What does this mean? The Cooper Union for the Advancement of Science and Art 
+Activity: Euler for IVP systems 
+Define the Euler step  
+for this system in 
+terms of step size h 
+(Remember, an Euler 
+step is purely linear) The Cooper Union for the Advancement of Science and Art 
+Answer: Euler for IVP systems 
+f(t, u) for this IVP: 
+Euler step in general: 
+Euler step for this IVP: 
+Euler's Method for multiple dimensions is almost 
+identical to Euler's Method in one dimension The Cooper Union for the Advancement of Science and Art 
+Recall: RK methods in 1D 
+•RK methods use Δt, Δy, and f(t+ Δt, y+ Δy) to 
+approximate the curvature  of y, permit better  
+than linear  (aka better than Euler) steps 
+○How are derivatives of f(t, y) related to curvature ?
+•If we calculate f ' numerically, we get this 
+nested expression known as RK2: 
+The Cooper Union for the Advancement of Science and Art 
+Example: Euler vs RK2 
+RK2 uses an 
+estimate of f(t, y) at 
+the midpoint  of step 
+size h, instead of 
+the start like Euler Even with twice 
+as many steps, 
+so both call 
+f(t,y) equally, 
+Euler can't 
+catch up with 
+RK2 here. Note the 
+curvature  of the 
+function y(t). 
+This is what 
+makes an IVP 
+hard for Euler's 
+Method. The Cooper Union for the Advancement of Science and Art 
+Recall: RK4 for 1D IVPs 
+Initial 
+Iterative 
+step for 
+tj (time) Step size h 
+RK4 is 
+typically 
+the best 
+balance 
+between 
+accuracy 
+and cost The Cooper Union for the Advancement of Science and Art 
+RK4 for IVP systems 
+Initial 
+What is the meaning of i, j, & m? The Cooper Union for the Advancement of Science and Art 
+Here is the iterative step that would be used to 
+solve the previous activity's 3D IVP, using RK4 
+instead of Euler, in terms of wij, kij, and h: Example IVP step with RK4 
+The Cooper Union for the Advancement of Science and Art 
+Example IVP step with RK4 
+(For more 
+details, see F&B 
+page 215-216) k1 is the Euler 
+step, as always The Cooper Union for the Advancement of Science and Art 
+Example IVP step with RK4 
+The Cooper Union for the Advancement of Science and Art 
+Tricky IVPs 
+Simulation of the 3-body problem (an IVP) 
+Errors are more likely where the forces are high... The Cooper Union for the Advancement of Science and Art 
+Getting Physics Right 
+•Low error abs(yi - ytrue) is not the only goal 
+•What about conservation laws? Energy, 
+momentum, angular momentum... 
+•Euler methods, RK4, etc are not energy  
+conserving  if used to integrate equations 
+of motion (as in molecular dynamics) 
+•Energy-conserving methods are called 
+"symplectic" (from the geometry of 
+Hamiltonians, symplectic geometry) The Cooper Union for the Advancement of Science and Art 
+Symplectic Methods 
+•Most popular: second-order Velocity Verlet 
+•Similar "midpoint" idea to RK2 
+Estimate the half-step  
+velocity, then use it to 
+calculate the whole step The Cooper Union for the Advancement of Science and Art 
+Symplectic Methods 
+         angle  →          momentum  → 
+         angle  →          momentum  →          angle  →          momentum  → 
+         angle  →          momentum  → •Dynamics of a frictionless 
+pendulum. Correct solutions 
+are all stable over time 
+(make a ring, not a spiral). 
+•A method may have low 
+error at every step, like 
+RK45, yet have a steady 
+bias in energy ( energy drift ) 
+that makes it bad for 
+dynamics simulations •Most popular: second-order Velocity Verlet 
+•Similar "midpoint" idea to RK2 The Cooper Union for the Advancement of Science and Art 
+IVPs of a Hamiltonian System 
+The Cooper Union for the Advancement of Science and Art 
+IVPs of a Hamiltonian System 

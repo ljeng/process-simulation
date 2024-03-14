@@ -1,0 +1,278 @@
+The Cooper Union for the Advancement of Science and Art 
+ChE352 
+Numerical Techniques for Chemical Engineers 
+Professor Stevenson 
+Lecture 14 The Cooper Union for the Advancement of Science and Art 
+Linear algebra is easy in numpy 
+b = np.array([ 1, 1, 1])  # Define vector b 
+A = np.array([[ 4, -1, 1], [-1, 4.25, 2.75], 
+[1, 2.75, 3.5]])  # Define matrix A 
+x = np.linalg.solve(A, b)  # Find Ax = b 
+C = A + B  # Find A plus B 
+D = A @ B  # Find A times B (matrix multiply) 
+E = A * B  # Find A times B COMPONENT-WISE 
+Bsq = B** 2  # Square each element of B ( ≠B@B)
+L = np.linalg.cholesky(A)  # Cholesky factor 
+Ainv = np.linalg.inv(A)  # Inverse (unwise) 
+Apnv = np.linalg.pinv(A)  # pseudo-inverse The Cooper Union for the Advancement of Science and Art 
+Linear algebra is easy(?) in numpy 
+# by default, a 1-D np.array is "flat" 
+a = np.array([ 1, 2, 3])  # not row OR col 
+a2 = np.array([[ 1, 2, 3]])  # row vector 
+b = a.reshape( -1, 1)  # column vector 
+c = a.reshape( 1, -1)  # row vector 
+d = b.flatten()  # flat version again 
+# shape affects matrix operations: 
+one_number  = c @ b  # [[14]] 
+nine_numbers  = b @ c  # 3x3 matrix The Cooper Union for the Advancement of Science and Art 
+Writing out a large matrix in numpy 
+A = np.array([ 
+    [9,   1.5, 0,   2.5, 0.5],
+    [1.5, 10,  1.5, 0.5, 2  ],
+    [0,   1.5, 11,  0,   2  ],
+    [2.5, 0.5, 0,   8,   1  ],
+    [0.5, 2,   2,   1,   5  ],
+])
+# Aligning the columns makes it 
+# easier to spot errors The Cooper Union for the Advancement of Science and Art 
+How do you confirm your data? 
+import hashlib 
+# Get the unique hash of the data 
+sha = hashlib.sha256() 
+sha.update(A.dumps())   # dump string 
+print(sha.hexdigest()[: 8])
+# then you can compare your hash to 
+# someone else's to see immediately 
+# if you have the same data 
+What does the [:8] do? Why does it help? The Cooper Union for the Advancement of Science and Art 
+How do you confirm an answer? 
+# example system of linear equations 
+b = np.array([ 1.4, 1.7, 2.0])
+A = np.array([[ 4, -1,    1   ],
+              [ -1,  4.25, 2.75],
+              [ 1,  2.75, 3.5]])
+# first we'll solve, then test the solution 
+x = np.linalg.solve(A, b)   # Ax = b: find x 
+# check whether x is close (default=1e-8) 
+Ax = A @ x   # matrix multiply A times x 
+print(np.allclose(Ax, b))   # test Ax = b The Cooper Union for the Advancement of Science and Art 
+Matrices are also linear operators 
+•Any linear operation over vectors of length 
+N can be represented as an NxN matrix 
+–Linear operator  means: maps vector x to 
+vector y such that all entries of y are 
+weighted sums of entries of x 
+–Example: rotate  a vector 
+•This means we can treat an operator  / 
+transformation (a function from one vector 
+to another) as data (NxN grid of numbers) The Cooper Union for the Advancement of Science and Art 
+Rotation matrices 
+•Any rotation or scaling of a vector can be 
+represented with a special matrix 
+•A rotation matrix  is one that changes the 
+direction  of a vector but not its magnitude 
+•A 3D rotation can be represented with 
+Euler angles ( R3) or quaternions ( R4), but 
+a rotation matrix is easiest: just multiply 
+Simple 2D 
+rotation matrix 
+examples The Cooper Union for the Advancement of Science and Art 
+You should know what all of these things are: 
+•Scalar (dot) product, Matrix product 
+•Square, Diagonal, Identity matrices 
+•Upper and Lower Triangular matrices 
+•Transpose, Symmetric Matrix vocabulary The Cooper Union for the Advancement of Science and Art 
+A-1, AT, |A|, Mij
+You should know what all of these things are: 
+•Matrix inverse, existence of inverse  (When?) 
+•Singular/noninvertible v. nonsingular/invertible 
+•Determinant 
+•Eigenvector / eigenvalue The Cooper Union for the Advancement of Science and Art 
+Nonsingular Matrices are Nice 
+The following statements are equivalent  for A in Rnxn:
+1.rank(A) = n 
+2.A is nonsingular 
+3.A-1 exists 
+4.The rows and columns of A are lin. indep. 
+5.det(A) ≠ 0 
+6.range(A) = Rn
+7.nullspace(A) = {0} 
+8.Ax = b has a unique solution x* for each b in Rn
+9.The only solution to Ax = 0 is x* = 0 
+10. Zero is not an eigenvalue of A 
+What if it isn’t 
+square? 
+How could a matrix be close  to singular? The Cooper Union for the Advancement of Science and Art 
+Factoring Matrices 
+•Solving a linear system Ax = b requires O(n3) 
+operations with Gaussian Elim. for A in Rnxn
+•If n is large (>1000) or if we need x = A-1b for 
+many different choices of b, this is expensive 
+•If we can find triangular  matri ces L & U such  
+that A = LU , then we can find x differently: 
+•If U and L are triangular , solving Ly = b for y 
+and Ux = y for x takes only O(n2) operations 
+•If n=1000, how much faster is this than O(n3)?
+The Cooper Union for the Advancement of Science and Art 
+LU solution for Ax = b 
+1.Let A = LU  →  LUx = b 
+2.Let y be a new n-vector:  y = Ux   →   Ly = b 
+3.Since L is lower triangular, the first equation in 
+Ly = b says that y1 = b1 / L11  →  1 flop for y1
+4.y1 is now known and the second equation 
+involves only y1 and y2 → Calculate y2
+5.Repeat until yn
+6.y is now known; repeat the same process for 
+Ux = y, starting now with xn and going up to x1 
+since U is upper triangular. 
+This takes 2n2 flops total The Cooper Union for the Advancement of Science and Art 
+Activity: Ly = b 
+5 min to do, 5 min discuss 
+Solve for y if Ly = b.  It should only 
+take O(n2) ≈ 9 flops. 
+Is this faster than Gauss. Elimination? 
+The Cooper Union for the Advancement of Science and Art 
+Answer: Ly = b 
+y1 = 0
+y2 = 1
+y3 = 4/3 
+NOTE: getting LU form takes O(n3) flops 
+The Cooper Union for the Advancement of Science and Art 
+Special Matrices 
+•Sparse  matrices – Have many more zeros 
+than non-zeros, can save computation ( What 
+would this mean in a physical system? )
+•Symmetric  matrix: A = AT (What shape is A? )
+•Positive definite  matrices: xTPx > 0 for any 
+non-zero vector x (square, symmetric) 
+•Negative definite  matrices: xTNx < 0 for any 
+non-zero vector x (square, symmetric) 
+•Positive semidefinite : xTSx ≥ 0 for any x 
+•Negative semidefinite : xTDx ≤ 0 for any x 
+The Cooper Union for the Advancement of Science and Art 
+Properties of PD Matrices 
+If a matrix P in Rnxn is PD, it implies the following: 
+1.P is non-singular 
+2.All diagonal entries of P are positive 
+3.-P is negative definite 
+4.Solving Px = b has stable growth of error 
+5.All leading principle minors  (1x1, 2x2, . . .  
+nxn) must be positive ( Sylvester's criterion )
+6.P = UTU = LLT for some upper triangular U 
+with positive diagonal entries.  We call this 
+the Cholesky Decomposition : L = UT, U = LTThe Cooper Union for the Advancement of Science and Art 
+Vector Norms = Kinds of Length 
+Every p corresponds to a kind of vector length 
+Inner product:  (how is it like the 2-norm? )
+The Cooper Union for the Advancement of Science and Art 
+●For any event, the set of probabilities of all 
+outcomes form a "probability vector" with a 
+1-norm (Manhattan norm) of exactly 1 
+●Some matrices can act on probability vectors 
+and give new probability vectors Example: Probability Vectors 
+●For non-finite outcomes, the 
+1-norm sum ∑ is continuous, 
+aka an integral ∫ The Cooper Union for the Advancement of Science and Art 
+Vector Spaces 
+The following are true for any norm and any 
+elements x and y of a normed vector space :
+Norms are a 
+measure of 
+distance between 
+two points/vectors 
+What vector spaces do we use in this class? The Cooper Union for the Advancement of Science and Art 
+Vector norm inequalities 
+Triangle 
+inequality 
+|x + y| ≤ |x| + |y| 
+Cauchy- 
+Schwarz 
+inequality 
+|x•y| ≤ |x|•|y| The Cooper Union for the Advancement of Science and Art 
+Activity: Vector Norms 
+5 min to do, 5 min discuss 
+Find the 1-norm, 2-norm (Euclidean norm), and 
+the infinity-norm of the following vectors: 
+Then show that the triangle & 
+Cauchy-Schwarz inequalities 
+hold for the 2-norm. 
+Triangle 
+|x + y| ≤ |x| + |y| Cauchy- 
+Schwarz 
+|x•y| ≤ |x|•|y| The Cooper Union for the Advancement of Science and Art 
+Answer: Vector Norms 
+Which norm is 
+"the" norm? 
+How is the 
+∞-norm related 
+to infinity? The Cooper Union for the Advancement of Science and Art 
+Eigenvalues and Eigenvectors 
+Heard of these before? 
+What is the characteristic polynomial? 
+What can we do with eigen stuff? 
+“Eigen” means 
+“characteristic”, 
+or "own" as used 
+in the phrase 
+"my own room" The Cooper Union for the Advancement of Science and Art 
+Eigenvalues and Eigenvectors 
+Eigenvalues & eigenvectors make the most sense when you 
+think of matrices as operators , aka linear transformations, 
+not just grids of numbers (though both ideas are true) 
+The Cooper Union for the Advancement of Science and Art 
+We can find the eigenvalues by solving for 𝛌 in 
+det(A - 𝛌I) = 0 (the "characteristic polynomial"). 
+This is roughly O(N3), like matrix multiplication. 
+We can find the eigenvectors by substituting 
+each eigenvalue 𝛌i into the definition Avi = 𝛌iviHow do we find 𝛌i numerically? The Cooper Union for the Advancement of Science and Art 
+Finding eigenvalues 
+"Characteristic 
+polynomial"
+Polynomial is cubic in 𝛌, 
+because A is a rank-3 matrixCubic polynomial, so 3 roots﹣ 𝛌I means 
+subtract 𝛌 from 
+the diagonal 
+(Why?)The Cooper Union for the Advancement of Science and Art 
+Finding eigenvectors 
+Eigenvector v1
+A system of linear 
+equations Ax = b, 
+where b is all zerosThe Cooper Union for the Advancement of Science and Art 
+●Probability vectors have 1-norm = 1.0 
+●What if we used 2-norm  = 1.0 instead? 
+●Generalized probability vectors = quantum 
+state vectors 
+●Matrices which keep the 2-norm are called 
+Hermitian  matrices (in QM,  operators )
+A matrix which maintains 
+the 2-norm is its own 
+conjugate transpose 
+●Energy is just an eigenvalue: H 𝛹 = E 𝛹
+●~100% of quantum chemistry is with vectors Vector quantum mechanics The Cooper Union for the Advancement of Science and Art 
+●For discrete properties, like spin ↑↓, it's easy: 
+vector contains all discrete possibilities 
+○For one particle, spin state vector = [a, b] 
+where a & b are amplitudes of |↑ 〉&  |↓ 〉
+●For continuous properties, like position, we 
+can pick a set of functions that approximate it How do we build a quantum state? 
+The state vector 
+consists of an 
+amplitude for each 
+basis function 
+The Cooper Union for the Advancement of Science and Art 
+Eigenvalues in numpy 
+from numpy.linalg import (det, diag, eig,
+                          matrix_rank , norm)
+d = det(A)  # Determinant of A 
+r = matrix_rank (A)  # Rank of A 
+# if A is Hermitian, can use faster eigh(A) 
+eigenvalues , eigenvectors  = eig(A)
+# norm works for p = 1, 2, np.inf 
+x = norm(A, p)  # Matrix norm The Cooper Union for the Advancement of Science and Art 
+Next time: Optimization 
+(PNM is weak here, so all F&B this time) 
+Iterative search, steepest descent, 
+nonlinear solvers, Newton, quasi-Newton: 
+F&B 7.6 and 10.1-4 “World domination is such an ugly phrase. 
+ I prefer to call it world optimization .”
+– Eliezer Yudkowsky, author 

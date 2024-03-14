@@ -1,0 +1,243 @@
+The Cooper Union for the Advancement of Science and Art 
+ChE352 
+Numerical Techniques for Chemical Engineers 
+Professor Stevenson 
+Lecture 10 The Cooper Union for the Advancement of Science and Art 
+Recall: Initial Value Problems 
+Why can't we use trapezoidal integration? 
+What method can we use instead? 
+The Cooper Union for the Advancement of Science and Art 
+Can you find more IVP examples? 
+•Anything involving rate of change 
+–Reaction rates 
+–F = ma 
+–Epidemics 
+–Time-dependent Schrodinger equation 
+•Other examples? 
+•We define dy/dt = f(t, y) because f(t, y) 
+is the function we actually have  in IVPs 
+–y is the function we want The Cooper Union for the Advancement of Science and Art 
+Recall: Euler’s Method 
+Pronounced the same as "oiler" 
+Solve the IVP by taking steps along the derivative 
+The Cooper Union for the Advancement of Science and Art 
+Recall: Euler’s Method 
+Example:   f (t) = t 2    t0 = 0     y(t0) = 0    h = 1
+t1 = h = 1 
+y(1) ≈ 0 + 1 * 02 = 0
+t2 = 2 * h = 2 
+y(2) ≈ 0 + 1 * 12 = 1
+t3 = 3 * h = 3 
+y(3) ≈ 1 + 1 * 22 = 5
+Step size 1.0 is too big 
+for this IVP: accuracy 
+is quickly lost The Cooper Union for the Advancement of Science and Art 
+Euler’s Method to get all w[i] 
+We can define a vector of "time" (call it "t") 
+and calculate our approximate y(t) (aka "w") 
+by iterating forwards in "time" from t0 = a: 
+Why "time" in quotes? 
+What if we want in-between w values? The Cooper Union for the Advancement of Science and Art 
+Activity: Euler in Python (15 minutes) 
+Write a Python function  which implements 
+Euler’s method for the IVP for this reaction: 
+Assume: kf = 1.0, C0
+EB = 2.0, τfinal = 10.0 
+Use step size h = 0.01. Does the h value matter? 
+Make a list of your approximate CEB at each step, 
+and if you have time, plot your results vs t 
+Euler's method The Cooper Union for the Advancement of Science and Art 
+Solution: Euler in Python 
+Euler's method 
+Analytical = Euler 
+solution 
+is nearly 
+exact at 
+small dt Euler 
+solution 
+goes bad 
+fast at 
+large dt 
+The Cooper Union for the Advancement of Science and Art 
+Is there a better IVP method? 
+•Euler's Method is straightfoward, works if 
+you can afford a small h 
+○Local error O(h2), global error O(h) 
+•But we want better than O(h)
+•What is local error  vs global error ?
+•Why is global error 1/h times bigger? 
+•Why can't we always make h smaller? 
+•How can we make a better method? 
+○Consider where Euler's Method comes from The Cooper Union for the Advancement of Science and Art 
+Taylor Methods of Order n 
+•Euler’s method uses just the linear Taylor 
+terms, but we could use up to any n: 
+Linear terms Quadratic and higher terms Error term 
+•By definition, y'(t) = f (t, y) 
+•2nd derivative: y''(t) = f '(t, y) 
+•n-th derivative: yn(t) = f n-1(t, y)We always have 
+this in an IVP 
+Might not 
+have this 
+Good luck The Cooper Union for the Advancement of Science and Art 
+Taylor Methods of Order n 
+•If we use a series of order n, the local error  
+for each step is O(hn+1) (Why?) 
+•Global error  after all steps is O(hn) (Why?) 
+•Euler’s method uses just the linear Taylor 
+terms, but we could use up to any n: The Cooper Union for the Advancement of Science and Art 
+Translate the Taylor polynomial formula above into 
+an iterative step for the 2nd-order Taylor method for 
+IVPs, giving wi+1 in terms of wi, ti, f, f ', and h. 
+Use your general expression to define the iterative 
+step wi+1 for this IVP: 
+y’ = y – t       t0 = 0       y(0) = e + 1   
+Leave your expression in terms of h ( Why? )
+Activity: 2nd Order Taylor Methods The Cooper Union for the Advancement of Science and Art 
+Answer: 2nd Order Taylor Methods 
+Euler’s method: 
+2nd order Taylor: 
+What are some drawbacks of this method? y’ = y – t   t0 = 0   y(0) = e + 1 The Cooper Union for the Advancement of Science and Art 
+The problem with f '
+•Taylor methods gain more accuracy by using 
+more derivatives of f
+○Recall: yn(t) = f n-1(t, y) 
+•But derivatives of f are rarely available 
+•Can we approximate   f '(t, y) using the values 
+of f (t, y)? How? 
+•The resulting methods are the most popular 
+IVP solvers: Runge-Kutta The Cooper Union for the Advancement of Science and Art 
+Chain rule 
+gives f '(ti, yi)Use 2D Taylor series & the chain rule to find
+f '(ti, yi), with Δt = h/2 and Δy = Δt f (ti, yi). Then 
+plug f '(ti, yi) into the 2nd order Taylor method. 
+2nd order 
+Taylor method 
+needs f '(ti, yi)2D Taylor series in y, t Runge-Kutta Methods: RK2 The Cooper Union for the Advancement of Science and Art 
+Same as chain rule! 2D Taylor series in y, t 
+Chain rule 
+gives f '(ti, yi)
+By definition: f '(t, y) = dy/dt Runge-Kutta Methods: RK2 The Cooper Union for the Advancement of Science and Art 
+Given f ', we can plug 
+it into the 2nd order 
+Taylor IVP method 
+RK2, aka "midpoint 
+method for IVPs" Runge-Kutta Methods: RK2 The Cooper Union for the Advancement of Science and Art 
+Activity: RK2 in Python (10 minutes) 
+Copy your Python IVP solver  from before and 
+change it to RK2: 
+Make a list of your approximate CEB at each step, 
+and if you have time, plot your results vs t 
+How does the dependence on h change? RK2
+Euler's method The Cooper Union for the Advancement of Science and Art 
+Solution: RK2 in Python 
+RK2
+Analytical = 
+RK2 
+solution 
+is nearly 
+exact at 
+small dt RK2 
+solution 
+does not 
+go bad 
+so fast The Cooper Union for the Advancement of Science and Art 
+Better Runge-Kutta? 
+•Different values for Δt and Δy in 2D Taylor 
+make new IVP methods (F&B 185-187) 
+•Order 2 methods have global approximation 
+error of O(h2)
+•Most common RK method for solving IVPs is 
+order 4, which uses the Taylor terms up to h4
+•This method is called RK4 or just The 
+Runge-Kutta Method  for IVPs 
+•Given this description, what is the big-O of 
+local & global error for RK4? The Cooper Union for the Advancement of Science and Art 
+"The" Runge-Kutta Method: RK4 
+•Like RK2 but more 
+•Global error O(h4)
+•Requires 4 calls to 
+f (t, y) per step 
+•Don't need f '(t, y) 
+•Usually the sweet 
+spot for accuracy 
+The Cooper Union for the Advancement of Science and Art 
+Why stop at RK4? 
+•The main cost for using an IVP algorithm is 
+the calls to function f – fewer is better 
+•Euler needs 1 function evaluation per step 
+•RK4 needs 4 
+•RK4 is only useful if it allows step sizes over 
+4x bigger, with the same accuracy ( it does )
+•Table on p. 188 of F&B shows that RK4 is  
+superior to lower and higher order methods  
+by this metric under reasonable assumptions The Cooper Union for the Advancement of Science and Art 
+Activity: Local Error in RK4 
+1.Use RK4 to estimate y(0.1) for this IVP: 
+y’ = y – t       t0 = 0       y(0) = e + 1       h = 0.1 
+2.Just as a demonstration of the error, 
+compare your approximation to the 
+exact answer y(t) = et+1 + t + 1 to get 
+the actual local relative approximation 
+error. Is it similar in scale to h5?The Cooper Union for the Advancement of Science and Art 
+Answer: Local Error in RK4 The Cooper Union for the Advancement of Science and Art 
+SciPy generic IVP solver: solve_ivp 
+from scipy.integrate import solve_ivp 
+sol = solve_ivp(fun, (t0, t_end), [y0]) 
+plt.plot(sol.t, sol.y[ 0], label= 'RK45')
+•Uses RK4 but with dynamic h, with an error 
+estimate based on RK5 - known as RK4(5) 
+○Also has other, specialized methods 
+•Can solve for multi-dimensional y in f(t, y) 
+•Returns an object containing data about the 
+solution, including sol.t, sol.y, & sol.success The Cooper Union for the Advancement of Science and Art 
+IVP Systems 
+•1D problems are common, but so are IVPs 
+with multiple outputs: 
+•We need output to be a vector  instead of a 
+scalar - u now instead of yWhere are the 
+dependent 
+variables here? The Cooper Union for the Advancement of Science and Art 
+Numerical Soln. of IVP Systems 
+Suppose your problem now looks like this: 
+Vector function 
+Vector function a, not α
+Same methods work! The Cooper Union for the Advancement of Science and Art 
+IVP Systems in Python 
+from scipy.integrate  import solve_ivp 
+def fun(t, u):  # 3-D IVP 
+   C_A, C_B, C_C = u
+   ... calculate du/dt here ... 
+   return dAdt, dBdt, dCdt 
+sol = solve_ivp (fun, (t0, t_final), u0) 
+plt.plot(sol.t, sol.y[0], label='[A]')
+plt.plot(sol.t, sol.y[1], label='[B]')
+plt.plot(sol.t, sol.y[2], label='[C]')The Cooper Union for the Advancement of Science and Art 
+Million+ Dimension IVP Systems 
+●IVPs often scale to millions of dimensions 
+●Example: molecular dynamics , every [x, y, z] 
+of every atom is another dimension of w(t) 
+●Same techniques apply, just more compute The Cooper Union for the Advancement of Science and Art 
+1012+ Dimension IVP Systems 
+●Machine learning all known text / images 
+●Same techniques apply, just more compute 
+The Cooper Union for the Advancement of Science and Art 
+Activity: Coding RK4 
+•Write a function that 
+calculates the next 
+step of RK4: 
+def rk4(f, ti, wi, h): 
+    ...your code... 
+    return w_next 
+•Try it with this IVP: 
+  def fun(t, w): 
+      return w - t 
+  t0 = 0; y0 = np.e+1 
+When you've got it, compare vs scipy.integrate.solve_ivp The Cooper Union for the Advancement of Science and Art 
+Pre-reading for next week 
+Predictor-corrector & adaptive methods for IVPs, 
+higher-order IVPs, stiff IVPs: 
+PNM 22.6-7, F&B 5.6-8. 
+Verlet integration: 
+https://www.algorithm-archive.org/contents/verlet_integra
+tion/verlet_integration.html 

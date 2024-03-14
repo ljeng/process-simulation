@@ -1,0 +1,550 @@
+3.5 Spline Interpolation 87
+b.Repeat (a)with theHermite interpolating polynomial ofdegree atmost 5,using x0=1,
+=1.05 ,andx2=1.07.
+5. Usetheerror formula andMATLAB tofindabound fortheerrors intheapproximations of/(x)in
+(a)and(c)ofExercise 2.
+6. Thefollowing table listsdata forthefunction described by/(x)=e01*2.Approximate /(1.25)by
+using //5(1.25 )and//3(1.25 ),where uses thenodes Xo=1,xj=2,andx2=3and uses the
+nodes x0=1and X!=1.5.Find error bounds forthese approximations .
+X f i x)=e01*2f i x )=0.2xe01*2
+x0=x0=11.105170918 0.2210341836
+X!=1.5 1.252322716 0.3756968148
+*1=2 1.491824698 0.5967298792
+x2=3 2.459603111 1.475761867
+7. Acartraveling along astraight road isclocked atanumber ofpoints .Thedatafrom theobservations
+aregiven inthefollowing table ,where thetime isinseconds ,thedistance isinfeet,andthespeed is
+infeetpersecond .
+Time 0 3 5 8 13
+Distance 0225 383 623 993
+Speed 75 77 80 74 72
+a.UseaHermite polynomial topredict theposition ofthecaranditsspeed when t=10s.
+b.Usethederivative oftheHermite polynomial todetermine whether thecareverexceeds a55-mi/h
+speed limit ontheroad.Ifso,what isthefirsttime thecarexceeds thisspeed ?
+c.What isthepredicted maximum speed forthecar?
+8. Letzo=x0.Z\=x0,Z2=X|,andz3=xi.Form thefollowing divided -difference table.
+Zo=*o/[zo]=/(*o)
+/[zo.Zt]=/'(*o)
+Z i=X0/lZ|]=/(*o) /[Zo,Zi,Z2]
+/[ZI.Z2] /[Zo,Zl,Z2,Z3]
+Z2=*l/[Z2]=/(*l) /[ZI.Z2.Z3]
+/[Z2.Z3]=/'(*l)
+Z3=*l/[Z3]=/(*l)
+Show if
+P(x)=f[z0)+/[z0.Zi](x-x0)+/[z0,Z|,z2](*-xo)2+/[z0,zi,z2,z3](x-x0)2(x-x,).
+then
+P(xo)=fixo ),PM=/(X,).P'ixo)=f\xo),andP'(x.)=/'(*.).
+which implies thatP(x)=H3(x).
+3.5 Spline Interpolation
+The previous sections usepolynomials toapproximate arbitrary functions .However ,rela-
+tively high-degree polynomials areneeded foraccurate approximation andthese have some
+serious disadvantages .They canhave anoscillatory nature ,andafluctuation over asmall
+portion oftheinterval caninduce large fluctuations over theentire range .Wewillseean
+example ofthislater inthissection .
+Copyright 2012 Cengagc Learn in*.AIRight*Reversed Mayr*xbecopied ,canned ,o*daplicated.»whole otmpan.Doctoelectronic rtghtv .vomc third pony content may besupposed horn theeBook and/orcCh<xcn»l.Editorial roiew h*>
+deemed Cutanysupprewed content dee*notimxttaly alTect theoverall learning experience .C'cngagc Learn xiprexxvev theright lorenxyve additional conceal atanytimeiivubveqjrni right*rotrictionv require It88 C H A P T E R 3 Interpolation andPolynomial Approximation
+Analternative approach istodivide theinterval into acollection ofsubintervals and
+construct adifferent approximating polynomial oneach subinterval .This iscalled piecewise
+polynomial approximation .
+Piecewise -Polynomial Approximation
+The simplest piecewise polynomial approximation joins thedata points (xo,/(xo)),
+(*i,f(x\)),...,(x„ ,/(*„ ))byaseries ofstraight lines ,such asthose shown inFigure 3.7.
+Adisadvantage oflinear approximation isthattheapproximation isgenerally notdif-
+ferentiable attheendpoints ofthesubintervals ,sotheinterpolating function isnot“ smooth ” 
+atthese points.Itisoften clear from physical conditions thatsmoothness isrequired ,and
+theapproximating function must becontinuously differentiable .
+Figure 3.7
+y
+m V
+H 1 1 1 1 1 1 1
+*0 *2    X j Xj+i X j+2 ... A
+Isaac Jacob Schoenberg
+(1903-1990 )developed hiswork
+onsplines during World WarIIat
+theArmy ’sBallistic Research
+Laboratory inAberdeen ,
+Maryland ,while onleave from
+theUniversity ofPennsylvania .
+Hisoriginal work involved
+numerical procedures forsolving
+differential equations .The much
+broader application ofsplines to
+theareas ofdata fitting and
+computer -aided geometric design
+became evident with the
+widespread availability of
+computers inthe1960 s.One remedy forthisproblem istouseapiecewise polynomial ofHermite type.For
+example ,ifthevalues of/and/'areknown ateach ofthepoints xo<x\<   <x„ ,
+acubic Hermite polynomial canbeused oneach ofthesubintervals [xo,xj],[x j,X2],...,
+,xn]toobtain anapproximating function thathasacontinuous derivative ontheinterval
+[xo,xn].Todetermine theappropriate cubic Hermite polynomial onagiven interval ,we
+simply compute thefunction H$(x)forthatinterval .
+The Hermite polynomials arecommonly used inapplication problems tostudy the
+motion ofparticles inspace.Thedifficulty with using Hermite piecewise polynomials for
+general interpolation problems concerns theneed toknow thederivative ofthefunction being
+approximated .The remainder ofthissection considers approximations using piecewise
+polynomials thatrequire noderivative information ,except perhaps attheendpoints ofthe
+interval onwhich thefunction isbeing approximated .
+Cubic Splines
+The most common piecewise -polynomial approximation uses cubic polynomials between
+pairs ofnodes andiscalled cubic spline interpolation .Ageneral cubic polynomial involves
+four constants ,sothere issufficient flexibility inthecubic spline procedure toensure that
+theinterpolant hastwocontinuous derivatives ontheinterval .Thederivatives ofthecubic
+spline donot,ingeneral ,however ,agree with thederivatives ofthefunction ,even atthe
+nodes.(SeeFigure 3.8.)
+Copyright 2012 Cengagc Learn in*.AIRights Reversed May n«becopied ,canned ,ocimplicated ,inwhole orinpar.Doctocjectronie rightv.some third pur.ycontent may besupplied rican theeBook and/orcChaptcnM .Editorial review h*>
+deemed Cutanysuppicwcd content do»notmaterial yafTcct theoverall learn ireexperience .('engage I.cam/inreserve*theright Mremove additional conceal atanytime i!vuhveqjcni nghtv restrictions require It.3.5 Spline Interpolation 89
+Figure 3.8
+S/,xj+1)~/(*>+1)— Sj+faj+i)
+SXxJ +])= iC*,+i)
+H 1 1 1 1 1 1—I—I
+*0 X2    Xj Xj+\ Xj+2    xn-2Xn-1XnX
+Cubic Spline Interpolation
+Given afunction /defined on [a,b)andasetofnodes ,a=xo<x\<    <xn=b,
+acubic spline interpolant ,S,for/isafunction thatsatisfies thefollowing conditions :
+(a)Foreach j=0,1,...,n— 1,S(;t)isacubic polynomial ,denoted byS j(x),
+onthesubinterval [x j,X j+j).
+(b)S j(X j)=f(x j)andS j(x j+1)=f(x j+1)foreach j=0,1,...,n-1.
+(c)S,+i(*j+i)=S;(*,+i)foreach j=0,1,. . .,n-2(Implied by(b).)
+(d)S'j+l(Xj+1)=S j(X j+j)foreach j=0,1,. . .,n-2.
+(e)SJ+1(x,+i)=SJ(*y+i)foreach;=0,1 n-2.
+(f)One ofthefollowing setsofboundary conditions issatisfied :
+(i)S"(*o)=$"(*„ )=0(natural orfree boundary );
+(ii)S'(xo)=f(x0)andS'(x„ )=f\xn)(clamped boundary ).Six)
+SI
+So2
+s
+S
+SjXxj +\)— Sj+x(Xj+,)
+T h e root oftheword “ spline ” is
+thesame asthatofsplint .Itwas
+originally asmall strip ofwood
+thatcould beused tojoin two
+boards .Later theword wasused
+torefer toalong flexible strip,
+generally ofmetal,thatcould be
+used todraw continuous smooth
+curves byforcing thestrip topass
+through specified points and
+tracing along thecurve .
+Example 1Although cubic splines aredefined with other boundary conditions ,theconditions
+given in(0aresufficient forourpurposes .When thenatural boundary conditions areused ,
+thespline assumes theshape thatalong flexible rodwould take ifforced togothrough
+thepoints {(*o,/(*o)).(*i./C*i)),.. .,(x„ ,/(*„ ))}.This spline continues linearly when
+x<XQandwhen x>xn.
+Construct anatural cubic spline thatpasses through thepoints (1,2),(2,3),a n d(3,5).
+Solution This spline consists oftwocubics .The firstfortheinterval (1,2),denoted
+So(*)=ao+bo(x-1)+cQ(x-l)2-fdQ(x-1)\
+Copyright 2012 Cengagc Learn in*.AIRights Reversed May rotbecopied.scanned .o*implicated ,inwhole orinpa.".Doctocjectronie rights.some third pur.yCOMCK may besuppressed rican theeBook and/orcChapccriM .Editorial review h*>
+deemed Cutanysuppre-edcontent does nottnaxrUXy alTcct theoverall learning experience .Ccngagc [.camonreserves theright 10remove additional eonteatatanytime iisubsequent rights restrictions require It90 CH A P TER 3 Interpolation andPolynomial Approximation
+Anatural spline hasnoconditions
+imposed forthedirection atits
+endpoints ,sothecurve lakes the
+shape ofastraight lineafter it
+passes through theinterpolation
+points nearest itsendpoints .The
+name derives from thefactthat
+thisisthenatural shape aflexible
+strip assumes ifforced topass
+through specified interpolation
+points with noadditional
+constraints .(SeeFigure 3.9.)and theother for[2,3],denoted
+s,(*)=a,+M*-2)+ci(x-2)2+</,(*-2)\
+There are8constants tobedetermined ,which requires 8conditions .Four conditions come
+from thefactthatthesplines must agree with thedata atthenodes .Hence
+2=/(1)=a0,3=/(2)=oo+*>0+0)+do,3=/(2)=au and
+5=/(3)=a\+b\+C]4-d\.
+Two more come from thefactthat5Q(2)=5J(2)and SQ(2)=SJ'(2).These are
+So(2)=51(2):bo+2c0+3do=bx and S£(2)=$;'(2):2c0+6d0=2c,.
+Thefinal twocome from thenatural boundary conditions :
+$o(l)=0:2c0=0 and $;'(3)=0:2c\+6d\=0.
+Figure 3.9 Solving thissystem ofequations gives thespline
+S(x)2+?(*-l)+j(*-l)\for*e[1,2]4 4
+3+\{x2)+|(JC-2)2-l-(x-2)\for*[2,3],2 4 4
+Construction ofaCubic Spline
+Clamping aspline indicates that
+theends oftheflexible stripare
+fixed sothatitisforced totakea
+specific direction ateach ofits
+endpoints .This isimportant ,for
+example ,when twospline
+functions should match attheir
+endpoints .This isdone
+mathematically byspecifying the
+values ofthederivative ofthe
+curve attheendpoints ofthe
+spline .Ingeneral ,clamped boundary conditions leadtomore accurate approximations because they
+include more information about thefunction .However ,forthistype ofboundary condition ,
+weneed values ofthederivative attheendpoints oranaccurate approximation tothose
+values .
+Toconstruct thecubic spline interpolant foragiven function /,theconditions inthe
+definition areapplied tothecubic polynomials
+S j(x)=a}+b j(x-X j)+C j(x-x j)2+d j(x-x j)3
+foreach j=0,1,...,n— I.
+Since
+S j l x j )=d j=f(x j),
+condition (c)canbeapplied toobtain
+tfy+i=Sj+ilxj+i)=S j(xj+1)=aj+bj(xj+1-x j)+C j(x j+1-X j)2+djlxj +i-X j)3
+foreach j=0,1,...,n— 2.
+Since theterm xj+j-xjisused repeatedly inthisdevelopment ,itisconvenient to
+introduce thesimpler notation
+hi=xi+1“ xb
+foreach j=0,1,.. ..n— 1.Ifw ealsodefine a n=/(*„ ),then theequation
+a j+i=d j+b j h j+C j h2+d j h j (3.1)
+holds foreach j=0,1,...,n— 1.
+Copyright 2012 Cengagc Learning .AIRights Reversed May notbecopied .scanned .orduplicated .inwhole orinport .Doc toelectronic rights .>onic third pur.ycontent may bevuppreved rrom theeBook aml/orcCh<xcn»l.Editorial review h*>
+deemed Cutany suppic-cdcontent does nottnaxrUXy alTcct theoverall learning experience .('engage [.cammereserves theright 10remove additional conteat atanytime ifsubsequent rights restrictions require It3.5 Spline Interpolation 91
+Inasimilar manner ,define bn=S'(xn)andobserve that
+S'W=b j+2C j(x-x j)+3d j(x-X j)2(3.2)
+implies thatS'(*y)=bjforeach j=0,1,...,n— I.Applying condition (d)gives
+b j+1=b j4-2C j h j 4-3d j h2
+j, (3.3)
+foreach;=0,1,...,«-1.
+Another relation between thecoefficients ofSjisobtained bydefining cn=S"(xn)/2
+andapplying condition (e).Inthiscase,
+C j+1=C j4-3d j h j t (3.4)
+foreach j=0,1,...,n—1.
+Solving fordjinEq.(3.4)andsubstituting thisvalue intoEqs.(3.1)and (3.3)gives
+thenewequations
+andh2:
+aj+i=Q j+b j h j+-y-(2C j+cj+i) (3.5)
+b j+i=b j+h j(c j4-C j+j) (3.6)
+foreach j=0,1,...,n— 1.
+Thefinal relationship involving thecoefficients isobtained bysolving theappropriate
+equation intheform ofEq.(3.5)forbj,
+1 hbj=— (fly+1-fly)-~/(2c;H-cy+i), (3.7)
+h j 3
+andthen,with areduction oftheindex ,forbj-uwhich gives
+bj-1=7 (fly~Oj-\)4^(2Cy_
+i+Cy).
+";-l J
+Substituting these values intotheequation derived from Eq.(3.6),when theindex isreduced
+by1,gives thelinear system ofequations
+3 3hj-\Cj-\4-2(/»y_
+i4-hj)cj4-/»yCy+i=— (ay+i-ay)--— (ay-ay_
+i) ( 3.8)
+hj hj-\
+foreach j=1,2,...,/i—1.This system involves only {cy}” =0asunknowns since the
+values of{hj}*!,$and {ay}'*=0aregiven bythespacing ofthenodes {*y}y«oandthevalues
+o-Once thevalues of{cy}"=0aredetermined ,itisasimple matter tofindtheremainder
+oftheconstants {bj)*Z^from Eq.(3.7)and {dy)"~
+Qfrom Eq.(3.4)andtoconstruct the
+cubic polynomials {Sy(*)}yli.Inthecase oftheclamped spline ,wealso need equations
+involving the{cy}thatensure thatS'(JCO)=/'(*o)andS'(xn)=/'(*„ ).InEq.(3.2)we
+have S'j(x)interms ofbj,cy,anddj.Since wenow know bjanddjinterms ofcy,wecan
+usethisequation toshow thattheappropriate equations are
+32h0c04-h0ci=— (a,-oo)-3f'(x0) (3.9)
+ho
+Copyrtfhi 2012 CcniMfc Lcirniit*.AIRighb Reversed May notbetopic*).Knitted .ocAbdicated.»whole ormpan .Doc 10electronic itjhtv .some third pur.ycontent may bevupprtvcd Tiom theeBook amtar eOncxcnnl .Editorial review h*>
+deemed Cutany vuppreesed content does notmaterial yalTcct theoverall teamireexperience .Ccngjgc [.camonresenti thenjht toremove additional conteat*anytime i!vubvoyjem nghev totrictions require it92 C H A P T E R 3 Interpolation andPolynomial Approximation
+Program NCUBSP 34
+creates aNatural Cubic
+Spline
+Example 2
+Program CCUBSP 35
+creates aClamped Cubic
+Splineand
+3hn-\cn-\42hn^c„=3/'(*„ )-7— ifln~an-1). (3.10 )
+hn-\
+Thesolution tothecubic spline problem with thenatural boundary conditions S"(*o)=
+S"(xn)=0canbeobtained byapplying theprogram NCUBSP 34.Theprogram CCUBSP 35
+determines thecubic spline with theclamped boundary conditions S'(xo)=/'(JCO)and
+S'(xn)=/'(*„ ).
+Determine theclamped cubic spline forf(x)=xsin4xusing thenodes XQ=0,JCJ=0.25,
+x2=0.4,and*3=0.6.
+Solution Wefirstdefine thefunction /(x)anditsderivative f p(x)s/'(x)inMATLAB
+with
+f=inline(’x*sin(4*x)*,*x*)
+fp=inline(,sin(4*x)+4*x*cos(4*x)J,’x’)
+Wedefine thenodes using theMATLAB capability ofdefining subscripted variables within
+square brackets ,where ablank isused toseparate entries .Thesubscripts inMATLAB begin
+with 1so JC(1)=0,x(2)=0.25,x(3)=0.4,andx(4)=0.6.This isentered inMATLAB
+as
+x=[00.250.40.6]
+Thestepsizes arcdefined by
+h=Cx(2)-x(l)x(3)-x(2)x(4)-x(3)]
+andthevalues ofthefunction atthenodes by
+a=[f(x(l))f(x(2))f(x(3))f(x(4))]
+MATLAB responds tothislastcommand with
+a=00.210367746201974 0.399829441216602 0.405277908330691
+A4x4array Aisdefined whose rows aredefined bythesystem ofequations used to
+determine thequadratic coefficients ,thatis,thec’s.These aregiven inEqs.(3.8),(3.9),
+and(3.10 ),butEq.(3.9)involves anindex of0,which MATLAB does notpermit .Sothe
+indices must allbeincreased by1tocompensate .SoAisdefined asfollows :
+Row 1:theleft-hand side ofEq.(3.9),with alltheindices increased by1;thatis:
+2h\C\4h\c240 C340 C4.
+Row 2:theleft-hand sideofEq.(3.8)when j=2:
+h\C\42{h\4h2)c2-fh2 C340 c4.
+Row 3:theleft-hand side ofEq.(3.8)when j=3:
+0 c\4h2c242{h2«f/*3)^34/23^4-
+Copyrifht 2012 Cc«£»fcLearn in*.AIRights Reserved Mayr*xbecopied ,canned ,o*defeated.»whole o tmpan.Doctoelectronic rights.xvtic third pony content may besuppressed rrom theeBook and/orcCh<xcn»l.Editorial review h*>
+deemed Cutanysuppressed content does notimxttaly alTect theoverall learning experience .Ccagagc Learn xipreserves theright loremove additional conceal atanytime i isubsequent rights restrictions require It3.5 Spline Interpolation 93
+Row 4:theleft-hand sideofEq.(3.10)when n=4:
+0 Ci+0  C2 +h3c3-f-2/13C4.
+This gives
+A=[2*h(l)h(l)00;h(l)2*(h(l)+h(2))h(2)0;0h(2)
+2*(h(2)+h(3) ) h(3);0 0 h(3)2*h(3)]
+The right -hand sides ofthesame equations arestored inthe4x1array B.
+Row 1:theright -hand sideofEq.(3.9),with alltheindices increased by1;thatis:
+^-(a2-ai)-3/'(*i).
+Row 2:theright -hand sideofEq.(3.8)when j=2:
+3 3— (a)-a2)~-(a2-at).h2 hi
+Row 3:theright -hand sideofEq.(3.8)when j=3:
+3 3r-(a4-as)-r-(a3-a2).«3 n2
+Row 4:theright -hand sideofEq.(3.10)when n=4:
+SoBisdefined by
+B=[3*(a(2)-a(l))/h(l)-3*fp(x(l));
+3*(a(3)-a(2))/h(2)-3*(a(2)-a(l))/h(l);
+3*(a(4)-a(3))/h(3)-3*(a(3)-a(2) )/h(2);
+3*fp(x(4))-3*(a(4)-a(3))/h(3)]
+MATLAB gives these as
+A=1:1:111101010 :111:1:1 0.5(
+0.250000000000000
+0
+00.250000000000000
+0.800000000000000
+0.150000000000000
+00
+0.150000000000000
+0.700000000000000
+0.2000000000000000
+0
+1:1in 0.2(
+0.400000000000000
+and
+2.524412954423689’
+1.264820945868869“ -3.707506893581232
+_-3.364572216954841 _
+Wenow canhave MATLAB solve thesystem using thelinsolve command .
+c=linsolve (A,B)
+Copyright 2012 Cenfajc Lcarniit*.AIRighb Reversed May notbecopied ,canned ,orduplicated.»whole ormpar.Doctoelectronic ilfhu.xvtic third pur.ycontent may bevuppftv *drrom theeBook and/orcCh<xcn»l.Editorial roiew h*>
+deemed Cutanysuppressed content dees notimxtlaly alTcct theoverall Icamir .itexperience .Ccnitasc[.camme reverses therljtlu lorenxyve additional concert atanytimeiisubseqjcnt nRhts rotrictions require It94 C H A P T E R 3 Interpolation andPolynomial Approximation
+Table 3.13
+IllustrationMATLAB responds with solution consisting ofc(l),c(2),c(3),andc(4)as
+4.649673230468573'
+0.798305356757612
+C“ -3.574944314362422_-6.623958385205892
+Now useEq.(3.7)toobtain thevalues of6(1),6(2),and6(3)with thecommand
+b=[(a(2)-a(l) )/h(l)-h(l)*(2*c(l)+c(2) )/3;
+(a(3)-a(2) )/h(2)-h(2)*(2*c(2)+c(3) )/3;
+(a(4)-a(3) )/h(3)-h(3)*(2*c(3)+c(4))/3]
+which MATLAB gives as
+6=0.000000000000000
+1.361994646806546
+0.945498803165825
+Finally ,thevalues ofd(l),d(2),andd(3)areobtained using Eq.(3.4)andthecommand
+d-[(c(2)-c(l))/(3*h(l));(c(3)-c(2))/(3*h(2));
+(c(4)-c(3) )/(3*h(3))]
+producing
+d=-5.135157164947948-9.718332602488962-5.081690118072451
+This implies thatthecubic spline ,tothree decimal places ,isasshown inTable 3.13.
+j o j b j C j d j
+0 0.000 0.000 0.000 4.650 -5.135
+1 0.250 0.210 1.362 0.798 -9.718
+2 0.400 0.400 0.945 -3.575 -5.082
+3 0.600 0.405 -6.624
+Inthefollowing Illustration theshape ofthecurve ismuch more complex .Placing a
+minimal number ofdata points along thecurve togetagood representation would require
+some experimentation .
+Figure 3.10 shows aruddy duck inflight.Toapproximate thetopprofile oftheduck ,we
+have chosen points along thecurve through which wewant theapproximating curve topass.
+Table 3.14 lists thecoordinates of21data points relative tothesuperimposed coordinate
+system shown inFigure 3.11.Notice thatmore points areused when thecurve ischanging
+rapidly than when itischanging more slowly .
+Copyright 2012 Cengagc Learn in*.AIRights Reversed Mayr*xbecopied.scanned .ocimplicated ,inwhole orinpar.Doctocjectronie rlghtv.some third pur.ycontent may besupplied ftem theeBook and/orcChaptcnM .Editorial review h*>
+deemed Cutanysuppressed content does notnuxtlaly alTcct theioera .1learning experience .('engage [.camonreserves theright 10remove additional eonteatatanytime ifsubsequent rights restrictions require It3.5 Spline Interpolation 95
+Figure 3.10
+c)-VJ
+Figure 3.11
+fix)n
+J*
+<to
+*: 5'-^101II213
+r
+j
+.FW
+Table 3.14
+X 0.9 1.3 1.9 2.1 2.6 3.0 3.9 4.4 4.7 5.0 6.0 7.0 8.0 9.2 10.5 11.3 11.6 12.0 12.6 13.0 13.3
+f i x)1.3 1.5 1.85 2.1 2.6 2.7 2.4 2.15 2.05 2.1 2.25 2.3 2.25 1.95 1.4 0.9 0.7 0.6 0.5 0.4 0.25
+Using theprogram NCUBSP 34togenerate thenatural cubic spline forthisdata pro-
+duces thecoefficients shown inTable 3.15.This spline curve isnearly identical totheprofile ,
+asshown inFigure 3.12.
+Forcomparison purposes ,Figure 3.13 gives anillustration ofthecurve thatisgen-
+erated using aLagrange interpolating polynomial tofitthedata given inTable 3.14.The
+interpolating polynomial inthiscase isofdegree 20andoscillates wildly .Itproduces a
+very strange illustration oftheback ofaduck ,inflight orotherwise .
+Copyright 2012 Cengagc Learn in*.AIRights Reversed May rvotbecopied.scanned .ocimplicated ,inwhole orinpa.".Doctocjectronie rights.some third pur.ycontent may besupplied ftem theeBook and/orcChapccriM .Editorial review h*>
+deemed Cutanysuppressed content does nottnaxriaXy alTcct theoverall learning experience .('engage [.camonreserves theright toremove additional eonteatatanytime ifsubsequent nghts restrictions require It96 C H A P T E R 3 Interpolation andPolynomial Approximation
+Table 3.15 Figure 3.12
+jX J a j b j C J d j
+00.91.3 5.40 0.00-0.25
+11.3 1.5 0.42-0.30 0.95
+21.9 1.85 1.09 1.41-2.96
+32.12.1 1.29-0.37-0.45
+42.62.6 0.59-1.04 0.45
+53.02.7-0.02-0.50 0.17
+63.9 2.4-0.50-0.03 0.08
+74.4 2.15-0.48 0.08 1.31
+84.7 2.05-0.07 1.27-1.58
+95.0 2.1 0.26-0.16 0.04
+10 6.0 2.25 0.08-0.03 0.00
+11 7.02.3 0.01-0.04-0.02
+12 8.0 2.25-0.14-0.11 0.02
+13 9.2 1.95-0.34-0.05-0.01
+1410.5 1.4-0.53-0.10-0.02
+1511.3 0.9-0.73-0.15 1.21
+1611.6 0.7-0.49 0.94-0.84
+1712.0 0.6-0.14-0.06 0.04
+1812.6 0.5-0.18 0.00-0.45
+1913.0 0.4-0.39-0.54 0.60
+2013.3 0.25fix)
+JV.
+/$- -4^10111213
+/
+//i
+Figure 3.13
+f i x)
+rr\——f\\j\ft
+*2t56'£ >-l01112\
+f
+j
+y
+Touseaclamped spline toapproximate thiscurve wewould need derivative approx -
+imations fortheendpoints .Even ifthese approximations were available ,wecould expect
+little improvement because oftheclose agreement ofthenatural cubic spline tothecurve
+ofthetopprofile.
+Cubic splines generally agree quite wellwith thefunction being approximated ,provided
+thatthepoints arenottoofarapart andthefourth derivative ofthefunction iswell behaved .
+Forexample ,suppose that/hasfour continuous derivatives on [a,b]andthatthefourth
+derivative onthisinterval hasamagnitude bounded byAf.Then theclamped cubic spline
+Copyright 20I2C««cLearn in*.AIRights Reversed Mayr*xbecopied.scanned .ocimplicated ,inwhole orinpar.Doctocjectronie rights.some third pur.ycontent may besupplied ftem theeBook and/orcChapccriM .Editorial review h*>
+deemed Cutanysuppressed content does notnuxtlaly alTcct theoverall learning experience .('engage [.camonreserves theright toremove additional eonteatatanytime ifsubsequent nghts restrictions require It3.5 Spline Interpolation 97
+S i x)agreeing with f i x)atthepoints a— xo<X|<   <x n=bhastheproperty that
+forallxin[a,b\.
+5M
+Asimilar— butmore complicated — result holds forthenatural cubic splines .
+E X E R C I S E S E T 3 . 5
+1.
+2.
+3.Determine thenatural cubic spline Sthatinterpolates thedata/(0)=0,/(1)=1,and/(2)=2.
+Determine theclamped cubic spline sthatinterpolates thedata/(0)=0,/(1)=1,/(2)=2and
+satisfies s'(0)=s'(2)=1.
+Construct thenatural cubic spline forthefollowing data.
+a.
+c.X f i x)
+8.3 17.56492
+8.6 18.50515
+X f i x)
+-0.5-0.0247500-0.25 0.3349375
+0 1.1010000X f i x)
+0.8 0.22363362
+1.0 0.65809197
+X f i x)
+0.1-0.62049958
+0.2-0.28398668
+0.3 0.00660095
+0.4 0.24842440
+4. Thedata inExercise 3were generated using thefollowing functions .Usethecubic splines constructed
+inExercise 3forthegiven value ofxtoapproximate /(x)and/'(x),andcalculate theactual error.
+a./(x)=xlnx ;approximate /(8.4)and/'(8.4).
+b./(x)=sin(e*-2);approximate /(0.9)and/'(0.9).
+c./(x)=x3+4.001 x2+4.002*+1.101 ;approximate f i— \)and/'(— 5).
+d./(x)=xcosx-2x2+3x— 1;approximate /(0.25)and/'(0.25).
+5. Construct theclamped cubic spline using thedata ofExercise 3andthefactthat
+a./'(8.3)=3.116256 and/'(8.6)=3.151762
+b./'(0.8)=2.1691753 and/'(1.0)=2.0466965
+c./'(-0.5)=0.7510000 and/'(0)=4.0020000
+d./'(0.1)=3.58502082 and/'(0.4)=2.16529366
+6. Repeat Exercise 4using theclamped cubic splines constructed inExercise 5.
+7. a.Construct anatural cubic spline toapproximate /(x)=COSTTX byusing thevalues given by
+/(x)atx=0.0.25,0.5,0.75,and1.0.
+b.Integrate thespline over [0,1],andcompare theresult tof(!cosn xd x=0.
+c.Use thederivatives ofthespline toapproximate /'(0.5)and/"(0.5),andcompare these ap-
+proximations totheactual values.
+8. a.Construct anatural cubic spline toapproximate /(x)=e~xbyusing thevalues given by/(x)
+atx=0,0.25,0.75,and1.0.
+b.Integrate thespline over [0,1],andcompare theresult tof Q]e~xd x=1-1/e.
+c.Usethederivatives ofthespline toapproximate /'(0.5)and/"(0.5),andcompare theapproxi -
+mations totheactual values .
+9. Repeat Exercise 7,constructing instead theclamped cubic spline with/'(0)=/'(1)=0.
+10. Repeat Exercise 8,constructing instead theclamped cubic spline with/'(0)=-1,/'(1)=-e~*.
+Copyright 2012 Cenpapc Learn in*.AIR-phivReversed Mayr*xbecopied ,canned ,orduplicated .inwhole ormpan .Doctoelectronic rifhu.vomc third pony content may bevuppftv «dftem theeBook and/orcCh<xcn»l.Editorial roiew h*>
+deemed Cutanyvuppicwed content dee>notnuxtiily alTect theoverall Icamir .itexperience .Ccri|tapel.camzip rexxvei thertpht 10renxwe additional conceal atanytimeiisubvoyjem npht »roirlctionc require It9 8 C H A P T E R Interpolation andPolynomial Approximation
+11. Anatural cubic spline Son[0,2]isdefined by
+S(x)=
+12.
+13.
+14.SoCO=14*2x— x3, if0<x<1,
+S,(x)=a+b{x-1)+c(x-l)2+d(x-l)3,if1<x<2.
+Finda,b,c,andd.
+Aclamped cubic spline sforafunction /isdefined on[1,3]by
+s(x)_(s0(x)=3\si(x)=a=3(x-1)+2(x-l)2-(x-l)3, if1<x<2,
++b(x-2)+c(x-2)2+d(x-2)\ if2<x<3.
+Given/'(1)=/'(3),finda,b,c,andd.
+Anatural cubic spline Sisdefined by
+S(x)=So(x)=1+B(x-1)-D(x-l)3, if1<x<2,
+St(x)=l+b(x-2)-\(x-2)2+d(x-2)\ if2<x<3.
+IfSinterpolates thedata (1,1),(2,1),and(3.0),find B.D,b,andd.
+Aclamped cubic spline sforafunction /isdefined by
+s(x)5o(x)=1+Bx+2x2-2x\ if0<x<1,
+5,(x)=1+b(x-1)-4(x-l)2+7(x-l)3,if1<x<2.
+Find/'(0)and/'(2).
+15. Suppose that/(x)isapolynomial ofdegree 3.Show that/(x)isitsown clamped cubic spline but
+thatitcannot beitsown natural cubic spline .
+16. Suppose thedata {x,,/(x,)),lieonastraight line.What canbesaid about thenatural andclamped
+cubic splines forthefunction /?[Hint:Take acuefrom theresults ofExercises 1and2.]
+17. The data inthefollowing table give thepopulation oftheUnited States fortheyears 1960 to2010
+andwere considered inExercise 16ofSection 3.2andExercise 6ofSection 3.3.
+Year 1960 1970 1980 1990 2000 2010
+Population (thousands )179,323 203,302 226,542 249,633 281,442 307,746
+a.Find anatural cubic spline agreeing with these data,andusethespline topredict thepopulation
+intheyears 1950 ,1975 ,and2020.
+b.Compare your approximations with those previously obtained .Ifyou hadtomake achoice ,
+which interpolation procedure would youchoose ?
+18. Acartraveling along astraight road isclocked atanumber ofpoints .Thedata from theobservations
+aregiven inthefollowing table,where thetime isinseconds ,thedistance isinfeet,andthespeed is
+infeetpersecond .
+Time 0 3 5 8 13
+Distance 0 225 383 623 993
+Speed 75 77 80 74 72
+a.Useaclamped cubic spline topredict theposition ofthecaranditsspeed when t=10s.
+b.Usethederivative ofthespline todetermine whether thecareverexceeds a55-mi/hspeed limit
+ontheroad;ifso,what isthefirsttime thecarexceeds thisspeed ?
+c.What isthepredicted maximum speed forthecar?
+19. The 2011 Kentucky Derby waswon byahorse named Animal Kingdom (at20:1odds )inatime of
+2:02.04 (2minutes and2.04 seconds )forthe1
+^-mile race.Times atthequarter -mile ,half-mile,and
+mile poles were 0:24.26 ,0:59.68 ,and1:47.95.
+Copyright 2012 Cenfajc Learn in*.AIR.(huRocncd Mayr*xbecopied.v.-aitned.o*implicated ,inwhole orinpar.Doctocjectronie rifhu.*wcthird pur.ycontent may besupplied rican theeBook and/orcChaptcnM .Editorial roiew h*>
+deemed CutanyMpprcucd content does notmaterialy alTcct theoverall Icamir*experience .Ceagage l.cammu reserves theright 10remove additional conceal atanytime ifvutoeqjcni nghtv restrictions require It3.6 Parametric Curves 99
+a.Usethese values together with thestarting time toconstruct anatural cubic spline forAnimal
+Kingdom ’srace.
+b.Usethespline topredict thetime atthethree-quarter -mile pole,andcompare thistotheactual
+time of1:24.40 .
+c.Usethespline toapproximate Animal Kingdom ’sspeed atthefinish line.
+20. Itissuspected thatthehigh amounts oftannin inmature oakleaves inhibit thegrowth ofthewinter
+moth (Operophtera bromata L,Geometridae )larvae thatextensively damage these trees incertain
+years.Thefollowing table liststheaverage weight oftwosamples oflarvae attimes inthefirst28days
+after birth.Thefirstsample wasreared onyoung oakleaves ,whereas thesecond sample wasreared
+onmature leaves from thesame tree.
+a.Useanatural cubic spline toapproximate theaverage weight curve foreach sample .
+b.Find anapproximate maximum average weight foreach sample bydetermining themaximum
+ofthespline .
+Day 0 6 10 13 17 20 28
+Sample 1average
+weight (mg)6.67 17.33 42.67 37.33 30.10 29.31 28.74
+Sample 2average
+weight (mg)6.67 16.11 18.89 15.00 10.56 9.44 8.89
+3.6 Parametric Curves
+None ofthetechniques wehave developed canbeused togenerate curves oftheform shown
+inFigure 3.14,because thiscurve cannot beexpressed asafunction ofonecoordinate
+variable interms oftheother .Inthissection wewillsechow torepresent general curves by
+using aparameter toexpress both the*-andy-coordinatc variables .This technique canbe
+extended torepresent general curves andsurfaces inspace .
+Figure 3.14
+V
+1
+*-
+1 1
+1
+Copyright 2012 Cc«£»fcLearn in*.AIRights Reserved Mayr*xbecopied ,canned ,ocduplicated.»whole oempan.Doctoelectronic rights.some third pony content may besuppressed ftem theeBook and/orcCh<xcn»l.Editorial review h*>
+deemed Cutanysuppressed content does notnuxtiily alTcct theoverall learning experience .Ccagagc [.cammu reserves theright 10remove additional conceal atanytime i isubsequent rights restrictions require It.

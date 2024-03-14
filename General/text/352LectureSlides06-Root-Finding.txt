@@ -1,0 +1,254 @@
+The Cooper Union for the Advancement of Science and Art 
+ChE352 
+Numerical Techniques for Chemical Engineers 
+Professor Stevenson 
+Lecture 6 The Cooper Union for the Advancement of Science and Art 
+Root finding 
+•Origin: Egypt, ~1700 B.C.E. 
+•Solve any algebraic 
+equation, even equations 
+with no analytic solutions 
+(which is most of them) 
+•Common in ChemE 
+•We will learn two methods: 
+1.Bisection (simple, safe) 
+2.Newton-Raphson (fast) 
+Modern 
+root-finding Ancient 
+root-finding The Cooper Union for the Advancement of Science and Art 
+Example: Fluid Mechanics 
+Given the Reynolds number Re, how 
+would you find the friction factor 𝒇?
+Churchill and Zajic (2002): 
+equation for friction factor 𝒇 
+in a pipe as a function of 
+Reynolds number Re 
+Polynomial + log: 
+no analytic 
+solution The Cooper Union for the Advancement of Science and Art 
+Finding the Friction Factor from Re 
+First we rearrange the Churchill-Zajic equation: 
+Why is this form easier? 
+The Cooper Union for the Advancement of Science and Art 
+Does a Root Exist? 
+●We want to find p 
+such that f(p) = 0 
+●Don't try to find p 
+if it doesn’t exist! 
+Why f(p) = 0, not the more general f(p) = K? 
+How do we know there will be a root p? 
+How many values of p might exist? 
+The Cooper Union for the Advancement of Science and Art 
+Intermediate Value Theorem 
+Existence of an intermediate value: 
+Plug in K = 0 and c = p (root finding): 
+(Note that we can flip a and b ; IVT is still valid) The Cooper Union for the Advancement of Science and Art 
+We Must Prove That a Root Exists 
+1.Is f(x) continuous for the Churchill-Zajic eqn.? 
+2.Can our bounds, a & b, be negative? 
+3.Should f(a) or f(b) ever be equal to zero? 
+4.Is f(a) always less than f(b)? 
+The Cooper Union for the Advancement of Science and Art 
+Activity: Existence of a Root 
+For the Churchill-Zajic equation below: 
+1.Rewrite the function in the form f(y) = 0 with    
+y = √(2/x), and Re = 20000 
+2.Write a Python function that returns f(y) 
+3.Find values a, b such that f is continuous on 
+[a, b] and a root of f(y) exists between a & b 
+The Cooper Union for the Advancement of Science and Art 
+Answer: Existence of a Root 
+# Churchill-Zajic for Re = 20,000 
+# note, continuous for all positive values of y 
+def churchill_zajic (y):
+   Re = 2e4
+   return (3.2 - 227 * y / (0.5 * Re) +
+           2500 * (y / (0.5 * Re))**2 +
+           1 / 0.436 * np.log(0.5 * Re / y) - y)
+Can we make this long equation nicer? The Cooper Union for the Advancement of Science and Art 
+Answer: Existence of a Root 
+# Churchill-Zajic for Re = 20,000 
+# note, continuous for all positive values of y 
+def churchill_zajic (y):
+   Re = 2e4
+   yr = y / (0.5 * Re)
+   return (3.2 - 227 * yr +
+           2500 * yr**2 +
+           1 / 0.436 * np.log(1 / yr) - y)How is this form 
+of the equation 
+mathematically 
+nicer? The Cooper Union for the Advancement of Science and Art 
+Answer: Existence of a Root 
+# test for roots of f from A to B 
+def find_root_bounds (f, A, B, step):
+   for a in np.arange(A, B, step):
+       for b in np.arange(a + step, B, step):
+           if np.sign(f(a)) != np.sign(f(b)):
+               return a, b
+# we know churchill_zajic(y) is continuous for y > 0 
+bounds = find_root_bounds (churchill_zajic , 1, 100, 1)
+print(bounds)  # gives 1, 18 
+print([churchill_zajic (y) for y in bounds])How does this 
+prove existence 
+of a root? The Cooper Union for the Advancement of Science and Art 
+Bisection for Root Finding 
+The bisection method  finds p* such that 
+f(p*) ≈ 0, on the interval [a, b], in this way: 
+1.Prove there is a root on the interval [a, b] 
+2.Cut the interval in half (aka bisect  it)
+3.Pick the half-interval that contains the root 
+4.If not done, go back to step 3 
+How do you pick the half with the root? 
+When are you done? The Cooper Union for the Advancement of Science and Art 
+Bisection in pictures 
+Interval 1 (100%) 
+Interval 2 (50%) 
+Interval 3 (25%) 
+Interval 4 (12.5%) The Cooper Union for the Advancement of Science and Art 
+Bisection in pseudocode 
+Inputs: function f, scalar a, and scalar b 
+1.If sign(f(a)) == sign(f(b)), raise an error 
+2.Set p = (a + b) / 2 
+3.If sign(f(a)) == sign(f(p)), set a = p, else b = p 
+4.If conditions are met, STOP 
+5.Go to Step 2 
+Outputs: p, f(p); or error if sign(f(a)) == sign(f(b)) 
+Stopping conditions: f(p) < 𝜀, or |a-b| < 𝜀, 
+or |a-b| / |p|  < 𝜀, or simply too many iterations The Cooper Union for the Advancement of Science and Art 
+Convergence of Bisection 
+Each step, we reduce the uncertainty 
+by half: ratio of error between adjacent 
+steps is approximately a constant 0.5. 
+Not bad, but we can do better. 
+Is there more information about f(x) we 
+can use to make a better method? The Cooper Union for the Advancement of Science and Art 
+import time 
+print( 'Lecture paused' )
+time.sleep( 300)
+print( 'More information' )The Cooper Union for the Advancement of Science and Art 
+Use the slope f’(x) 
+How can we find a root using the following? 
+•Starting point x, y = p0, f(p0)
+•Desired y = f(p) = 0 
+•Slope at p0 = f’(p0) ← new information 
+Remember first-order Taylor series, any 
+function can be approximated as a line:
+By plugging in f(p1) = 0, we can solve for p1
+and get a very nice estimate of p The Cooper Union for the Advancement of Science and Art 
+Activity: solve for p1
+Plug in f(p1) = 0
+Solve for p1How can we find a root using the following? 
+•Starting point x, y = p0, f(p0)
+•Desired y = f(p) = 0 
+•Slope at p0 = f’(p0) ← new information 
+Remember first-order Taylor series, any 
+function can be approximated as a line:
+The Cooper Union for the Advancement of Science and Art 
+Solve for p1
+How can we find a root using the following? 
+•Starting point x, y = p0, f(p0)
+•Desired y = f(p) = 0 
+•Slope at p0 = f’(p0) ← new information 
+Remember first-order Taylor series, any 
+function can be approximated as a line:
+The Cooper Union for the Advancement of Science and Art 
+German, I guess Newton's Method The Cooper Union for the Advancement of Science and Art 
+Newton's Method 
+●Using the line defined by p0, 
+f(p0), f’(p0) to calculate your next 
+guess p1 is called Newton’s 
+Method or Newton-Raphson 
+●Converges faster  than Bisection 
+●Can fail  if you’re unlucky 
+●How can it fail? 
+The Cooper Union for the Advancement of Science and Art 
+Newton-Raphson failure 
+If f’(p) ≈ 0, f(p) / f’(p) 
+will be nonsense 
+How could we 
+address these 
+problems? If p is near a max or min, 
+not a root, we can get stuck The Cooper Union for the Advancement of Science and Art 
+Newton-Raphson failure 
+Use limited step size 
+(“trust radius”) 
+After N iterations, try again with a new guess. 
+Can use bisection, finish with Newton (“polishing”) Use bounds pmin, pmax If p is near a max or min, 
+not a root, we can get stuck If f’(p) ≈ 0, f(p) / f’(p) 
+will be nonsense The Cooper Union for the Advancement of Science and Art 
+Quadratic vs Linear Convergence 
+An algorithm/sequence converges linearly  if, for large n: 
+And quadratically  if: 
+•Newton's Method converges quadratically 
+(if at all), bisection linearly (every time) 
+•See F&B page 51 for more details 
+The ratio errorn+1 / errorn 
+is bounded by a constant K 
+(for bisection, K = 0.5) 
+The ratio errorn+1 / errorn2
+is bounded by a constant K 
+(drop in error accelerates )The Cooper Union for the Advancement of Science and Art 
+Bisection vs Newton-Raphson 
+Bisection Newton 
+Convergence? 
+Always 
+converges? 
+Special 
+conditions? 
+Good when? The Cooper Union for the Advancement of Science and Art 
+Bisection vs Newton-Raphson 
+Bisection Newton 
+Convergence? Linear Quadratic 
+Always 
+converges? Yes No, if bad p0 or if 
+we hit f’(pn) ≈ 0 
+Special 
+conditions? Need the 
+bounds a, b Need a guess p0, 
+need to have f’(x) 
+Good when? We need 
+stability We need 
+accuracy & speed The Cooper Union for the Advancement of Science and Art 
+def f_df(x):  # example function: f(x) = x**2 - 6 
+   return x**2 - 6, 2 * x  # return f(x) and f'(x) 
+rel_x_tolerance  = 1e-4
+n_max = 5
+p0 = 1.0  # very simple guess 
+for i in range(n_max):
+   f_p0, df_p0 = f_df(p0)  # get f(x) and f'(x) 
+   p = p0 - f_p0 / df_p0  # get new point p 
+   if abs((p - p0) / p) < rel_x_tolerance :
+        break
+   p0 = p  # try again from new point p 
+print(f'p**2 = {p**2}')  # p**2 = 6.00000000002 Code for Newton-Raphson The Cooper Union for the Advancement of Science and Art 
+Activity: Newton-Raphson √6 
+Use Newton's Method to find sqrt(6) from an 
+initial guess of p0 = 1: 
+At each step, record your guess pn and your 
+relative error bound abs((pn-1 - pn) / pn). Stop 
+when the relative error bound is under 0.01. 
+The Cooper Union for the Advancement of Science and Art 
+Answer: Newton-Raphson by Hand 
+The Cooper Union for the Advancement of Science and Art 
+Root Finding Implementations 
+1.For linear or quadratic, solve analytically 
+2.For polynomials of order > 2, use “roots” in 
+numpy: numpy.roots(P)  gives all the roots 
+3.For general nonlinear equations, use 
+scipy.optimize: define a function f, then 
+optimize.newton(f, guess)  gives one root 
+near your initial guess “guess” 
+○What might scipy.optimize.newton do if 
+function f doesn’t return its derivative f’? The Cooper Union for the Advancement of Science and Art 
+Summary and Problems 
+●Open Python Numerical Methods, go to 
+Chapter 19.6: Summary and Problems 
+●Solve the problem 
+beginning " Consider 
+the problem of 
+building a pipeline..."  
+●Note, same with an 
+offshore wind turbine 
+All reading for next week: linear, spline, & Lagrange 
+interpolation (PNM 17.1-4), numerical derivatives 
+(PNM 20.1-2) & integrals (PNM 21.1-3) 

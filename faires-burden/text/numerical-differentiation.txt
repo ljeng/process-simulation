@@ -1,0 +1,414 @@
+4.9 Numerical Differentiation 163
+4.9Numerical Differentiation
+Atthebeginning ofthischapter westated thatderivative approximations arenotasfrequently
+needed asintegral approximations .This istruefortheapproximation ofsingle derivatives ,
+butderivative approximation formulas areused extensively forapproximating thesolutions
+toordinary andpartial differential equations ,asubject weconsider inChapters 11and12.
+Thederivative ofthefunction /atx pisdefined as
+/'(*o)=lim
+h— *0f(X Q+h)-f(X Q)
+h
+This formula gives anobvious waytogenerate anapproximation tof'(xo);simply compute
+fjxp+h)-FJXQ )
+h
+forsmall values ofh.Although thismay beobvious ,itisnotvery successful ,duetoour
+oldnemesis ,round -offerror.Butitiscertainly theplace tostart.
+Toapproximate fixo ),suppose first thatxoe(a,b),where/eC2[a,b\,andthat
+x\=xo+hforsome h^0thatissufficiently small toensure thatx\e[a,b\.Weconstruct
+thefirstLagrange polynomial ,PQ.I,for/determined byXQandx\with itserror term
+f i x)=Po.iOO+2! /(tW)
+/(*>)(*-x o-h)+fjxo+h)j x-X Q)+j x-x0)(x-x p-h)-h h 2
+forsome number £(x)in[a,b].Differentiating thisequation gives
+f\x)=f t o+V-f t o )+D xh{x-x0)(x-x0-h)„
+2 /(fto)
+f i xo+h)-f i x0)+2(x-x0)-hy//(^(x^)h 2
+SO
+Difference equations were used
+andpopularized byIsaac Newton
+inthelastquarter ofthe17th
+century ,butmany ofthese
+techniques hadpreviously been
+developed byThomas Harriot
+(1561-1621 )andHenry Briggs
+(1561-1630 ).Harriot made
+significant advances innavigation
+techniques ,andBriggs wasthe
+person most responsible forthe
+acceptance oflogarithms asan
+aidtocomputation .f(x)*/.(*>.+ft
+h
+with error
+There aretwoterms fortheerror inthisapproximation .Thefirstterm involves /"(£(x)),
+which canbebounded ifwehave abound forthesecond derivative of/.Thesecond part
+ofthetruncation error involves Ac/"(ICO)=/"'(ICO) |'C0,which generally cannot be
+estimated because itcontains theunknown term|'C0-However ,when*is*o,thecoefficient
+ofAc/"(ICO)iszero.Inthiscase,theformula simplifies tothefollowing :
+Copyright 2012 Cengagc Learning .AIRights Reversed May notbecopied ,canned ,orduplicated .inwhole orinpar.Doctoelectronic ilghtv.xvtic third pur.ycontent may bevuppreved rrom theeBook amtar cCh<xcn»l.Editorial roiew h*>
+deemed Cutanysuppressed content does nottnaxrUXy alTect theoverall learning experience .('engage [.camonreserves theright*>rerrxyve additional conteatatanytime iisubseqjcnt nghts restrictions require It164 CH A PTER 4 Numerical Integration andDifferentiation
+Two-Point Formula
+I f/"exists ontheinterval containing XQand JC0+h,then
+/'(*>)=fixo+h)— f(xQ)
+h\f"«) 
+forsome number $between xoand XQ+h.
+Suppose that Afisabound on|/"(JC)|forxe[a,b].Then forsmall values of/i,
+thedifference quotient [fixo+h)— fixo )]/hcanbeused toapproximate fixo)with an
+error bounded byM\h\/2.This isatwo-point formula known astheforward -difference
+formula ifh>0(seeFigure 4.20)andthebackward -difference formula ifh<0.
+Figure 4.20
+y- Slope/'(*o)
+fixo +h)-f(x0)Slope
+x0x0+h x
+Example 1Usetheforward -difference formula toapproximate thederivative off(x)=lnxatxo =1.8
+using h=0.1,h=0.05,andh=0.01,anddetermine bounds fortheapproximation errors .
+Solution Theforward -difference formula
+/(1.8+h)— f(1.8)
+h
+with h=0.1gives
+In1.9-In1 .8
+0.10.64185389 -0.58778667
+0.1=0.5406722 .
+Because fix )=— l/x1and1.8<f<1.9,abound forthisapproximation error is
+\hfm
+21*1
+2H2<0.1
+2(1.8)2=0.0154321 .
+Theapproximation anderror bounds when h=0.05 andh=0.01 arefound inasimilar
+manner andtheresults areshown inTable 4.9.
+Copyright 2012 Cenfajc Learn in*.AIRights Reversed Mayr*xbecopied.scanned .ocimplicated ,inwhole orinpar.Doctocjectronie rifhu.some third pur.ycontcir.may besupplied rican theeBook and/orcChapccriM .Editorial review h*>
+deemed Cutanysuppressed content docs nottnaxrUXy alTcct theoverall Icamir .itexperience .Ccagagc [.cannon reserves theright 10remove additional eonteatatanytime ifsubsequent rights restrictions require It.4.9 Numerical Differentiation 165
+Table 4.9
+h /(1.8+h) /(1.8+/i)--/(1.8) \h\
+h 2(1.8)2
+0.1 0.64185389 0.5406722 0.0154321
+0.05 0.61518564 0.5479795 0.0077160
+0.01 0.59332685 0.5540180 0.0015432
+Since fix)=l/x,theexact value of/'(1.8)is0.555 ,andinthiscase theerror bounds
+arequite close tothetrueapproximation error .
+Toobtain general derivative approximation formulas ,suppose that*o,*i,...xHare
+(n+1)distinct numbers insome interval /andthat/C"+1(/).Then
+m=£fWito +
+forsomef(JC)in/,where L,(x)denotes theythLagrange coefficient polynomial for/at
+JCQ,x\,...,xn.Differentiating thisexpression gives
+n
+f'(x)=J2f(*j)L'j(x)+Dx
+j=0(X-X0)--(X-X„)
+(n+1)! /("+1)(*(*))
+(n+1)!
+Again wehave aproblem with thesecond partofthetruncation error unless xisoneof
+thenumbers x*.Inthiscase ,themultiplier ofDx[/(n+1)(£(*))]iszero ,andtheformula
+becomes
+/-(**)=E/(*/)ty**)+
+j=of{n+l\Hxk ))
+(n+1)! -X j).
+j=0
+j*k
+Three -Point Formulas
+Applying thistechnique using thesecond Lagrange polynomial atxo,=*o+h,and
+x2=XQ+2hproduces thefollowing formula .
+Three -Point Endpoint Formula
+If{"'exists ontheinterval containing XQandxo+2h,then
+fixo)=^[-3/(xo)+4/(*o+h)-f(x0+2h))+y/'"«).
+forsome number £between XQand XQ+2h.
+This formula isuseful when approximating thederivative attheendpoint ofaninterval .
+This situation occurs ,forexample ,when approximations areneeded forthederivatives used
+fortheclamped cubic splines .Left endpoint approximations arefound using h>0,and
+right endpoint approximations using h<0.
+Copyright 2012 Cc«£»fcLearn in*.AIR.(huReversed Mayr*xbecopied ,canned ,o*daplicated.»whole oempan.Doctoelectronic ilfhu.vontc third pony content may besupposed rrom theeBook aml/ofcCh<xcn»l.Editorial roiew h*>
+deemed Cutanysupprewed content dec>notimxttaly alTect theoverall leamir*experience .Ccfiitapc Learn xiprexxvev thert|>lttlorenxyve additional conceal atanytime i ivutoeqjrni nghtv rotrictionv require It.166 C H A P T E R 4 Numerical Integration andDifferentiation
+When approximating thederivative ofafunction ataninterior point ofaninterval ,itis
+better tousetheformula thatisproduced from thesecond Lagrange polynomial atx0-h,
+XQ,andxo +h.
+Three -Point Midpoint Formula
+If/'"exists ontheinterval containing xo— handxo+h,then
+/'(*o)=L[/(Jo+h)-f{xo-A)]-^/"(*),
+forsome number £between XQ-hand XQH-h.
+The error intheMidpoint formula isapproximately half theerror intheEndpoint
+formula and/needs tobeevaluated atonly twopoints whereas intheEndpoint formula three
+evaluations arerequired .Figure 4.21 gives anillustration oftheapproximation produced
+from theMidpoint formula .
+Figure 4.21
+y-
+Slope f\xd^^
+^-^^Slope2h[/(*>+A)-/(*o“ A)]
+1 1 1
+*0~h XQ XQ+h X
+These methods arecalled three -point formulas (even though thethird point ,f(xo),
+does notappear intheMidpoint formula ).Similarly ,there arefive-point formulas that
+involve evaluating thefunction attwoadditional points ,whose error term is0(hA).These
+formulas aregenerated bydifferentiating fourth Lagrange polynomials that pass through
+theevaluation points .The most useful istheMidpoint formula .
+Five-Point Formulas
+Five -Point Midpoint Formula
+If/(5)exists ontheinterval containing *o— 2hand*o+2h,then
+/'(*<>)=7Ll/to-2/0-8/(*0-h)+8/(*o+h)-fixo+2h)]+^/(5)(f),12/i 30
+forsome number £between JCO-2hand XQ-F2h.
+Copyright 2012 Cengagc Learn in*.AIRights Reversed May r*xbecopied .scanned .o*duplicated .inwhole orinpar.Doc toelectronic rights .some third pur.ycontetr .may besupprcv «drrom theeBook and/oreChaptcnnl .Editorial review h*>
+deemed Cutanysuppressed content does nottnaxrUXy alTect theoverall learning experience .('engage Learning reserves theright 10remove additional conteat atanytime ifsubsequent rights restrictions require IL4.9 Numerical Differentiation 167
+There isanother five-point formula thatisuseful ,particularly with regard totheclamped
+cubic spline interpolation .
+Five-Point Endpoint Formula
+If/(5)exists ontheinterval containing xoandxo+4/z,then
+/'(*>)=^r-25/(*o)+48/(*0+h)-36/(JCO+2h)
++16/(x0+3h)-3/(x0+Ah)]+j/»>«),
+forsome number £between XQand JCQ+4/i.
+Left-endpoint approximations arefound using h>0,andright-endpoint approxima -
+tions arefound using h<0.
+Example 2Values for/(x)=xe1arcgiven inTable 4.10.Usealltheapplicable three-point and
+five-point formulas toapproximate /'(2.0).
+Table 4.10
+x f i x)
+1.8 10.889365
+1.9 12.703199
+2.0 14.778112
+2.1 17.148957
+2.2 19.855030Solution Thedata inthetable permit ustofindfour different three-point approximations :
+Three -Point Endpoint Formula with h=0.1:
+-L-3/(2.0)+4/(2.1)-/(2.2)]=5[— 3(14.778112 )+4(17.148957 )-19.855030 )]
+=22.032310 ,
+Three -Point Endpoint Formula with h=— 0.1:
+-^[-3/(2.0)+4/(1.9)-/(1.8)]=— 5[— 3(14.778112 )+4(12.703199 )
+-10.889365 )]=22.054525 ,
+Three -Point Midpoint Formula with h=0.1:
+-L/(2.1)-/(1.9)]=5(17.148957 -12.703199 )=22.228790 ,
+V/.Z
+Three -Point Midpoint Formula with h=0.2:
+^[/(2.2)-/(1.8)]=
+^(19.855030 -10.889365 )=22.414163 .
+The only five-point formula forwhich thetable gives sufficient data isthemidpoint
+formula with h=0.1.
+Five-Point Midpoint Formula with h=0.1:
+^[/(1.8)-8/(1.9)+8/(2.1)-/(2.2)]=— [10.889365 -8(12.703199 )
++8(17.148957 )— 19.855030 ]
+=22.166999 .
+Ifwehadnoother information ,wewould accept thefive-point midpoint approximation
+using h=0.1asthemost accurate .Thetruevalue forthisproblem is/'(2.0)=(2-fl)e2=
+22.167168 .
+Copyright 2012 Cc«£»fcLearn in*.AIR.(huReversed May r*xbecopied ,canned ,o*duplicated.»whole o tmpan .Doc 10electronic ttfht ».vonte third pony content may besuppressed rrom sheeBook and/orcClupccriM .Editorial review h*>
+deemed Cut artysuppressed content dees notimtetlaly alTect theoverall teamireexperience .Cenitapc [.cannon reserves thenjlu Mremove additional conceal atanytime i!subsequent rights restrictions require It.168 C H A P T E R 4 Numerical Integration andDifferentiation
+Round -OffError Instability
+Itisparticularly important topayattention toround -offerror when approximating deriva -
+tives.When approximating integrals inSection 4.3,wefound thatreducing thestepsizein
+theComposite Simpson ’srulereduced thetruncation error,and,even though theamount
+ofcalculation increased ,thetotal round -offerror remained bounded .This isnotthecase
+when approximating derivatives .
+When applying anumerical differentiation technique ,thetruncation error will also
+decrease ifthestepsizeisreduced ,butonly attheexpense ofincreased round -offerror.To
+seewhy thisoccurs ,letusexamine more closely theThree -Point Midpoint formula :
+/'(*o)=-U/(*>+h)~f(x0-*)]-In o
+Suppose that,inevaluating /(xo+/i)and/(XQ H),WCencounter round -offerrors e(xo+h)
+ande(*o-h).Then ourcomputed values/(xo+h)and/(xo-h)arerelated tothetrue
+values/(xo+h)and/(XQ-h)by
+/(*o+h)=f(xo+h)+e(xQ+h)and/(x0-h)=/(x0-h)+e(x0-h).
+Inthiscase,thetotal error intheapproximation ,
+x/(*>+W-/(*o-W e(xo+h)-e(xo-h)h2/(*b)2*2h~
+6f
+isdueinparttoround -offandinparttotruncating .Ifweassume thattheround -offerrors ,
+e(xo± h)tforthefunction evaluations arebounded bysome number e>0andthatthe
+third derivative of/isbounded byanumber Af>0,then
+f\xo)-fixo4-h)-/(x0+h)
+2hEh\.
+Toreduce thetruncation portion oftheerror,hrM/6,wemust reduce h.Butashisreduced ,
+theround -offportion oftheerror ,e/h,grows.Inpractice ,then,itisseldom advantageous
+tolethbetoosmall ,since theround -offerror willdominate thecalculations .
+Illustration Consider using thevalues inTable 4.11 toapproximate /'(0.900 ),where f(x)=sin*.
+Thetruevalue iscos0.900 =0.62161 .Theformula
+/'(0.900 ).^(0-900+ft)— /(0.900— h),2h
+with different values ofA,gives theapproximations inTable 4.12.
+Table 4.11X sinx X sinxTable 4.12Approximation
+0.800 0.71736 0.901 0.78395h to/'(0.900 ) Error
+0.850 0.75128 0.902 0.784570.001 0.62500 0.00339
+0.880 0.77074 0.905 0.786430.002 0.62250 0.000890.890 0.77707 0.910 0.789500.005 0.62200 0.00039
+0.895 0.78021 0.920 0.795600.010 0.62150 -0.00011
+0.898 0.78208 0.950 0.813420.020 0.62150 -0.000110.899 0.78270 1.000 0.841470.050 0.62140 -0.00021
+0.100 0.62055 -0.00106
+Copyright 20I2C««cLearn in*.AIRight*Reserved Mayr*xbecopied.scanned .o*duplicated .inwhole orinpar.Doctocjectronie rights.some third pur.ycontent may besuppressed rrom sheeBook and/oreChaptcnnl .Editorial review h*>
+deemed Cutanysuppressed content docs notmaterial yalTcct thelocra’IIeamir .itexperience .Cenitape [.camon reserve*theright n>remove additional conceal atanytime i!subsequent right*restrictions require It.4.9 Numerical Differentiation 169
+Theoptimal choice forhappears toliebetween 0.005 and0.05.Wecanusecalculus
+toverify (seeExercise 13)thataminimum for
+e h2
+e(h)=-+— Af,n o
+occurs ath=y/3e/M,where
+M= max |/'"(*)|= max |cosx \=cos0.8^0.69671 .
+jt[0.800.1.00 ) x[0.800.1.00]
+Because values of/aregiven tofivedecimal places ,wewillassume thattheround -off
+error isbounded bye=5x10-6.Therefore ,theoptimal choice ofhisapproximately
+/1=3(0.000005 )
+0.69671%0.028 ,
+which isconsistent with theresults inTable 4.12.
+Inpractice ,wecannot compute anoptimal htouseinapproximating thederivative ,
+because wehave noknowledge ofthethird derivative ofthefunction .Butwemust remain
+aware thatreducing thestepsize willnotalways improve theapproximation .
+Wehave considered only theround -offerror problems thatarepresented bytheThree -
+Point Midpoint formula ,butsimilar difficulties occur with allthedifferentiation formulas .
+The reason fortheproblems canbetraced totheneed todivide byapower ofh.Aswe
+found inSection 1.4(see,inparticular ,Example 1),division bysmall numbers tends to
+exaggerate round -offerror,andthisoperation should beavoided ifpossible .Inthecase
+ofnumerical differentiation ,itisimpossible toavoid theproblem entirely ,although the
+higher -order methods reduce thedifficulty .
+Keep inmind that,asanapproximation method ,numerical differentiation isunstable ,
+because thesmall values ofhneeded toreduce truncation error cause theround -offerror
+togrow.This isthefirstclass ofunstable methods thatwehave encountered ,andthese
+techniques would beavoided ifitwere possible .However itisnot,because these formulas
+areneeded inChapters 11and12forapproximating thesolutions ofordinary andpartial -
+differential equations .
+Methods forapproximating higher derivatives offunctions using Taylor polynomials
+canbederived aswasdone when approximating thefirstderivative orbyusing anaveraging
+Keep inmind thatdifference technique thatissimilar tothatused forextrapolation .These techniques ,ofcourse ,suffer
+method approximations can from thesame stability weaknesses astheapproximation methods forfirstderivatives ,but
+beunstable . they areneeded forapproximating thesolution toboundary value problems indifferential
+equations .Theonly onewewill need isaThree -Point Midpoint formula ,which hasthe
+following form.
+Three -Point Midpoint Formula forApproximating f"
+If/(4)exists ontheinterval containing XQ— handx$+h,then
+/BC*0)=^[/(*o-h)-2f(xo)+f(xo+/.)]-^/(4,«).
+forsome number fbetween XQ— handx$+h.
+Copyright 2012 Cengagc Learn in*.AIR.ghtsReserved Mayr*xbecopied ,canned ,orduplicated.»whole ormpan.Doctoelectronic rifhu.*wcthird pony contcac may besoppre ^tedftem theeBook and/orcCh<xcn»l.Editorial roiew h*>
+deemed Cut artyMpptccscd content dcc>notmaterial'.yafTccr theoverall Icamir .tfexperience .Ccnitapc Learnxip rcsenn theright Mremove additional conceal atanytime i!vuhvcyjcw nghtv restrictions require It.170 C H A P T E R 4 Numerical Integration andDifferentiation
+EXERCISE SET 4.9
+l.
+2.
+3.
+4.
+5.
+6.
+7.
+8.Usetheforward -difference formulas andbackward -difference formulas todetermine each missing
+entry inthefollowing tables .
+a.x fix) fix ) b. X fix) fix )
+0.5 0.4794 0.0 0.00000
+0.6 0.5646 0.2 0.74140
+0.7 0.6442 0.4 1.3718
+ThedatainExercise 1were taken from thefollowing functions .Compute theactual errors inExercise 1,
+andfinderror bounds using theerror formulas .
+a./(x)=sin*b./(x)=e*— l x2+3x— 1
+Usethemost accurate three-point formula todetermine each missing entry inthefollowing tables .
+X fix) fix )
+1.1 9.025013
+1.2 11.02318
+1.3 13.46374
+1.4 16.44465X fix) fix )
+8.1 16.94410
+8.3 17.56492
+8.5 18.19056
+8.7 18.82091
+X fix) fix )
+2.9-4.827866
+3.0-4.240058
+3.1 — 3.496909
+3.2-2.596792X f i x)/'(*)
+2.0 3.6887983
+2.1 3.6905701
+2.2 3.6688192
+2.3 3.6245909
+ThedatainExercise 3were taken from thefollowing functions .Compute theactual errors inExercise 3,
+andfinderror bounds using theerror formulas .
+a.f i x)=e2x b./(x)=xlnx
+c. f i x)=xcosx— x2sinx d. f(x)=2(lnx)2+3sin*
+Usetheformulas given inthissection todetermine ,asaccurately aspossible ,approximations foreach
+missing entry inthefollowing tables .
+X fix) fix ) b. x fix)
+2.1-1.709847 -3.0 9.367879
+2.2-1.373823 -2.8 8.233241
+2.3-1.119214 -2.6 7.180350
+2.4-0.9160143 -2.4 6.209329
+2.5-0.7470223 -2.2 5.320305
+2.6-0.6015966 -2.0 4.513417
+ThedatainExercise 5were taken from thefollowing functions .Compute theactual errors inExercise 5,
+andfinderror bounds using theerror formulas .
+a.f(x)=tanx b. f(x)=e+x2
+Let/(x)=cos 7i x.UsetheThree -Point Midpoint formula forf"andthevalues of/(x)atx=0.25 ,
+0.5,and0.75 toapproximate /"(0.5).Compare thisresult totheexact value andtotheapproximation
+found inExercise 7ofSection 3.5.Explain why thismethod isparticularly accurate forthisproblem .
+Let f(x)=3xe*-cosx.Usethefollowing data andtheThree -Point Midpoint formula for/"to
+approximate /"(1.3)with h=0.1andwith h=0.01.
+X 1.20 1.29 1.30 1.31 1.40
+f i x)11.59006 13.78176 14.04276 14.30741 16.86187
+Compare your results to/"(1.3).
+Copyright 2012 Cc«£»fcLearn in*.AIR.(huReversed May r*xbecopied ,canned ,o*duplicated.»whole o tmpan .Doc toelectronic rifhu .*wcthird pony contcac may besoppre ^tedftem theeBook and/orcCh<xcn»l.Editorial roiew h*>
+deemed CutanyMpptccscd content dec>notiiutctlaXy alTca theoverall Icamir .itexperience .C'cnitasc Learn xipre\me»therljtlu lorenxyve additional conceal atanytime i itutoeqjcni nghtv rotrictionc require It4.9 Numerical Differentiation 171
+9. Usethefollowing data andtheknowledge thatthefirstfivederivatives of/were bounded on[1,5]
+by2,3,6,12,and23,respectively ,toapproximate /'(3)asaccurately aspossible .Find abound for
+theerror.
+X 1 2 3 4 5
+f i x)2.4142 2.6734 2.8974 3.0976 3.2804
+10.
+11.Repeat Exercise 9,assuming instead thatthethird derivative of/isbounded on[1,5Jby4.
+Analyze theround -offerrors fortheformula
+fixo)=/(*0+ft)-/(*o)
+h\f"(So).
+Find anoptimal h>0interms ofabound Mfor/"on(x0,x0+h).
+12. Allcalculus students know thatthederivative ofafunction /atxcanbedefined as
+fix)
+h-*0 h
+Choose your favorite function /,nonzero number x,andcomputer orcalculator .Generate approxi -
+mations f'n(x)to/'(-*)by
+13./»=f i x+10-")-f(x)
+10"
+forn=1,2,....20anddescribe what happens .
+Consider thefunction
+e h2'(*)=h+1M'
+where Misabound forthethird derivative ofafunction .Show thate(h)hasaminimum aty/3e/M.
+14. The forward -difference formula canbeexpressed as
+/'(*o)= +h)~/(*»)]- -j f'(xo)+0(h3).
+Useextrapolation onthisformula toderive an0(/i3)formula forf\xo).
+15. InExercise 7ofSection 3.4,data were given describing acartraveling onastraight road.That problem
+asked topredict theposition andspeed ofthecarwhen t=10s.Usethefollowing times andpositions
+topredict thespeed ateach time listed.
+Time 0 3 5 8 10 13
+Distance 0 225 383 623 742 993
+16. Inacircuit with impressed voltage £(t)andinductance L,Kirchhoff ’sfirstlawgives therelationship
+„ di£(t)=L-+Ri,at
+where Ristheresistance inthecircuit andiisthecurrent .Suppose wemeasure thecurrent forseveral
+values oftandobtain :
+t1.00 1.01 1.02 1.03 1.0
+i3.10 3.12 3.14 3.18 3.24
+where tismeasured inseconds ,iisinamperes ,theinductance Lisaconstant 0.98 henries ,andthe
+resistance is0.142 ohms .Approximate thevoltage £(t)when t=1.00,1.01,1.02 ,1.03,and1.04.
+17. Derive amethod forapproximating /"(x0)whose error term isoforder h2byexpanding thefunction
+/inathird Taylor polynomial about XQandevaluating atXQ+handx0-h.
+Copyright 2012 Cenfajc Learn in*.AIRights Reserved May r*xbecopied .scanned .o*implicated ,inwhole orinpar.Doc tocjectronie rights .some third pur.ycontent may besupplied rican ihceBook and/orcChapccmi .Editorial review h*>
+deemed Cutanysuppressed content does notmaterialy alTcct theioera .1learning experience .Ccagagc Learn ngreserves theright 10remove additional conceal atanylimeiisubsequent rights restrictions require It172 C H A P T E R 4 Numerical Integration andDifferentiation
+4.10 Survey ofMethods andSoftware
+Inthischapter weconsidered approximating integrals offunctions ofone ,two,orthree
+variables andapproximating thederivatives ofafunction ofasingle real variable .
+The Midpoint rule.Trapezoidal rule,andSimpson ’srule were studied tointroduce the
+techniques anderror analysis ofquadrature methods .Composite Simpson ’sruleiseasy to
+useandproduces accurate approximations unless thefunction oscillates inasubinterval of
+theinterval ofintegration .Adaptive quadrature canbeused ifthefunction issuspected of
+oscillatory behavior .Tominimize thenumber ofnodes andalso increase theaccuracy ,we
+studied Gaussian quadrature .Romberg integration wasintroduced totake advantage ofthe
+easily -applied Composite Trapezoidal rule andextrapolation .
+Most software forintegrating afunction ofasingle realvariable isbased ontheadaptive
+approach orextremely accurate Gaussian formulas .Cautious Romberg integration isan
+adaptive technique thatincludes acheck tomake sure thattheintegrand issmoothly behaved
+over subintervals oftheintegral ofintegration .This method hasbeen successfully used in
+software libraries .Multiple integrals aregenerally approximated byextending good adaptive
+methods tohigher dimensions .Gaussian -type quadrature isalsorecommended todecrease
+thenumber offunction evaluations .
+The main routines inboth theIMSL andNAG Libraries arebased onQUADPACK :
+ASubroutine Package forAutomatic Integration byR.Piessens ,E.deDoncker -Kapenga ,
+C.W.Uberhuber ,andD.K.Kahaner published bySpringer -Verlag in1983 [PDUK ].The
+routines arealso available aspublic domain software ,athttp://www .netlib .org/quadpack .
+The main technique isanadaptive integration scheme based onthe21-point Gaussian -
+Kronrod rule using the10-point Gaussian rule forerror estimation .The Gaussian rule
+uses the10points JCI,. . . ,X\oandweights w j,. ..,vt>iotogive thequadrature formula
+Wi/fo)toapproximate f(x)d x.Theadditional points x\\,...,*21andthenew
+weights i»i,...,V2\arethen used intheKronrod formula , v,-/(*, ).Theresults of
+thetwoformulas arecompared toeliminate error .Theadvantage inusing x\,.. .,*10in
+each formula isthat/needs tobeevaluated atonly 21points .Ifindependent 10-and21-
+point Gaussian rules were used ,31function evaluations would beneeded .This procedure
+also permits endpoint singularities intheintegrand .Other subroutines allow user specified
+singularities andinfinite intervals ofintegration .Methods arealso available formultiple
+integrals .
+Although numerical differentiation isunstable ,derivative approximation formulas are
+needed forsolving differential equations .The NAG Library includes asubroutine forthe
+numerical differentiation ofafunction ofone real variable ,with differentiation tothe
+fourteenth derivative being possible .AnIMSL function uses anadaptive change instep
+sizeforfinite differences toapproximate aderivative of/atxtowithin agiven tolerance .
+Both packages allow thedifferentiation andintegration ofinterpolator cubic splines .
+Forfurther reading onnumerical integration ,werecommend thebooks byEngels [EJ
+and byDavis and Rabinowitz [DRJ .Formore information onGaussian quadrature ,see
+Stroud andSccrest [StSJ .Books onmultiple integrals include those byStroud [Stro]and
+bySloan andJoe[SJ].
+Copyright 2012 Cengagc Learn in*.AIR.phtsReserved Mayr*xbecopied ,canned ,oeduplicated.»whole o tmpan.Doctoelectronic rights.some third pony content may besuppressed ftem theeBook and/orcClupccris !.Editorial review h*>
+deemed Cut artysuppressed content dees notmaterial'.yafTcct theoverall learnire experience .Cenitape Learning reserves theright Mremove additional conceal atanytime i!suhsajjent right*restrictions require It.

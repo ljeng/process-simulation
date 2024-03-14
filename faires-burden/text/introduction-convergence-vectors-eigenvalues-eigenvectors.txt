@@ -1,0 +1,650 @@
+C H A P T E R
+Iterative Methods forSolving Linear Systems
+7.1 Introduction
+Theprevious chapter considered theapproximation ofthesolution ofalinear system using
+direct methods ,techniques that would produce theexact solution ifallthecalculations
+were performed using exact arithmetic .Inthischapter wedescribe some popular iterative
+techniques ,which require aninitial approximation tothesolution .These methods arenot
+expected toreturn theexact solution even ifallthecalculations could beperformed using
+exact arithmetic .Inmany instances ,however ,theyaremore effective than thedirect methods
+because they canrequire farlesscomputational effort andround -offerror isreduced .This
+isparticularly truewhen thematrix issparse— thatis,when ithasahigh percentage ofzero
+entries .
+Some additional material from linear algebra isneeded todescribe theconvergence of
+theiterative methods .Principally ,weneed tohave ameasure ofhow close twovectors are
+tooneanother because theobject ofaniterative method istodetermine anapproximation
+thatiswithin acertain tolerance oftheexact solution .
+InSection 7.2,thenotion ofanorm isused toshow how various forms ofdistance
+between vectors canbedescribed .Wewillalsoseehow thisconcept canbeextended to
+describe thenorm of— and,consequently ,thedistance between — matrices .InSection 7.3,
+matrix eigenvalues andeigenvectors aredescribed ,andweconsider theconnection between
+these concepts andtheconvergence ofaniterative method .
+Section 7.4describes theelementary Jacobi andGauss -Seidel iterative methods .By
+analyzing thesizeofthelargest eigenvalue ofamatrix associated with aniterative method ,
+wecandetermine conditions that predict thelikelihood ofconvergence ofthemethod .
+InSection 7.5weintroduce theSOR method .This isacommonly applied iterative tech-
+nique because itreduces theapproximation errors faster than theJacobi andGauss -Seidel
+methods .
+InSection 7.6wediscuss some oftheconcerns thatshould beaddressed when applying
+cither aniterative oradirect technique forapproximating thesolution toalinear system .
+Theconjugate gradient method ispresented inSection 7.7.This method ,with precon -
+ditioning ,isthetechnique most often used forsparse ,positive -definite matrices .
+7.2 Convergence ofVectors
+The distance between thereal numbers xand yis\x— y\.InChapter 2wesaw that
+thestopping techniques fortheiterative root-finding techniques used thismeasure toes-
+timate theaccuracy ofapproximate solutions andtodetermine when anapproximation
+277
+Copyright 2012 Cengagc Lcarnlag .AIRight*Reserved May rscabecopied.scanned .orduplicated .'»whole ormpan.Doctoelectronic rights.tone third party content nu>besuppreved Trom theeBook and/oreChaptcnul .Editorial review h*>
+deemed thatanyvupprc'-cdcontent dee *,notmaterial !)affect theoverall learning experience .Ceng ageLearning reserves theright torerrx'cradditional conceal atanytime ifsubvcijjcni rights restrictions require it.278 C H A P T E R 7 Iterative Methods forSolving Linear Systems
+was sufficiently accurate .The iterative methods forsolving systems ofequations use
+similar logic ,sothefirst step istodetermine away tomeasure thedistance between
+n-dimensional vectors because thisistheform thatistaken bythesolution toasystem of
+equations .
+Vector Norms
+LetR"denote thesetofalln-dimcnsional column vectors with realnumber coefficients .
+Itisaspace -saving convenience tousethetranspose notation presented inSection 6.4
+when such avector isrepresented interms ofitscomponents .Generally ,wewrite the
+vector
+x=*i
+x2
+Xnas %=(xUX 2 xny.
+Vector Norm onR"
+Avector norm onR"isafunction ,|| ||,from R"intoRwith thefollowing properties :
+(i)||x||>0forallxRB,
+(ii)||x||=0ifandonly ifx=(0,0 0 )'=0,
+(iii)||orx||=|a|||x||forallcreRandxeRn,
+(iv)||x+y||<||x||+||y||forallx,yGR".
+Forourpurposes ,weneed only twospecific norms onRn.(Athird ispresented in
+Exercise 2.)
+The/2andlxnorms forthevector x=(JCJ,*2,".".x„Yaredefined by
+M 2=n
+2£*.:
+i=l1/2
+and IIx||oc,maxM.
+1<i<n
+The/2norm iscalled theEuclidean norm ofthevector xbecause itrepresents the
+usual notion ofdistance from theorigin when xisinR1=R,R2,orR3.Forexample ,the
+/2norm ofthevector x=(*i,X2,*3)'gives thelength ofthestraight linejoining thepoints
+(0,0,0)and(xj,X2,*3);thatis,thelength oftheshortest path between those twopoints.
+Figure 7.1shows theboundary ofthose vectors inR2andR3thathave /2norm lessthan 1.
+Figure 7.2gives asimilar illustration fortheloonorm .
+Copyright 2012 Cengagc Learn in*.AIRights Reversed Mayr*xbecopied.scanned .ocduplicated .inwhole orinpar.Doctoelectronic rights.some third pur.ycontetr.may besuppressed rrom theeBook and/oreChaptcnnl .Editorial review h*>
+deemed Cutany suppic-cdcontent does nottnaxrUXy alTcct theoverall learning experience .('engage [.camonreserves theright 10remove additional conteatatanytime ifsubsequent nghts restrictions require It7.2 Convergence ofVectors 279
+Figure 7.1
+*2,
+The vectors inR2
+with l2norm less
+than 1areinside
+thisfigure .(0,1)
+1,0)z \a,o)
+(0,-1)*3
+(0,0,1)The vectors inthe
+first octant ofR3
+with l2norm less
+than 1areinside
+thisfigure .
+(0,1,0) (1.0.0)
+*2 x
+Figure 7.2
+(-I.D1*2i
+(0,1) ( 1.1)/
+(-1.0)\(1.0)
+(-1,-1) (0,-D (1,-*3
+(0,0,1)
+(1,0,1).
+(0,1,1)
+*i(1 . 1.1)
+(1,0,0)
+(0,1,0)
+(1 . 1.0)
+The vectors inU2with
+/*norm lessthan 1are
+inside thisfigure .The vectors inthefirst
+octant ofR3with /xnorm
+lessthan 1areinside
+thisfigure .
+Example 1Determine the/2norm andthe/«.norm ofthevector x=(— 1,1,— 2)'.
+Solution The vector x=(— 1,1,— 2)'inR3hasnorms
+M2=\/(-l)2+(l)2+(-2)2=V6
+Copyright 2012 Cc«£»fcLearn in*.AIR.(huReversed May notbecopied .wanned .o*daplicatod .»whole oempan .Doc toelectronic ilfhu .xvtic third pony content may bevuppftvwd rrom theeBook aml/ofcCh<xcn»l.Editorial roiew h*>
+deemed Cutany vuppic-edcontent doev notimxttaly alTect theoverall leamir*experience .C'cnitape[.cammu roervev thert|>ht10renxyve additional conceal atanytimeiivubvoyjem right.rotrietionv require It280 C H A P T E R 7 Iterative Methods forSolving Linear Systems
+and||x| |00=max{|-lUlU-2|)=2.
+Notice that||x||oo<l|x|binthisexample .
+There aremany forms ofthis
+inequality ,hence many
+discoverers .Augustin Louis
+Cauchy (1789-1857 )describes
+thisinequality in1821 inCours
+d'Analyse Alg£brique ,thefirst
+rigorous calculus book.An
+integral form oftheequality
+appears inthework ofViktor
+Yakovlevich Bunyakovsky
+(1804-1889 )in1859.and
+Hermann Amandus Schwarz
+(1843-1921 )used adouble
+integral form ofthisinequality in
+1885.More details onthehistory
+canbefound in(Steel.Showing that\\x\\oc=ntaxi <i<n|*,|satisfies theconditions necessary foranorm on
+R"follows directly from thetruth ofsimilar statements concerning absolute values ofreal
+numbers .Inthecase ofthel2norm ,itisalso easy todemonstrate thefirst three ofthe
+required properties ,butthefourth ,
+ll*+ylb<IWI2+llylb.
+ismore difficult toshow.Todemonstrate thisinequality weneed theCauchy -Buniakowsky -
+Schwarz inequality ,which states thatforanyx=(*,,*2»   ,*„ )'andy=(y,,y2.   .y*)',
+" ("'i1/2r»11/2
+With thisitfollows that||x+yH2<llxlb+llylb because(7.1)
+n n n n n n
+ii*+yill=E*?+2Ex‘y‘+E-Ex‘+2E1*»1+Ey?
+1=1 i=l i=l i=l i=l i=l
+n
+«=1nE*2
+1=11/2n
+i=l+E^=(iix|i2+|iy^2-
+i=l
+Distance between Vectors inRn
+Thenorm ofavector gives ameasure forthedistance between thevector andtheorigin ,so
+thedistance between twovectors isthenorm ofthedifference ofthevectors .
+Distance between Vectors
+Ifx=(*,,*2,...,*„ )'andy=(y,,y2,...,y„ )'arevectors inR",thel2andlx
+distances between xandyaredefined by
+x-ylb=-nE<*‘-*>2
+L1-11/2
+and||x— y||oc max|Xi— 1<i<ny«l-
+Example 2Thelinear system
+3.3330 *1+15920 *2-10.333 *3=15913 ,
+2.2220 *,+16.710 *2+9.6120 *3=28.544 ,
+1.5611 *,+5.1791 *2+1.6852 *3=8.4254
+hastheexact solution x=(*,,*2,*3)f=(1,1,1)',andGaussian elimination performed
+using five-digit rounding arithmetic andpartial pivoting produces theapproximate solution
+x=(*,,*2,x3)'=(1.2001 ,0.99991 ,0.92538 )'.
+Determine thel2andlxdistances between theexact andapproximate solutions .
+Copyright 2012 Cengagc Learn in*.AIRights Reversed May r*xbecopied .scanned .ocduplicated .inwhole orinpar.Doc toelectronic rights .some third pur.ycontent may besupprcv «drrom theeBook and/oreChaptcnnl .Editorial review h*>
+deemed Cutanysuppressed content does nottnaxrUXy alTcct theoverall learning experience .('engage Learning reserves theright 10remove additional conteat atanytime ifsubsequent rights restrictions require IL7.2 Convergence ofVectors 281
+Solution Measurements ofx— xaregiven by
+||x-t| |2=[(1-1.2001 )2+(1— 0.99991 )2+(1— 0.92538 )2]1/2
+=[(0.2001 )2+(0.00009 )2+(0.07462 )2]'72=0.21356 .
+and
+||x-x||oo=max{11-1.20011 ,|1-0.99991 |,|1-0.92538 |}
+=max{0.2001 ,0.00009 ,0.07462 (=0.2001
+Although thecomponents x2andx3aregood approximations toX2andx3,thecomponent
+Jcjisapoor approximation tox\tand|xi-x\|dominates both norms .
+The distance concept inR"isused todefine thelimit ofasequence ofvectors .A
+sequence {x(A))^=1ofvectors inRnissaid toconverge toxwith respect tothenorm|| ||
+if,given anye>0,there exists aninteger N(e)such that
+||xU)— x||<eforallk>N(e).
+Example 3Show that
+x(*>_zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA(JQJ*>r<*>— \X1 »x2 »*3„ 132+k'V'e-ksinit)'
+converges tox=(1,2,0,0)'with respect tothelxnorm.
+Solution Lete>0begiven .Foreach ofthecomponent functions ,
+lim1=1,
+k-*OCsoaninteger N\(e)exists with forallk>/V,(e),
+lim(2+1/it)=2,
+K— *-Vsoaninteger N2(£)exists withN*’-2\<eforallk>N2(e\
+lim3/fc2=0.k-*ocsoaninteger N$(e)exists with1*1*’-0|<eforallk>/V3(e),
+lime~ksink=0,soaninteger NA(e)exists with14**-0|<eforallk>7V4(e).
+Let
+N(e)=max (A7,(e),N2(e),tf3(e).N^e)}.
+Then when k>7V(e),wehave
+11*(*)-x||oo=max{|x}*)-l|,\xl2k)-2|,-0|,\x\k)-0|}<e,
+sox(A:)converges tox.
+InExample 3weimplicitly used thefactthatasequence ofvectors {x(i)converges in
+thenorm || \\xtothevector xifandonly if,foreach i=1,2,...,n,thesequence
+converges toxMtheithcomponent ofx.This makes thedetermination ofconvergence for
+thenorm|| 1«,relatively easy.
+Toshow directly thatthesequence inExample 3converges to(1,2,0,0)'with respect
+tothe/2norm isquite complicated .However ,suppose thatxisavector inRrtand jisan
+index with theproperty that
+11x11,»=max|x4|=|x,|.
+i=l n
+Copyright 2012 Cengagc Learn in*.AIRights Reversed May notbecopied.scanned.o*duplicated .inwhole orinpar.Doctocjectronie rights.some third pur.yCOMCK may bevuppreved rrom theeBook aml/oreChaptcnnl .Editorial review h*>
+deemed Cutanyvupprc-cdcontent does notmaterial yalTect theoverall learning experience .('engage [.camonreserves theright loremove additional conteatatanytime ifsubsequent nghts restrictions require IL282 CHAPTER 7 Iterative Methods forSolving Linear Systems
+Then
+n n n
+11*11«=l*fl2=x)<JZ-r?=llxlliandINI*=^2xf<Yixl =n x)=nHxlllo -
+1=1 1=1 1=1
+This gives thenorm inequalities
+Moo M2<V«l|x|loo-
+This implies thatthesequence ofvectors {x(A)}also converges toxin3R"with respect to
+|| ||2ifandonly iflim*.^xjk)=xtforeach i=1,2,...,n,since thisiswhen the
+sequence converges inthe/<*,norm .
+Infact ,itcanbeshown thatallnorms onR"areequivalent with respect toconvergence ;
+thatis,
+ if|| | |and|| ||'areanytwonorms onR"and{x(i)}£i,hasthelimit xwith respect to
+|| ||,then {x(A)}^jhasthelimit xwith respect to|| ||\
+Since avector sequence converges inthe1&norm precisely when each ofitscomponent
+sequences converges ,wehave thefollowing .
+Vector Sequence Convergence
+The following statements areequivalent :
+(i)Thesequence ofvectors {x(A)}converges toxinsome norm .
+(ii)Thesequence ofvectors {xU)}converges toxinevery norm .
+(iii)Foreach ofthecomponent functions xf*}ofx(k),wehave lim*^*,xfk)=x,-.
+Matrix NormMatrix Norms and Distances
+Inthesubsequent sections ,wewill need methods fordetermining thedistance between
+nxnmatrices .This again requires theuseofanorm .
+Amatrix norm onthesetofallnxnmatrices isareal-valued function ,|| ||,defined
+onthisset,satisfying forallnxnmatrices AandBandallrealnumbers or:
+(i) l|A||>0,
+(ii)||A||=0,ifandonly ifAis0,thematrix with allzero entries ,
+(iii)||orA||=|ar|||A||,
+(iv)|A+*|<|A||+m,
+(v)||Afl||<||A|||*|.
+Every vector norm produces an
+associated natural matrix norm.Adistance between nxnmatrices Aand Bwith respect tothis matrix norm is
+||A— Z?||.Although matrix norms canbeobtained invarious ways ,theonly norms wc
+consider arethose that arenatural consequences ofavector norm .
+Copyright 2012 Cengagc Learn in*.AIRighto Reversed May r*xbecopied .KaiUKd .o*dedicated .inwhole orinpar.Doc toejevtronie righto .some third pur.ycontent may besuppressed rrom theeBook aml/oreChaptcnal .Editorial review h*.
+deemed Cutanysuppressed content does nottnaxrUXy alTcct theioera .1learning experience .('engage [.camme reserves theright 10remove additional conceal atanytime ifsubvcqjem rights restrictions require It7.2 Convergence ofVectors 283
+Natural Matrix Norm
+If|| ||isavector norm onR\thenatural matrix norm onthesetofnxnmatrices
+given by|| ||isdefined by
+||A||=max||Ax||.
+So,the/2andlxmatrix norms are,respectively ,
+||A||2=max||Ax||2(the/2norm )and 11/11100=max||/\x||oc (thelxnorm ).
+11*12=1 11*130=1
+When n— 2these norms have thegeometric representations shown inFigures 7.3and7.4.
+Figure 7.3
+x2i
+Nl*
+1=1/1-1*1
+-1X2
+Ml.
+Ari
+Axfor
+2|z|„ =1
+,K A..-V-T*'
+--2
+Figure 7.4
+*2i1
+IWI 2=1
+1"**sv
+-'Cr)''
+-1x2 1
+-3
+Axfor
+. M 2= 
+f\\AX
+Ml1\
+-2\-1\_1'1 \2*1
+-3-
+Copyright 2012 Cc«£»fcLearn in*.AIRifhb Reserved May notbecopied .N/anncd .o*duplicated.»whole oempan .Doc 10electronic rifhu .*wcthird pony content may besuppreved riom3ceBook and/orcCh<xcn»l.Editorial toiew h*>
+deemed Cutany Mjppic-cdcontent dee>notmaxrUXy alTcct theoverall Icamir .itexperience .C'cnitapc [.camon roervei therljtlu lorenxyve additional conceal atanytime i iwtoeqjcni nRht »reMrictionc require IL284 C H A P T E R 7 Iterative Methods forSolving Linear Systems
+Thelocnorm ofamatrix hasarepresentation with respect totheentries ofthematrix
+thatmakes itparticularly easy tocompute .
+Matrix Norm Characterization
+Mil*,n
+max
+1<i<n
+Example 4Determine ||A|ooforthematrix
+A=1 2-1
+0 3-1
+5-1 1
+Solution Wehave
+3
+X>i;l=W+l2l+l-
+j=l1 1=4,3
+5>2,|=|0|+|3|+|-1|=4,
+7=1
+52l“ 3>l=151+I-1|-H111=7.
+7-1
+So\\A\\X=max {4,4,7}=7.
+The/2norm ofamatrix isnotaseasily determined ,butinthenext section wewill
+discover analternative method forfinding thisnorm .
+E X E R C I S E S E T 12
+1. Find| |xHoc and| |x||2forthefollowing vectors .
+a.x=(3,-4,0,1)' b-x=(2.1,-3,4)'
+c.x=(sink,cosk,2k)'forafixed positive integer k
+d.x=(4/(jfc4-1),2/A:2,k2e~k)‘forafixed positive integer k
+2. a.Verify that|| ||iisanorm forR"(called thel\norm ),where
+n
+l|i| |,=X>|.
+4=1
+b.Find||x||tforthevectors given inExercise 1.
+3. Show thatthefollowing sequences areconvergent ,andfindtheir limits.
+a.x<*>=(1/Jfc,e1"*,— 2/k2)1
+b.xik)=(ekcos A:,/:sin(l/k),3+k2)‘
+c.x(*’=(ke~k‘,(cosA:)/A:,Jk2+k— A:)*
+d.x(A)=(e l/k,(A:2+1)/(1-A:2),(1/A:2)(1+3+5+..*+(2A:-1)))'
+Copyright 2012 Cengagc Learning .AIRights Reserved May notbecopied ,canned ,orduplicated .inwhole orinpar.Doctoelectronic rights.xvtic third pur.ycontent may besupprcsted rrom theeBook andtor cCh<xcn»l.Editorial roiew h*>
+deemed Cutany suppic-cdcontent does nottnaxrUXy alTect theiAera .1learning experience .Collage Learning reserve*theright*>renxyve additional conteatatanytime ifsubsequent rights restrictions require It7.3 Eigenvalues andEigenvectors 285
+4. Find|| ll*forthefollowing matrices .
+5.rioisia-[0.J
+C.2-1 0-1 2-1
+0-1 2b.
+d.10
+15
+4-1-70
+1
+-1
+4
+07
+0
+4
+Thefollowing linear systems Ax=bhave xastheactual solution andkasanapproximate solution .
+Compute ||x-xll*,and||Ax— bll^.
+1 1 1a.2*'+3*2=63’
+1 1 1
+3*1+4*2=168-
+X-(H)'
+k=(0.142 ,-0.166 )'.
+b. JCJ+2x2+3*3=1,
+2xi-f-3x24"4x3=— 1*
+3*i+4x2+6x3=2,
+x=(0,-7,5)',
+x=(-0.33,-7.9,5.8)'.
+c. x\+2X2+3X3=1,
+2x|+3X2+4*3=1,
+3*1+4X2+6x3=2,
+x=(0,-7,5)',
+x=(— 0.2,-7.5,5.4V.
+d.0.04 xj-I-0.01x2-O.OIxj=0.06 ,
+0.2xj+0.5X2-0.2x3=0.3,
+X\-+ 2x2 4x3=11,
+x=(1.827586 ,0.6551724 ,1.965517 )',
+*=(1.8,0.64,1.9V.
+6. The/1matrix norm ,defined by| |A||1=max||Ax||1,canbecomputed using theformula
+Xij=l
+/1
+Mill=maxVia ,,I,
+where thel\vector norm isdefined inExercise 2.Find the/1norm ofthematrices inExercise 4.
+7. Show byexample that|| ||,v,defined byMIL ,=^ax|a<;|,does notdefine amatrix norm.
+8. Show that|| ||®,defined by
+n n
+1=1J m1
+isamatrix norm.Find| | ||®forthematrices inExercise 4.
+9. Show thatif|| ||isavector norm onRn,then||A||=maxsi_,| |Ax||isamatrix norm.
+7.3 Eigenvalues andEigenvectors
+A n n x m matrix canbeconsidered asafunction thatuses matrix multiplication totake
+m-dimensional vectors inton-dimensional vectors .Soannxnmatrix Atakes thesetof
+Copyright 2012 Cc«£»fcLearn in*.AIR.(huReversed May notbecopied.wanned .o*duplicated.»whole oempan .Doctoelectronic ilfhu.xvtic third pony content may besupposed rtom theeBook and/orcCh<xcn»l.Editorial roiew h*>
+deemed Cutanyvupprccscd content deev notimxttaly alTect theoverall leamir*experience .Ccfiitjpc [.camon roentt theri|>ltt10remote additional conceal atanytime i ivutoeqjroi nghtv toirk-tionv require It.286 C H A P T E R 7 Iterative Methods forSolving Linear Systems
+n-dimensional vectors intoitself.Inthiscase certain nonzero vectors canhave xand Ax
+parallel ,which means thataconstant Aexists with A x=Ax,orthat (A-X I)x=0.There
+isaclose connection between these numbers Xandthelikelihood thataniterative method
+based onAwillconverge .Wewillconsider theconnection inthissection .
+Forasquare nxnmatrix A,thecharacteristic polynomial ofAisdefined by
+p(X)=det(A-X I).
+Because oftheway thedeterminant ofamatrix isdefined ,pisannth-degree polynomial
+and,consequently ,hasatmost ndistinct zeros ,some ofwhich might becomplex .These
+zeros ofparecalled theeigenvalues ofthematrix A.
+Theresult onpage 256inChapter 6,then,implies thatthefollowing areequivalent :
+ Xisaneigenvalue ofA,
+ A— X Idoes nothave aninverse ,
+ there exists avector x^0with A x=X x,
+ det(A— X I)=0.
+Theprefix eigen comes from the
+German adjective meaning “ to
+own” andissynonymous in
+English with theword
+characteristic .Each matrix has
+itsown eigen-orcharacteristic
+equation ,with corresponding
+eigen -orcharacteristic values
+andfunctions .Ifxisanonzero vector with A x=AX,thenxiscalled aneigenvector ofAcorresponding
+totheeigenvalue X.Note thatifxisaneigenvector ofAcorresponding totheeigenvalue
+X,then anynonzero scalar multiple axofxisalsoaneigenvector ofAcorresponding toX
+because
+A(ax)=a(Ax)=a(Ax)=A(ax).
+Ifxisaneigenvector associated with theeigenvalue X,then Ax=X x,sothematrix A
+takes thevector xintoascalar multiple ofitself.When Xisarealnumber and X>1,Ahas
+theeffect ofstretching xbyafactor ofX.When 0<X<1,Ashrinks xbyafactor ofX.
+When X<0,theeffects arcsimilar ,butthedirection isreversed (secFigure 7.5).
+Figure 7.5
+(a)A>1 (b)1>A>0 (c)A<-1 (d)-1<A<0
+AM
+\\ xXA x
+AM
+Ax
+Ax=Ax
+Example 1Determine theeigenvalues andcorresponding eigenvectors forthematrix
+A2 0 0
+1 12
+1-14
+Copyright 2012 Cengagc Learn in*.AIR.ghtvReserved Mayr*xbecopied ,canned ,oeduplicated.»whole oempan.Doctoelectronic right*.some third pony content may besuppressed ftem theeBook and/orcCh<xcn»l.Editorial roiew h*>
+deemed Cut artyMpptccscd content dcc>notmaterial'.yafTccr theoverall learnire experience .Cenitape Learnxip roctvev theright Mremove additional conceal atanytime i!vutoeqjrni right*restriction*require It.7.3 Eigenvalues andEigenvectors 287
+Solution Thecharacteristic polynomial ofAis
+p(A)=dct(A-A/)=dct 1 1-A 2
+1-14— A
+=-(A.3-7A2+16A-12)=-(A-3)(A.-2)2,
+sothere aretwoeigenvalues ofA:Ai=3and A2=2.
+Aneigenvector Xi^0corresponding totheeigenvalue Aj=3isasolution tothe
+vector -matrix equation (A-3 7)xj=0,so
+'0 -1 0 0‘X\ -X\
+0=1-2 2  X2=x\-2x2+2x3
+0 1-11 .X3. x\-X2+x3
+which implies thatx\=0andxi— X3.Anynonzero value of*3produces aneigenvector for
+theeigenvalue Aj=3.Forexample ,when *3=1wehave theeigenvector \\=(0,1,1)'.
+Any eigenvector ofAcorresponding toA=3isanonzero multiple of\\.
+Aneigenvector X2^0ofAassociated with theeigenvalue A2=2isasolution ofthe
+system (A— 2/)x=0,so
+'0* '0 0 0'*1"0
+0= 1-12  X2= X\— X2+2X3
+0 1-12 .X3.X\-X2+2X3
+Inthiscase theeigenvector hasonly tosatisfy theequation
+xx-x2+2x3=0,
+which canbedone invarious ways.Forexample ,when xj=0wehave*2=2x3,so
+onechoice would beX2=(0,2,1)'.Wecould also choose *2=0,which requires that
+x\=-2x3.Hence x3=(-2,0,1)'gives asecond eigenvector fortheeigenvalue A2=2,
+onethatisnotamultiple ofX2.
+Theeigenvectors ofAcorresponding totheeigenvalue A2=2generate anentire plane.
+This plane isdescribed byallvectors oftheform
+ax2+0x3=(-20,2a,a+0)',
+forarbitrary constants aand0,provided thatatleast oneoftheconstants isnonzero .
+The next example illustrates thateven some very simple matrices canhave noreal
+eigenvalues .
+Example 2Show thatthere arenononzero vectors xinR2with Bxparallel toxif
+B=01-10
+Solution Theeigenvalues ofBarethesolutions tothecharacteristic polynomial
+0=det(fl-A/)=det-A 1-1-AA2+l,
+sotheeigenvalues ofBarethecomplex numbers Ai
+eigenvector xforAjneeds tosatisfyiand A2=— 1.Acorresponding
+0 -i 1 X\ -ix1+X2
+0 -1-i x2 X\-ix2
+Copyright 2012 Cengagc Learn in*.AIRight *Reserved Mayr*xbecopied ,canned ,o*duplicated .»whole otmpan .Doctoelectronic right*.some third pony content may besuppressed horn theeBook and/orcCluptcnM .Editorial roiew h*>
+deemed Cutanysuppressed content dee*notimxttaly alTect theoverall Icamir .itexperience .Ccri|tape Learning reserves theright lorenxyve additional conceal atanytimeiisubsequent right*restrictions require It288 C H A P T E R 7 Iterative Methods forSolving Linear Systems
+thatis,0=— ix\+*2»so*2=**i»andaneigenvector forA]=iis(1,i)‘.Inasimilar
+manner ,aneigenvector forA2=— iis(1,—i)r.
+Ifxisaneigenvector ofB,then exactly oneofitscomponents isrealandtheother is
+complex .Asaconsequence ,there isnorealconstant Aandnonzero vector xinR2with
+Bx=Ax,andhence there isnononzero vector xinR2with Bxparallel tox.
+MATLAB provides methods todirectly compute theeigenvalues andeigenvectors of
+amatrix .Wefirstdefine thematrix Aby
+A-[102;01-1;-111]
+Thecharacteristic polynomial isdetermined with
+p=poly (A)
+giving
+p=1.0000— 3.0000 6.0000-4.0000
+Thenumbers arethecoefficients ofthecharacteristic polynomial indescending order ,so
+p(X)=X?-3A.2+6A.-4.
+Wecannow compute theroots ofthepolynomial toobtain theeigenvalues with
+roots (p)
+The most direct way toobtain eigenvalues iswith theeigcommand .
+eig(A)
+Ifwewant thecorresponding eigenvectors ,weenter eigas
+[V,D]=eig(A)
+which produces thefollowing matrix Vandvector D.Wehave rounded theentries inVso
+thatitwilldisplay ononeline.
+V=-0.70710678 -0.70710678 0.70710678
+0.35355339 +0.00000000 / 0.35355339 -0.00000000 / 0.70710678-0.00000000 -0.61237244 /-0.00000000 +0.61237244 /0.00000000
+D=0.999999999999999 +1.732050807568876 /
+0.999999999999999 -1.732050807568876 /
+1.000000000000000
+Thecolumns ofVareeigenvectors ofAcorresponding totheeigenvalues intherows ofD.
+Thenotions ofeigenvalues andeigenvectors arcintroduced here foraspecific compu -
+tational convenience ,butthese concepts arise frequently inthestudy ofphysical systems .In
+fact,theyareofsufficient interest thatmost ofChapter 9isdevoted totheir approximation .
+Spectral Radius
+Thespectral radius p(A)ofamatrix Aisdefined by
+p(A)=max|A|,where Aisaneigenvalue ofA.
+(Note :Forcomplex A=a+f)i,wehave|A|=(or+p2)l/2.)
+Copyright 2012 Cenfajc Learn in*.AIR.(huRocncd Mayr*xbecopied.v.-aitned.o*implicated ,inwhole orinpar.Doctocjectronie rifhu.*wcthird pur.ycontent may besupplied rican theeBook and/orcChaptcnM .Editorial roiew h*>
+deemed CutanyMpprcucd content does notmaterialy alTcct theoverall Icamir*experience .Ccnpge l.cammu reserves thert|>ht10remove additional conceal atanytime ifvutoeqjcni nghtv restrictions require It.7.3 Eigenvalues andEigenvectors 289
+Example 3Determine thespectral radius ofthematrices
+'2 0 0'
+01-i°A= 1
+112-14and B=
+Solution InExample 1wefound thattheeigenvalues ofAwere k\=3and A2=2.So
+p(A)=max{|3|,|2|)=3,
+andinExample 2wefound thattheeigenvalues ofBwere k\=iand A2=— i.So
+p(B)=max{\/l2,%/(— l)2}=1.
+Thespectral radius isclosely related tothenorm ofamatrix .
+/2Matrix Norm Characterization
+IfAisannxnmatrix ,then
+(i)||A||2=[p(A'A)]1/*;
+(ii)p(A)<||A||foranynatural norm .
+Thefirstpartofthisresult isthecomputational method fordetermining the/2norm of
+matrices thatwementioned attheendoftheprevious section .
+Example 4Determine the/2norm of
+A=1 1 0
+121-112
+Solution Toapply part(i)ofthe/2Matrix Norm Characterization ,weneed tocalculate
+p(A'A),soweneed theeigenvalues ofA'A.
+If‘1 1-1‘1 1 0'32— 1
+12 1 121=26 4
+01 2-1 1 2 -1 4 5
+3— A 2-1
+0=det(A'A— kl)=det 2 6-k 4-1 4 5-k
+=-X1+14A2-42A.=-A(X2-14X+42),
+then A.=0o r X=7±y/l.So
+||i4| |2=s/p{A<A)=ymax {0,7-Vl,7+Vl )=\jl+-Jl«3.106 .
+Copyrtfhi 2012 Cenfajc Lcarni #*.AIRights Reserved Mayr*xbecopied.scanned .0*duplicated.»whole 0»mport.Doctoelectronic rights.xvnc third pur.ycontent may besuppreved rrom theeBook aml/orcCIwpccmi .Editorial review h*>
+deemed Cutanysupprc-cdcontent does notnuxtlaly alTcct theoverall learning experience .Ccagagc [.camonreserves theright 10remove additional conteat*anytime iisubsequent rights restrictions require It.290 C H A P T E R 7 Iterative Methods forSolving Linear Systems
+Theoperations inExample 4canalso beperformed using MATLAB .First define
+A«[110;121;-112]
+then compute itstranspose anddetermine A'A,andtheeigenvalues ofA'A
+u=eig(A’*A)
+This gives theeigenvalues as
+u=0.000000000000003
+4.354248688935409
+9.645751311064592
+Thesquare rootofthelargest eigenvalue isthe/2norm ofA
+sqrt (u(3) )
+which MATLAB gives as3.105760987433610 .
+The/2norm ofAcanalso bedirectly computed with
+nonn (A)
+The/00norm ofAisfound with norm (A,Inf).
+Convergent Matrices
+Instudying iterative matrix techniques ,itisofparticular importance toknow when the
+powers ofamatrix become small (thatis,when alloftheentries approach zero).Wecall
+annxnmatrix Aconvergent if,foreach i=1,2,...,nandj=1,2,...,n,wehave
+lim(A%=0.
+Example 5Show that
+A=\0iij
+isaconvergent matrix .
+Solution Computing thepowers ofA,weobtain :
+1
+4
+1
+40
+1
+4,A3=01
+8
+3_1
+16 8,A4=JL016U
+1
+81
+16
+and,ingeneral.
+Ak'(
+^>*0
+S&T(
+^)*
+SoAisaconvergent matrix because
+lim
+k-*-OCG)‘0and limTATk— *OC2*+1=0.
+Copyright 2012 Cc«£»fcLearn in*.AIR.(huReversed May notbecopied.wanned .o*daplicated.»whole oempan.Doctoelectronic ilfhu.vontc third pony content may besupposed rrom theeBook and/orcCh<xcn»l.Editorial roiew h*>
+deemed Cutanyvuppicwed content doev notmaterial yalTect theoverall leamir*experience .C'criitape[.camon roentt theripltt KVrenxyve additional conceal atanytime i ivutoeqjmi nghtv rotrletionv require It7.3 Eigenvalues andEigenvectors 291
+Thefollowing important connection exists between thespectral radius ofamatrix and
+theconvergence ofthematrix .
+Convergent Matrix Equivalences
+Thefollowing areequivalent statements :
+(i)Aisaconvergent matrix .
+(ii)limn^oc||A"||=0,forsome natural norm .
+(iii)limn_t3c||A',||=0,forallnatural norms .
+(iv)p(A)<1.
+(v)lim^^ocA"x=0,forevery x.
+E X E R C I S E S E T 7 . 3
+l.
+2.
+3.
+4.
+5.
+6.
+7.Compute theeigenvalues andassociated eigenvectors ofthefollowing matrices .
+a.
+c.
+e.
+8-2-1-1 2
+°>11°.
+210
+120
+003
+‘21 1"
+232
+1 1 2b.01
+1 1
+d.1 1-2-2
+f.
+h.-1 2 0'
+034
+0 0 7
+3 2-1'
+1-2 3
+2 0 4
+Find thespectral radius foreach matrix inExercise 1.
+Show that
+A,10
+Ii
+ *2.
+isnotconvergent ,but
+isconvergent .
+Which ofthematrices inExercise 1areconvergent ?
+Find the|| ||2norms ofthematrices inExercise 1.
+Show thatifXisaneigenvalue ofamatrix Aand| | ||isavector norm ,thenaneigenvector xassociated
+with Xexists with||x||=1.
+Find 2x2matrices AandBforwhich p(A+B)>p(A)+p{B).(This shows thatp(A)cannot be
+amatrix norm.)
+Copyright 2012 Cc«£»fcLearn in*.AIR.(huReversed Mayr*xbecopied ,canned ,o*duplicated.»whole o tmpan.Doctoelectronic rifhu.vomc third pony content may besupposed ftem theeBook and/orcCh<xcn»l.Editorial roiew h*>
+deemed Cutanyvuppicwcd content doev nottmxtlaly alTect theoverall Icamir .itexperience .C'criitapeLearn oprexxvev therljtlu lorenxyve additional conceal atanytime i ivutoeqjrni nphtv rotrictionv require It.292 C H A P T E R 7 Iterative Methods forSolving Linear Systems
+8. Show thatifAissymmetric ,then||A||2=p(A).
+9. Let Abeaneigenvalue ofthenxnmatrix Aandx^0beanassociated eigenvector .
+a.Show that A.isalsoaneigenvalue ofA'.
+b.Show thatforanyinteger k>1,A*isaneigenvalue ofA*with eigenvector x.
+c.Show thatifA1exists ,then 1/Aisaneigenvalue ofA-1with eigenvector x.
+d.Leta^Abegiven.Show thatif(A-a/)"1exists ,thenl/(A-a)isaneigenvalue of(A-a/)"1
+with eigenvector x.
+10. InExercise 8ofSection 6.4,itwasassumed thatthecontribution afemale beetle ofacertain type
+made tothefuture years ’beetle population could beexpressed interms ofthematrix
+A=0 0 6
+l0 0
+0 To
+where theentry intheithrowandy'thcolumn represents theprobabilistic contribution ofabeetle of
+agejonto thenext year’sfemale population ofagei.
+a.Does thematrix Ahave anyrealeigenvalues ?Ifso,determine them andanyassociated eigen -
+vectors .
+b.Ifasample ofthisspecies wasneeded forlaboratory testpurposes thatwould have aconstant
+proportion ineach agegroup from year toyear,what criteria could beimposed ontheinitial
+population toensure thatthisrequirement would besatisfied ?
+7.4TheJacobi andGauss -Seidel Methods
+Inthissection wedescribe theelementary Jacobi andGauss -Seidel iterative methods .These
+areclassic methods thatdate tothelateeighteenth century ,butthey findcurrent application
+inproblems where thematrix islarge andhasmostly zero entries inpredictable locations .
+Applications ofthistype arecommon ,forexample ,inthestudy oflarge integrated circuits
+andinthenumerical solution ofboundary -value problems andpartial -differential equations .
+General Iteration Methods
+Aniterative technique forsolving thenxnlinear system Ax=bstarts with aninitial
+approximation x(0)tothesolution xandgenerates asequence ofvectors {x(A)}^1that
+converges tox.These iterative techniques involve aprocess thatconverts thesystem Ax=b
+intoanequivalent system oftheform x=T x+cforsome nxnmatrix Tandvector c.
+After theinitial vector x(0)isselected ,thesequence ofapproximate solution vectors is
+generated bycomputing
+\{k)=T%{k~l)A-c
+foreach k=1,2,3,
+Thefollowing result provides animportant connection between theeigenvalues ofthe
+matrix Tandtheexpectation thattheiterative method willconverge .
+Convergence andtheSpectral Radius
+Thesequence
+x(*)=T x(k-\)+c
+converges totheunique solution ofx=Tx+cforanyx10’inR"ifandonlyifp (T)<1.
+Copyright 2012 Cengagc Learn in*.AIRight*Reversed May rotbecopied.wanned .orimplicated ,inwhole orinpar.Doctocjectronie right*.some third pur.ycontent may besupplied horn theeBook and/orcChaptcnM .Editorial review h*>
+deemed Cutanysuppressed content dee*notmaterial yafTcct theoverall learnire experience .Cette jpeLearn xieroene *theright Mremove additional conceal atanytime i!vuhvcyjcm right*restriction*require It.

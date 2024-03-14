@@ -1,0 +1,353 @@
+44 C H A P T E R 2 Solutions ofEquations ofOneVariable
+17. The particle inthefigure starts atrestonasmooth inclined plane whose angle 6ischanging ata
+constant rate
+Attheendoftseconds ,theposition oftheobject isgiven by
+-sincur
+^.
+Suppose theparticle hasmoved 1.7ftin1s.Find,towithin 10-5,therate IDatwhich 0changes .
+Assume thatg=-32.17 ft/s2.*(0=8
+2w2\(e°*-e**
+0(t)
+2.4Newton 'sMethod
+Isaac Newton (1641-1727 )was
+oneofthemost brilliant scientists
+ofalltime.Thelate17thcentury
+wasavibrant period forscience
+andmathematics andNewton ’s
+work touches nearly every aspect
+ofmathematics .Hismethod
+forsolving wasintroduced to
+findarootoftheequation
+y3—2y—5=0,Although he
+demonstrated themethod only for
+polynomials ,itisclear thathe
+realized itsbroader applications .TheBisection andSecant methods both have geometric representations thatusethezero of
+anapproximating linetothegraph ofafunction /toapproximate thesolution tof(x)=0.
+Theincrease inaccuracy oftheSecant method over theBisection method isaconsequence
+ofthefactthatthesecant linetothecurve better approximates thegraph of/thandoes the
+lineused togenerate theapproximations intheBisection method .
+Thelinethatbest approximates thegraph ofthefunction atapoint onitsgraph isthe
+tangent linetothegraph atthatpoint.Using thislineinstead ofthesecant lineproduces
+Newton ’smethod (also called theNewton -Raphson method ),thetechnique weconsider
+inthissection .
+Newton 'sMethod
+Suppose that poisaninitial approximation totheroot poftheequation f(x)=0andthat
+/'exists inaninterval containing alltheapproximations top.Theslope ofthetangent line
+tothegraph of/atthepoint (po,/(po))is/'(po),sotheequation ofthistangent lineis
+y-/(Po)=f\po)(x-Po).
+Copyright 2012 Cengagc Learn in*.AIR.ghivReserved Mayr*xbecopied ,canned ,o*daplicaied.»whole o»zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBAmpan .Doctoelectronic rifhu.*wcthird pony contcac may besoppre ^tedftem theeBook and/orcCh<xcn»l.Editorial roiew h*>
+deemed Cut artyMpptccscd content dcc>notmaterial'.yafTcct theoverall learnire experience .Cenitape Learnxip roctvev theright Mremove additional conceal atanytime i!vuhvcyjcw nghtv rotrictions require it2.4 Newton 'sMethod 45
+Figure 2.6
+Newton 'sMethod
+Example 1
+Program NEWTON 24
+implements Newton ’s
+method .This tangent linecrosses thex-axiswhen the^-coordinate ofthepoint onthelineis0,
+sothenext approximation ,putopsatisfies
+0-f(po)=f'(po)(Pi-Po),
+which implies that
+Pi Po-f(Po)
+f'(Po)'
+provided that f'(po)^0.Subsequent approximations arefound forpinasimilar manner ,
+asshown inFigure 2.6.
+y
+-
+Slope/'(p,)/^y=/(x)
+/iPiJ (Pi))
+po p/fSlope/'(po)
+X
+'^^KPuJiPo ))
+Theapproximation p„+\toarootoff(x)=0iscomputed from theapproximation p n
+using theequation
+Pn+1f(Pn)
+f'(Pn)'
+provided that f'(pn)i10.
+UseNewton ’smethod withp0=1toapproximate therootoftheequation x3-f4x2-10=0.
+Solution WewilluseMATLAB tofindthefirsttwoiterations ofNewton ’smethod with
+Po=1.Wefirstdefine/(*),/'(*),and pOwith
+f-inline (»x-3+4*x~2-10»,»x1)
+fp=inlineC,3*x"2+8*x>,’x*)
+p0=l
+Copyright 2012 Cc«£»fcLcarni #*.AIRight,Rcictved .May ncabecopied .Knitted.orAliened.»whole oempar.Doc 10electronic right,.some third puny content may besuppreved riom theeBook andtor cCh<xcn»l.Editorial toiew h*.
+deemed CutanyMpprcscd content do»notmaterial yalTcct theoverall Icamir .itexperience .('engage [.camonreserve*therljtlu lorenxwe additional conteat*anytime ifcutoeqjcoi right,mtrictiona require It.46 C H A P T E R 2 Solutions ofEquations ofOneVariable
+Thefirstiteration ofNewton ’smethod gives p1=1.454545454545455 using thecommand
+pl=pO-f(pO)/fp(pO)
+Thesecond iteration isp2=1.368900401069519 using
+p2-pl-f(pl)/fp(pl)
+andsoon.Theprocess canbecontinued togenerate theentries inTable 2.4.This table was
+generated using p0=1,TOL=0.0005 ,andNo=20intheprogram NEWTON 24.Note
+thatwehave
+i p-P*\**io-10.
+Ifwecompare theconvergence ofthismethod with those applied tothisproblem
+previously ,wecanseethatthenumber ofiterations needed tosolve theproblem byNewton ’s
+method islessthan thenumber needed fortheSecant method .Recall thattheSecant method
+required lessthan halftheiterations needed fortheBisection method .
+Table 2.4n Pn f i P n )
+1 1.4545454545 1.5401953418
+2 1.3689004011 0.0607196886
+3 1.3652366002 0.0001087706
+4 1.3652300134 0.0000000004
+Convergence Using Newton 'sMethod
+Newton ’smethod generally produces accurate results injustafewiterations .With theaid
+ofTaylor polynomials wecanseewhy thisistrue.Suppose pisthesolution tof(x)=0
+andthat f"exists onaninterval containing both pandtheapproximation pn.Expanding
+/inthefirstTaylor polynomial atpngives
+f” (t\
+fM=fipn )+f'(pn)(x-P n)+ -pn)2,
+andevaluating atJC=pgives
+f"(£\
+0=f i p)=f i P n )+f i P n )(p-P n)+ ~P^>
+where fliesbetween pnand p.Consequently ,iff'(pn)^0,wehave
+Since
+thisimplies that,f(P n)p-Pn+-r,/'(Pn) 2/'(P)'^(p-Pn)2-
+P"+'~P" f’iPnY
+P~Pn+l=P-Pn+/(P»)
+/'(Pn)/"($)
+2/'(Pn)(P“ Pn)2-
+Copyright 2012 Certfaje Learniit*.AIRighb Reserved May ncabecopied.scanned .orduplicated.»whole oempan.Doc ioelectronic rights.some third pur.ycontent may besuppreved Tiom theeBook aml/ofcCh<xcn»l.Editorial roiew h*>
+deemed CutanyMpptcsscd content dees notmaterial yalTect theiAvra .lIcamir*experience .Ccnitasc[.camonreserves theri|>htioremote additional conteat*anytime iisubsequent rights restrictions requite It.2.4 Newton 'sMethod 47
+Ifapositive constant Mexists with|/"(JC)|<Monaninterval about p,andifpnis
+within thisinterval ,then
+M
+The important feature ofthisinequality isthatif/'isnonzero ontheinterval ,then the
+error|p-pn+1|ofthe(n+l)stapproximation isbounded byapproximately thesquare
+oftheerror ofthenthapproximation ,|p— pn|.This implies thatNewton ’smethod has
+thetendency toapproximately double thenumber ofdigits ofaccuracy with each successive
+approximation .Newton ’smethod isnot,however ,infallible ,aswewillseelater inthis
+section .
+Example 2Find anapproximation tothesolution oftheequation x=3xthatisaccurate towithin
+io-8.
+Solution Asolution tox=3xcorresponds toasolution of
+0=f(x)=x-3“ \
+Since/iscontinuous with/(0)=— 1and/(1)= asolution oftheequation liesinthe
+interval (0,1).Wehave chosen theinitial approximation tobethemidpoint ofthisinterval ,
+P o=0.5.Succeeding approximations aregenerated byapplying theformula
+__„ /0»«)
+Pn+l~P"f{Pn)Pn~3-*
+1+3-?nIn3’
+These approximations arelisted inTable 2.5,together with differences between successive
+approximations .Since Newton ’smethod tends todouble thenumber ofdecimal places of
+accuracy with each iteration ,itisreasonable tosuspect that p$iscorrect atleast tothe
+places listed.
+Table 2.5n Pn1i
+0 0.500000000
+1 0.547329757 0.047329757
+2 0.547808574 0.000478817
+3 0.547808622 0.000000048
+Thesuccess ofNewton ’smethod ispredicated ontheassumption thatthederivative of
+/isnonzero attheapproximations tothezero p.Iffiscontinuous ,thismeans thatthe
+technique willbesatisfactory provided that f\p)^0andthatasufficiently accurate initial
+approximation isused.Thecondition f\p)^0isnottrivial ;itistrueprecisely when p
+isasimple zero .Asimple zero ofafunction /occurs atpifafunction qexists with the
+property that,forx^p,
+f(x)=(x— p)q(x)% where limq{x)± 0.
+x->p
+Ingeneral ,azero ofmultiplicity mofafunction /occurs atpifafunction qexists with
+theproperty that,forxp,
+/(*)=(*-P)mqix ), where Urnq{x)#0.x-*P
+Soasimple zero isonethathasmultiplicity 1.
+Cop>?i£tu2012 Cc«£»fcLearn in*.AIR.(huRocncd Mayr*xbecopied ,canned ,o*daplicaied.»whole o»mpan .Doctoelectronic rifhu.*wcthird pony contcac may besoppre ^tedftem theeBook and/orcCh<xcn»l.Editorial roiew h*.
+deemed Cut artyMpptccscd content doc>notimtetlaly afTcct theoverall learning experience .Cenitapc l.camon roenti theright Mremove additional conceal atanytime i!vuhvcyjcw nghtv mtrictionc require It.48 C H A P T E R 2 Solutions ofEquations ofOneVariable
+Bytaking consecutive derivatives andevaluating atpitcanbeshown that
+ Afunction /with mderivatives atphasazero ofmultiplicity matpifandonly if
+o=/(p)=/'(/>)=   =butf(p)#0.
+When thezero isnotsimple ,Newton ’smethod might converge ,butnotwith thespeed
+wehave seen inourprevious examples .
+Example 3Let f(x)=e*— x— 1.(a)Show that/hasazero ofmultiplicity 2atx=0.
+(b)Show thatNewton ’smethod with p o=\converges tothiszero butnotasrapidly
+astheconvergence inExamples 1and2.
+Table 2.6Solution (a)Wehave
+n Pn
+0 1.0
+1 0.58198
+2 0.31906
+3 0.16800
+4 0.08635
+5 0.04380
+6 0.02206
+7 0.01107
+8 0.005545
+9 2.7750 x10-’10 1.3881 x10~3
+11 6.9411 x10~4
+12 3.4703 x104
+13 1.7416 x104
+14 8.8041 x10“ 5
+15 4.2610 x105
+16 1.9142 xlO6f(x)=e x-x-1,
+so
+/(0)=e°-0-1=0./'(*)=e x-\
+/'(0)=e°-1=0and f'(x)=e x,
+and/"(0)=e°=1.
+This implies that/hasazero ofmultiplicity 2atx=0.
+(b)Thefirsttwoterms generated byNewton ’smethod applied to/with p0=1are
+andPi P o/(Po)
+/'(po)1--— ?«0.58198 ,e— 1
+P2=P\~/(Pi)
+/'(Pi)%0.58198 -0.20760
+0.78957%0.31906 .
+Thefirsteight terms ofthesequence generated byNewton ’smethod areshown inTable 2.6.
+Thesequence isclearly converging to0,butnotasrapidly astheconvergence inExamples 1
+and2.Thegraph of/isshown inFigure 2.7.
+Figure 2.7
+/«,
+1-
+(L e-2)e— 2
+(-1.*’1)
+V.-
+i1H1 II
+’s\
+1— -1“ 1 ^
+1X
+One method forimproving theconvergence toamultiple root isconsidered in
+Exercise 8.
+Copyright 2012 Cc«£»fcLearnin*.AIRighb Rcscncd May ncabecopied ,canned ,orduplicated.»whole oempar.Due 10electronic ttfht ».*wcthird pur.ycontent may besuppressed ftem theeBook and/orcClupccriM .Editorial toiew h*>
+deemed Cutanysuppressed content decs notimxtlaly alTcct theoverall lcamir«experience .Ccnitasc[.camonreserves thert|>httoremose additional conteatatanytime iisuhvcyjcw rights restrictions require It.2.4 Newton 'sMethod 49
+E X E R C I S E S E T 2 . 4
+l.
+2.
+3.
+4.
+5.
+6.
+7.
+8.
+9.
+10.
+11.
+12.
+13.Letf(x)=x2-6andp0=1.UseNewton ’smethod tofindp2.
+Let/(x)=-x3-cos*andp0=-1.UseNewton ’smethod tofind p2.Could p0=0beused for
+thisproblem ?
+UseNewton ’smethod tofindsolutions accurate towithin 104forthefollowing problems .
+a.x3— 2x2— 5=0,on [1,4]
+b.x3+3x2-1=0,on [-3,-2]
+c.x— cos*=0,on [0,7i/2)
+d.x-0.8-0.2sinx=0,on [0,TT/2]
+UseNewton ’smethod tofindsolutions accurate towithin 105forthefollowing problems .
+a.2xcos2x-(x-2)2=0,on[2,3]and[3,4]
+b.(x— 2)2— lnx=0,on[1,2]and [e,4]
+c.ex— 3x2=0,on[0,1]and[3,5]
+d.sinx— e~x=0,on[0,1],[3,4],and[6,7]
+Use Newton ’smethod tofindallfour solutions of4xcos(2x)— (x— 2)2=0in[0,8]accurate to
+within 10"5.
+UseNewton ’smethod tofind allsolutions ofx24-10cosx=0accurate towithin 10-5.
+UseNewton ’smethod toapproximate thesolutions ofthefollowing equations towithin 10~5inthe
+given intervals .Inthese problems ,theconvergence willbeslower than normal because thezeros are
+notsimple .
+a.x2— 2xe~*+e-2*=0,on [0,1]
+b. COS(X+V^)+J:U/2+V2)=0,on [-2,-1]
+c.x}-3*2(2-')+3x(4-*)+8'=0,on [0,1]
+d.e<“ +3(ln2)V'-(ln8)e4'-(ln2)\on[-1,0]
+Thenumerical method defined by
+f(Pn-l)f\Pn-1)
+Pn^ [f'(Pn-l))2~/(p*-,)/"(p*-,)’
+forn=1,2,...,canbeused instead ofNewton ’smethod forequations having multiple zeros.
+Repeat Exercise 7using thismethod .
+UseNewton ’smethod tofindanapproximation toy/3correct towithin 104,andcompare theresults
+tothose obtained inExercise 9ofSections 2.2and2.3.
+UseNewton ’smethod tofindanapproximation toV^25correct towithin 10~6,andcompare theresults
+tothose obtained inExercise 10ofSections 2.2and2.3.
+Newton ’smethod applied tothefunction /(x)=x2— 2with apositive initial approximation p0
+converges totheonly positive solution ,V2.
+a.Show thatNewton ’smethod inthissituation assumes theform that theBabylonians used to
+approximate V2:
+b.Usethesequence in(a)with p0=1todetermine anapproximation thatisaccurate towithin
+io-5.
+InExercise 14ofSection 2.3,wefound thatfor/(x)=tannx-6,theBisection method on[0,0.48 J
+converges more quickly than themethod ofFalse Position with p0=0andp,=0.48.Also ,the
+Secant method with these values ofpoandp\does notgiveconvergence .Apply Newton ’smethod to
+thisproblem with (a)po=0and(b)po=0.48.(c)Explain thereason foranydiscrepancies .
+UseNewton ’smethod todetermine thefirstpositive solution totheequation tanx=x,andexplain
+why thisproblem cangive difficulties .
+Cop>?i£tu2012 Cc«£»fcLearn in*.AIR.(huRocncd Mayr*xbecopied ,canned ,o*daplicaied.»whole o»zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBAmpan .Doctoelectronic rifhu.*wcthird pony contcac may besJJppre ^tedftem theeBook and/orcCh<xcn»l.Editorial roiew h*>
+deemed CutanyMpprcucd content dee>notnuxtiily alTect theoverall Icamir .itexperience .Ccfiitapc [.camme roentt therljtlu 10renxwe additional conceal atanytime i itutoeqjroi nghtv rotrictionc require It5 0 C H A P T E R >Solutions ofEquations ofOneVariable
+14.
+15.
+16.
+17.
+18.
+19.
+20.UseNewton ’smethod tosolve theequation
+* 1 1 7 , 1 ., 710=-+-x— xsinx— -cos2x,with p{)=— .2 4 2 2
+Iterate using Newton ’smethod until anaccuracy of105isobtained .Explain why theresult seems
+unusual forNewton ’smethod .Also ,solve theequation with p0=5TTand p0=10TT.
+Player Awillshut out(winbyascore of21-0)player Binagame ofracquetball with probability
+P=l± £( PV1
+2U-P+P V'
+where pdenotes theprobability that Awillwinanyspecific rally (independent oftheserver ).(See
+(K,JJ,p.267.)Determine ,towithin 10\theminimal value ofpthatwillensure thatAwillshut out
+Binatleast halfthematches they play.
+Thefunction described by/(x)=ln(x:+1)— e0AxCOSTTX hasaninfinite number ofzeros.
+a.Determine ,within 10'6,theonly negative zero.
+b.Determine ,within 106,thefour smallest positive zeros.
+c.Determine areasonable initial approximation tofindthenthsmallest positive zero of/.[Hint:
+Sketch anapproximate graph of/.]
+d.Use(c)todetermine ,within 10"6,the25thsmallest positive zero of/.
+Theaccumulated value ofasavings account based onregular periodic payments canbedetermined
+from theannuity  dueequation ,
+A-^ia+iy-i].
+I
+Inthisequation ,Aistheamount intheaccount ,Pistheamount regularly deposited ,andiisthe
+rateofinterest perperiod forthendeposit periods .Anengineer would liketohave asavings account
+valued at$750,000upon retirement in20years andcanafford toput$1500 permonth toward this
+goal.What istheminimum interest rateatwhich thisamount canbeinvested ,assuming that the
+interest iscompounded monthly ?
+Problems involving theamount ofmoney required topayoffamortgage over afixed period oftime
+involve theformula
+A=^[l-(l
+I
+known asanordinary annuity equation .Inthisequation ,Aistheamount ofthemortgage ,Pisthe
+amount ofeach payment ,andiistheinterest rateperperiod forthenpayment periods .Suppose that
+a30-yearhome mortgage intheamount of$135,000isneeded andthattheborrower canafford house
+payments ofatmost $1000 permonth .What isthemaximum interest ratetheborrower canafford to
+pay?
+Adrug administered toapatient produces aconcentration intheblood stream given byc(/)=Ate~,f3
+milligrams permilliliter thours after Aunits have been injected .Themaximum safe concentration
+is1mg/ml.
+a.What amount should beinjected toreach thismaximum safeconcentration andwhen does this
+maximum occur ?
+b.Anadditional amount ofthisdrug istobeadministered tothepatient after theconcentration falls
+to0.25 mg/ml.Determine ,tothenearest minute ,when thissecond injection should begiven .
+c.Assuming that theconcentration from consecutive injections isadditive andthat75%ofthe
+amount originally injected isadministered inthesecond injection ,when isittime forthethird
+injection ?
+Let/00=33i+l-7 S2*.
+a.UsetheMATLAB function fzero totrytofindallzeros of/.
+b.Plot/(x)tofindinitial approximations toroots of/.
+c.UseNewton ’smethod tofind roots of/towithin 10-16.
+d.Find theexact solutions of/(x)=0algebraically .
+Copyright 2012 Cengagc Learn in*.AIRights Reserved Mayr*xbecopied .scanned .ocimplicated ,inwhole orinpar.Doc tocjectronie rights .some third pur.ycontent maybesupplied ftem theeBook and/orcChapccmi .Editorial review h*>
+deemed Cutanysuppressed content does notmaterialy alTcct theoverall learning experience .Catgagc l.cammu reserves theright*>remove additional conceal atanytimeiisubsequent nghts restrictions require It.2.5 Error Analysis andAccelerating Convergence 51
+2.5 Error Analysis andAccelerating Convergence
+Intheprevious section wefound thatNewton ’smethod generally converges very rapidly ifa
+sufficiently accurate initial approximation hasbeen found .This rapid speed ofconvergence
+isduetothefactthatNewton ’smethod produces quadratically convergent approximations .
+Order ofConvergence
+Suppose thatamethod produces asequence {p„ }ofapproximations thatconverge toa
+number p.
+ Thesequence converges linearly if,forlaige values ofn,aconstant 0<Mexists with
+\P~Pn+\\<M\p-pn\.
+ Thesequence converges quadratically if,forlarge values ofn,aconstant 0<Mexists
+with
+\P~Pn+\\<M\p-pn|2.
+Theconstant Miscalled anasymptotic error constant .
+Thefollowing illustrates theadvantage ofquadratic over linear convergence .
+Illustration Suppose that {pn}%Loislinearly convergent to0with
+\Pn+\\lim '=0.5\p„\
+andthat {p*};Ji0isquadratically convergent to0with thesame asymptotic error constant ,
+M— 0.5,so
+1I 1IC\Clim =0.5.
+n~¥0°\Pn\2
+Forsimplicity weassume thatforeach nwehave
+*0.5 and^r*0.5.
+\Pn\ IPnV
+Forthelinearly convergent scheme ,thismeans that
+\Pn-0|=\p„\*0.5|p„ _,|«(0.5)2|p„ .2|*   «(0.5)” |/Jol.
+whereas thequadratically convergent procedure has
+\Pn-0|=\pn\«0.5|p„ _,|2*(0.5)[0.5|/>„ _
+2|2]2=(0.5)3|p„ .2|4
+*(0.5)3[(0.5)|p„ _312]4=(0.5)7|p„ _318
+«-.-«(0.5)2'’-1|A,|2".
+Table 2.7illustrates therelative speed ofconvergence ofthesequences to0if|/?oI=Ipol=1-
+Copyright 2012 Cc«£»fcLcarni #*.AIRighb Rocrscd May notbecopied.N.anncd.orduplicated.»whole oempar.Doc 10electronic ttfht ».*wtcthird pur.ycontent may besuppressed ftem theeBook and/orcClupccriM .Editorial toiew h*>
+deemed Cutany suppic-cdcontent dee>notimxtlaly alTcct theoverall leamir*experience .Ccnitasc[.cammu rexrvei theri|>httorenxyve additional contort atanytime i iwtoeqjcoi rights restrictions require It.

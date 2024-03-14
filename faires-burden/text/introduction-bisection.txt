@@ -1,0 +1,227 @@
+C H A P T E R
+Solutions ofEquations ofOneVariable
+2.1 Introduction
+Inthischapter weconsider oneofthemost basic problems ofnumerical approximation ,
+theroot-finding problem .This process involves finding aroot,orsolution ,ofanequation
+oftheform f(x)=0.Arootofthisequation isalsocalled azero ofthefunction /.This
+isoneoftheoldest known approximation problems ,yetresearch continues inthisarea at
+thepresent time.
+Theproblem offinding anapproximation totherootofanequation canbetraced atleast
+asfarback as1700 B.c.Acuneiform table intheYale Babylonian Collection dating from that
+period gives asexagesimal (base-60)number equivalent to1.414222 asanapproximation
+to\/2,aresult thatisaccurate towithin 10"5.This approximation canbefound byapplying
+atechnique given inExercise 11ofSection 2.4.
+2.2 TheBisection Method
+The first andmost elementary technique weconsider istheBisection ,orBinary -Search ,
+method .The Bisection method isused todetermine ,toanyspecified accuracy thatyour
+computer will permit ,asolution tof(x)=0onaninterval [a,b],provided that/is
+continuous ontheinterval andthat f(a)and f(b)areofopposite sign.Although the
+method willwork forthecase when more than onerootiscontained intheinterval [a,b\,
+weassume forsimplicity ofourdiscussion thattherootinthisinterval isunique .
+Bisection Technique
+Tobegin theBisection method ,seta\=aandb\=b,asshown inFigure 2.1,andletp\
+bethemidpoint oftheinterval [a,b]:
+bi— a\ a\+b\
+Iff(p\)=0,then theroot pisgiven byp=p\\iff(p\)^0,then f(p\)hasthesame
+signaseither f(a\)orf(b\).
+33
+Copyright 2012 Cengagc Lcarnlag .AIR.ghu Reserved May rscabecopied .scanned .orduplicated .'»whole ormpan.Doc toelectronic rights .tone third party concent nu>besupprcsxd Trent theeBook and/oreChaptcnM .Editorial review h*>
+deemed thatany vupprc'-cdcontent dee *,notmaterials affect theoverall learning experience .Ceng ageLeant ngreverses theright torerrx'sradditional conceal atanytime ifsubvcijjcti nglas restrictions require it.3 4 C H A P T E R 2 Solutions ofEquations ofOneVariable
+Figure 2.1
+yti
+m-
+VII
+f(p\)- p3/
+“ =a, p2/PP\ b=b]x
+f(pi>-m
+a\ P}b}
+a2 Pi *>2
+ay Pyb3
+i a i
+Incomputer science ,theprocess
+ofdividing asetcontinually in
+halftosearch forthesolution toa
+problem ,astheBisection method
+does,isknown asabinary search
+procedure . Iff{p\)and f(a\)have opposite signs ,then pisintheinterval (a\,p\)yandweset
+02=a\and &2=Pi-
+ Iff(p\)and/(aj)have thesame sign ,then pisintheinterval (pi,b\)>andweset
+0 2=P i and b2=b\.
+Reapply theprocess totheinterval [,a2,£>2].andcontinue forming [<23,^3],[a4,fc4],
+Each new interval will contain pandhave length onehalfofthelength ofthepreceding
+interval .
+Bisection Method
+Aninterval [a„ +i,b n+\]containing anapproximation toarootoff(x)=0isconstructed
+from aninterval [a„,b„)containing theroot byfirstletting
+Pn=an+2
+Then set
+anda„+\=a„and bn+l=p„iff(a„)f(p n)<0,
+a„ +i=p n and b„+\=bn otherwise .
+Copyrifht 20I2C««cLearning .AIRights Reversed May notbecopied ,canned ,orduplicated .»whole oempar.Doctoelectronic rtghtv.xvtic third pur.ycontent may besuppressed horn theeBook amtar eChaptcnn !.Editorial roiew h*>
+deemed Cutanysuppressed content does nottnaxriaXy alTect theoverall learning experience .('engage [.cammu reserves therighttoremove additional contort atanytime ifsubseqjcni nght »restrictions require It2.2 TheBisection Method 35
+Program BISECT 21
+implements theBisection
+method .*There arethree stopping criteria commonly incorporated intheBisection method ,and
+incorporated within BISECT 21.
+ Themethod stops ifoneofthemidpoints happens tocoincide with theroot.
+ Italsostops when thelength ofthesearch interval islessthan some prescribed tolerance
+wecallTOL.
+ Theprocedure also stops ifthenumber ofiterations exceeds apreset bound N0.
+Tostart theBisection method ,aninterval [a,b]must befound with f(a) /{b)<0;
+thatis,/(a)and/(b)have opposite signs .Ateach step,thelength oftheinterval known to
+contain azero of/isreduced byafactor of2.Since themidpoint p\must bewithin (b— a)/2
+oftheroot p,andeach succeeding iteration divides theinterval under consideration by2,
+wehave
+b-a
+IP-~P\~jr-
+Consequently ,itiseasy todetermine abound forthenumber ofiterations needed toensure
+agiven tolerance .Iftherootneeds tobedetermined within thetolerance TOL,weneed to
+determine thenumber ofiterations ,n,sothat
+b— a
+2n<TOL.
+Using logarithms tosolve forninthisinequality gives
+b— a
+TOL<2\ which implies that log2(b— a
+TOL)<n.
+Since thenumber ofrequired iterations toguarantee agiven accuracy depends onthe
+length oftheinitial interval [a,b],wewant tochoose thisinterval assmall aspossible .For
+example ,if/(*)=2*3— x2+x— 1,wehave both
+/(-4)-/(4)<0and/(0)/(1)<0,
+sotheBisection method could beused oneither [-4,4]or[0,1].Starting theBisection
+method on[0,1]instead of[-4,4]reduces by3thenumber ofiterations required toachieve
+aspecified accuracy .
+Example 1Show that f(x)=x3+4x2-10=0hasaroot in[1,2]andusetheBisection method to
+determine anapproximation totheroot thatisaccurate toatleast within 10“ 4.
+Solution Because /(1)=— 5and/(2)=14,theIntermediate Value Theorem ensures
+thatthiscontinuous function hasarootin[1,2].Since f'(x)=3*2+8*isalways positive
+on[1,2],thefunction /isincreasing ,and,asseen inFigure 2.2,therootisunique.
+’These programs canbefound athttp://www.math.ysu.edu/~faires /Numerical -Methods /Programs /
+Copyright 2012 Cengagc Learn in*.AIR.ghtvRocncd Mayr*xbecopied ,canned ,o*daplicaied.»whole o»mpan.Doctoelectronic rifhu.*wcthird pony contcac may besoppre ^tedftem theeBook and/orcCh<xcn»l.Editorial roiew h*>
+deemed CutanyMpprccscd content dee>notnuxtiily alTect theoverall Icamir .itexperience .Ceng apeLearning rexxvei theright lorenxyve additional conceal atanytime iisub*cyjcw nght »rotrictioric require It.36 C H A P T E R 2 Solutions ofEquations ofOneVariable
+Figure 2.2
+y,
+14
+y=/(*)=x3+4x2— 10/
+1=afP 2=b x
+-5-
+Forthefirstiteration oftheBisection method weusethefactthat atthemidpoint of
+[1,2]wehave
+/(1.5)=2.375 >0.
+This indicates thatweshould select theinterval [1,1.5]foroursecond iteration .Then we
+findthat
+/(1.25)=-1.796875
+soournewinterval becomes (1.25,1.5],whose midpoint is1.375 .Continuing inthismanner
+gives thevalues inTable 2.1.
+Table 2.1n On bn Pn H P n )
+1 1.0 2.0 1.5 2.375
+2 1.0 1.5 1.25 -1.79687
+3 1.25 1.5 1.375 0.16211
+4 1.25 1.375 1.3125 -0.84839
+5 1.3125 1.375 1.34375 -0.35098
+6 1.34375 1.375 1.359375 -0.09641
+7 1.359375 1.375 1.3671875 0.03236
+8 1.359375 1.3671875 1.36328125 -0.03215
+9 1.36328125 1.3671875 1.365234375 0.000072
+10 1.36328125 1.365234375 1.364257813 -0.01605
+11 1.364257813 1.365234375 1.364746094 -0.00799
+12 1.364746094 1.365234375 1.364990235 -0.00396
+13 1.364990235 1.365234375 1.365112305 -0.00194
+After 13iterations ,pn=1.365112305 approximates theroot pwith anerror
+\p— P13I<I*i4-flul=11.365234375 — 1.365112305 |=0.000122070 .
+Copyright 2012 Cenfajc Learn in*.AIRights Reversed Mayr*xbecopied.scanned .ocimplicated ,inwhole orinpar.Doc tocjectronie rifhu.some thirdpur.ycontcir.maybesupplied ftem theeBook and/orcChapccriM .Editorial review h*>
+deemed Cutanysuppressed content docs nottnaxrUXy alTcct theoverall Icamir .itexperience .Ccagagc [.cammereserves theright 10remove additional eonteat atanytimeifsubsequent rights restrictions require It2.2 TheBisection Method 37
+Since <\p\twehave
+I\P7PnI
+<Ipl1^14~flu!
+\O\A\<9.0x10“ 5,
+sotheapproximation iscorrect toatleast within 10-4.Thecorrect value ofptoninedecimal
+places isp=1.365230013 .Note that/79iscloser topthan isthefinal approximation p\$.
+You might suspect thisistruebecause |/(p9)|<\f(p n)l
+TheBisection method ,although conceptually clear ,hasserious drawbacks .Itisslow to
+converge relative totheother techniques wewilldiscuss ,andagood intermediate approxi -
+mation may beinadvertently discarded .This happened ,forexample ,with /79inExample 1.
+However ,themethod hastheimportant property thatitalways converges toasolution and
+itiseasy todetermine abound forthenumber ofiterations needed toensure agiven accu-
+racy.Forthese reasons ,theBisection method isfrequently used asadependable starting
+procedure forthemore efficient methods presented later inthischapter .
+The bound forthenumber ofiterations fortheBisection method assumes that the
+calculations areperformed using infinite -digit arithmetic .When implementing themethod
+onacomputer ,consideration must begiven totheeffects ofround-offerror.Forexample ,
+thecomputation ofthemidpoint oftheinterval [an,bn]should befound from theequation
+instead offrom thealgebraically equivalent equation
+Pna n+b n
+2
+Thefirstequation adds asmall correction ,(b n-a n)/2,totheknown value a n.When b n-an
+isnear themaximum precision ofthemachine ,thiscorrection might beinerror ,buttheerror
+would notsignificantly affect thecomputed value ofp n.However ,inthesecond equation ,
+ifb n-anisnear themaximum precision ofthemachine ,itispossible forp ntoreturn a
+midpoint thatisnoteven intheinterval [a n,bn].
+Anumber oftests canbeused toseeifaroothasbeen found .Wewould normally use
+atestoftheform
+\f(Pn)\<
+TheLatin word signum means
+“ token ” or“ sign."Sothesignum
+function quite naturally returns
+thesign ofanumber (unless the
+number is0).where >0would beasmall number related insome way tothetolerance .However ,itis
+also possible forthevalue f(pn)tobesmall when pnisnotnear theroot p.
+Asafinal remark ,todetermine which subinterval of[a„ ,bn]contains arootof/,itis
+better tomake useofsignum function ,which isdefined as
+f— 1.if*<0,
+sgn(jr)=<0, ifx=0,
+(l, ifJC>0.
+The test
+sgn(f(a n) )sgn(/(/?*))<0 instead of f(a n)f(p n)<0
+gives thesame result butavoids thepossibility ofoverflow orunderflow inthemultiplication
+off(an)and f(pn).
+Copyright 2012 Cengagc Learning .AIRight*Rocncd May rxnbecopied ,canned ,o*daplicaied.»whole o»mpan.Doctoelectronic light*.*omc third pony contcac may besuppreved Trent theeBook and/orcCh<xcn*l.Editorial roiew h*>
+deemed Cut arty*upprc »*edcontent doc*notimtctiily affect theoverall learning experience .Ceng apeLcarnmg roerve*theright Mremove additional conceal atanytime i!*uh*eyjcm right*restriction *require it38 C H A P T E R 2 Solutions ofEquations ofOneVariable
+E X E R C I S E S E T 22
+1. UsetheBisection method tofind p3forf(x)=J x— cos*on[0,1J.
+2. Let/(x)=3(x+l)(x-
+^)(x— 1).UsetheBisection method onthefollowing intervals tofind p3.
+a.[—2,1.5] b.[-1.25,2.5]
+3. UsetheBisection method tofindsolutions accurate towithin 102forx3-l x2+14*-6=0on
+each interval .
+a.[0,1] b.[1,3.2] c.[3.2,4]
+4. UsetheBisection method tofindsolutions accurate towithin 10-2forx4— 2x3— A x1+4x+4=0
+oneach interval .
+a.[-2,-1] b.[0,2]
+c.[2,3] d.[-1,0]
+5. a.Sketch thegraphs ofy=xandy— 2sin*.
+b.UsetheBisection method tofindanapproximation towithin 10“ 2tothefirstpositive value of
+xwith x=2sin*.
+6. a.Sketch thegraphs ofy=xand y=tanx.
+b.UsetheBisection method tofindanapproximation towithin 102tothefirstpositive value of
+xwith x=tanx.
+7. Let/(x)=(x4-2)(x+l)x(x-l)3(x-2).Towhich zero of/does theBisection method converge
+forthefollowing intervals ?
+a.[-3,2.5] b.[-2.5,3]
+c.[-1.75,1.5] d.[-1.5,1.75]
+8. Letf(x)=(x4-2)(x+l)2x(x-l)3(x-2).Towhich zero of/does theBisection method converge
+forthefollowing intervals ?
+a.[-1.5,2.5] b.[-0.5,2.4]
+c.[-0.5,3] d.[-3,-0.5]
+9. Use theBisection method tofindanapproximation to\/3correct towithin 10~4.[H i n t:Consider
+f(x)=x2-3.]
+10. UsetheBisection method tofindanapproximation to\^25correct towithin 104.
+11. Find abound forthenumber ofBisection method iterations needed toachieve anapproximation with
+accuracy 103tothesolution ofx3+x-4=0lying intheinterval [1,4].Find anapproximation to
+therootwith thisdegree ofaccuracy .
+12. Find abound forthenumber ofBisection method iterations needed toachieve anapproximation with
+accuracy 104tothesolution ofx3—x—1=0lying intheinterval [1,2].Find anapproximation to
+theroot with thisdegree ofaccuracy .
+13. Thefunction defined by/(x)=sin;rxhaszeros atevery integer .Show thatwhen-1<a<0and
+2<b<3,theBisection method converges to
+a.0,i fa+b<2 b.2,ifa+b>2 c. 1, i fa+b=2
+2.3 TheSecant Method
+Although theBisection method always converges ,thespeed ofconvergence isoften tooslow
+forgeneral use.Figure 2.3gives agraphical interpretation oftheBisection method thatcan
+beused todiscover how improvements onthistechnique canbederived .Itshows thegraph
+ofacontinuous function thatisnegative ata\andpositive atb\.Thefirstapproximation p\
+totherootpisfound bydrawing thelinejoining thepoints (a\,sgn(/(ai)))=(a\,-l)and
+(b\ysgn(/(&i)))=(b\,1)andletting p\bethepoint where thislineintersects thex-axis.
+Inessence ,thelinejoining -1)and (b\,1)hasbeen used toapproximate thegraph of/
+ontheinterval [a\,b\].Successive approximations apply thissame process onsubintervals
+Cop>?i£tu2012 Cc«£»fcLearn in*.AIR.(huRocncd Mayr*xbecopied ,canned ,o*daplicaied.»whole o»mpan .Doctoelectronic rifhu.*wcthird pony contcac may besoppre ^tedftem theeBook and/orcCh<xcn»l.Editorial roiew h*>
+deemed CutanyMpprcucd content dee>notnuxtiily alTect theoverall Icamir .itexperience .C'crtitape Learnmp rexxvei thertpltt 10renxwe additional conceal atanytime i itutoeqjcni npht »rotrictionc require It

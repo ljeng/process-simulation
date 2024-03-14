@@ -1,0 +1,171 @@
+The Cooper Union for the Advancement of Science and Art 
+ChE352 
+Numerical Techniques for Chemical Engineers 
+Professor Stevenson 
+Lecture 17 The Cooper Union for the Advancement of Science and Art 
+Exams = Monte Carlo integration 
+•I can't ask you about every topic 
+•I can't use a predictable sequence 
+•Therefore, I must use a pseudo-random 
+subset... 
+The Cooper Union for the Advancement of Science and Art 
+Midterm rules 
+•You will have 90 minutes. 
+•You may use only these resources: the two 
+course textbooks (F&B and PNM), my slides, 
+your own notes, your group's HWs, and Colab 
+•You may use laptops and/or tablets, but not 
+phones. 
+•The exam will be graded based on your blue 
+book. Show all your work clearly in your blue 
+book and draw a box around each answer. 
+•If you have a question, raise your hand. The Cooper Union for the Advancement of Science and Art 
+Midterm rules 
+•You will have 90 minutes. 
+•You may use only these resources: the two 
+course textbooks (F&B and PNM), my slides, 
+your own notes, your group's HWs, and Colab 
+–You can use my graded pdfs of your 
+group's HWs, too 
+–You can be on the Wifi in order to get to 
+these resources like PNM and Colab, but 
+no general internet usage 
+–No using the AI features in Colab The Cooper Union for the Advancement of Science and Art 
+Linear algebra 
+5. (10 points) Define the following in one sentence (or less) each: 
+A.Linear operator 
+B.Non-singular matrix 
+C.Positive definite matrix 
+D.Dot product 
+E.Eigenvector 
+The Cooper Union for the Advancement of Science and Art 
+Linear algebra 
+5. (10 points) Define the following in one sentence (or less) each: 
+A.Linear operator 
+An operation transforming one vector into another which can be 
+expressed as matrix multiplication by some matrix 
+B.Non-singular matrix 
+A matrix which has an inverse, aka can be solved in a linear system 
+Ax = b. Also valid: full-rank and square, determinant != 0. 
+C.Positive definite matrix 
+A matrix for which the expression xTPx always gives a positive scalar 
+for any nonzero column vector x of the correct length 
+D.Dot product 
+The operation of multiplying all corresponding entries of two vectors 
+x1, x2 and summing all the results to produce a single scalar 
+E.Eigenvector 
+A characteristic vector x  of a given matrix H satisfying the expression  
+Hx = ax  for some scalar a (the corresponding eigenvalue), meaning 
+that the vector x does not change direction when multiplied by the 
+matrix H, it is only scaled by a constant (the eigenvalue). Common mistake: not saying eigenvector depends on the matrix The Cooper Union for the Advancement of Science and Art 
+Optimization formalism 
+Or abbreviated as: 
+Optimal value Objective 
+function 
+Constraint set 
+Problem 
+name 
+●Which values are changing over the course of 
+optimization? How? 
+●Which values are not changing? The Cooper Union for the Advancement of Science and Art 
+Interpolation/regression Methods 
+•Linear regression 
+•Polynomial regression 
+•Lagrange polynomial interpolation 
+•Piecewise linear interpolation 
+•Cubic spline interpolation 
+← Which method is this? 
+When would you use 
+each of these methods? The Cooper Union for the Advancement of Science and Art 
+Numerical derivatives & integrals 
+come from approximation methods 
+•You have learned some methods for 
+approximating a function f(x) based on 
+individual data points ( Examples? )
+•How can you use these approximation 
+methods to get numerical derivatives and 
+integrals? The Cooper Union for the Advancement of Science and Art 
+Numerical derivatives & integrals 
+come from approximation methods 
+•You have learned some methods for 
+approximating a function f(x) based on 
+individual data points ( Examples? )
+•We used functions like polynomials which 
+have easy analytic derivatives & integrals 
+•We can also use these to estimate the 
+derivative & integral of the true function f(x) The Cooper Union for the Advancement of Science and Art 
+Bisection Newton 
+Convergence? 
+Always 
+converges? 
+Special 
+conditions? 
+Good when? Root-finding methods: what & why? The Cooper Union for the Advancement of Science and Art 
+Root-finding methods: what & why? 
+Bisection Newton 
+Convergence? Linear Quadratic 
+Always 
+converges? Yes No, if bad p0 or if 
+we hit f’(pn) ≈ 0 
+Special 
+conditions? Need the 
+bounds a, b Need a guess p0, 
+need to have f’(x) 
+Good when? We need 
+stability We need 
+accuracy & speed The Cooper Union for the Advancement of Science and Art 
+Sensitivity analysis 
+•How can you tell if an approximation is stable ?
+Ariane 5 algorithm was 
+conditionally stable The Cooper Union for the Advancement of Science and Art 
+•How can you tell if an approximation is stable ?
+•Try small  perturbations in input (“small” 
+depends on the problem at hand) 
+•If the output changes significantly  (as defined 
+by the problem at hand), you have instability 
+Ariane 5 algorithm was 
+conditionally stable Sensitivity analysis The Cooper Union for the Advancement of Science and Art 
+What is floating point? 
+•Not every real number can be represented 
+What numbers can’t be represented? How many decimal digits can we store in 23 bits? •Computer math is almost always floating point  
+•Like scientific notation with powers of 2 only The Cooper Union for the Advancement of Science and Art 
+•np.float32 holds ~7 decimal digits 
+•np.float64 holds ~16 decimal digits 
+•Not every real number can be represented 
+•Too big = overflow, too small = underflow 
+•Only binary fractions (no exact 1/3, 1/5, etc) 
+•Computer math is almost always floating point  
+•Like scientific notation with powers of 2 only What is floating point? The Cooper Union for the Advancement of Science and Art 
+Review: IVPs 
+•When is an IVP like an integral? 
+○Only when y' = f(t) , no y 
+○Then y = ∫ f(t), can solve with quadrature 
+•In general, y' = f(t, y) 
+○We know t exactly, but y (after y0) is an 
+estimate, so y' = f(t, y) is also an estimate 
+○Subject to accumulating errors, so be careful 
+The Cooper Union for the Advancement of Science and Art 
+Review: IVP systems 
+•Same idea, but u' = f(t, u) where u is a vector 
+•Solving is similar to 1-D IVPs, but more values 
+to keep track of 
+•Vector math rules apply: vector + vector = 
+vector, scalar * vector = vector, etc 
+Euler for systems (w = our estimate for u): 
+Which index i, j is the timestep? What is the other index? The Cooper Union for the Advancement of Science and Art 
+Setting up IVP systems 
+•Every ui corresponds to an element ui' = f(t, u) 
+Vector function Vector function The Cooper Union for the Advancement of Science and Art 
+Review: Euler for IVP systems 
+What is the Euler 
+step for this system? The Cooper Union for the Advancement of Science and Art 
+Review: Euler for IVP systems 
+f(t, u) for this IVP: 
+Euler step definition: 
+Euler step for this IVP: The Cooper Union for the Advancement of Science and Art 
+Review: higher-order IVPs 
+•Often we know only a higher-order derivative 
+of our desired function y, like y'' = f(t, y, y') 
+•Treat every derivative of y as an element of u 
+in an IVP system: u1 = y, u2 = y'
+•du2/dt = f(t, u1, u2)      du1/dt = u2•And initial conditions y0 & y'0

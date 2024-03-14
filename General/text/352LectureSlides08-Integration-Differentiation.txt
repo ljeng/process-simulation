@@ -1,0 +1,304 @@
+The Cooper Union for the Advancement of Science and Art 
+ChE352 
+Numerical Techniques for Chemical Engineers 
+Professor Stevenson 
+Lecture 8 The Cooper Union for the Advancement of Science and Art 
+A bright idea from NYU 
+A Mathematical Model for the 
+Determination of Total Area 
+Under Glucose Tolerance and 
+Other Metabolic Curves 
+Journal: Diabetes Care, 1994 
+●In 1994, doctors at NYU's 
+Department of Nutrition 
+invented a method for 
+finding area under a curve 
+●Allowed better treatment 
+of diabetes patients 
+"The strategy of this mathematical 
+model is to divide the total area 
+under a curve into individual small 
+segments such as squares, rect- 
+angles, and triangles, whose areas 
+can be precisely determined." The Cooper Union for the Advancement of Science and Art 
+A bright idea from NYU 
+A Mathematical Model for the 
+Determination of Total Area 
+Under Glucose Tolerance and 
+Other Metabolic Curves 
+Journal: Diabetes Care, 1994 
+●In 1994, doctors at NYU's 
+Department of Nutrition 
+invented a method for 
+finding area under a curve 
+●Allowed better treatment 
+of diabetes patients 
+●The method was over 
+2000 years old at the time 
+●Better late than never! The Cooper Union for the Advancement of Science and Art 
+Activity: define using limits 
+1.Write (from memory) the limit which defines 
+the derivative of a function f(x) at a point x0 
+○Use h to represent the change in x 
+2.Write (from memory) the limit which defines 
+the integral of a function f(x) over the interval 
+[a,b]
+○Assume the interval is subdivided into n 
+equally-spaced subintervals, each of size h 
+○Also give the value of h in terms of a, b, & n The Cooper Union for the Advancement of Science and Art 
+Definition of derivative & integral 
+f '(x)f(x)
+a bhWhy do 
+these work? The Cooper Union for the Advancement of Science and Art 
+Types of derivatives & integrals 
+•Analytic  (aka symbolic ): math ➜ math 
+–The kind you learned in calculus class 
+–Example: 𝝏 sin(x) / 𝝏 x ➜ cos(x) 
+•Numerical : numbers ➜ numbers 
+–Don't need explicit f(x), just some of its values 
+–Example: (y1 - y0) / (x1 - x0) ➜ Δy/Δx 
+•Autodiff : code ➜ code 
+–Like analytic, but for large chunks of code 
+–Aims for speed, not just correctness 
+All of these can be done with computers The Cooper Union for the Advancement of Science and Art 
+Numerical derivatives & integrals 
+come from approximation methods 
+•You have learned some methods for 
+approximating a function f(x) ( Examples? )
+•We used functions like polynomials which 
+have easy analytic derivatives & integrals 
+•We can also use these to estimate the 
+derivative & integral of the true function f(x) The Cooper Union for the Advancement of Science and Art 
+Recall: Lagrange polynomials 
+Can approximate any function f(x) using data points 
+at x0, x1, ... xn. Sensitive to noise after 4 or 5 terms. Same 
+Basis Lagrange 
+Lagrange error term Data Basis The Cooper Union for the Advancement of Science and Art 
+Lagrange polynomial for 2 points 
+Find the Lagrange polynomial for this data: 
+x0, y0 = (1, 3), x1, y1 = (2, 3) 
+With a weighted sum of 
+these two lines, you can 
+make any line! 3
+The Cooper Union for the Advancement of Science and Art 
+Lagrange polynomial for 2 points 
+Find the Lagrange polynomial for this data: 
+x0, y0 = (1, 3), x1, y1 = (2, 3) 
+(2 - x)  *  3      +  (x - 1)  *  3     =  3
+3
+x - 2
+1 - 2
+x - 1
+2 - 1
+In this case, a constant: 3 The Cooper Union for the Advancement of Science and Art 
+Lagrange math & code 
+The Cooper Union for the Advancement of Science and Art 
+Lagrange for estimating df/dx 
+From p. 169 of F&B: 
+•We can use the derivative of the Lagrange  
+polynomial  for a set of N points { xj, f (xj)} to 
+approximate the derivative of the function f
+•This is called the N-point formula  for 
+approximating the derivative of f 
+•For N points, polynomial order n = N-1 ( Why? )The Cooper Union for the Advancement of Science and Art 
+Lagrange polynomial derivatives 
+Use the Lagrange polynomials (from the 
+definition), then find their derivatives: 
+Lagrange polynomials for n=2 Lagrange derivatives for n=2 The Cooper Union for the Advancement of Science and Art 
+Example: 2-point derivative f`(x0)
+Assume we know f(x0) & f(x1), where x1 = x0 + h 
+Error 
+term
+Error proportional to h The Cooper Union for the Advancement of Science and Art 
+Midpoint 
+f`(x1)Example: 3-point derivative f`(x1)The Cooper Union for the Advancement of Science and Art 
+Midpoint 
+f`(x1)
+Endpoint 
+f`(x0)Example: 3-point derivative f`(x0)The Cooper Union for the Advancement of Science and Art 
+Derivatives for N = 2, 3, & 5 
+Which N 
+is best? The Cooper Union for the Advancement of Science and Art 
+Numerical differentiation summary 
+•N-point formula =  Lagrange polynomial  with 
+different numbers of points (N = 2, 3, 5, etc.) 
+•Midpoint is better  (less approx. error, fewer 
+function evaluations, less round-off) 
+•Methods are unstable as h → 0  (Why?) 
+○Use h > 10-8, and test (sensitivity analysis) 
+•We’ll use these to 
+solve BVPs / PDEs  
+on a grid  (Finite 
+Difference Methods )Navier-Stokes The Cooper Union for the Advancement of Science and Art 
+Numerical derivatives in Python 
+•np.gradient(y, x)  estimates dy/dx using central 
+difference (at the ends, endpoint difference) 
+•Result: 
+mean_abs_error = 0.00015 The Cooper Union for the Advancement of Science and Art 
+Analytic derivatives in Python 
+•Module sympy  can give analytic  gradients 
+•Result: 
+Try it! The Cooper Union for the Advancement of Science and Art 
+Analytic derivatives in Python 
+•Module sympy  can give analytic  gradients 
+f = sin(k + x**2) 
+df = 2*x*cos(k + x**2) •Result: The Cooper Union for the Advancement of Science and Art 
+Autodiff in Python 
+•Frameworks like PyTorch, TensorFlow, and 
+Jax can autodiff  a whole program 
+○Unlike an analytic derivative, autodiff is not 
+limited to single mathematical expressions 
+○Just code your function f(), even with loops, 
+then request the derivative 
+•At Schrodinger, here's how we get atomic 
+forces from our potential energy models: 
+forces = -torch.autograd.grad(energy, xyz) The Cooper Union for the Advancement of Science and Art 
+Derivatives vs integrals 
+•Many families of 
+functions are 
+"closed " under 
+differentiation but 
+not integration 
+–This is why 
+integrals stink 
+•Fortunately, we 
+have numerical 
+integration 
+ xkcd.com/2117 The Cooper Union for the Advancement of Science and Art 
+Numerical integration 
+•Numerical integration  (aka quadrature ) refers 
+to a method which approximates an integral 
+using a weighted sum of function values: 
+•We can pick any set of n+1 points x0 . . . xn in 
+[a,b] we would like, but to start we’ll assume 
+we have equally spaced ones 
+•What are the "weights"? The Cooper Union for the Advancement of Science and Art 
+Quadrature for small n 
+•We would like to use many points (large n), 
+since that makes h (the interval size ) small: 
+•We don’t always have a lot of data – 
+sometimes only two or three points 
+•We can use Lagrange polynomials (just like for 
+differentiation) to derive formulae. . . 
+The Cooper Union for the Advancement of Science and Art 
+Simple Quadrature Rules 
+Midpoint rule  (Figure 4.1 on F&B p108): 
+Trapezoidal rule  (Fig 4.2, F&B p110): 
+Which is more 
+accurate? The Cooper Union for the Advancement of Science and Art 
+•The midpoint and trapezoid rules are fine, 
+error O(h3), but  Simpson’s Rule  is O(h5):
+•What if the interval [a,b] is very large? Simpson’s Rule (n = 2) 
+The Cooper Union for the Advancement of Science and Art 
+Composite Quadrature 
+•If we want to integrate over a big interval [a,b], 
+we can break it up into smaller parts and do 
+basic quadrature on each part: 
+•This method is called Composite Quadrature  
+and the resulting rules are at F&B p118-119 
+•Makes h smaller, so error is much smaller 
+•Only works if we can get more values of f(x) The Cooper Union for the Advancement of Science and Art 
+How do we pick h? 
+•Adaptive Quadrature  uses a bound on the 
+approximation error ε to choose the number 
+of subintervals  – example in F&B uses 
+Simpson’s Rule on four subintervals (p. 140) 
+•Gaussian Quadrature  minimizes the error of 
+approximation by picking exactly the right 
+points (given the approximating polynomial), 
+producing a variable step size h The Cooper Union for the Advancement of Science and Art 
+More complicated situations? 
+•Multiple integrals  (often double and triple): 
+useful for simulators (CAD programs, fluid 
+dynamics) where you need to calculate 
+properties over complex 3D shapes 
+•Improper integrals  (some bounds ∞): hope 
+integral converges fast enough that it can be 
+estimated with large but finite bounds 
+The Cooper Union for the Advancement of Science and Art 
+Quadrature functions 
+•In Python, scipy.integrate.quad(f, a, b)  
+finds the integral of f on [a,b] using 
+adaptive quadrature  with a specified 
+error tolerance 
+•dblquad  and tplquad  in scipy.integrate 
+will do double and triple integrals (much 
+slower) 
+•What about higher dimensions? The Cooper Union for the Advancement of Science and Art 
+Curse of exponentiality 
+•Quadrature fails for 
+high-dimensional grids 
+•Grid size grows 
+exponentially 
+3D grid 
+N_points = (L / h)3The Cooper Union for the Advancement of Science and Art 
+Monte Carlo integration 
+•Quadrature fails for 
+high-dimensional grids 
+•Grid size grows 
+exponentially 
+•Monte Carlo: pick 
+points at random  & 
+compute mean(f) 
+•Standard deviation 
+gives uncertainty 
+estimate for mean(f) f(x)
+a b∫f(x) = (b-a) * mean(f(xi))
+No grid required 
+Convergence is slow Random 
+3D grid 
+N_points = (L / h)3The Cooper Union for the Advancement of Science and Art 
+Monte Carlo example: reactor 
+•You're estimating reactor output given yield f(xi) 
+for concentrations xi of reactants & impurities 
+•For each impurity, you have bounds  on the 
+concentration, not exact amounts 
+•Solution: generate random points within the 
+bounds, calculate expected yield mean( f(xi) ), 
+multiply by total input to get the total output 
+The Cooper Union for the Advancement of Science and Art 
+How do we get random numbers? 
+●For numerical methods, we don't try to get 
+real random numbers (such as quantum 
+noise) 
+●We use functions that give repeatable  
+outputs with the same statistical properties  
+as real random numbers 
+●These functions are Pseudo-Random 
+Number Generators  (PRNGs) 
+●Found in np.random  & hashlib The Cooper Union for the Advancement of Science and Art 
+Monte Carlo example: 𝞹
+•Say we have a function f(x, y) = 1 when the 
+point x, y is in the unit circle, otherwise 0 
+•Find the average value of this function in the 
+square from 0,0 to 1,1 (see np.random.random) 
+•How is this value related 
+to 𝞹?
+•How many random points 
+does it take to converge 𝞹 
+reliably to 3.14? 0,01,1The Cooper Union for the Advancement of Science and Art 
+Integrating motion: Asteroids 
+•This is how I got into numerical methods 
+•Sitting in Cooper Union physics class, 
+not paying 
+much attention, 
+coding video 
+games where 
+things move 
+around (things 
+like asteroids) The Cooper Union for the Advancement of Science and Art 
+Integrating motion: Asteroids 
+Given an asteroid with a position, velocity, 
+and forces, how does it move? 
+Position = x 
+ Velocity = dx/dt 
+    Force = m(d2x/dt2)
+If we know the initial values  of the variables, 
+we can find their values at later times too 
+using a form of numerical integration The Cooper Union for the Advancement of Science and Art 
+Integrating motion: instability 
+Unlike quadrature, Initial Value Problems (IVPs) can suffer from instability The Cooper Union for the Advancement of Science and Art 
+Integrating motion: instability 
+All reading for next week: Intro to Initial Value 
+Problems, Euler’s method, RK4: PNM 22.1-5. 
+More details in F&B 5.1-3. 

@@ -1,0 +1,187 @@
+The Cooper Union for the Advancement of Science and Art 
+ChE352 
+Numerical Techniques for Chemical Engineers 
+Professor Stevenson 
+Lecture 7 The Cooper Union for the Advancement of Science and Art 
+Remote class Feb 21 & 22 
+I will be presenting at the Schrodinger Materials 
+Science Summit in San Diego 
+Mean partial charge per atom Lithium 
+Carbon 
+Oxygen 
+Hydrogen The Cooper Union for the Advancement of Science and Art 
+Designing Without The Data 
+Suppose you need to scale up a reactor to make a 
+new drug ASAP. In order to avoid thermal runaway , 
+you need to know the 
+thermal properties  
+of your reactants and 
+products. 
+You need heat capacities ,
+but you don't have data at the right temperatures... 
+(Very few chemicals have sufficient data) 
+The Cooper Union for the Advancement of Science and Art 
+A Typical Data Situation 
+Product Reactant 
+TrxnTinStirred-tank reactor 
+No CP data at Tin or Trxn
+What can we do? The Cooper Union for the Advancement of Science and Art 
+Interpolation & Regression 
+Interpolation  matches data exactly at each 
+known point, but maybe not in between. 
+Regression  
+minimizes expected 
+error overall - not an 
+exact match at the 
+known points, less 
+risk of a big error. 
+Interpolation 
+Regression 
+Which is better? 
+Depends on the engineering problem The Cooper Union for the Advancement of Science and Art 
+Example engineering problems? 
+Interpolation? 
+Regression? 
+Interpolation 
+Regression 
+Which is better? 
+Depends on the engineering problem Think about the kinds of data that would make 
+one method or another work better... The Cooper Union for the Advancement of Science and Art 
+Weierstrass theorem 
+•For any continuous function f, there exists a 
+polynomial P(x) with an error bound 𝜀:
+What does this not guarantee? f(x)P(x)f(x)+ 𝜀
+f(x)− 𝜀The Cooper Union for the Advancement of Science and Art 
+Weierstrass theorem traps 
+•No bounds on the derivative  or curvature 
+•No guarantee that the optima  are the same 
+f(x)P(x)f(x)+ 𝜀
+f(x)− 𝜀
+Theorems are like contract lawyers 
+We want a well-behaved polynomial The Cooper Union for the Advancement of Science and Art 
+Lagrange Polynomials 
+•Say we want our polynomial to be exact at our 
+data points, and have lowest possible degree 
+•This is the definition of Lagrange Polynomials 
+Same 
+Basis Lagrange 
+Data Basis The Cooper Union for the Advancement of Science and Art 
+Lagrange polynomial for 2 points 
+Find the Lagrange polynomial for this data: 
+x0, y0 = (1, 3), x1, y1 = (2, 3) 
+With a weighted sum of 
+these two lines, you can 
+make any line! 3
+The Cooper Union for the Advancement of Science and Art 
+Lagrange polynomial for 2 points 
+Find the Lagrange polynomial for this data: 
+x0, y0 = (1, 3), x1, y1 = (2, 3) 
+(2 - x)  *  3      +  (x - 1)  *  3     =  3
+3
+x - 2
+1 - 2
+x - 1
+2 - 1
+In this case, a constant: 3 The Cooper Union for the Advancement of Science and Art 
+Lagrange math & code 
+The Cooper Union for the Advancement of Science and Art 
+Lagrange Polynomials for n > 1 
+•What if we have 3, 5, 10, etc. data points? 
+•Same procedure: values of f(xk) are the 
+weights for the basis functions Ln,k(x)
+Same 
+Basis Lagrange 
+Data Basis The Cooper Union for the Advancement of Science and Art 
+Pn(x) has Bounded Error, but. . . 
+We can bound the error in using Pn(x) to 
+approximate f(x) ( Look familiar? ):
+Not always helpful: the true f(x) is not known 
+when we only have data, let alone a bound 
+on its (n+1)th derivative. True 
+function 
+Lagrange Error term The Cooper Union for the Advancement of Science and Art 
+Problem: Runge’s Phenomenon 
+•Lagrange gives higher-n 
+polynomials for higher-n 
+datasets 
+•High-n polynomials have 
+large derivatives ( Why? )
+•Between datapoints, P(x) 
+will oscillate (“ring”) 
+•This can get really bad f(x)
+P5(x)
+P9(x)Runge’s 
+Phenomenon 
+How can we fit more points 
+without higher-order polynomials? The Cooper Union for the Advancement of Science and Art 
+Piecewise Methods 
+•Piecewise linear interpolation  – 
+draw/calculate a line between adjacent 
+data points to estimate an intermediate 
+value – How many lines for n+1 points? 
+•Simple 
+•Robust 
+•Any dataset size 
+•No oscillation 
+Any problems? The Cooper Union for the Advancement of Science and Art 
+Splines 
+•Piecewise low-n polynomials fitted to 
+match each datapoint and be smooth 
+•Based on how an elastic piece of metal (a 
+“spline”) physically curves between points 
+Physical  
+spline 
+Mathematical  
+spline The Cooper Union for the Advancement of Science and Art 
+•Smooth  means that for each datapoint xi:
+○P’i(xi)==P’i+1(xi)
+○P’’i(xi)==P’’i+1(xi)
+•Every cubic has 4 coefficients 
+•Every point has x, f(x), P’(x), P’’(x) 
+○Get P’, P’’ from f(xi+1) - f(xi) / (xi+1 - xi)
+○Need to choose P’, P’’ at boundaries 
+•Solve a linear system of equations to 
+determine coefficients (Ax = b) Cubic splines The Cooper Union for the Advancement of Science and Art 
+Higher dimension interpolation 
+•Example: heat capacity as a function of T 
+and P (more dimensions: mixture ratio...) 
+•Can use similar 
+methods 
+•Getting enough 
+data is even harder 
+•Regression helps 
+•Difficult to visualize 
+after 2-D 
+The Cooper Union for the Advancement of Science and Art 
+Tools for interpolation 
+•Spreadsheet  – trendlines on graphs are 
+interpolation  if polynomial is order <= n for 
+n+1 points, regression otherwise  (Ax = b) 
+•Python  – numpy.polyfit, numpy.polyval 
+(evaluates polynomial at point), 
+scipy.interpolate.lagrange, 
+scipy.interpolate.CubicSpline 
+•Calculator  – never a bad idea to try a simple 
+linear interpolation as a check 
+•Brain  - nearest-neighbor is very fast! The Cooper Union for the Advancement of Science and Art 
+Interpolation Summary 
+•You can always find a single polynomial of 
+order n which fits any n+1 data points... 
+○...But if n > 4, you should use a piecewise method 
+•Lagrange (and similar methods) use one 
+polynomial  for entire data set 
+•You can use interpolation  methods to  
+extrapolate , but expect problems ( Why? )
+○Safer to use linear, not higher order ( Why? )
+•We’ll see Lagrange’s Pn(x) again soon... The Cooper Union for the Advancement of Science and Art 
+Summary and Problems 
+●Open Python Numerical Methods, go to 
+Chapter 17.6: Summary and Problems 
+https://pythonnumericalmethods.berkeley.edu
+/notebooks/chapter17.06-Summary-and-Prob
+lems.html 
+●Do problem 1: 
+def my_lin_interp (x, y, X):
+   # returns an array Y containing linear 
+   # interpolation values of data x,y 
+   # for the array of desired inputs X 

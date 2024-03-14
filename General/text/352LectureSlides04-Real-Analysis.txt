@@ -1,0 +1,299 @@
+The Cooper Union for the Advancement of Science and Art 
+ChE352 
+Numerical Techniques for Chemical Engineers 
+Professor Stevenson 
+Lecture 4 The Cooper Union for the Advancement of Science and Art 
+Real Analysis 
+●Properties of functions and series over 
+the real numbers 
+●Formalize ideas 
+about calculus 
+●Vocabulary and 
+notation we'll use 
+for the rest of the 
+course The Cooper Union for the Advancement of Science and Art 
+F&B 1.2: We 💜
+ Continuous Functions 
+Sufficient condition for f to be a continuous function :
+If f is a continuous function of one independent variable 
+on the interval from a to b, we say “ f is in C A B ”:
+ Why are continuous functions useful? The Cooper Union for the Advancement of Science and Art 
+Sequences and Convergence 
+   More "numerical" definition of continuity: 
+If a function f(x) is continuous, a sequence of 
+trial values xn such that xn → x0 will make f( xn) 
+approach f( x0).
+   This means questions about continuous 
+functions can be solved iteratively .
+f is a function taking one real input & giving 
+one real output, and X is also real. The Cooper Union for the Advancement of Science and Art 
+Example: Convergence to a Root 
+A series of guesses xi all have valid f( xi)
+What else is defined for all these 
+guesses xi besides f( xi)?The Cooper Union for the Advancement of Science and Art 
+Derivatives and Differentiability 
+For a scalar function f(x): 
+•If the limit above exists for all x in [a,b], then we 
+say the function f is differentiable  over [a,b] 
+•A function which is differentiable over [a, b] is 
+continuous over [a, b] too ( sufficient condition )
+•f’(x0) is the slope of, aka tangent to, f(x) at x0Lagrange Leibniz Newton Euler The Cooper Union for the Advancement of Science and Art 
+We Like Differentiable Functions 
+•Polynomials  have derivatives of all orders (but most 
+of them are zero) 
+•Sine, cosine, exponential functions have nonzero 
+derivatives of all orders 
+•Rational  (polynomial divided by polynomial) and 
+logarithmic functions have all continuous derivatives 
+too, but careful about their domain 
+•The sum & difference & product of differentiable & 
+continuous functions is differentiable & continuous, 
+but not always the quotient (division). Why? 
+The Cooper Union for the Advancement of Science and Art 
+Is f(Z) continuous? Is it differentiable? 
+Over what domain of Z is f(Z) physically  
+meaningful? Activity: Taking Derivatives 
+Find the derivative of the SRK equation of state 
+with respect to the compressibility factor Z: 
+The Cooper Union for the Advancement of Science and Art 
+Answer: Taking Derivatives 
+Compare to the standard form of the 
+Soave-Redlich-Kwong equation of state. All polynomials are differentiable. f(Z) is 
+physically meaningful for positive real values of 
+Z, because Z is compressibility factor (PV/nRT). 
+Is this differentiable in terms of molar volume Vm?
+'The Cooper Union for the Advancement of Science and Art 
+Numerical Definitions of Integrals 
+The mean of f(x) over [a, b] Area under the 
+curve of f(x) 
+between a and b Discretize x 
+between a and b 
+into n equal slices 
+The Cooper Union for the Advancement of Science and Art 
+Extreme Value Theorem 
+Extreme Value Theorem: if f(x) 
+is continuous on [a, b], there 
+exist points c, d in [a, b] such 
+that f(c) is the maximum of f(x) 
+and f(d) is the minimum. 
+EVT
+We build models (like neural networks) from 
+continuous functions partly to take advantage 
+of the Extreme Value Theorem, which shows 
+such functions can be optimized. The Cooper Union for the Advancement of Science and Art 
+Mean Value Theorem 
+Mean Value Theorem: if f(x) is 
+differentiable on [a, b], point c 
+exists within [a, b] such that f'(c) 
+is exactly the slope of the line 
+between a, f(a) and b, f(b). 
+MVT 
+Used to define the derivative and 
+integral (Fundamental Theorem of 
+Calculus) and to represent any 
+differentiable function in terms of 
+derivatives (Taylor's Theorem) The Cooper Union for the Advancement of Science and Art 
+Taylor’s Theorem 
+•Rn(x) is the “remainder”, ξ(x) is a value on [x0, x]•Estimate f(x) near x0 using only info at point x0
+Linear approximation 
+Quadratic Everything 
+The Cooper Union for the Advancement of Science and Art 
+import numpy as np
+import matplotlib.pyplot  as plt
+x = np.arange(0, np .pi/2, 0.01) 
+sin_x = np .sin(x)
+plt.plot(x, sin_x)
+plt.xlabel('x')
+plt.ylabel('sin(x)' )
+plt.show() 
+What is the first nonzero 
+term of the Taylor Series 
+for sin(x)? Example: approx sin(x)? The Cooper Union for the Advancement of Science and Art 
+import numpy as np
+import matplotlib.pyplot  as plt
+x = np.arange(0, np .pi/2, 0.01) 
+sin_x = np .sin(x)
+plt.plot(x, sin_x)
+plt.xlabel('x')
+plt.ylabel('sin(x)' )
+plt.show() 
+Open Colab and plot the 
+first-order (linear) term of 
+the Taylor Series for sin(x) Example: approx sin(x) up to 𝝅/2The Cooper Union for the Advancement of Science and Art 
+Example: approx sin(x) as x 
+import numpy as np
+import matplotlib.pyplot  as plt
+x = np.arange(0,  np.pi/2, 0.01)
+sin_x = np .sin(x)
+sinish_x = x 
+plt.plot(x, sin_x)
+plt.plot(x, sinish_x) 
+plt.xlabel('x')
+plt.ylabel('sin(x)' )
+plt.show() 
+The Cooper Union for the Advancement of Science and Art 
+Example: approx sin(x) better 
+import numpy as np
+import matplotlib.pyplot  as plt
+x = np.arange(0,  np.pi/2, 0.01)
+sin_x = np .sin(x)
+sinish_x = x - x**3/(3*2) + x**5/(5*4*3*2) 
+plt.plot(x, sin_x)
+plt.plot(x, sinish_x) 
+plt.xlabel('x')
+plt.ylabel('sin(x)' )
+plt.show() 
+The Cooper Union for the Advancement of Science and Art 
+Example: approx sin(x) up to 𝝅
+import numpy as np
+import matplotlib.pyplot  as plt
+x = np.arange(0,  np.pi, 0.01)
+sin_x = np .sin(x)
+sinish_x = x - x**3/(3*2) + x**5/(5*4*3*2) 
+plt.plot(x, sin_x)
+plt.plot(x, sinish_x) 
+plt.xlabel('x')
+plt.ylabel('sin(x)' )
+plt.show() 
+The Cooper Union for the Advancement of Science and Art 
+Example: approx sin(x) up to 2 𝝅
+import numpy as np
+import matplotlib.pyplot  as plt
+x = np.arange(0,  np.pi*2, 0.01)
+sin_x = np .sin(x)
+sinish_x = x - x**3/(3*2) + x**5/(5*4*3*2) 
+plt.plot(x, sin_x)
+plt.plot(x, sinish_x) 
+plt.xlabel('x')
+plt.ylabel('sin(x)' )
+plt.show() 
+The Cooper Union for the Advancement of Science and Art 
+Taylor series error 
+●Like any infinite series 
+approximation, Taylor 
+series suffer from: 
+○Truncation error 
+○Round-off error 
+●Using lots of terms will 
+decrease truncation 
+error, but increase 
+round-off error 
+●Best to keep (x - a) small 
+For any Taylor series of order n, if 
+we know that the (n+1)th derivative 
+f(n+1)(x) ≤ M, we know that the 
+truncation error is bounded by: The Cooper Union for the Advancement of Science and Art 
+Exercise: error bounds 
+For any Taylor series of order n, if 
+we know that the (n+1)th derivative 
+f(n+1)(x) ≤ M, we know that the 
+truncation error is bounded by: 
+Hardest part is finding a bound M on the 
+(n+1)th derivative of our true function f. 
+Sometimes impossible, sometimes easy. 
+What is M in this case? For our 5th-order Taylor 
+approximation of sin(x), 
+x - x3/6 + x5/120, find a 
+bound xb such that truncation 
+error | E5(xb)| ≤ 0.01 The Cooper Union for the Advancement of Science and Art 
+Exercise: error bounds 
+For any Taylor series of order n, if 
+we know that the (n+1)th derivative 
+f(n+1)(x) ≤ M, we know that the 
+truncation error is bounded by: 
+Answer: max of all 
+derivatives of sine & cosine 
+is 1. Here, a = 0 (this Taylor 
+series is centered at zero). 
+Plug in x = xb and solve. 
+For our 5th-order Taylor 
+approximation of sin(x), 
+x - x3/6 + x5/120, find a 
+bound xb such that truncation 
+error | E5(xb)| ≤ 0.01 The Cooper Union for the Advancement of Science and Art 
+Exercise: error bounds 
+For any Taylor series of order n, if 
+we know that the (n+1)th derivative 
+f(n+1)(x) ≤ M, we know that the 
+truncation error is bounded by: 
+Does this still work if 
+we use n = 6? Why? 
+For our 5th-order Taylor 
+approximation of sin(x), 
+x - x3/6 + x5/120, find a 
+bound xb such that truncation 
+error | E5(xb)| ≤ 0.01 The Cooper Union for the Advancement of Science and Art 
+Test the answer in Python 
+x = 1.39  # 5th-order bound xb 
+sinish_x  = x - x**3/(3*2) + x**5/(5*4*3*2)
+sin_x = np.sin( x)
+print(f'True error = {sinish_x  - sin_x:.4f}')
+Open Colab and try this! The Cooper Union for the Advancement of Science and Art 
+Test the answer in Python 
+x = 1.39  # 5th-order bound xb 
+sinish_x  = x - x**3/(3*2) + x**5/(5*4*3*2)
+sin_x = np.sin( x)
+print(f'True error = {sinish_x  - sin_x:.4f}')
+True error = 0.0019 
+(Well below our bound of 0.01) The Cooper Union for the Advancement of Science and Art 
+Test the answer in Python 
+x = 1.75  # 6th-order bound xb 
+sinish_x  = x - x**3/(3*2) + x**5/(5*4*3*2)
+sin_x = np.sin( x)
+print(f'True error = {sinish_x  - sin_x:.4f}')
+True error = 0. 0096
+(Right below our bound of 0.01) The Cooper Union for the Advancement of Science and Art 
+Stability 
+•How can you tell if an approximation is stable ?
+•Try small  perturbations in input (“small” 
+depends on the problem at hand) 
+•If the output changes significantly  (as defined 
+by the problem at hand), you have instability 
+Ariane 5 algorithm was 
+conditionally stable The Cooper Union for the Advancement of Science and Art 
+Exercise: stability bounds 
+sinish_x = x - x**3/(3*2) + x**5/(5*4*3*2) 
+We can still find stability bounds for sinish (x) 
+even if we don't know any bound M on the 
+derivatives of the true function sin( x).
+We only need the change in the known  function 
+sinish (x) with respect to small changes in x.
+The Cooper Union for the Advancement of Science and Art 
+Exercise: stability bounds 
+sinish_x = x - x**3/(3*2) + x**5/(5*4*3*2) 
+Find bounds xb such that, within these bounds, 
+a given change in x always produces an equal 
+or smaller change in sinish (x):
+The Cooper Union for the Advancement of Science and Art 
+?Exercise: stability bounds 
+The Cooper Union for the Advancement of Science and Art 
+Exercise: stability bounds 
+The Cooper Union for the Advancement of Science and Art 
+Exercise: stability bounds 
+Substitute xb for x 
+and the bound 1 
+for dsinish (x)/dx The Cooper Union for the Advancement of Science and Art 
+Safe to divide 
+by xb2 since it is 
+always positive. 
+Within these bounds, 
+the approximation is 
+stable, but is it 
+accurate? (~3.46) Exercise: stability bounds 
+The Cooper Union for the Advancement of Science and Art 
+Safe to divide 
+by xb2 since it is 
+always positive. 
+(~3.46) Exercise: stability bounds 
+Already bad for 
+x > 3.0, but we 
+avoid disaster The Cooper Union for the Advancement of Science and Art 
+Summary and Problems 
+●Open Python Numerical Methods, go to 
+18.4: Summary and Problems 
+●Do problems 2, 4, & 5. For reference: 
+Definition of a 
+Taylor series 
+All reading for next week: writing fast 
+code (PNM 8.1-8.3), root finding (PNM 
+19.1-19.5), convergence (F&B 1.4) 

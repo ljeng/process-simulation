@@ -1,0 +1,268 @@
+222 C H A P T E R 5 Numerical Solution ofInitial -Value Problems
+Forthisreason ,weassume thatthebirth rate(predator )iskyXi(0*2(0-’Thedeath rateofthepredator
+willbetaken assimply proportional tothenumber ofpredators alive atthetime;thatis,death rate
+(predator )=kiX 2(t).
+Since xj(0andxj(0represent thechange intheprey andpredator populations ,respectively ,
+with respect totime ,theproblem isexpressed bythesystem ofnonlinear differential equations
+*J(0=*i*i(0-Mi(0*2(0and*2(0=Mi(0*2(0-*4*2(0.
+UseRunge -Kutta oforder 4forsystems tosolve thissystem for0<t<4,assuming thattheinitial
+population oftheprey is1000 andofthepredators is500 andthattheconstants arek\=3,k2=
+0.002 ,*3=0.0006 .andk4=0.5.Isthere astable solution tothispopulation model ?Ifso,forwhat
+values x\andxzisthesolution stable ?
+6. InExercise 5weconsidered theproblem ofpredicting thepopulation inapredator -prey model .
+Another problem ofthistype isconcerned with twospecies competing forthesame food supply .
+Ifthenumbers ofspecies alive attime taredenoted by*i(/)and xj(/),itisoften assumed that,
+although thebirth raleofeach ofthespecies issimply proportional tothenumber ofspecies alive
+atthattime ,thedeath rateofeach species depends onthepopulation ofbothspecies .Wewillassume
+thatthepopulation ofaparticular pairofspecies isdescribed bytheequations
+=*,(/)[4-0.0003 *,(1)-0.0004 *i(r)]
+and
+dx]{,)=*2(r)[2-0.0002 *,(f)-0.0001 *2(1)).at
+Ifitisknown thattheinitial population ofeach species is10,000,findthesolution tothissystem for
+0<t<4.Isthere astable solution tothispopulation model ?Ifso,forwhat values ofx,andx2is
+thesolution stable ?
+5.8 StiffDifferential Equations
+Stiff systems derive their name
+from themotion ofspring and
+mass systems thathave large
+spring constants .Allthemethods forapproximating thesolution toinitial -value problems have error terms
+thatinvolve ahigher derivative ofthesolution oftheequation .Ifthederivative canbe
+reasonably bounded ,then themethod willhave apredictable error bound thatcanbeused
+toestimate theaccuracy oftheapproximation .Even ifthederivative grows asthestepsizes
+increase ,theerror canbekept inrelative control ,provided that thesolution also grows
+inmagnitude .Problems frequently arise,however ,where themagnitude ofthederivative
+increases ,butthesolution does not.Inthissituation ,theerror cangrow solarge that
+itdominates thecalculations .Initial -value problems forwhich thisislikely tooccur are
+called stifTequations andarequite common ,particularly inthestudy ofvibrations ,chemical
+reactions ,andelectrical circuits .
+Stiff differential equations have anexact solution with aterm oftheform e~c\where
+cisalarge positive constant .This isusually only apartofthesolution ,called thetransient
+solution ;themore important portion ofthesolution iscalled thesteady -state solution .A
+transient portion ofastiff equation willrapidly decay tozeroastincreases ,butsince the
+nthderivative ofthisterm hasmagnitude cne~c\thederivative does notdecay asquickly ,
+andforlarge values ofcitcangrow very large.Inaddition ,thederivative intheerror
+term isevaluated notatf,butatanumber between zero and f,sothederivative terms may
+increase astincreases — andvery rapidly indeed .Fortunately ,stiffequations cangenerally
+bepredicted from thephysical problem from which theequation isderived ,andwith care
+theerror canbekept under control .Themanner inwhich thisisdone isconsidered inthis
+section .
+Copyright 2012 Cengagc Learn in*.AIRights Reserved Mayr*xbecopied.scanned .ocimplicated ,inwhole orinpar.Doctocjectronie lights.some third puny content may besupplied rican theeBook and/orcChapccmi .Editorial review h*>
+deemed Cutanysuppressed content does notmaterial yalTcct theovera’.Ilearning experience .('engage l.cammureserves theright 10remove additional conceal atanytime ifsubsequent nghts restrictions require It5.8 StiffDifferential Equations 223
+Illustration
+Table 5.17Thesystem ofinitial-value problems
+1 4u\=9u\+24J*2+5cos/— -sinf,«i(0)=-
+mJ
+1 2u'2=24MI— 51W2— 9cost+-sinf,«2(0)=^hastheunique solution
+u\(t)=2e~M— e~39t+-cosf,«2(0=—e~3t+2e~39t— 
+^cosf.
+The transient term e~39tinthesolution causes thissystem tobestiff.Applying the
+Runge -Kutta Fourth -Order Method forSystems program RK04SY57gives results listed in
+Table 5.17.When h=0.05,stability results andtheapproximations areaccurate .Increasing
+thestepsizetoh=0.1,however ,leads tothedisastrous results shown inthetable.
+/Exact
+«i(0w'.CO
+h=0.05W|(f)
+h=0.1Exact
+«2(0w2(0
+h=0.05w2(t)
+h=0.1
+0.1 1.793061 1.712219 -2.645169 -1.032001 -0.8703152 7.844527
+0.2 1.423901 1.414070 -18.45158 -0.8746809 -0.8550148 38.87631
+0.3 1.131575 1.130523 -87.47221 -0.7249984 -0.7228910 176.4828
+0.4 0.9094086 0.9092763 -934.0722 -0.6082141 -0.6079475 789.3540
+0.5 0.7387877 9.7387506 -1760.016 -0.5156575 -0.5155810 3520.00
+0.6 0.6057094 0.6056833 -7848.550 -0.4404108 -0.4403558 15697.84
+0.7 0.4998603 0.4998361 -34989.63 -0.3774038 -0.3773540 69979.87
+0.8 0.4136714 0.4136490 -155979.4 -0.3229535 -0.3229078 311959.5
+0.9 0.3416143 0.3415939 -695332.0 -0.2744088 -0.2743673 1390664 .
+1.0 0.2796748 0.2796568 -3099671 .-0.2298877 -0.2298511 6199352 .
+Although stiffness isusually associated with systems ofdifferential equations ,the
+approximation characteristics ofaparticular numerical method applied toastiffsystem can
+bepredicted byexamining theerror produced when themethod isapplied toasimple test
+equation ,
+y'=Ay,with y(0)=or,
+where Aisanegative real number .The solution tothisequation contains thetransient
+solution ektandthesteady -state solution iszero,sotheapproximation characteristics ofa
+method areeasy todetermine .(Amore complete discussion oftheround -offerror associated
+with stiffsystems requires anexamination ofthetestequation when Aisacomplex number
+with negative realpart.)
+One-Step Methods
+Suppose thatweapply Euler ’smethod tothetestequation .Letting h=(b— a)/Nand
+t j— j h yforj=0,1,2,...,N,implies that
+W0=O'
+and,forj=0,1,...,N— 1,
+w j+1=W j+h(k w j )=(1+h k)w j %
+Copyright 2012 Cc«£»fcLearn in*.AIR.(huReversed Mayr*xbecopied ,canned ,oeduplicated.»whole oempan .Doctoelectronic rifhu.vonte third pony content may besuppressed ftem theeBook and/orcCh<xcn»l.Editorial review h*>
+deemed Cut artysuppressed content dees notnuxtlaly afTcct theoverall teamIncexperience .Cenitapc [.camonroenti thenjhtn>remove additional conceal atanytime i!subseqjrnt nphts restrictions require It.224 C H A P T E R 5 Numerical Solution ofInitial-Value Problems
+Illustration
+Table 5.18so
+wj+i=(1+h\y+lwO=(1H-hky+la,forj=0,1 N-1. (5.6)
+Since theexact solution isy(t)=aek\theabsolute error is
+\y(tj)-Wj\m\e*hk-(l+hky 11ori=\(ehy-o+hxy\\a\,
+andtheaccuracy depends onhow well theterm 1+hkapproximates ehk.When A.<0,the
+exact solution ,(ehky ,decays tozero asjincreases ,but,byEq.(5.6),theapproximation
+will have thisproperty only if|1+hk\<1.This effectively restricts thestepsizehfor
+Euler ’smethod tosatisfy|1+/iA.|<1,which inturnimplies thath<2/|A|.
+Suppose now thataround -offerror <$oisintroduced intheinitial condition forEuler ’s
+method ,
+w0=o r+ <50.
+Atthejthstep theround -offerror is
+8j=(l+hX.y8o.
+IfA.<0,thecondition forthecontrol ofthegrowth ofround -offerror,11-h/iA|<1,isthe
+same asthecondition forcontrolling theabsolute error,soweneed tohave h<2/\k\.
+Thetestdifferential equation
+y'=— 30y,0<f<1.5,y(0)=i
+hasexact solution y=je~y0t.Using h=0.1forEuler ’smethod ,theRunge -Kutta method
+oforder 4,andtheAdams Predictor -Corrector method ,gives theresults att=1.5in
+Table 5.18.
+Exact solution 9.54173 x10~21
+Euler ’smethod -1.09225 x104
+Runge -Kutta method 3.95730 x10'
+Predictor -Corrector method 8.03840 x105
+Thesituation issimilar forother one-stepmethods .Ingeneral ,afunction Qexists with
+theproperty thatthedifference method ,when applied tothetestequation ,gives
+wj+i=Q(hk)wj.
+Theaccuracy ofthemethod depends upon how well Q(hk)approximates ehk,andtheerror
+willgrow without bound if\Q(hk)\>1.
+Multistep Methods
+The problem ofdetermining when amethod isstable ismore complicated inthecase of
+multistep methods ,duetotheinterplay ofprevious approximations ateach step.Explicit
+multistep methods tend tohave stability problems ,asdopredictor -corrector methods ,be-
+cause they involve explicit techniques .Inpractice ,thetechniques used forstiffsystems are
+implicit multistep methods .Generally ,w,+iisobtained byiteratively solving anonlinear
+Copyright 2012 Cengagc Learn in*.AIRights Reserved Mayr*xbecopied.scanned .o*implicated ,inwhole orinpar.Doctocjectronie rights.some third pur.ycontent may besupplied rican theeBook and/orcChapccmi .Editorial nesie*h*>
+deemed Cutanysuppressed content does notmaterialy alTcct theioera .1learning experience .('engage Learn ngreserves theright loremove additional conceal atanylimeiisubsequent nghts restrictions require IL5.8 StiffDifferential Equations 225
+equation ornonlinear system ,often byNewton ’smethod .Toillustrate theprocedure ,con-
+sider thefollowing implicit technique .
+Implicit Trapezoidal Method
+w0=a
+Wy+i=W j+ W j)+/(»y+l,W/+,)]
+where j=0,1,...,N— 1.
+Todetermine vvjusing thistechnique ,weapply Newton ’smethod tofindtheroot of
+theequation
+h h0=F(w)=w-w0--[/(f0,w0)+f(tuw)]=w-a--[/(a,or)+f(tuw)].
+Toapproximate thissolution ,select wj0’(usually aswo)andgenerate w[k)byapplying
+Newton ’smethod toobtain
+w<*)=w(k~l)-1 1 =w*~n- 1wi~
+*-g-f[/(a,«)+/(*!,wj~>)]
+Theprogram TRAPNT 58
+implements theImplicit
+Trapezoidal method .until|w{*)-wj*'1)|issufficiently small.Normally only three orfouriterations arerequired .
+Once asatisfactory approximation forwihasbeen determined ,themethod isrepeated to
+find w2andsoon.
+Alternatively ,theSecant method canbeused intheImplicit Trapezoidal method inplace
+ofNewton ’smethod ,butthen twodistinct initial approximations towy+iarerequired .To
+determine these,theusual practice istoletw^,=wyandobtain wj'J,from some explicit
+multistcp method .When asystem ofstiffequations isinvolved ,ageneralization isrequired
+foreither Newton ’sortheSecant method .These topics arcconsidered inChapter 10.
+Illustration Thestiffinitial -value problem
+/=5e5'(y-02+l,0<f<1,y(0)=-l
+hassolution y(t)=t— e~5t.Toshow theeffects ofstiffness ,theImplicit Trapezoidal
+method andtheRunge -Kutta method oforder 4areapplied both with N=4,giving
+h=0.25,andwith N=5,giving h=0.20.
+TheTrapezoidal method performs well inboth cases using amaximum of10iterations
+perstepandTO L=10“ 6,asdoes Runge -Kutta with h=0.2.However ,h=0.25isoutside
+theregion ofabsolute stability oftheRunge -Kutta method ,which isevident from theresults
+inTable 5.19.
+Copyright 2012 Cengagc Learn in*.AIRights Reserved Mayr*xbecopied.scanned .ocimplicated ,inwhole orinpar.Doctocjectronie rights.some third pur.ycontent may besupplied rican theeBook and/orcChapccmi .Editorial review h*>
+deemed Cutanysuppressed content does notmaterial yalTcct theioera .1learning experience .('engage [.cammureserves theright 10remove additional conteatatanytime ifsubsequent rights restrictions require It.226 C H A P T E R 5 Numerical Solution ofInitial-Value Problems
+Table 5.19Runge-Kutta Method Trapezoidal Method
+/i=0.2
+W/ l>(0“ W i l/i=0.2
+vv, y(t,)-vv,
+0.0 -1.0000000 0 -1.0000000 0
+0.2 -0.1488521 1.9027 x10"2-0.1414969 2.6383 xlO"2
+0.4 0.2684884 3.8237 xltT30.2748614 1.0197 x10"2
+0.6 0.5519927 1.7798 x10-30.5539828 3.7700 xlO"3
+0.8 0.7822857 6.0131 x10-40.7830720 1.3876 x10~3
+1.0 0.9934905 2.2845 xlO"40.9937726 5.1050 x10^
+h=0.25 h=0.25
+h WO-wi\ W*/)-wi\
+0.0 -1.0000000 0 -1.0000000 0
+0.25 0.4014315 4.37936 x1010.0054557 4.1961 x10~2
+0.5 3.4374753 3.01956 x10" 0.4267572 8.8422 x10~3
+0.75 1.44639 x1023 1.44639 x1023 0.7291528 2.6706 x10~3
+1.0 Overflow 0.9940199 7.5790 x104
+MATLAB hasspecific routines tosolve stiffsystems .Tousethevariable order multistep
+method ode15stosolve thestiffsystem intheIllustration atthebeginning ofthesection :
+1 4u\=9u\+24«2+5cos/— -sin/, u j(0)=— ,
+1 2«2=-24«!51W2— 9cosr+-sinf,«2(0)=J J
+wefirstdefine theright-hand sideofthesystem bycreating anM-filecalled FI.m.
+function dy=F l(t,y)
+dy=zeros (2,1);
+dy(l)=9*y(l)+24*y(2)+5*cos(t)-sin(t)/3;
+dy(2)=-24*y(l)-51*y(2)-9*cos(t)+sin(t)/3;
+andmake FI.mknown toMATLAB with
+F3=QF1
+Theinitial conditions wi(0)=4/3and«2(0)=2/3aredefined by
+ylO =4/3,y20=2/3
+andthetvalues where wewant theapproximations by
+tspan =[00.1 0.2 0.30.4 0.5 0.6 0.7 0.8 0.91.0]
+TheMATLAB response to
+[T,YY]=odel 5s(F3,tspan ,[ylO y20])
+gives thetvalues inthearray Tandinthearray YYaretheapproximations to«i(/)inthe
+firstcolumn andto«2(0inthesecond .
+Copyright 2012 Cc«£»fcLearn in*.AIRighb Rescued May n«becopied. canned .ocduplicated .»whole oempan .Doc 10electronic rights.some third pony content may besuppressed rrom theeBook and/orcChapccrtM .Editorial roiew h*>
+deemed Cutany suppic-cdcontent dees notmaterial yalTect theoverall Icamir*experience .C'enitasc[.camon reserves thety-ht10nenxyve additional conceal atanytimeiisubseqjroi rights restrictions require It5.9 Survey ofMethods andSoftware 227
+T=0
+O.IOOOOOOOOOOOOOO
+0.200000000000000
+0.300000000000000
+0.400000000000000
+0.500000000000000
+0.600000000000000
+0.700000000000000
+0.800000000000000
+0.900000000000000
+1.000000000000000and Y Y=1.333333333333333
+1.792822173096780
+1.423841705229490
+1.131606544984823
+0.909737405881405
+0.739488715596804
+0.606600245598731
+0.500693300085545
+0.414374560936528
+0.342214086384561
+0.2801236383874670.666666666666667
+-1.031510588260698-0.874543162822479
+-0.725026524390037-0.608356645400698-0.515984454184929
+-0.440862764215503-0.377829713594847-0.323304488389232-0.274706988032098-0.230112384428887
+EXERCISE SET 5.8
+l.
+2.
+3.
+4.
+5.
+6.Solve thefollowing stiffinitial -value problems using Euler ’smethod andcompare theresults with
+theactual solution .
+a./=— 9y,for0<t<1,with y(0)=eandh=0.1;actual solution y(t)=ex~91.
+b.y'=— 20(y— r)4-2/,for0<t<1,with y(0)=Jandh=0.1;actual solution
+y(t)=f2+
+^e-20'.
+c./=— 20y+20sin (+cos/,for0</<2,with y(0)=1andh=0.25;actual solution
+y(t)=sinf+e-20f.
+50^ d.y' 50y,for0<t<1,with y(0)=V2andh=0.1;actual solution y(t)=
+(1+e~,00,),/2.
+Repeat Exercise 1using theRunge -Kutta Fourth -Order method .
+Repeat Exercise 1using theAdams Fourth -Order Predictor -Corrector method .
+Repeat Exercise 1using theTrapezoidal method with atolerance of10“ 5.
+TheBackward Euler One-Step method isdefined by
+wi+i=w,-f/i/(f1+i,wl+i)fori=0,1 N-1.
+Repeat Exercise 1using theBackward Euler method incorporating Newton ’smethod tosolve for
+W|+l.
+Thedifferential equation
+dpjt )
+dtrb{1-p{t))
+canbeused asamodel forstudying theproportion pit)ofnonconformists inasociety whose birth
+rateisb,andwhere rrepresents therateatwhich anoffspring becomes nonconformist when atleast
+oneoftheparents isaconformist .UsetheTrapezoidal method tofindanapproximation forpi50)
+when pi0)=0.01 ,b=0.02 ,r=0.1,andttakes ontheintegral values from 1to50.
+5.9 Survey ofMethods andSoftware
+Inthischapter wehave considered methods toapproximate thesolutions toinitial -value
+problems forordinary differential equations .Webegan with adiscussion ofthemost elemen -
+tarynumerical technique ,Euler ’smethod .This procedure isnotsufficiently accurate tobe
+ofuseinapplications ,butitillustrates thegeneral behavior ofthemore powerful techniques ,
+without theaccompanying algebraic difficulties .TheTaylor methods were thenconsidered
+Copyright 2012 Cc«£»fcLearn in*.AIR.(huReversed May r*xbecopied ,canned ,ocdaplicated.»whole oempan .Doc toelectronic rifhu .vonte third pony content may besuppressed ftem theeBook and/orcClupccnM .Editorial roiew h*>
+deemed Cutanysuppressed content dees notimxttaly alTect theoverall leamir*experience .Ccri|tape[.camon roentt theRTPLTTK >renxyve additional conceal atanytimeiisubsequent rights restrictions require It

@@ -1,0 +1,1150 @@
+C H A P T E R
+1 Mathematical Preliminaries
+andErrorAnalysis
+1.1 Introduction
+This book examines problems thatcanbesolved bymethods ofapproximation ,techniques
+called numerical methods .Webegin byconsidering some ofthemathematical andcom-
+putational topics thatarise when approximating asolution toaproblem .Nearly allthe
+problems whose solutions canbeapproximated involve continuous functions ,socalculus
+istheprincipal tooltouseforderiving numerical methods andverifying thatthey solve the
+problems .Thecalculus definitions andresults included inthenextsection provide ahandy
+reference when these concepts areneeded later inthebook.
+There aretwothings toconsider when applying anumerical technique .The firstand
+most obvious istoobtain theapproximation .The equally important second objective is
+todetermine asafety factor fortheapproximation :some assurance ,oratleast asense ,of
+theaccuracy oftheapproximation .Sections 1.3and1.4deal with astandard difficulty that
+occurs when applying techniques toapproximate thesolution toaproblem :
+ Where andwhy iscomputational error produced andhow canitbecontrolled ?
+Thefinal section inthischapter describes various types andsources ofmathematical software
+forimplementing numerical methods .
+1.2 Review ofCalculus
+Limits andContinuity
+The limit ofafunction ataspecific number tells,inessence ,what thefunction values
+approach asthenumbers inthedomain approach thespecific number .Thelimit concept is
+basic tocalculus ,andthemajor developments ofcalculus were discovered inthelatter part
+oftheseventeenth century ,primarily byIsaac Newton andGottfried Leibnitz .However ,it
+wasnotuntil 200years later thatAugustus Cauchy ,based onwork ofKarl Weierstrass ,first
+expressed thelimit concept intheform wenow use.
+Wesaythatafunction /defined onasetXofrealnumbers hasthelimit Lat*o,written
+lim^^^,/(x)=L,if,given anyrealnumber e>0,there exists arealnumber 8>0such
+that\f(x)— L\<ewhenever 0<\x— *ol< <$ This definition ensures thatvalues ofthe
+function willbeclose toLwhenever xissufficicndy close toJCQ.(SeeFigure 1.1.)
+1
+O.'pyrijj'tt20I2Cenjjayc Lcirrii /AIRjihuReserved May notbecopied Manned orduplicated towhole ortopan.Doctoelectronic rifhu.**ncthird party content nu>besupprcsied riom theeBook and/oreCh<xemi .Editorial review h*>
+deemed thatanyxipprecxd content dee *,not i*uxtia:'.>affect theoverall Icamir .actpcncncc Ceityape Leaning roervev theright toremose additional contort atanytime ifvubvcijjcni nphre restrictions require it.2 C H A P T E R 1 Mathematical Preliminaries andError Analysis
+Figure 1.1
+y
+-1
+L+'-ss
+L!L /i/i/i
+i. i
+i
+i
+i
+i!
+x0-Sx o X g+6 x
+Afunction issaid tobecontinuous atanumber initsdomain when thelimit atthe
+number agrees with thevalue ofthefunction atthenumber .Soafunction /iscontinuous
+atX Qiflim,^f(x)=f(x0).
+Afunction /iscontinuous onthesetXifitiscontinuous ateach number inX.We
+useC(X)todenote thesetofallfunctions thatarecontinuous onX.When Xisaninterval
+oftherealline,theparentheses inthisnotation areomitted .Forexample ,thesetofall
+functions thatarecontinuous ontheclosed interval [a,b]isdenoted C[a,b].
+Thelimit ofasequence ofrealorcomplex numbers isdefined inasimilar manner .An
+infinite sequence {x„ }jjijconverges toanumber *if,given anye>0,there exists apositive
+integer N(e)such that \x„— x\<ewhenever n>N(e).Thenotation lim^ocx„=x,or
+x n-xasn-oo,means thatthesequence {x,,}^converges tox.
+Continuity andSequence Convergence
+If/isafunction defined onasetXofrealnumbers andxoeX,then thefollowing are
+equivalent :
+a./iscontinuous atXQ.
+b.If isanysequence inXconverging toxo,then
+lim/(*„ )=f(x0).n-*oo
+Allthefunctions weconsider when discussing numerical methods arecontinuous
+because thisisaminimal requirement forpredictable behavior .Functions thatarenot
+continuous canskipover points ofinterest ,which cancause difficulties when weattempt
+toapproximate asolution toaproblem .
+More sophisticated assumptions about afunction generally lead tobetter approxima -
+tion results .Forexample ,afunction with asmooth graph would normally behave more
+predictably than would onewith numerous jagged features .Smoothness relies onthecon-
+cept ofthederivative .
+Copyright 2012 Cengagc Learn in*.AIRights Reserved May r*xbecopied .scanned .orimplicated ,inwhole orinpar.Doc tocjectronie rights .some third puny content may besupplied rican theeBook and/orcChapccmi .Editorial review h*>
+deemed Cutanysuppressed content does notmaterialy alTcct theoverall learning experience .('engage Learning reserves theright 10remove additional conceal atanytime ifsubsequent nghts restrictions require It.1.2 Review ofCalculus 3
+Differentiability
+If/isafunction defined inanopen interval containing xo,then/isdifferentiable atx0
+when
+/'(*o)=lim/(*)-/(xo)
+X— Xo
+exists .The number f'(xo)iscalled thederivative of/atxo.The derivative of/atxois
+theslope ofthetangent linetothegraph of/at(XQ,/(xo)),asshown inFigure 1.2.
+Figure 1.2
+yi
+The tangent linehasslope/'(XQ)
+f(xo)/(XQ)) y— y(*)
+Xo x
+Afunction thathasaderivative ateach number inasetXisdifferentiable onX.
+Differentiability isastronger condition onafunction than continuity inthefollowing
+sense.
+Differentiability Implies Continuity
+Ifthefunction /isdifferentiable atxo,then/iscontinuous atXQ.
+Thesetofallfunctions thathave ncontinuous derivatives onXisdenoted C"(X),and
+thesetoffunctions thathave derivatives ofallorders onXisdenoted C00(X).Polynomial ,
+rational ,trigonometric ,exponential ,and logarithmic functions areinC^CX),where X
+consists ofallnumbers atwhich thefunction isdefined .
+Thenextresults areoffundamental importance inderiving methods forerror estimation .
+Theproofs ofmost ofthese canbefound inanystandard calculus text.
+Mean Value Theorem
+If/ C[a,b]and/isdifferentiable on(a,b),then anumber cin(a,b)exists such
+that(seeFigure 1.3)
+f\c)m-m
+b— a
+Copyright 2012 Cenfajc Learn in*.AIRights Reversed Mayr*xbecopied.scanned .ocimplicated ,inwhole orinpar.Doctocjectronie rtghtv.some third pur.ycontent may besupplied rican theeBook and/orcChaptcnM .Editorial review h*>
+deemed Cutanysuppressed content does notnuxtlaly alTcct theoverall learning experience .Ccagagc [.camonreserves theright 10remove additional eonteatatanytime ifsubsequent rights restrictions require It4 C H A P T E R 1 Mathematical Preliminaries andError Analysis
+Figure 1.3
+y
+Slope/'(c)
+Slopeb-aParallel lines
+y=m
+m-m
+a c b x
+Thefollowing result isfrequently used todetermine bounds forerror formulas .
+Extreme Value Theorem
+If/ C[a,b],thenc\andciin[a,b]exist with f(c\)<f(x)<f(ci)forallxin
+[a,b].If,inaddition ,/isdifferentiable on(a,b),then thenumbers c\andcioccur
+either atendpoints of[a,b]orwhere/'iszero.
+Thevalues where acontinuous function hasitsderivative 0orwhere thederivative does
+notexist arecalled critical points ofthefunction .SotheExtreme Value Theorem states
+thatamaximum orminimum value ofacontinuously differentiable function onaclosed
+interval canoccur only atthecritical points ortheendpoints .
+Ourfirstexample gives some illustrations ofapplications oftheExtreme Value Theorem
+andMATLAB .
+Example 1UseMATLAB tofindtheabsolute minimum andabsolute maximum values of
+f(x)=5cos2x-2xsin2x
+ontheintervals (a)[1,2],and(b)[0.5,1].
+Solution The solution tothis problem isone thatiscommonly needed incalculus .It
+provides agood example forillustrating some commonly used commands inMATLAB
+andtheresponse tothecommands thatMATLAB gives.Inourpresentations ofMATLAB
+material ,input statements appear left-justified using atypewriter -like font.Toadd
+emphasis totheresponses from MATLAB ,these appear centered andincyan type.
+Forbetter readability ,wewilldelete the»symbols needed forinput statements as
+wellastheblank lines from MATLAB responses .Other than these changes ,thestatements
+willagree with thatofMATLAB .
+Thefollowing command defines f(x)=5cos2x— 2xsin2xasafunction ofx.
+f*inline (,5*cos(2*x)-2*x*sin(2*x)*,*x*)
+Copyright 2012 Cenfajc Learn in*.AIR.(huRocncd Mayr*xbecopied.v.'aitned.orimplicated ,inwhole ormpart.Doctocjectronie rifhu.*wcthird pur.ycontent may besupplied rican theeBook and/orcChaptcnM .Editorial roiew h*>
+deemed CutanyMpprcucd content does nottnaxrUXy alTcct theoverall Icarmr .itexperience .Ceagage [.camonroenn theright K>rcnxyve additional conteatatanytime ifsubvoyjem nghtc mtrictinna require It1.2 Review ofCalculus 5
+andMATLAB responds with (actually ,theresponse isontwoseparate lines,butwewill
+compress theMATLAB responses ,here andthroughout )
+Inline function :f(x)=5*cos(2*x)— 2*x*sin(2*x)
+Wehave now defined ourbase function /(*).Thexinthecommand indicates thatxisthe
+argument ofthefunction /.
+Tofindtheabsolute minimum andmaximum values off(x)onthegiven intervals ,we
+also need itsderivative /'(*),which is
+f'(x)=— \2sm2x— 4xcos2x.
+Then wedefine thefunction fp(x)=f'(x)inMATLAB torepresent thederivative with
+theinline command
+fp=inline(*-12*sin(2*x)-4*x*cos(2*x)*,’x’)
+Bydefault ,MATLAB displays only afive-digit result ,asillustrated bythefollowing com-
+mand which computes /(0.5):
+f(0.5)
+Theresult from MATLAB is
+ans=1.8600
+Wecanincrease thenumber ofdigits ofdisplay with thecommand
+formatlong
+Then thecommand
+f(0.5)
+produces
+ans=1.860040544532602
+Wewill usethisextended precision version ofMATLAB output intheremainder ofthe
+text.
+(a)The absolute minimum andmaximum ofthecontinuously differentiable function /
+occur only attheendpoints oftheinterval [1,2]oratacritical point within thisinterval .
+Weobtain thevalues attheendpoints with
+f(1),f(2)
+andMATLAB responds with
+ans=-3.899329036387075 ,ans=-0.241008123086347
+Todetermine critical points ofthefunction /,weneed tofindzeros off'(x).Forthiswe
+usethefzero command inMATLAB :
+p=fzero (fp,[1,2])
+Copyright 2012 Cc«£»fcLearn in*.AIR.(huReversed Mayr*xbecopied ,canned ,o*duplicated.»whole o tmpan .Doctoelectronic rifhu.vomc third pony content may besupposed ftem theeBook and/orcCh<xcn»l.Editorial roiew h*>
+deemed Cutanyvuppicwed content dee>notimxttaly alTect theoverall Icamir .itexperience .Ccitit apeLearn xiprexxvev therljtlu lorenxyve additional conceal atanytime i ivutoeqjrni nghtv rotrictionv require It.6 C H A P T E R 1 Mathematical Preliminaries andError Analysis
+andMATLAB responds with
+p=1.358229873843064
+Evaluating /atthissingle critical point with
+f(p)
+gives
+ans— — 5.675301337592883
+Insummary ,theabsolute minimum andabsolute maximum values off(x)ontheinterval
+[1,2]areapproximately
+/(1.358229873843064 )=-5.675301337592883 and/(2)=-0.241008123086347 .
+(b)When theinterval is[0.5,1]wehave thevalues attheendpoints given by
+/(0.5)=5cos1-1sin1=1.860040544532602 and
+/(1)=5cos2-2sin2=-3.899329036387075 .
+However ,when weattempt todetermine critical points intheinterval [0.5,1]with the
+command
+pi=fzero (fp,[0.51])
+MATLAB returns theresponse
+???Error using==>fzero at293
+This indicates thatMATLAB could notfindasolution tothisequation ,which isthecorrect
+response because /isstrictly decreasing on[0.5,1]andnosolution exists.Hence the
+approximate absolute minimum andabsolute maximum values ontheinterval [0.5,1]are
+/(1)=-3.899329036387075 and/(0.5)=1.860040544532602 .
+Thefollowing fivecommands plot thefunction ontheinterval [0.5,2]with titles for
+thegraph andaxes onagrid.
+fplot (f,[0.5 2])
+title ('Plot off(x)*)
+xlabel ('Values ofx')
+ylabelC 'Values off(x)')
+grid
+Figure 1.4shows thescreen thatresults from these commands .They confirm theresults
+weobtained inExample 1.Thegraph isdisplayed inawindow thatcanbesaved inavariety
+offorms foruseintechnical presentations .
+Copyright 2012 Cengagc Learn in*.AIRights Reserved May r*xbecopied.scanned .ocimplicated ,inwhole orinpar.Doctocjectronie rights.some third pur.ycontent may besupplied rican theeBook and/orcChapccmi .Editorial review h*>
+deemed Cutanysuppressed content does notmaterialy alTcct theoverall learning experience .('engage l.cammu reserves theright 10remove additional conceal atanytime ifsubsequent rights restrictions require It.1.2 Review ofCalculus 7
+Figure 1.4
+Plotof/(x)
+2
+I
+0
+iS-l
+"-2s.U-zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA3-3>
+-4
+-5
+1 1.5
+Values ofx2
+Thenext result istheIntermediate Value Theorem .Although itsstatement isnotdiffi-
+cult,theproof isbeyond thescope oftheusual calculus course .
+Intermediate Value Theorem
+If/6C[a,b]and Kisanynumber between /(a)and f(b),then there exists anumber
+cin(a,b)forwhich/(c)=K.(Figure 1.5shows oneofthethree possibilities forthis
+function andinterval .)
+Figure 1.5
+yi
+(«./(«))
+f(a)-
+Kii iAiiiL
+m1 \i v
+(bjm
+— i— !1
+a c bx
+Example 2Show thatx5— 2x3+3x2— 1=0hasasolution intheinterval [0,1].
+Solution Consider thefunction defined by/(x)=x5— 2x3+3x2— 1.Thefunction /is
+continuous on[0,1].Inaddition ,
+/(0)=-1<0 and 0<1=/(1).
+Copyright 2012 Cc«£»fcLearn in*.AIRifhb Rocncd May rotbecopied ,canned ,ocdaplicated.»whole oempan .Doc 10electronic rifhu.*wtethird pony content may besuppressed rrom theeBook and/orcCh<xcn»l.Editorial toiew h*>
+deemed Cutanysuppressed content dees notimxttaly alTcct theoverall Icamir*experience .C'cnpape[.camon reserves thety-ht10remote additional conceal atanytimeiisubvoyjem nRhts restrictions require It8 C H A P T E R 1 Mathematical Preliminaries andError Analysis
+TheIntermediate Value Theorem implies thatanumber xexists in(0,1)withx5— 2x3+
+3x2— 1=0. u
+Asseen inExample 2,theIntermediate Value Theorem isused tohelpdetermine when
+solutions tocertain problems exist.Itdoes not,however ,giveanefficient means forfinding
+these solutions .This topic isconsidered inChapter 2.
+Integration
+The integral istheother basic concept ofcalculus .TheRiemann integral ofthefunction
+/ontheinterval [a,b]isthefollowing limit ,provided itexists :
+[f(x)d x= limVf(n)AxitJa maxAx,-+0^where thenumbers XQ,XJ, xnsatisfy a=xo<x\<    <xn=band where
+Ax,=x,— x,_
+i,foreach i=1,2 n,andz,isarbitrarily chosen intheinterval
+[**'— 1>%i] 
+Afunction /thatiscontinuous onaninterval [a,b]isalso Riemann intcgrablc on
+[a,b\.This permits ustochoose ,forcomputational convenience ,thepoints x,tobeequally
+spaced in[a,b]andforeach i=1,2,...,n,tochoose z,=x,.Inthiscase,
+fJ a/(*)dx=nb— alim V/(*.),
+oon'i=i
+where thenumbers shown inFigure 1.6asx,arcx,=a+(i(b-a)/n).
+Figure 1.6
+y,
+/7N>
+7-/w/
+a=xox,x2...x,.,x,... x„ _
+ib— xn x
+Two more basic results areneeded inourstudy ofnumerical methods .The firstisa
+generalization oftheusual Mean Value Theorem forIntegrals .
+Mean Value Theorem forIntegrals
+If/eC[a,b],gisintegrable on[a,b]tandg(x)does notchange sign on[a,b]tthen
+there exists anumber cin(a,b)with
+[f(x)g(x)d x=/(c)fg(x)dx.
+J a J a
+Copyright 20I2C««cLearn in*.AIRights Reversed May notbecopied ,canned ,o*dedicated .inwhole orinpar.Doc toelectronic tights .some third pur.ycontent may besuppreved rrom sheeBook and/orcChapcerOri .Editorial review h*>
+deemed Cutanysuppressed content does notmaterial yalTcct theioera'.llearning experience .('engage [.cammereserves theright K>remove additional conteat atanytime ifsubsequent rights restrictions require IL1.2 Review ofCalculus 9
+When g(x)=1,thisresult reduces totheusual Mean Value Theorem forIntegrals .It
+gives theaverage value ofthefunction /over theinterval [a,b]as
+1 [b
+/(c)=7/f(x)dx.b-aJa
+(SeeFigure 1.7.)
+Figure 1.7
+y-
+=/Mj/(c)-
+1
+1
+1
+1
+1
+c C £ X
+Taylor Polynomials andSeries
+Thefinal result inthisreview from calculus describes thedevelopment oftheTaylor polyno -
+mials .Theimportance oftheTaylor polynomials tothestudy ofnumerical analysis cannot
+beoveremphasized ,andthefollowing result isused repeatedly .
+Taylor 'sTheorem
+Suppose / Cn[a,b]and/("+1)exists on[a,b].Letxobeanumber in[a,b].For
+every xin[a,b],there exists anumber £(x)between xoandxwith
+/(x)=P„ (x)+Rn(x),
+where
+F„ (x)=/(x0)+/'(*0)(x-*o)+ ~xo)2+ **+*-fo\x-x0)"2! n!I
+= -*<>)*k\
+and
+f^Hm ), ,„ +1RAX )~(n+1)!(X X0)
+Here Pn(x)iscalled thenthTaylor polynomial for/about xo,and Rn(x)iscalled
+thetruncation error (orremainder term )associated with Pn(x).Thenumber £(x)inthe
+truncation error R„(x)depends onthevalue ofxatwhich thepolynomial Pn(x)isbeing
+evaluated ,soitisactually afunction ofthevariable x.However ,weshould notexpect to
+Copyright 2012 Cc«£»fcLearn in*.AIRighb Rocncd May notbecopied .N.anncil .ocdaplicated.»whole oempan .Doc 10electronic itfhu .*wtethird pony content may besuppreved Tiom theeBook and/wcCh<xcn»l.Editorial roiew h*>
+deemed*»aiany Mjppic-cdcement dee>nottmxtlaly alTect theoverall lcamir«experience .Cent!ape[.camon roervei theright loremote additional conceal atanytime ifsubvoyjeM nght »rotrictionc requite IL10 C H A P T E R 1 Mathematical Preliminaries andError Analysis
+Brook Taylor (1685-1731 )
+described thisseries in1715 in
+thepaper Methodus
+incrementorum directa etinverse .
+Special cases oftheresult ,and
+likely theresult itself,hadbeen
+previously known toIsaac
+Newton ,James Gregory ,and
+others .b eable toexplicitly determine thefunction £(*).Taylor ’sTheorem simply ensures that
+such afunction exists ,andthatitsvalue liesbetween xand XQ.Infact,oneofthecommon
+problems innumerical methods istotrytodetermine arealistic bound forthevalue of
+y(#»+1>(£(*))forvalues ofxwithin some specified interval .
+The infinite series obtained bytaking thelimit ofPn{x)asn-ociscalled theTaylor
+series for/about XQ.The term truncation error intheTaylor polynomial refers tothe
+error involved inusing atruncated (thatis,finite )summation toapproximate thesumofan
+infinite series .
+Inthecase x0=0,theTaylor polynomial isoften called aMaclaurin polynomial ,
+andtheTaylor series iscalled aMaclaurin series .
+Example 3Letf(x)=cos*and X Q=0.Determine
+(a)thesecond Taylor polynomial for/about xo;and
+(b)thethird Taylor polynomial for/about JCO-
+Solution Since/C°°(R),Taylor ’sTheorem canbeapplied foranyn>0.Also ,
+f\x)=— sin*,/"(*)=— cos*,/"'(*)=sinx ,and/(4)(x)=COSJC ,
+so
+/(0)=1,/'(0)=0,/"(0)=-1,and/"'(0)=0.
+(a)Forn=2and X Q=0,wehave
+cos*=/(0)+/'(0)*+@*2+0*^3
+2! 3!
+1,1,._
+=1-r*+z xsm£(x),2 o
+where f(x)issome (generally unknown )number between 0andx.(SeeFigure 1.8.)
+Figure 1.8
+y
+-
+I
+^y=cosx
+7Tyf 71
+2/y 2
+— zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA1T // \\ 7T X
+y=P2(x)=1-£*2
+When x=0.01 ,thisbecomes
+cos0.01=1-
+^(0.01)2+*(0.01 )3sin£(0.01 )2 60.99995 + sin£(0.01).6
+Copyright 2012 Cc«£»fcLearn in*.AIRights Reserved .May r*xbecopied ,scanned ,ordaplicated.»whole ormpan .Doc 10electronic rights .some third pony content may besuppressed riom sheeBook and/orcClupccmi .Editorial review has
+deemed Cutanysuppressed content decs notimxtlaly alTcct theiAera'.llearning experience .Ceng ageLearning reserves theright »oremove additional conceal atanytimeiisubsequent rights restrictions require IL1.2 Review ofCalculus 11
+Theapproximation tocos0.01 given bytheTaylor polynomial istherefore 0.99995 .The
+truncation error,orremainder term,associated with thisapproximation is
+sinf (O.Ol)=0.16 x10-6sin|(0.01),6
+where thebarover the6in0.16 isused toindicate that thisdigit repeats indefinitely .
+Although wehave noway ofdetermining sin§(0.01 ),weknow thatallvalues ofthesine
+lieintheinterval [-1,1],soabound fortheerror occurring ifweusetheapproximation
+0.99995 forthevalue ofcos0.01 is
+|cos(0.01)-0.999951 =0.16 x10~6|sin$(0.01)|<0.16 x10~6.
+Hence theapproximation 0.99995 matches atleast thefirstfivedigits ofcos0.01,and
+0.9999483 <0.99995 -1.6x10“ 6<cos0.01
+<0.99995 +1.6x1(T6<0.9999517 .
+Theerror bound ismuch larger than theactual error.This isdueinparttothepoor
+bound weused for|sin§(*)|.Itisshown inExercise 16thatforallvalues ofx,wehave|sinx|<|x|.Since 0<§<0.01 ,wecould have used thefactthat|sin§(x)|<0.01 inthe
+error formula ,producing thebound 0.16 x10“ 8.
+(b)Since/'"(0)=0,thethird Taylor polynomial with remainder term about xo=0has
+nor3term.Itis
+cos*=1— 
+^x2+^*4cosf (*),
+where 0<§(*)<0.01.The approximating polynomial remains thesame ,andtheap-
+proximation isstill 0.99995 ,butwenow have much better accuracy assurance .Since|COS§(JC)|<1forallx,wehave
+^*4cosf (*)<-
+^(0.01)4(1)*4.2 X1(T10.
+So
+|cos0.01-0.999951 <4.2x10-,°,
+and
+0.99994999958 =0.99995 -4.2x10"10
+<cos0.01 <0.99995 +4.2x10'10=0.99995000042 .
+Example 3illustrates thetwobasic objectives ofnumerical methods :
+ Find anapproximation tothesolution ofagiven problem .
+ Determine abound fortheaccuracy oftheapproximation .
+Thesecond andthird Taylor polynomials gave thesame result forthefirstobjective ,butthe
+third Taylor polynomial gave amuch better result forthesecond objective .
+Copyright 2012 Cc«£»fcLearn in*.AIR.phtsReserved .May notbecopied ,scanned ,ordaplicated.»whole ormpan .Doe 10electronic rights ,some third pony content may besuppressed riom sheeBook and/orcClupccrtsl .Editorial tesiew h*>
+deemed Cutanysuppressed cement decs notimxttaly alTect theoverall lcamir«experience .C'cnitapc Learn opreserves thert|>httoremove additional conceal atanytimeiisubsequent rights restrictions require IL12 C H A P T E R 1 Mathematical Preliminaries andError Analysis
+Illustration Wecanalsousethethird Taylor polynomial anditsremainder term found inExample 3to
+approximate J*001cos*d x.Wehave
+={‘-ix,}yhrx ‘mHx )i‘
+l lf0-1
+=0.1--(0.1)3+— *4cosf (jr)dx.
+Therefore
+1/ U.l
+/cosxdx*0.1-2(0.1)3=0.09983 .
+Jo O
+Abound fortheerror inthisapproximation isdetermined from theintegral oftheTaylor
+remainder term andthefactthat|cosf (x)|<1forallx:
+cosf (*)d x x4|cos£(x)|</x
+<-F'x^J x-(0'1)5
+— 8T-;10-8-24JoX X120X
+The truevalue ofthisintegral is
+fcosxdx=sinxo.i
+0sin0.1 %0.099833416647 ,
+sotheactual error forthisapproximation is8.3314 x108,which iswithin theerror
+bound .
+MATLAB canbeused toobtain these results byfirst defining f(x)=cos*andthe
+second Taylor polynomial T2(x)m7*2(x)=1— \x2with
+f=inline(*cos(x)*,’x*)
+T2=inline(,1-0.5.x.''2Vx’)
+Thenextcommands evaluate /at0.01,72at0.01 andcompute theerror inapproximating
+cos(0.01 )with the72(0.01 ).
+yl-f(0.01),y2=T2(0.01),errl=abs(yl-y2)
+giving
+yl=0.999950000416665 ,y2=0.999950000000000 ,
+errl=4.166652578518892*-010
+Toobtain agraph similar toFigure 1.8requires creating anM-filewhich canload more
+than onecommand atatime.Weneed thisinorder todefine both f(x)andT2(x)ifwe
+want toplotthem both onthesame graph.
+Copyright 2012 Cengagc Learning .AIRights Reserved .May notbecopied ,scanned ,ctduplicated .inwhole orinp«.".Doctocjectronie rights.some third pur.ycontent may besuppressed rrom theeBook and/oreChaptcnnl .Editorial review h*>
+deemed Cutanysuppressed content dees nottnaxrUXy alTcet theoverall Icamir .itexperience .Catfage [.camonreserves theright 10remove additional conteatatanytime ifsubsequent rights restrictions require It.1.2 Review ofCalculus 13
+An M-fileiscreated byselecting File ontheMATLAB toolbar .Then select New
+andScript .The three statements areentered and theresult issaved asafilenamed
+ourfunctionl .The M-fileconsists ofthefollowing commands :
+functionY=ourfunctionl(x)
+Y(:,l)=cos(x(:));
+Y(:,2)=l-0.5.*x(:).~2;
+From theworksheet ,weneed toenter thefollowing command tocreate areference to
+thefunction M-file:
+fh=Qourfunctionl
+Theresponse from MATLAB is
+fh=@ourfunctionl
+Thegraph shown inFigure 1.9canthen becreated with thecommands
+fplot(fh,[-pi pi])
+grid
+Figure 1.9
+l
+0.5
+0
+0.5
+-1
+1.5
+-2
+2.5
+-3
+3.5
+-40-3-2 2 3 -1 1
+Wecanalso compute theintegrals of/(x)andtheTaylor polynomial Ti{x)onthe
+interval [0,0.1]using MATLAB .Weusethecommands
+ql=quad(’cos(x)*,0,0.1)
+q2=quadC’1-0.5*x.~2\0,0.1)
+andMATLAB produces
+q\=0.099833416646828 ,ql=0.099833333333333
+Copyright 2012 Cengagc Learn in*.AIRights Reversed Mayr*xbecopied.scanned .o*implicated ,inwhole orinpar.Doctoelectronic rights.some third pur.ycontent may besupplied ftem theeBook and/orcChaptcnsl .Editorial review h*>
+deemed Cutanysuppressed content does nottnaxriaXy alTcct theioera .1learning experience .Ccagagc [.cammureserves theright toremove additional eonteatatanytime ifvutoeqjmi nghts restrictions require It14 C H A P T E R 1 Mathematical Preliminaries andError Analysis
+E X E R C I S E S E T 12
+1. Show thatthefollowing equations have atleast onesolution inthegiven intervals .
+a.xcos*-2x2+3x-1=0,[0.2,0.3]and[1.2,1.3)
+b.(x— 2)2— Inx=0,[1.2]and [e,4]
+c.lxcos(2x)— (x— 2)2=0,[2,3]and[3,4]
+d.x-(lnx)*=0,[4,5]
+2. Find intervals containing solutions tothefollowing equations .
+a.x-3~x=0
+b.4x:— e*=0
+c. X2-lx2-Ax+3=0
+d.x2+4.001 x2+4.002*+1.101=0
+3. Show thatthefirstderivatives ofthefollowing functions arezero atleast once inthegiven intervals .
+a. f(x)=1-e*+(e-1)sin((;r/2)x),[0,1]
+b.f(x)=(x-l)tanx+xsin 7rx,[0,1]
+c.fix)=xsin7T X— (x— 2)lnx,[1,2]
+d.fix)=(x—2)sinx ln(x+2),[-1,3]
+4. Find maxu <^<fc|/(x)|forthefollowing functions andintervals .
+a.fix)=i2— ex4-2x)/3,[0,1]
+b.fix)=iAx-3)/(x2-2x),10.5,1]
+c.fix)=2xcos(2x)-ix-2)2,[2,4]
+d./(x)=l+tf-co^-1>t[1,2]
+5. Letfix)=x2.
+a.Find thesecond Taylor polynomial P2ix)about xo=0.
+b.Find R2(0.5)andtheactual error when using P2(0.5)toapproximate /(0.5).
+c.Repeat (a)with x0=1.
+d.Repeat (b)forthepolynomial found in(c).
+6. Letfix)=-Jx+1.
+a.Find thethird Taylor polynomial P3(x)about xo=0.
+b.UsePiix )toapproximate >/53,y/0.75,Vl-25,andVT3.
+c.Determine theactual error oftheapproximations in(b).
+7. Find thesecond Taylor polynomial P2{x)forthefunction fix)=e*cosx about x0=0.
+a.UseF2(05)toapproximate /(0.5).Find anupper bound forerror \f(0.5)— /^(O.S)!using the
+error formula ,andcompare ittotheactual error.
+b.Find abound fortheerror|f i x )-Pzix )\inusing Piix )toapproximate /(x)ontheinterval
+[0.1].
+c.Approximate fQlf(x)dxusing f01P2ix)dx.
+d.Find anupper bound fortheerror in(c)using fQ1|R2(x)dx|,andcompare thebound totheactual
+error.
+8. Find thethird Taylor polynomial P3(x)forthefunction /(x)=(x-1)lnxabout x0=1.
+a.Use/M0.5)toapproximate /(0.5).Find anupper bound forerror \f(0.5)— /M0.5)|using the
+error formula ,andcompare ittotheactual error.
+b.Find abound fortheerror|/(x)-P3(x)|inusing P3(x)toapproximate f i x )ontheinterval
+[0.5,1.5].
+c.Approximate /0‘55f i x)d xusing/0'55P3(x)dx.
+d.Find anupper bound fortheerror in(c)using/Jj3|/?3(x)dx\%andcompare thebound tothe
+actual error.
+Copyrifht 2012 Cc«£»fcLcarniit*.AIRights Reversed May notbecopied ,canned ,orduplicated .»whole oempar.Doctoelectronic rtghtv.vonte third pur.ycontent may bevupprcstcd riom theeBook amtar eOncxcnul .Editorial roiew h*>
+deemed Cutanysuppressed content does notmaxrUXy alTect theoverall learning experience .Ccagagc [.cammu reserves theRIGHTK >renxyve additional contort atanytimeiisubseqjcnt rights restrictions require It1.3 Round -OffError andComputer Arithmetic 15
+9. Use theerror term ofaTaylor polynomial toestimate theerror involved inusing sin*%xto
+approximate sin1°.
+10. UseaTaylor polynomial about 7r/4toapproximate cos42toanaccuracy of106.
+11. Let/(x)=e4/2sin(x/3).UseMATLAB todetermine thefollowing .
+a.The third Maclaurin polynomial /*3(x).
+b.Abound fortheerror|f i x)-P3(x)|on[0,1J.
+12. Let/(x)=ln(x2-I-2).UseMATLAB todetermine thefollowing .
+a.TheTaylor polynomial P*(x)for/expanded about xo=1.
+b.Themaximum error|f(x)— /*3(x)|for0<x<1.
+c.TheMaclaurin polynomial P3(x)for/.
+d.Themaximum error|/(JC)— P3(x)|for0<x<1.
+e.Does P3(0)approximate /(0)belter thanP3(l)approximates /(1)?
+13. Thepolynomial P2(x)=1-\x2istobeused toapproximate f(x)=cosx inl-*,J].Find abound
+forthemaximum error.
+14. ThenthTaylor polynomial forafunction /atx0issometimes referred toasthepolynomial ofdegree
+atmost nthat“ best” approximates /near XQ.
+a.Explain why thisdescription isaccurate .
+b.Find thequadratic polynomial thatbestapproximates afunction /nearxo=1ifthetangent
+lineatx0=1hasequation y=4x—1,andif/"(1)=6.
+15. Theerror function defined by
+gives theprobability thatanyoneofaseries oftrials willliewithin xunits ofthemean ,assuming that
+thetrials have anormal distribution with mean 0andstandard deviation J2/2.This integral cannot
+beevaluated interms ofelementary functions ,soanapproximating technique must beused ,
+a.Integrate theMaclaurin series fore~‘~toshow that
+erf(x)?oc
+k=0(2k+1)*!’
+b.Theerror function canalso beexpressed intheform
+erf(x)=A 2kx2k*1
+1 3 . 5 -..(2*+l)’
+Verify thatthetwoseries agree fork=1,2,3,and4.[Hint:UsetheMaclaurin series fore~x‘.)
+c.Usetheseries in(a)toapproximate erf(l)towithin 101.
+d.Usethesame number ofterms used in(c)toapproximate erf(l)with theseries in(b).
+e.Explain why difficulties occur using theseries in(b)toapproximate erf(x).
+16. InExample 3itisstated thatxwehave|sinx|<|x|.Usethefollowing toverify thisstatement .
+a.Show thatforallx>0wehave/(x)=x-sinxisnon-decreasing ,which implies thatsinx<x
+with equality only when x=0.
+b.Reach theconclusion byusing thefactthatforallvalues ofx,sin(-x)=— sinx.
+1.3 Round -OffError andComputer Arithmetic
+Thearithmetic performed byacalculator orcomputer isdifferent from thearithmetic that
+weuseinouralgebra andcalculus courses .From your pastexperience ,youmight expect
+thatwealways have astruestatements such things as2+2=4,4 8=32,and(V^3)2=3.
+Copyright 20I2C««cLearning .AIRight*Reversed May notbecopied ,canned ,orduplicated.»whole ormpar.Doctoelectronic right*.vome third pur.yconcent may bevupprcv *driom theeBook and/orcCh<xcn»l.Editorial roiew h*>
+deemed Cutanysuppressed content dec*notmaterial yalTcct theoverall learning experience .C'cngagc Learn aigreserves theright loremove additional conteatatanytime iisubsequent right*restrictions require It.16 C H A P T E R 1 Mathematical Preliminaries andError Analysis
+Error duetorounding should be
+expected whenever computations
+areperformed using numbers that
+arenotpowers of2.Keeping this
+error under control isextremely
+important when thenumber of
+calculations islarge.
+IllustrationInstandard computational arithmetic weexpect exact results for2+2=4and4 8=32,
+butwewillnothave precisely (V3)2=3.Tounderstand why thisistruewemust explore
+theworld offinite-digit arithmetic .
+Inourtraditional mathematical world wepermit numbers with aninfinite number of
+digits.Thearithmetic weuseinthisworld defines \/3asthatunique positive number which
+when multiplied byitself produces theinteger 3.Inthecomputational world ,however ,each
+representable number hasonly afixed andfinite number ofdigits.This means ,forexample ,
+thatonly rational numbers — andnoteven allthese— canberepresented exactly .Since >/3is
+notrational ,itisgiven anapproximate representation within themachine ,arepresentation
+whose square will notbeprecisely 3,although itwilllikely besufficiently close to3tobe
+acceptable inmost situations .Inmost cases ,then,thismachine representation andarithmetic
+issatisfactory andpasses without notice orconcern ,butattimes problems arise because of
+thisdiscrepancy .
+Theenor thatisproduced when acalculator orcomputer isused toperform real-
+number calculations iscalled round -offerror .Itoccurs because thearithmetic performed
+inamachine involves numbers with only afinite number ofdigits ,with theresult that
+calculations areperformed with only approximate representations oftheactual numbers .
+Inatypical computer ,only arelatively small subset oftherealnumber system isused for
+therepresentation ofalltherealnumbers .This subset contains only rational numbers ,both
+positive andnegative ,andstores thefractional part,together with anexponential part.
+Binary Machine Numbers
+In1985,theIEEE (Institute forElectrical andElectronic Engineers )published areport called
+Binary Floating Point Arithmetic Standard 754-1985.Anupdated version waspublished
+in2008 asIEEE 754-2008.This provides standards forbinary anddecimal floating point
+numbers ,formats fordata interchange ,algorithms forrounding arithmetic operations ,and
+forthehandling ofexceptions .Formats arespecified forsingle ,double ,andextended
+precisions ,andthese standards aregenerally followed byallmicrocomputer manufacturers
+using floating -point hardware .
+Forexample ,double precision realnumbers require a64-bit(binary digit )representa -
+tion.The first bitisasign indicator ,denoted s.This isfollowed byan11-bitexponent ,c,
+called thecharacteristic ,anda52-bitbinary fraction ,/,called themantissa .Thebase for
+theexponent is2.
+Thenormalized form forthenonzero double precision numbers has0<c<2n— 1=
+2047.Since cispositive ,abias of1023 issubtracted from ctogive anactual exponent
+intheinterval (— 1023 ,1024 ).This permits adequate representation ofnumbers with both
+large andsmall magnitude .The first bitofthefractional partofanumber isassumed to
+be1andisnotstored inorder togive oneadditional bitofprecision totherepresentation ,
+Since 53binary digits correspond tobetween 15and16decimal digits ,wecanassume that
+anumber represented using thissystem hasatleast 15decimal digits ofprecision .Thus,
+numbers represented innormalized double precision have theform
+(— 1)'2c_
+1023(1+/).
+Consider themachine number
+010000000011 1011100100010000000000000000000000000000000000000000 .
+The leftmost bitiss=0,which indicates thatthenumber ispositive .The next 11bits,
+10000000011 ,give thecharacteristic andareequivalent tothedecimal number
+c=l-210+0-29+---+0-22+l-2‘+l-2°=1024+2+1=1027.
+Copyright 2012 Ccngagc Learn in*.AIR.phtsReserved Mayr*xbecopied ,canned ,o*duplicated.»whole o tmpan.Doc loelectronic right*.some third pony content may besuppressed ftem sheeBook and/orcCh<xcn»l.Editorial review h*>
+deemed that artysuppressed content dees notmaterial yalTcct theoverall learning experience .('engage [.cannon reserves theright Mremove additional conceal atanytime i!subsequent right*restriction*require It.1.3 Round -OffError andComputer Arithmetic 17
+Theexponential partofthenumber is,therefore ,210271023=24.Thefinal 52bitsspecify
+thatthemantissa is
+Asaconsequence ,thismachine number precisely represents thedecimal number
+(— 1)S2c-1023(1+/)=(-1)° 21027-1023(1+G+§+i+^+256+4i6))
+=27.56640625 .
+However ,thenext smallest machine number is
+01 111011100100001111111111111111111111111111111111111111 ,
+andthenext largest machine number is
+01 l l l l l l l 111011100100010000000000000000000000000000000000000001 .
+This means thatouroriginal machine number represents notonly 27.56640625 ,butalsohalf
+oftherealnumbers thatarebetween 27.56640625 andthenext smallest machine number ,
+aswellashalfthenumbers between 27.56640625 andthenext largest machine number .To
+beprecise ,itrepresents anyrealnumber intheinterval
+[27.5664062499999982236431605997495353221893310546875 ,
+27.5664062500000017763568394002504646778106689453125 ).
+Thesmallest normalized positive number thatcanberepresented hass=0,c=1,
+and/=0,andisequivalent tothedecimal number
+2-IK2.(1+o)«0.225 x10-307.
+The largest normalized positive number thatcanberepresented hass=0,c=2046 ,and
+/=1— 2“ 52,andisequivalent tothedecimal number
+2'023 (1+(1-2-52))0.17977 x10309.
+Numbers occurring incalculations thathave toosmall amagnitude toberepresented result
+inunderflow ,andarcgenerally setto0with computations continuing .However ,numbers
+occurring incalculations thathave toolarge amagnitude toberepresented result inoverflow
+andtypically cause thecomputations tostop.Note thatthere arctworepresentations for
+thenumber zero;apositive 0when s=0,c=0,and/=0andanegative 0when 5=1,
+c=0,and/=0.
+Decimal Machine Numbers
+Theuseofbinary digits tends tocomplicate thecomputational problems thatoccur when a
+finite collection ofmachine numbers isused torepresent alltherealnumbers .Toexamine
+Copyright 2012 Cengagc Learn in*.AIR.phtvReversed May notbecopied ,canned ,o*duplicated.»whole otmpan .Doc 10electronic right*.vonte third pony content may besuppressed ri«nsheeBook and/orcCh<xcn»l.Editorial roiew h*>
+deemed Cut artyMipprcucd content dcc>notmaterial'.yafTcet theoverall learnire experience .Ccnitapc [.cannon roetve*theright Mremove additional conceal atanytime i!vuhvcyjcw nphtv rotrictions require it18 C H A P T E R 1 Mathematical Preliminaries andError Analysis
+these problems ,wenowassume ,forsimplicity ,thatmachine numbers arerepresented in
+thenormalized decimal form
+± 0.did2...4x10",1<<4<9,0<4<9
+foreach i=2,...,k.Wecallnumbers ofthisform k-digit decimal machine numbers .
+Any positive realnumber within numerical range ofthemachine canbenormalized to
+achieve theform
+Theerror thatresults from
+replacing anumber with its
+floating -point form iscalled
+round-offerror regardless of
+whether therounding or
+chopping method isused.y=0.d\d2... <4+2...x10” .
+Thefloating -point form ofy,denoted by//(y),isobtained byterminating themantissa
+ofyatkdecimal digits.There aretwoways ofperforming thetermination .One method ,
+called chopping ,istosimply chop offthedigits <4+I<4+2   toobtain
+//(y)=0.<4<4...<4x10".
+Theother method ofterminating themantissa ofyatkdecimal points iscalled round -
+ing.Ifthek+1stdigit issmaller than5,then theresult isthesame aschopping .Ifthek-I-1st
+digit is5orgreater ,then 1isadded tothek\hdigit andtheresulting number ischopped .
+Asaconsequence ,rounding canbeaccomplished bysimply adding 5x10"-(*+l)toyand
+then chopping theresult toobtain//(y).Note thatwhen rounding up,theexponent ncould
+increase by1.Insummary ,when rounding weaddoneto <4toobtain//(y)whenever
+<4+15,thatis,weround up;when <4+i<5,wechop offallbutthefirstkdigits ,sowe
+round down.
+The next examples illustrate floating -point arithmetic when thenumber ofdigits being
+retained isquite small .Although thefloating -point arithmetic thatisperformed onacal-
+culator orcomputer will retain many more digits ,theproblems thisarithmetic cancause
+arcessentially thesame regardless ofthenumber ofdigits .Retaining more digits simply
+postpones theawareness ofthesituation .
+Example 1Determine thefive-digit (a)chopping and(b)rounding values oftheirrational number TT.
+Solution Thenumber nhasaninfinite decimal expansion oftheformn=3.14159265—Written innormalized decimal form ,wehave
+?r=0.314159265 ...x10'.
+(a)Thefloating -point form ofnusing five-digit chopping is
+=0.31415 x101=3.1415 .
+(b)Thesixth digit ofthedecimal expansion ofnisa9,sothefloating -point form ofn
+using five-digit rounding is
+Therelative error isgenerally a
+better measure ofaccuracy than
+theabsolute error because ittakes
+intoconsideration thesizeofthe
+number being approximated .fl(n)=(0.31415 +0.00001 )x101=3.1416 .
+There arctwocommon methods formeasuring approximation errors .
+Theapproximation p*tophasabsolute error \p— p*\andrelative error|p— p*|/|p|,
+provided that p^0.
+Example 2Determine theabsolute andrelative errors when approximating pbyp*when
+(a)p=3.000 and p*=3.100 ;
+(b)p=0.003000 and p*=0.003100 ;
+(c)p=3000 andp*=3100.
+Copyright 2012 Cengagc Learning .AIRights Reserved .May rotbecopied ,scanned ,orduplicated ,inwhole orinpar.Doctocjectronie lights ,some third party content may besuppressed rrom theeBook aml/ofcCh<xcnsl .Editorial review h*>
+deemed thatanysuppressed content decs notmaterial yafleet theoverall learning experience ,('engage Learning reserves (heright Mremove additional conceal atanytime ifsuhscqjcnt rights restrictions require it1.3 Round -OffError andComputer Arithmetic 19
+Solution First weneed towrite these numbers instandard floating -point form:
+(a)Forp=0.3000 x101andp*=0.3100 x101theabsolute error is0.1,andtherelative
+error is0.3333 x10_
+1.
+(b)Forp=0.3000 x10-3and p*=0.3100 x10-3theabsolute error is0.1x10-4,
+andtherelative error is0.3333 x10_
+1.
+(c)Forp=0.3000 x104and p*=0.3100 x104,theabsolute error is0.1x103,and
+therelative error isagain 0.3333 x10-1.
+Wcoften cannot findanaccurate
+value forthetrueerror inan
+approximation .Instead wcfinda
+bound fortheerror,which gives
+usa“ worst-case” error.This example shows thatthesame relative error ,0.3333 x10-1,occurs forwidely varying
+absolute errors .Asameasure ofaccuracy ,theabsolute error canbemisleading andthe
+relative error more meaningful ,because therelative error takes intoconsideration thesize
+ofthevalue.
+Finite -Digit Arithmetic
+Thearithmetic operations ofaddition ,subtraction ,multiplication ,anddivision performed
+byacomputer onfloating -point numbers also introduce error.These arithmetic operations
+involve manipulating binary digits byvarious shifting andlogical operations ,buttheactual
+mechanics ofthearithmetic arenotpertinent toourdiscussion .Toillustrate theprob-
+lems thatcanoccur ,wesimulate thisfinite -digit arithmetic byfirst performing ,ateach
+stage inacalculation ,theappropriate operation using exact arithmetic onthefloating -point
+representations ofthenumbers .Wethen convert theresult todecimal machine -number
+representation .The most common round -ofTerror producing arithmetic operation involves
+thesubtraction ofnearly equal numbers .
+Example 3Use four-digit decimal chopping arithmetic tosimulate theproblem ofperforming the
+computer operation n-j.
+Solution Thefloating -point representations ofthese numbers are
+0.3142 x10*. //(* )=0.3141 x10’and //
+Performing theexact arithmetic onthefloating -point numbers gives
+//(jr)-fl
+^=-0.0001 x10',
+which converts tothefloating -point approximation ofthiscalculation :
+p'=fl
+^flOi )-fl(y))=-0.1000 x10~2.
+Although therelative errors using thefloating -point representations for JTandyaresmall ,
+7T-//(TT)
+71<0.0002 and ¥-//(¥)
+22
+7<0.0003 ,
+therelative error produced bysubtracting thenearly equal numbers nand^isabout 700
+times aslarge:
+(w-f)-P*
+(*-?)«0.2092 .
+Copyright 2012 Cc«£»fcLcarni #*.AIRighb Rcscncd May ncabecopied ,canned ,ordaplicatod .»whole oempar.Doc 10electronic tlfht».*wcthird pur.ycontent may besuppressed riom theeBook and/orcCh<xcn»l.Editorial toiew h*>
+deemed Cutanysuppressed content decs notmaterial yalTcct theioera .1Icamir*experience .C'cnitasc Learn xii:reserves thert|>httoremose additional conteatatanytime iisubsequent rights restrictions require IL20 C H A P T E R 1 Mathematical Preliminaries andError Analysis
+Rounding arithmetic inMATLAB involves theuseofthefunction round .This function
+rounds tothenearest whole number and thefunction fix chops offthefractional part.
+Suppose wedefine thenumbers x\,x2,x3,andx4with theMATLAB command
+xl—123.4 ,x2=-123.5 ,x3=123.4 ,x4=123.5
+MATLAB responds with,
+xl=-1.234000000000000^+002
+x2=-1.235000000000000*+002
+x3=1.234000000000000*+002
+x4=1.235000000000000*+002
+Invoking thecommands round andfixgives ,forround ,
+ans=— 123,ans=—124,ans=123,ans=124
+and,forf i x,
+ans=— 123,ans=— 123,ans=123,ans=123
+Exercise 12illustrates how these functions canbeused toperform rounding andchopping
+arithmetic toaspecific number ofdigits .
+E X E R C I S E S E T 1 . 3
+l.
+2.
+3.Compute theabsolute error andrelative error inapproximations ofpbyp*.
+a. p=7T,p*= b.p=7T,p‘=3.1416
+c. p=e,p*=2.718 d.p=\/2,p*=1.414
+e. p=ei0,p'=22000 f.p=10T,p*=1400
+g.p=8!,p"=39900 h.p_9|p-_,/ig^(9/e)»
+Perform thefollowing computations (i)exactly ,(ii)using three-digit chopping arithmetic ,and
+(iii)using three-digit rounding arithmetic ,(iv)Compute therelative errors in(ii)and(iii).
+a.
+c.4 1
+5+3/1_3\ 3_
+\3liy+20b.
+d.41
+5'3
+G+n)3_
+20
+Usethree-digit rounding arithmetic toperform thefollowing calculations .Compute theabsolute error
+andrelative error with theexact value determined toatleast fivedigits.
+a.
+c.
+e.
+8-133+0.921
+(121-0.327 )-119
+13_6
+14 7
+2e-5.4
+G) (!)b.133-0.499
+d.(121-119)-0.327
+f.— 10JT+6e— 62
+Copyright 2012 Cengagc Learning .AIR.ghtvReversed May notbecopied ,canned ,ordaplica '.cd.»whole oempar.Doctoelectronic rtghtv.vontc third pur.ycontent may besuppreved riom theeBook and/orcCh<xcn»l.Editorial roiew h*>
+deemed Cutanyvuppicvvcd content dee*nottmxtlaly alTect theoverall learning experience .Ceng age[.cammgreserve*theright loremote additional contort atanytime iivubveqjcni right*rotrictionv reyuirc It.1.3 Round -OffError andComputer Arithmetic 21
+4. Repeat Exercise 3using three-digit chopping arithmetic .
+5. Repeat Exercise 3using four-digit rounding arithmetic .
+6.
+7.Repeat Exercise 3using four-digit chopping arithmetic .
+The firstthree nonzero terms oftheMaclaurin series forthearctanx arex— *x3+jx5.Compute the
+absolute error andrelative error inthefollowing approximations ofnusing thepolynomial inplace
+ofthearctanx :
+a.4arctanG)+-~G)]b.16arctanG)_4arc,an(i)
+8. The two-by-twolinear system
+ax+by=e,
+cx+dy=/,
+where a,b,c,d,e,/aregiven ,canbesolved forxandyasfollows :
+csetm= provided a/0;a
+d\=d— mb\
+f\=f-m e\
+x_(g~b y)
+a
+Solve thefollowing linear systems using four-digit rounding arithmetic .
+a.1.130 x-6.990 y=14.20 b. 1.013 x-6.099 y=14.22
+8.1lOx+12.20 y=-0.1370 -18.1lx-I-112.2 y=-0.1376
+9. Suppose thepoints (x0,y0)and(x!,yi)areonastraight linewith y\/y0.TWo formulas areavailable
+tofindthex-intercept oftheline:
+xxoyi-xiyo . (*i-x0)yo— — and x=x0 — yi-y o y\-y o
+10.a.Show thatboth formulas arealgebraically correct .
+b.Usethedata (x0,yo)=(1.31*3.24 )and(x1(yj)=(1.93,4.76 )andthree-digit rounding arith-
+metic tocompute thex-intercept both ways .Which method isbetter ,andwhy?
+TheTaylor polynomial ofdegree nfor/(x)=e1is0x'//!.UsetheTaylor polynomial ofdegree
+nine andthree-digit chopping arithmetic tofindanapproximation toe~5byeach ofthefollowing
+methods .
+a.e-59(— 5y
+i!9
+=£(-1)'5'
+i!b.e-=-U'E’=o5-/i!
+Anapproximate value ofe~5correct tothree digits is6.74 x103.Which formula ,(a)or(b),gives
+themost accuracy ,andwhy?
+11. Arectangular parallelepiped hassides 3cm,4cm,and5cm,measured tothenearest centimeter .
+a.What arethebestupper andlower bounds forthevolume ofthisparallelepiped ?
+b.What arethebestupper andlower bounds forthesurface area?
+Copyright 2012 Cc«£»fcLearn in*.AIR.(huReversed May notbecopied ,canned ,ordaplicated .inwhole ormpan .Doctoelectronic ilfhu.vonte third pony content may besuppressed rrom theeBook and/orcClupccnM .Editorial roiew h*>
+deemed Cutanysuppressed content dees notimxttaly alTect theoverall leamir*experience .C'crtitape[.camon roentt thertpltt 10renxyve additional conceal atanytimeiisubsequent rights restrictions require It2 2 C H A P T E R Mathematical Preliminaries andError Analysis
+12. Thefollowing MATLAB M-filerounds orchops anumber xtotdigits where md=1forrounding
+andmd=0forchopping .
+function [res] CHIP (rnd,t,x)
+'/.This program isused toround orchop anumber xtoaspecific number t
+Xofdigits ,
+ifx-0
+w-0;
+else
+ee=fix(loglO (abs(x) ));
+ifabs(x)>1
+ee-ee+1;
+end;
+ifrnd ==1
+v-round (x*10~(t-ee) )*10~(ee-t);
+else
+v=fix(x*10“ (t-ee))*10“ (ee-t);
+end;
+end;
+res =w;
+Verify thattheprocedure works forthefollowing values .
+a.x— 124.031 ,t=5 b.x=124.036 ,/=5
+c.x=— 0.00653 ,t— 2 d.x=-0.00656 ,t=2
+Thebinomial coefficient
+/m\_ m!\k) k\(m— k)\
+describes thenumber ofways ofchoosing asubset ofkobjects from asetofmelements .
+a.Suppose decimal machine numbers areoftheform
+±0.d|*/2^3^4x10",with1<d i<9,0<d,<9,ifi=2,3,4and|n|<15.
+What isthelargest value ofmforwhich thebinomial coefficient (T1)canbecomputed forallk
+bythedefinition without causing overflow ?
+b.Show that(")canalsobecomputed by
+(m\_f m\fm— \\ fm— k+\\[k j-\k)OnT /Ai/
+c.What isthelargest value ofmforwhich thebinomial coefficient (")canbecomputed bythe
+formula in(b)without causing overflow ?
+d.Usetheequation in(b)andfour-digit chopping arithmetic tocompute thenumber ofpossible
+5-card hands ina52-card deck.Compute theactual andrelative errors.
+1.4 Errors inScientific Computation
+Intheprevious section wesawhow computational devices represent andmanipulate num-
+bers using finite -digit arithmetic .Wenow examine how theproblems with thisarithmetic
+cancompound andlook atways toarrange arithmetic calculations toreduce thisinaccuracy .
+Copyright 2012 Cengagc Learn in*.AIRights Reversed Mayr*xbecopied.scanned .ocimplicated ,inwhole orinpar.Doctocjectronie rlghtv.some third pur.ycontent may besupplied ftem theeBook and/orcChaptcnM .Editorial review h*>
+deemed Cutany suppic-cdcontent does notmamlaXy alTcct theoverall learning experience .('engage [.camonreserves theright 10remove additional eonteatatanytime ifsubsequent nghts restrictions require It1.4 Errors inScientific Computation 23
+Thelossofaccuracy duetoround -offerror canoften beavoided byacareful sequencing
+ofoperations orareformulation oftheproblem .This ismost easily described byconsidering
+acommon computational problem .
+Illustration The quadratic formula states thattheroots ofax2+bx+c=0,when a/0,are
+*i— b+ y/b2— 4ac
+2aand*2— b— y/b2— 4ac
+2a(1.1)
+Consider this formula applied totheequation x2+62.10*+1=0,whose roots are
+approximately
+*i=-0.01610723 and x2=-62.08390 .
+Wewillagain usefour-digit rounding arithmetic inthecalculations todetermine theroot.In
+thisequation ,b2ismuch larger than 4ac,sothenumerator inthecalculation for X]involves
+thesubtraction ofnearly equal numbers .Because
+vV-4ac=>/(62.10 )2— (4.000 )(1.000 )(1.000 )
+=-v/3856 ."
+— "4.000 =V385Z=62.06 ,
+wehave
+//(*1)=-62.10 +62.06
+~l/666-0.04000
+~
+2.000=-0.02000 ,
+apoor approximation tox\=-0.01611 ,with thelarge relative error
+1-0.01611 +0.020001
+1-0.016111«2.4x10_1.
+Ontheother hand ,thecalculation forx2involves theaddition ofthenearly equal numbers-band— y/b2— 4ac.This presents noproblem because
+//(*2)=-62.10-62.06
+2.000-124.2
+2.000-62.10
+hasthesmall relative error
+1-62.08 +62.101
+|— 62.08 |»3.2x10“ 4.
+Theroots x\andxiofageneral
+quadratic equation arerelated to
+thecoefficients bythefactthat
+b cx\+xi=— and X\X2— a a
+This isaspecial case ofVifcta 's
+formula forthecoefficients of
+polynomials .Toobtain amore accurate four -digit rounding approximation forx\,wechange theform of
+thequadratic formula byrationalizing thenumerator :
+*i=— b+y/b2— 4ac(— b— y/b2-4ac
+2ab2— (b2— 4ac)
+— b— y/b2— 4acI 2a(— b— y/b2— 4ac)’
+which simplifies toanalternate quadratic formula
+-2cx\=
+Using Eq.(1.2)gives
+f K x i)=b+y/b2— 4ac
+-2.000 -2.000(1.2)
+62.10 +62.06 124.2-0.01610 ,
+which hasthesmall relative error 6.2x104.
+Copyright 2012 Cengagc Learn in*.AIRights Reversed May notbecopied ,canned ,ocimplicated ,inwhole orinpar.Doctocjectronie rlghtv.some third pur.yCOMCK may besuppressed rican theeBook and/orcChapccriM .Editorial review h*>
+deemed Cutanysuppre-edcontent docs notmaterial yalTcct theoverall Icamir .itexperience .('engage [.cammereserves theright K>remove additional eonteatatanytime ifvubveqjeni nghtv restrictions require It24 C H A P T E R 1 Mathematical Preliminaries andError Analysis
+The rationalization technique canalso beapplied togive thefollowing alternative
+quadratic formula forx2:
+*2 — 2c
+b— >/b2— 4ac(1.3)
+This istheform touseifbisanegative number .IntheIllustration ,however ,themistaken use
+ofthisformula forx2would result innotonly thesubtraction ofnearly equal numbers ,but
+alsothedivision bythesmall result ofthissubtraction .Theinaccuracy thatthiscombination
+produces ,
+fl(x2) — 2c
+b— V*2— 4ac-2.000
+62.10-62.06-2.000
+0.04000-50.00 ,
+hasthelarge relative error 1.9x10"1.
+Nested Arithmetic
+Example 1Evaluate /(x)=x3— 6.lx2+3.2x+1.5atx=4.71 using three-digit arithmetic .
+Solution Table 1.1gives theintermediate results inthecalculations .
+Table 1.1X x2x36.1x23.2x
+Exact 4.71 22.1841 104.487111 135.32301 15.072
+Three -digit (chopping ) 4.71 22.1 104. 134. 15.0
+Three -digit (rounding ) 4.71 22.2 105. 135. 15.1
+Remember thatchopping (or
+rounding )isperformed after
+each calculation .Toillustrate thecalculations ,letusfirstlook atthose involved with finding x3using
+three -digit rounding arithmetic .
+First wefind
+x2=4.712=22.1841 ,which rounds to22.2.
+Then weusethisvalue ofx2tofind
+x3=x2 x=22.2 -4.71=104.562 ,which rounds to105.
+Also ,
+6.lx2=6.1(22.2 )=135.42 ,which rounds to135,
+and
+3.2x=3.2(4.71)=15.072 ,which rounds to15.1.
+Using finite -digit arithmetic ,theway inwhich weaddtheresults canaffect thefinal
+result.Suppose thatweaddlefttoright.Then forchopping arithmetic wehave
+Three -digit (chopping ):/(4.71)=((104.-134.)+15.0 )-I-1.5=-13.5,
+andforrounding arithmetic wehave
+Three -digit (rounding ):/(4.71)=((105.— 135.)+15.1)+1.5=-13.4.
+Copyright 2012 Cc«£»fcLearn in*.AIR-phivReversed Mayr*xbecopied ,canned ,o*duplicated.»whole o tmpan .Doctoelectronic rifhu.*wcthird pony contcac may besoppre ^tedftem theeBook and/orcCh<xcn»l.Editorial roiew h*>
+deemed CutanyMpprcucd content dee>notnuxtiily alTca theoverall Icamir .itexperience .C'crtitape l.camzip roentt thertpht 10renxyve additional conceal atanytime i itutoeqjcni npht »rotrictionc require It1.4 Errors inScientific Computation 25
+Illustration(Youshould carefully verify these results tobesure thatyour notion offinite-digit arithmetic
+iscorrect .)Note thatthethree-digit chopping values simply retain theleading three digits ,
+with norounding involved ,anddiffer from thethree-digit rounding values.Theexact result
+oftheevaluation is
+Exact :/(4.71)=104.487111 -135.32301 +15.072 +1.5=-14.263899 ,
+sotherelative errors forthethree -digit methods are
+Chopping :-14.263899 +13.5~
+14.263899%0.05 ,and
+Rounding :-14.263899 +13.4-14.263899%0.06.
+Asanalternative approach ,thepolynomial /(x)inExample 1canbewritten inanested
+manner as
+/(*)=X1-6.IJC2+3.2X+1.5=((*-6.1)JC+3.2)x+1.5.
+Using three -digit chopping arithmetic now produces
+/(4.71)=((4.71-6.1)4.71+3.2)4.71+1.5=((-1.39)(4.71 )+3.2)4.71+1.5
+=(-6.54+3.2)4.71+1.5=(-3.34 )4.71+1.5=-15.7+1.5=-14.2.
+Inasimilar manner ,wenowobtain athree-digit rounding answer of— 14.3.Thenewrelative
+errors are
+Three -digit (chopping ):-14.263899 +14.2^14.263899%0.0045 ;
+Three -digit (rounding ):-14.263899 +14.3-14.263899%0.0025 .
+Nesting hasreduced therelative error forthechopping approximation tolessthan 10%
+ofthatobtained initially .Fortherounding approximation ,theimprovement hasbeen even
+more dramatic ;theerror inthiscase hasbeen reduced bymore than95%.
+Characterizing Algorithms
+Wewill beconsidering avariety ofapproximation problems throughout thetext,andin
+each case weneed todetermine methods thatproduce dependably accurate results fora
+wide class ofproblems .Because ofthediffering ways inwhich theapproximation methods
+arederived ,weneed avariety ofconditions tocategorize their accuracy .Notallofthese
+conditions willbeappropriate foranyparticular problem .
+One criterion wewill impose ,whenever possible ,isthat ofstability .Amethod is
+called stable ifsmall changes intheinitial data produce correspondingly small changes
+inthefinal results .When itispossible tohave small changes intheinitial data producing
+large changes inthefinal results ,themethod isunstable .Some methods arestable only for
+certain choices ofinitial data.These methods arecalled conditionally stable .Weattempt
+tocharacterize stability properties whenever possible .
+Oneofthemost important topics affecting thestability ofamethod isthewayinwhich
+theround-offerror grows asthemethod issuccessively applied .Suppose anerror with
+Copyright 2012 Cengagc Learn in*.AIRights Reserved Mayr*xbecopied.scanned .orimplicated ,inwhole orinpar.Doctoelectronic rights.some third pur.ycontent may besupplied ftem theeBook and/orcChapccmi .Editorial review h*>
+deemed Cutanysuppressed content dees notmaterial yalTcct theoverall learnire experience .Cette jgcLearning rese-tvestheright Mremove additional conceal atanytime i!suhvojjcni right*restrictions require It.26 C H A P T E R 1 Mathematical Preliminaries andError Analysis
+magnitude Eo>0isintroduced atsome stage inthecalculations andthatthemagnitude of
+theerror after nsubsequent operations isE„.There aretwodistinct cases thatoften arise
+inpractice .
+ Ifaconstant Cexists independent of«,with En%CnEQ ,thegrowth oferror islinear .
+ Ifaconstant C>1exists independent ofn,with En%C"£o»thegrowth oferror is
+exponential .
+Itwould beunlikely tohave En^CnE 0,with C<1,because thisimplies thattheerror
+tends tozero.
+Linear growth oferror isusually unavoidable and,when CandEoaresmall ,the
+results aregenerally acceptable .Methods having exponential growth oferror should be
+avoided because theterm Cnbecomes large foreven relatively small values ofnandEo.
+Consequently ,amethod thatexhibits linear error growth isstable ,while oneexhibiting
+exponential error growth isunstable .(SeeFigure 1.10.)
+Figure 1.10
+ 
+Unstable exponential error growth.En=CnE 0
+ 
+Eo 
+#  Stable linear error growth
+ . * En=CnE0. *
+1 2 3 4 5 6 7 8n
+Rates ofConvergence
+Iterative techniques often involve sequences ,andthesection concludes with abrief dis-
+cussion ofsome terminology used todescribe therateatwhich sequences converge when
+employing anumerical technique .Ingeneral ,wewould liketochoose techniques thatcon-
+verge asrapidly aspossible .Thefollowing definition isused tocompare theconvergence
+rates ofvarious methods .
+Suppose that {(*„ }£!,isasequence thatconverges toanumber aasnbecomes laige.
+Ifpositive constants pand Kexist with
+%|a— an\<— ,foralllarge values ofn,
+nP
+then wesaythat{an}converges toawith rate,ororder ,ofconvergence 0{\/n p)(read
+“ bigohof1/np").This isindicated bywriting an=a+0(l/n p)andstated as“ a„ -a
+Copyright 2012 Cc«£»fcLearn in*.AIR.(huReversed Mayr*xbecopied ,canned ,o*duplicated.»whole ormpan.Doctoelectronic rifhu.vomc third pony content may bevupprcv «dftem theeBook and/orcCh<xcn»l.Editorial roiew h*>
+deemed Cutanyvuppicwed content dee>notnuxtiily alTect theoverall leamir*experience .C'cnitapc l.cammu roentt thert|>htKVrenxyve additional conceal atanytime i ivutoeqjrni nghtv rotrictionv require It1.4 Errors inScientific Computation 27
+There arcnumerous other ways
+ofdescribing thegrowth of
+sequences andfunctions ,some of
+which require bounds both above
+andbelow thesequence or
+function under consideration .
+Any good book thatanalyzes
+algorithms ,forexample [CLRS ],
+willinclude thisinformation .with rateofconvergence \/np.” Wearegenerally interested inthelargest value ofpfor
+which an=a4-0(1/np).
+Wealsousethe“ bigoh” notation todescribe howsome divergent sequences grow as
+nbecomes large.Ifpositive constants pand Kexist with
+|or„ l<Knp,foralllarge values ofn,
+then wesaythat{a„ }goes tooowith rate,ororder ,0(np).Inthecase ofasequence
+thatbecomes infinite ,weareinterested inthesmallest value ofpforwhich anis0(np).
+The “ bigoh” definition forsequences canbeextended toincorporate more general
+sequences ,butthedefinition aspresented hereissufficient forourpurposes .
+Example 2Suppose that,forn>1,
+»+l .A"+3an=— — and &n=— — .n2 n'
+Both ofthesequences converge to0,butthesequence {&„ }converges much faster than the
+sequence {<*„ }.Using five-digit rounding arithmetic ,wehave thevalues shown inTable 1.2.
+Determine rates ofconvergence forthese twosequences .
+Table Mn 1 2 3 4 5 6 7
+C*n 2.00000 0.75000 0.44444 0.31250 0.24000 0.19444 0.16327
+4.00000 0.62500 0.22222 0.10938 0.064000 0.041667 0.029155
+Solution Define thesequences pn=l/nand =1/n2.Then
+l«n-0|=n+1 n+n
+n2 n2=2--=2fi„n
+and
+A1n+3 n+3n 1h -01=— 3-<J— =4-r=4p„.rtJ n-5n2
+Hence therateofconvergence of{(*„ }to0issimilar totheconvergence of{l/n}to0,
+whereas {&„ }converges to0atarate similar tothemore rapidly convergent sequence
+{l/n2}.Weexpress thisbywriting
+a,i=O+0G)and an=0+0&) 
+The “ bigoh” notation isalso used todescribe therateofconvergence offunctions ,
+particularly when theindependent variable approaches 0.
+Suppose that Fisafunction thatconverges toanumber Lashgoes to0.Ifpositive
+constants pandKexist with
+\F(h)-L\<Khp, as/i-0,
+then F(h)converges toLwith rate,ororder ,ofconvergence 0(hp).This iswritten as
+F(h)=L+0(hp)andstated as“ F(h)—Lwith rateofconvergence
+Wearegenerally interested inthelargest value ofpforwhich F(h)=L+0(hp).
+Copyright 2012 Cerijaxc Leirnin*.AIR.(huRocrscd May ncabecopied ,canned ,ortiaplicated .inwhole orinpar.Doctoelectronic itfht».xvtic third pur.yconunc may be>upptcvcd riom*ceBook amMr cCh<xcn»l.Editorial roiew h*.
+deemed CutanyMpprccscd content does nottnaxrUXy alTea theoverall leamir*experience .Ceagace [.cammere\me»theright*>rerrxyve additional conteatatanytime iisutoeqjcoi nghts rotrictionv require It28 C H A P T E R 1 Mathematical Preliminaries andError Analysis
+EXERCISE SET 1.4
+l.
+2.
+3.(i)Usefour-digit rounding arithmetic andEqs.(1.2)and(1.3)tofindthemost accurate approximations
+totheroots ofthefollowing quadratic equations ,(ii)Compute theabsolute errors andrelative errors
+forthese approximations .
+1,123 18*3*’T X+6"°
+c.1.002 x2-ll.Olx+0.01265 =012123 1„ b.-X2+— x--=03 4 6
+d.1.002 x2+ll.Olx+0.01265 =0
+Repeat Exercise 1using four-digit chopping arithmetic .
+Letf(x)=1.013 x5-5.262 x3-0.01732 x2+0.8389 x-1.912 .
+a.Evaluate /(2.279 )byfirstcalculating (2.279 )2,(2.279 )3,(2.279 )4,and(2.279 )5using four-digit
+rounding arithmetic .
+b.Evaluate /(2.279 )using theformula
+fix)=(((1.013 x2-5.262 )x-0.01732 )x+0.8389 )x-1.912
+andfour-digit rounding arithmetic ,
+c.Compute theabsolute andrelative errors in(a)and(b).
+4. Repeat Exercise 3using four-digit chopping arithmetic .
+5. Thefifth Maclaurin polynomials fore2*ande_2jare
+*w"((((£*+f)*+s)*+2)*+2)x+1
+ft(l)'(((("B'+5)'"0x+2)Jt_
+2)x+1
+a.Approximate e-098using Ps(0.49)andfour-digit rounding arithmetic .
+b.Compute theabsolute andrelative error fortheapproximation in(a).
+c.Approximate e“ °9Kusing l//>5(0.49)andfour-digit rounding arithmetic .
+d.Compute theabsolute andrelative errors fortheapproximation in(c).
+6. a.Show thatthepolynomial nesting technique described intheIllustration onpage 25canalso be
+applied totheevaluation of
+fix)=l.Ole4*— 4.62e3*-3.1U2*+12.2e'-1.99.
+b.Usethree-digit rounding arithmetic ,theassumption thate153=4.62 ,andthefactthate"(,-53)=
+iel53)ntoevaluate /(1.53)asgiven in(a).
+c.Redo thecalculation in(b)byfirstnesting thecalculations .
+d.Compare theapproximations in(b)and(c)tothetruethree-digit result/(1.53)=— 7.61.
+7. Usethree-digit chopping arithmetic tocompute thesum2,'=!I/*2first by}+\4 4-^and
+then by^^H h}.Which method ismore accurate ,andwhy?
+8. TheMaclaurin series forthearctangent function converges for— 1<x<1andisgiven by
+arctanx =lim P„ix)
+IXn-limyV-l)m '.(2i-1)
+a.Use thefactthat tan 7r/4=1todetermine thenumber ofterms oftheseries thatneed tobe
+summed toensure that|4P„ (1)— n\<10“ 3.
+b.TheCprogramming language requires thevalue ofTTtobewithin 10_,°.How many terms of
+theseries would weneed tosum toobtain thisdegree ofaccuracy ?
+Copyright 2012 Cengagc Learn in*.AIRights Reserved May notbecopied.scanned.orduplicated .inwhole orinpar.Doctoelectronic rights.some third pur.ycontent may besuppressed rrom theeBook aml/oreChaptcnnl .Editorial review h*>
+deemed Cutanysuppressed content does nottnaxrUXy alTcct theioera .1learning experience .('engage [.camon reserves theright 10remove additional conceal atanytime ifsubvciyjem rights restrictions require It1.5 Computer Software 29
+9. The number eisdefined bye= 1/**!»where n!=n(n— 1)   2 1,forn^0and0!=1.
+(i)Usefour-digit chopping arithmetic tocompute thefollowing approximations toe.(ii)Compute
+absolute andrelative errors forthese approximations .
+a.51^n\
+/>=05E
+7=o1
+(5-7)!
+c.101
+n=010E
+7=01
+(10-7)!
+10. Find therates ofconvergence ofthefollowing sequences asn-oo.
+a.limsin(-]=0
+n-*oc\nJb.limsinf-z|=0
+n-*oc\n*J
+c- =0 d.lim[ln(n+1)— ln(n)J=0
+(l-*90
+11. Find therates ofconvergence ofthefollowing functions ash— 0.
+sinh-hcosha-hm =0h\-ehb.lim— — =-1
+h->oh
+..sin/ic.hm— — =1oh1-coshd.hm =0
+h-+o h
+12. a.How many multiplications andadditions arerequired todetermine asum oftheform
+EEfl-v
+i=l7=1
+b.Modify thesum in(a)toanequivalent form thatreduces thenumber ofcomputations .
+13. The sequence {/%,}described byF0=1,F\=1,and Fn+2=Fn4-Fn+Uifn>0,iscalled
+aFibonacci sequence .Itsterms occur naturally inmany botanical species ,particularly those with
+petals orscales arranged intheform ofalogarithmic spiral .Consider thesequence {*„ },where
+xn=F„+i/F„.Assuming thatlim„ ¥0cxn=xexists ,show thatxisthegolden ratio (1+V5)/2.
+1.5 Computer Software
+Computer software packages forapproximating thenumerical solutions toproblems are
+available inmany forms .Onourwebsite forthebook
+http://www.math.ysu.edu/~faires/Numerical -Methods /
+wehave provided programs written inC,FORTRAN ,Maple ,Mathematica ,MATLAB ,
+andPascal ,aswellasJAVA applets .These canbeused tosolve theproblems given inthe
+examples andexercises ,andwillgive satisfactory results formost problems thatyoumay
+need tosolve.However ,theyarewhat wecallspecial -purpose programs .Weusethisterm
+todistinguish these programs from those available inthestandard mathematical subroutine
+libraries .Theprograms inthese packages willbecalled general purpose .
+General Purpose Algorithms
+The programs ingeneral -purpose software packages differ intheir intent from thealgo-
+rithms andprograms provided with thisbook.General -purpose software packages consider
+Copyright 2012 Cc«£»fcLearn in*.AIR.(huReversed Mayr*xbecopied ,canned ,o*duplicated.»whole otmpan .Doctoelectronic rifhu.vomc third pony content may besupposed ftem theeBook and/orcCh<xcn»l.Editorial roiew h*>
+deemed Cutanyvuppicwed content dee>notimxttaly alTect theoverall Icamir .itexperience .C'criitapeLearn oprexxvev therljtlu Kvrenxyve additional conceal atanytime i ivutoeqjrni nphtv rotrictionv require It

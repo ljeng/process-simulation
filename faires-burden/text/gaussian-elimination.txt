@@ -1,0 +1,530 @@
+C H A P T E R
+6 Direct Methods forSolving Linear Systems
+6.1 Introduction
+Systems ofequations areused torepresent physical problems thatinvolve theinteraction of
+various properties .The variables inthesystem represent theproperties being studied ,and
+theequations describe theinteraction between thevariables .The system iseasiest tostudy
+when theequations arealllinear .Often thenumber ofequations isthesame asthenumber
+ofvariables ,foronly inthiscase isitlikely thataunique solution willexist.
+Notallphysical problems canbereasonably represented using alinear system with the
+same number ofequations asunknowns ,butthesolutions tomany problems either have this
+form orcanbeapproximated bysuch asystem .Infact,thisisquite often theonly approach
+thatcangive quantitative information about aphysical problem .
+Inthischapter weconsider direct methods forapproximating thesolution ofasystem
+ofnlinear equations innunknowns .Adirect method isonethatgives theexact solution to
+thesystem ,ifitisassumed thatallcalculations canbeperformed without round -offenor
+effects .However ,wecannot generally avoid round -offerror andweneed toconsider quite
+carefully theroleoffinite-digit arithmetic error intheapproximation tothesolution tothe
+system ,andhow toarrange thecalculations tominimize itseffect .
+6.2 Gaussian Elimination
+Ifyou have studied linear algebra ormatrix theory ,you probably have been introduced
+toGaussian elimination ,themost elementary method forsystematically determining the
+solution ofasystem oflinear equations .Variables areeliminated from theequations until
+oneequation involves only onevariable ,asecond equation involves only thatvariable and
+oneother,athird hasonly these twoandoneadditional ,andsoon.Thesolution isfound by
+solving forthevariable inthesingle equation ,using thistoreduce thesecond equation to
+onethatnowcontains asingle variable ,andsoon,until values forallthevariables arefound .
+Three operations arcpermitted onasystem ofequations E\,£2,   .£*.
+Operations onSystems ofEquations
+ Equation £,canbemultiplied byanynonzero constant A.,with theresulting
+equation used inplace of£,.This operation isdenoted (A.£,)-(£,).
+ Equation E}canbemultiplied byanyconstant A.,andadded toequation £,,with
+theresulting equation used inplace of£,-.This operation isdenoted (£;+A.£j)-
+(ft).
+ Equations E,andEjcanbetransposed inorder.This operation isdenoted (£,)<-*
+(Ej).
+229
+Copyright 2012 Cenjjayc Lcirrii /AIRjihuReserved May notbecopied Manned orduplicated towhole ortopan.Doctoelectronic rifhu.tome third party content nu>betupprcsied riom theeBook and/oreCh<xcmi .Editorial review h*>
+deemed thatanyvuppreoed content dee *,not i*uxtia:'.>affect theoverall Icamir .actpcncncc Ceityape Leaning roervev theright torerrx'ccadditional contort atanytime ifvubvcijjcni ngh<»restrictions require it.230 C H A P T E R 6 Direct Methods forSolving Linear Systems
+IllustrationByasequence oftheoperations justgiven ,alinear system canbetransformed toa
+more easily -solved linear system with thesame solutions .The sequence ofoperations is
+shown inthenext Illustration .
+The four equations
+Ey.*14-*2 4-3*4=4,
+Ey.2*i+*2-*34-*4= 1,
+Ey 3*,-*2-*34-2*4=-3,
+£4:-*14-2*24-3*3-*4=4,
+willbesolved for*j,*2,*3,and*4.Wefirstuseequation £1toeliminate theunknown X\
+from equations £2,£3»and£4byperforming (£2— 2£j)-(£2),(£3— 3£j)— (£3),
+and(£4+£])-(£4).Forexample ,inthesecond equation
+(£2— 2£,)— (£2)
+produces
+(2*i+X2-*3+*4)-2(x\+x2+3*4)=1-2(4),
+which simplifies totheresult shown as£2in
+Et:*14-*2 4-3*4= 4,
+Ey -*2-*3-5*4=-7,
+Ey.-4*2-*u>1-O*II-15,
+Ey. 3*24-3*34-2*4= 8.
+Forsimplicity ,thenewequations arcagain labeled £1,£2,£3,and£4.
+Inthenewsystem ,£2isused toeliminate theunknown JC2from£3and£4byperforming
+(£3— 4£2)— (£3)and(£44-3£2)—(£4).This results in
+E\ix1+*2 4-3*4
+£2:-*2-*3-5*4
+£3: 3*3+13*4
+£4: — 13*4
+The system ofequations (6.2)isnow intriangular (orreduced )form andcanbe
+solved fortheunknowns byabackward -substitution process .Since £4implies *4=1,
+wecansolve £3for*3togive
+x3=*(13-13*4)=
+^(13-13)=0.
+mJ mJ
+Continuing ,£2gives
+*2=— (“ 7+5*44-*3)=— (— 74-5+0)=2,4,
+“ 7,
+13,
+-13.(6.2)
+and£1gives
+*i=4— 3*4— *2=4— 3— 2=— 1.
+The solution tosystem (6.2),andconsequently tosystem (6.1),istherefore *1=— 1,
+*2=2,*3=0,and*4=1.
+Copyright 2012 Cenfajc Learn in*.AIRights Reversed Mayr*xbecopied.scanned .o*implicated ,inwhole orinpar.Doctocjectronie rights.some third pur.ycontcir.may besupprc-xdrican theeBook and/orcChapccriM .Editorial review h*>
+deemed Cutany Mjppic-xdcontent docs nottnaxrUXy alTcct theoverall Icamir .itexperience .Ccagagc [.camonreserves theright 10remove additional eonteatatanytime ifsubsequent rights restrictions require It.6.2 Gaussian Elimination 231
+Matrices and Vectors
+When performing thecalculations oftheIllustration ,wedidnotneed towrite outthefull
+equations ateach steportocarry thevariables X\,X29*3,andx4through thecalculations
+because they always remained inthesame column .The only variation from system to
+system occurred inthecoefficients oftheunknowns andinthevalues ontheright side of
+theequations .Forthisreason ,alinear system isoften replaced byamatrix ,arectangular
+array ofelements inwhich notonlyisthevalue ofanelement important ,butalsoitsposition
+inthearray.Thematrix contains alltheinformation about thesystem thatisnecessary to
+determine itssolution inacompact form.
+Thenotation forannxm(nbym)matrix will beacapital letter ,such asA,forthe
+matrix ,andlowercase letters with double subscripts ,such asairtorefer totheentry atthe
+intersection oftheithrowand jthcolumn ;thatis,
+A=[a y)=a\\ d]2
+a2ld22a\m
+&2m
+O/il &n2** *
+Example 1Determine thesizeandrespective entries ofthematrix
+A2-1 7
+3 10
+Solution Thematrix hastworows andthree columns ,soitisofsize2x3.Itsentries are
+described byan=2,d\2=— l,ai3=7,021=3,d22=1,and 023=0.
+The1xnmatrix A=[an d\2 --d\n]iscalled ann-dimensional row vector ,and
+annx1matrix
+o11
+«21A=
+1
+iscalled an/{-dimensional column vector .Usually theunnecessary subscript isomitted
+forvectors andaboldface lowercase letter isused fornotation .So,
+*1
+*2x=
+.x".
+denotes acolumn vector ,andy=[yiy2   yn]denotes arow vector.
+Asystem ofnlinear equations inthenunknowns x\9*2»   .xnhastheform
+011*1+al2x2+  +dlnxn-bu
+021*1+022*2H b02nX„=b2.
+On1*1+0„ 2*2+**’+Onn^fl— bn.
+Copyright 2012 Cenfajc Learn in*.AIRights Reversed Mayr*xbecopied.scanned .ocimplicated ,inwhole orinpar.Doctocjectronie rights.some third pur.ycontent may besupplied ftem theeBook and/orcChaptcnM .Editorial review h*>
+deemed Cutanysuppressed content does nottnaxriaXy alTcct theoverall learning experience .Ccagagc [.cammureserves theright toremove additional eonteatatanytime ifsubsequent rights restrictions require It232 C H A P T E R 6 Direct Methods forSolving Linear Systems
+Annx{n4-1)matrix canbeused torepresent thislinear system byfirstconstructing
+^=laij ]=«11«12'*’«ln'*t‘
+«21«22 «2*and b=b2
+«nl«n2* * *«nn .b».
+Augmented refers tothefactthat
+theright-hand side ofthesystem
+hasbeen included inthematrix .andthen combining these matrices toform theaugmented matrix :
+W,b]«11«12* **«ln b{
+«21«22***«2n b2
+I !  
+ania,,2    ann bn.
+where thevertical dotted linebefore thelastcolumn isused toseparate thecoefficients of
+theunknowns from thevalues ontheright-hand sideoftheequations .
+Repeating theoperations involved intheIllustration onpage 230 with thematrix
+notation results infirstconsidering theaugmented matrix :
+1 1 0 3 4'
+2 1-1 1 1
+3-1-1 2-3-1 2 3-1 4
+Performing theoperations
+(£2-2£,)-»(£2),(£3-3£I)-*(£3),and (£4+£,)-(£4)
+produces
+1 1 0 3 4'
+0-1-1-5-7
+0-4-1-7-1 5
+0 3 3 2 8
+Then
+Atechnique similar toGaussian
+elimination firstappeared during
+theHandynasty inChina inthe
+textNine Chapters onthe
+Mathematical Art,which was
+written inapproximately 200
+BCE.Joseph Louis Lagrange
+(1736-1813 )described a
+technique similar tothis
+procedure in1778 forthecase
+when thevalue ofeach equation
+is0.Gauss gave amore general
+description inTheoria Motus
+corporum coelestium sectionibus
+solem ambientium ,which
+described theleast squares
+technique heused in1801 to
+determine theorbit ofthedwarf
+planet Ceres .(£3-4£2)-(£3)and (£4+3£2) (£4),
+produces thefinal matrix
+110 3
+0-1-1-5
+0 0 3 1 3
+0 0 0 -1 34-7
+1 3-1 3
+This final matrix canbetransformed into itscorresponding linear system andsolutions
+for ,*2,*3,and*4obtained .The procedure involved inthisprocess iscalled Gaussian
+Elimination with Backward Substitution .
+Thegeneral Gaussian elimination procedure applied tothelinear system
+£i:tfn.xi4-a12*2+- - -+a\nXn=bu
+£2:«21*1+a22*2H h«2/i*n=bi,
+£« «nl*l"fa,j2*24"* * *4“ flnn^n— bfi,
+Copyright 2012 Cengagc Learn in*.AIRights Reversed May notbecopied ,canned ,ocduplicated .inwhole orinpar.Doctoelectronic rights.some third pur.ycontetr.may besupposed rrom theeBook and/oreChaptcnnl .Editorial review h*>
+deemed Cutanysuppressed content does nottnaxrUXy alTcct theoverall learning experience .('engage Learning reserves theright 10remove additional conteatatanytime ifsubsequent rights restrictions require IL6.2 Gaussian Elimination 233
+ishandled inasimilar manner .First form theaugmented matrix A:
+an a\2   <*ln
+A=[A,b]=aiia22 <*2n  a2,n+l
+Qnl an2* **ann
+where Adenotes thematrix formed bythecoefficients andtheentries inthe (n+l)st
+column arethevalues ofb;thatis,al%n+,=b,foreach i=1,2,...,n.
+Suppose thatan#0.Toconvert theentries inthefirstcolumn ,below an,tozero,we
+perform theoperations (£*-mk,£,)-(£*)foreach k=2,3...,nforanappropriate
+multiplier mk\.Wefirst designate thediagonal element inthecolumn ,a,,asthepivot
+element .The multiplier forthek\hrow isdefined bymk\=ak\/an.Performing the
+operations (£*— I£i)-(£*)foreach k=2,3,...,neliminates (thatis,changes to
+zero)thecoefficient ofx\ineach ofthese rows:
+an a\2   a\n:b\ E2— rn2iEi— E2 011 012    Oin:b\
+021 022    &2n\b2Ei-mi\E\-£3 0 022** * <*2/1 &2
+On1&n2* *’ann ;bn.£„ — mn\E\-£„ 0 On2* * * ann\bn
+Although theentries inrows 2,3,...,nareexpected tochange ,forease ofnotation ,we
+again denote theentry intheithrowandthejthcolumn byatj.
+Ifthepivot element 022#0,weform themultipliers mk2=ak2/a22andperform the
+operations (£*— m^Ei)— £*foreach k=3,...,nobtaining
+an
+0012
+022* * *a\n
+   a2nbi
+biE)-m32E2->£3an
+00,2
+022***a\n
+   a^br
+b2
+0an2***ann KEn— mn2E2— £„ .0 0 ***ann K
+Wethen follow thissequential procedure fortherows i=3...,n— 1.Define themultiplier
+mki=aki/aaandperform theoperation
+(Ek-m kiEi )-(Ek)
+foreach k=i+1,i+2,...,n,provided thepivot element a„ isnonzero .This eliminates
+Xiineach rowbelow theithforallvalues ofi=1,2,...,n—1.Theresulting matrix has
+theform
+0,i0,2  **0,n ai,n+i
+0..q
+^2  **fl2n a2,n+l
+l   
+.0 0 Onn an,n+im
+where ,except inthefirstrow,thevalues ofa,jarenotexpected toagree with those inthe
+original matrix A.Thematrix Arepresents alinear system with thesame solution setasthe
+original system ,thatis,
+a\\X\-f0,2*2H ha\n*n=01./J+1.
+<*22*2H 1-<*2nXn=02.«+!.
+&nnXrt=^n.n+1»
+Copyright 2012 CcniMfc Learn in*.AIR.(huReversed May rotbecopied.scanned .ocduplicated.»whole oempan.Doc loelectronic ttfht».some third pony content may besuppreved riom theeBook and/wcCh<xcn»l.Editorial review h*>
+deemed Cutanysuppressed content dees notimtetlaly alTcct theoverall learning experience .Cenitapc [.cannon reserves theright Mremove additional conceal atanytime i!subseqjrni nghts restrictions require it234 C H A P T E R 6 Direct Methods forSolving Linear Systems
+Backward substitution canbeperformed onthissystem .Solving thenthequation for*„ 
+gives
+®n,n+l
+Xn=  
+Qnn
+Then solving the(n— l)stequation for jcn_iandusing theknown value forxnyields
+x n-1&n— l.n+l &n— l,nXn
+<*n-\,n-\
+Continuing thisprocess ,weobtain
+Bj.n+1— (aiJ+lXj+lH bOj.nXn)
+anai,n+1^^j=i+\aijXj
+an
+Theprogram GAUSEL 61
+implements Gaussian
+Elimination with
+Backward Substitution .foreach /=n— 1,n— 2,...,2,1.
+The procedure willfailifattheithstep thepivot element a„ -iszero ,forthen either
+themultipliers m*,=am/anarenotdefined (thisoccurs ifan=0forsome i<n)orthe
+backward substitution cannot beperformed (ifann=0).This does notnecessarily mean
+thatthesystem hasnosolution ,butrather thatthetechnique forfinding thesolution must
+bealtered byinterchanging rows when apivot is0.
+Program GAUSEL 61incorporates row interchanges when required .Anillustration is
+given inthefollowing example .
+Example 2Represent thelinear system
+Ell Xi— *2+2*3-*4=-8,
+E2:2*i-2*2+3*3-3*4=-20,
+£3:*1+*2+*3 =— 2,
+£4:*1-*2+4*3+3*4= 4,
+asanaugmented matrix anduseGaussian elimination tofinditssolution .
+Solution Theaugmented matrix is
+'1-12-1 -8'
+2-23-3-20
+1 1 1 0-2
+1-14 3 4
+Performing theoperations
+(£2-2£|)-(£2),(£3-Ei) (£3),and (£4-£1)-(£4),
+gives thematrix
+Thepivot element foraspecific
+column istheentry thatisused to
+place zeros intheother entries in
+thatcolumn .'1-1 2-1-8‘
+0 0 -1-1-4
+0 2-1 1 6
+0 0 2 4 12
+The new diagonal entry 022.called thepivot element ,is0,sotheprocedure cannot
+continue initspresent form .Butoperations (£,)<+(£;)arepermitted ,soasearch ismade
+Copyright 2012 Cengagc Learn in*.AIRights Reversed Mayr*xbecopied.scanned .ocimplicated ,inwhole orinpar.Doctocjectronie ilghtv.some third pur.ycontent may besupplied ftem theeBook and/orcChaptcnM .Editorial review h*>
+deemed Cutanysuppressed cement does notmamlaXy alTcct theioera .1learning experience .('engage [.camonreserves theright 10remove additional eonteatatanytime ifsubsequent nghts restrictions require It6.2 Gaussian Elimination 235
+oftheelements <232anda42forthefirstnonzero element .Since <232^0,theoperation
+(£2)**(£3)isperformed toobtain anew matrix.
+'1-1 2-1-8'
+0 2-1 1 6
+0 0-1-1-4
+0 0 2 4 12
+Since x2isalready eliminated from£3and£4,thecomputations continue with theoperation
+(£4+2£3)-(£4),giving
+A(4)='1-1 2-1-8‘ 
+0 2-1 1 6
+0 0-1-1-4
+0 0 0 2 4
+Thematrix isnow converted back intoalinear system thathasasolution equivalent tothe
+solution oftheoriginal system andthebackward substitution isapplied :
+X4=t=2'
+1-4-(-1M.*3= : =2,
+x2=-1
+[6— x4— (-1)*3]
+2=3,
+[~8—(—l)x4—2X3—(—l)x2]- =
+Todefine theinitial augmented matrix inMATLAB ,which wewillcall AA,weenter
+thematrix row byrow.Aspace isplaced between each entry inarow,andtherows inAA
+areseparated byacolon .So,forthematrix inExample 2wehave
+AA=[1-1 2-1-8;2-2 3-3-20;1 1 10-2;1-1434]
+MATLAB responds with
+1-12-1-8
+2-23-3-20
+1 11 0-2
+1-14 3 4
+Toperform theoperation (Ej+m£,)— (£y)inMATLAB weusethecommand
+A A(j,:)=A A(j,:)+m*A A(i,:)
+The notation A A(k,l)refers toentry inthek\hrow and/thcolumn .The useof:in
+MATLAB refers tomultiplying anentire roworcolumn .Forexample ,multiplying thefcth
+rowbymisdone with m*A A(k,:).Similarly ,multiplying the/thcolumn bymwould be
+done with m*A A(:,1).Sothenext command subtracts twice thefirstrowofAAfrom the
+second row.
+A A(2,:)=A A(2,:)-2*A A(l,:)
+Copyright 2012 Cengagc Learn in*.AIRighto Reversed May n«becopied ,canned ,o*duplicated .inwhole orinpar.Doctocjectronie righto.some third pur.ycontent may besuppressed rrom theeBook and/oreChaptcnnl .Editorial review h*>
+deemed Cutanyvupprc"Cdcontent docs notmaterial yalTcct theover*!Ieamir .itexperience .Cenitape [.camon reserve!theright Mremove additional conceal atanytime i!subsequent rights restrictions require It.236 C H A P T E R 6 Direct Methods forSolving Linear Systems
+which gives
+1-1 2-1-8
+0 0 -1-1-4
+1 1 1 0-2
+1-1 4 3 4
+Wethen subtract thefirstrowofAAfrom thethird row,followed bythesubtraction ofthe
+firstrowfrom thefourth rowwith
+AA(3,:)=AA(3,:)-AA(1,:)
+and
+AA(4,:)=A A(4,:)— A A(1,:)
+This gives
+'1-1 2-1-8'
+0 0 -1-1-4A A~0 2-1 1 6
+0 0 2 412
+Thevariable x\hasnow been eliminated from therows corresponding tothesecond ,
+third ,andfourth equations .Since ai2iszero,weneed tointerchange rows tomove anonzero
+entry toan.Tointerchange rows 2and3,westore row2inatemporary rowvector B,move
+row3torow2,andthen more thetemporary rowvector Btorow3.This isdone with
+B=A A(2,:)
+AA(2,:)=A A(3,:)
+AA(3,:)=B
+Theresult is
+AA=1-1 2-1-8
+0 2-1 1 6
+0 0-1-1-4
+0 0 2 412
+The final operation inGaussian elimination forthismatrix istoadd2times thethird row
+tothefourth rowwith
+AA(4,:)=A A(4,:)+2*AA(3,:)
+This produces
+1-1 2-1-8
+0 2-1 1 6
+0 0 -1-1-4
+0 0 0 2 4
+Toperform thebackward substitution weneed todefine thevector xthatwillcontain the
+solution .Weinitialize avector xasthe0vector andwillreplace these entries asweprogress
+through thebackward substitution .
+x=[000 0]
+Copyright 2012 Cengagc Learn in*.AIRights Reversed Mayr*xbecopied.scanned .ocimplicated ,inwhole orinpar.Doctocjectronie rights.some third pur.ycontent may besupplied ftem theeBook and/orcChapccriM .Editorial review h*>
+deemed Cutany suppic-cdcontent does notmaxtUly alTcct theoverall learning experience .Ceagage [.camonreserves theright 10remove additional eonteatatanytime iivubvcyjcm nghtv rotrictionv require It6.2 Gaussian Elimination 237
+Now wereplace the0inthefourth column ofxwith
+x(4)=AA(4,5)/AA(4,4)
+which gives
+Then
+x(3)
+gives
+x(2)
+givesx=0 0 0 2
+(AA(3,5)-AA(3,4)*x(4))/AA(3,3)
+x=0 0 2 2
+(AA(2,5)-(AA(2,3)*x(3)+AA(2,4)*x(4) ))/AA(2,2)
+x=0 3 2 2
+and
+x(l)=(AA(1,5)-(AA(1,2)*x(2)+AA(l,3)*x(3)+AA(l,4)*x(4)))/AA(l,1)
+gives thefinal solution
+x=-7 3 2 2
+which corresponds tox\=-7,X2=3,X3=2,andx4=2.
+Example 2illustrates what isdone ifoneofthepivot elements iszero.Iftheithpivot
+element iszero,theithcolumn ofthematrix issearched from theithrowdownward for
+thefirstnonzero entry ,andarowinterchange isperformed toobtain thenew matrix .Then
+theprocedure continues asbefore.Ifnononzero entry isfound theprocedure stops ,and
+thelinear system does nothave aunique solution .Itmight have nosolution oraninfinite
+number ofsolutions .
+Operation Counts
+The computations intheprogram areperformed using only one nx(n+1)array for
+storage .This isdone byreplacing ,ateach step,theprevious value ofa,jbythenewone.In
+addition ,themultipliers arestored inthelocations ofa*«known tohave zero values— that
+is,when i<nandk=i+1,1+2,. . .,n.Thus ,theoriginal matrix Aisoverwritten bythe
+multipliers below themain diagonal andbythenonzero entries ofthefinal reduced matrix
+onandabove themain diagonal .WewillseeinSection 6.5thatthese values canbeused to
+solve other linear systems involving theoriginal matrix A.
+Both theamount oftime required tocomplete thecalculations andthesubsequent
+round -offerror depend onthenumber offloating -point arithmetic operations needed to
+solve aroutine problem .Ingeneral ,theamount oftime required toperform amultiplication
+ordivision onacomputer isapproximately thesame andisconsiderably greater than
+thatrequired toperform anaddition orsubtraction .Even though theactual differences
+inexecution time depend ontheparticular computing system being used ,thecount of
+theadditions /subtractions arekept separate from thecount ofthemultiplications /divisions
+Copyright 2012 Cenpapc Learn in*.AIR.(huReversed Mayr*xbecopied ,canned ,o*duplicated.»whole oempan.Doctoelectronic rifhu.vomc third pony content may besupposed ftem theeBook and/orcCh<xcn»l.Editorial roiew h*>
+deemed Cutanyvuppicwed content dee>notmaterial yalTect theoverall Icamir .itexperience .C'crtitape Learn oprexxvei thertpltt 10renxwe additional conceal atanytime i itutoeqjroi npht »rotrictionc require It238 C H A P T E R 6 Direct Methods forSolving Linear Systems
+because ofthetime differential .The total number ofarithmetic operations depends onthe
+sizen,asfollows :
+Multiplications /divisions :
+Additions /subtractions :n3.2-
+/i3n2
+3+2'3*
+5n
+6~*
+Forlarge n,thetotal number ofmultiplications anddivisions isapproximately n?/3,that
+is,0(H3),asisthetotal number ofadditions andsubtractions .The amount ofcomputation ,
+andthetime required toperform it,increases with ninapproximate proportion ton3/3,as
+shown inTable 6.1.
+Table 6.1n Multiplications /Divisions Additions /Subtractions
+3 17 11
+10 430 375
+50 44,150 42,875
+100 343,300 338,250
+E X E R C I S E S E T 6 . 2
+l. Obtain asolution bygraphical methods ofthefollowing linear systems ,ifpossible .
+a.x\+2x2=3,
+X]— X2=0.
+c. x,+2X2=3,
+2xi+4*2=6.
+e. x,+2X2=0,
+2x,4-4X2=0.
+g.2xi+x2=-1,
+4xi+2X2=-2,
+xi— 3x2=5.b.xi+2x2=0,
+X]- X2=0.
+d. xi+2X2=3,
+— 2xi-4X2=6.
+f.2x,+x2=-1,
+x,+x2=2,
+x,— 3X2=5.
+h.2xi4-X24-X3=1,
+2xi+4X2-*3=-1.
+2. UseGaussian elimination andtwo-digit rounding arithmetic tosolve thefollowing linear systems .
+Donotreorder theequations .(The exact solution toeach system isxi=1,X2=— 1,X3=3.)
+a.4x|— x24-x3=8, b.4xj4-x24-2x3=9,
+2xi4-5x24-2x3=3, 2xi4-4x2— X3=-5,
+xi4-2x24-4x3=11. xi4-X2-3x3=-9.
+3. UseGaussian elimination tosolve thefollowing linear systems ,ifpossible ,anddetermine whether
+rowinterchanges arenecessary :
+a. X|— x24-3x3=2,
+3x,-3x2+x3=-1,
+*1+*2 =3.
+b.2xj— 1.5X24-3x3=1,-x, +2x3=3,
+4xi-4.5X24-5x3=1.
+Copyright 2012 Cengagc Learn in*.AIRighto Rcicrved .May notbecopied.canned .orimplicated ,inwhole ormpart.Doctocjectronie rifhu.some third pur.ycontent may besupplied riom theeBook and/orcChapccriM .Editorial roiew h*>
+deemed Cutanysuppressed content does nottnaxrUXy alTcct theoverall Icamir .itexperience .('engage [.camonreserves theright 10remose additional conteatatanytime ifsubvoyjem nghts restrictions require It6.2 Gaussian Elimination 239
+c.2*,=3,
+*i+1.5*2 =4.5,
+— 3*2+0.5*3 =— 6.6,
+2*i 2*24-*3+*4=0.8.
+d.*i-\x2+*3 =4,
+2*,-*2-*34-*4=5,
+*1+-*2 =2,
+*1-2*2+*3+*4=5.
+*1+*2 +"*4=2,
+2*1+*2~*3+*4=la
+4*i*22*3+-2*4=0,
+3*i*2*3+-2*4=-3.
+*1+*2 +*4=2,
+2*i+*2-*3+*4=1,-*,+2*2+-3*3-*4=4,
+3*1— *2— *3+2l4=— 3.
+4. UseMATLAB with long format andGaussian elimination tosolve thefollowing linear systems .
+a.j*i+-J*2+^*3=9,
+5*1+|*2+J*3=8,
+2*1+*2+2*3=8.
+b. 3.333*i+15920 *2-10.333 *3=15913 ,
+2.222*i+-16.71*2+-9.612*3=28.544 ,
+1.5611 *,+5.1791 *2+1.6852 *3=8.4254 .
+C.*l+-+j*3+” 1*4=
+5*1+|*2+1*3+"§*4=
+5*1+-1*2+-5*3+1*4=§.
+1*1+-1*2+-1*3+-5*4=
+d.2*,+*2-*3+*4-3*5=7,
+*1 +-2*3-*4+-*5=2,
+-2*2-*3+*4-*5=-5,
+3*i+*2-4*3 +5*5=6,
+*1-*2-*3-*4+-*5=3.
+5. Given thelinear system
+2*t— 6a*:=3,
+3a*i-*2=| *
+a.Find value (s)ofaforwhich thesystem hasnosolutions .
+b.Find value (s)ofaforwhich thesystem hasaninfinite number ofsolutions .
+c.Assuming aunique solution exists foragiven a,findthesolution .
+6. Given thelinear system
+*i-*2+-a*3=-2,-*i+-2*2-a*3=3,
+a*i+-*2+-*3=2.
+a.Find value (s)ofaforwhich thesystem hasnosolutions .
+b.Find value (s)ofaforwhich thesystem hasaninfinite number ofsolutions .
+c.Assuming aunique solution exists foragiven a,findthesolution .
+7. Suppose thatinabiological system there arenspecies ofanimals andmsources offood.Letx}
+represent thepopulation ofthejthspecies foreach j=1 represent theavailable daily
+Copyright 2012 Cengagc Learn in*.AIRights Reversed May rotbecopied.scanned .ocimplicated ,inwhole orinpar.Doctocjectronie rlghtv.some third pur.ycontent may bevuppreved rrom theeBook and/orcChaptcnM .Editorial review h*>
+deemed Cutanysuppressed content does notmaxrUXy alTcct theoverall learning experience .('engage [.camonreserves theright 10remove additional eonteatatanytime ifsubsequent nghts restrictions require It240 C H A P T E R 6 Direct Methods forSolving Linear Systems
+supply oftheithfood;andayrepresent theamount oftheithfood consumed onaverage byamember
+ofthey'thspecies .Thelinear system
+0n*i+012*2+   +0i„ *„ =bu
+021*1+022*2H 4*02«*/»=bl.
+0m1*1+0m2*2+***+0mn*n=b„ 
+represents anequilibrium where there isadaily supply offood toprecisely meet theaverage daily
+consumption ofeach species .
+a.Let
+A=[au)=12 03
+1 0 2 2
+0 0 1 1
+x=(xj)=[1000 ,500,350,4001 ,andb=fa)=[3500 ,2700 ,900].Isthere sufficient food
+tosatisfy theaverage daily consumption ?
+b.What isthemaximum number ofanimals ofeach species thatcould beindividually added tothe
+system with thesupply offood stillmeeting theconsumption ?
+c.Ifspecies 1became extinct ,how much ofanindividual increase ofeach oftheremaining species
+could besupported ?
+d.Ifspecies 2became extinct ,how much ofanindividual increase ofeach oftheremaining species
+could besupported ?
+8. AFredholm integral equation ofthesecond kind isanequation oftheform
+«(*)=/(*)+r*(*.ouMt ,
+where aandbandthefunctions /andKaregiven .Toapproximate thefunction uontheinterval
+[a,b],apartition x0=a<x\<   <xm.\<xm=bisselected andtheequations
+«(*<)=/(*i)+JK(xltr)u(r)dt,foreach i=0 m,
+aresolved foru(jto),w(*i), . ,u(*m).The integrals areapproximated using quadrature formulas
+based onthenodes xo,...,xm.Inourproblem ,a=0,b=1,f(x)=x2,andK(x,t)=ex~‘.
+a.Show thatthelinear system
+0(0)=/(0)+*[A:(0,0)U(0)+tf(0,1)II(1)1,
+0(1)=/(1)+*(AT(1,0)0(0)+K{1,1)0(1)]
+must besolved when theTrapezoidal ruleisused.
+b.Setupandsolve thelinear system thatresults when theComposite Trapezoidal ruleisused with
+n=4.
+c.Repeat (b)using theComposite Simpson 'srule.
+6.3 Pivoting Strategies
+Ifallthecalculations could bedone using exact arithmetic ,wecould almost endthechapter
+with theprevious section .Wenow know how many calculations areneeded toperform
+Gaussian elimination onasystem ,andfrom thisweshould beable todetermine whether
+Copyright 2012 Cengagc Learn in*.AIRights Reversed Mayr*xbecopied.scanned .ocimplicated ,inwhole orinpar.Doctocjectronie rights.some third pur.ycontent may besupplied ftem theeBook and/orcChaptcnM .Editorial review h*>
+deemed Cutanysuppressed content does notmamlaXy alTcct theioera .1learning experience .('engage [.camonreserves theright 10remove additional eonteat atanytime iisuhvcqjcM nghts restrictions require It

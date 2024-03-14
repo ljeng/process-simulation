@@ -1,0 +1,152 @@
+The Cooper Union for the Advancement of Science and Art 
+ChE352 
+Numerical Techniques for Chemical Engineers 
+Professor Stevenson 
+Lecture 13 The Cooper Union for the Advancement of Science and Art 
+Linear Algebra 
+•Vectors & matrices allow 
+huge calculations to be 
+represented with less 
+code and logic 
+•Linearity simplifies math 
+•Because of this, decades 
+of work have gone into 
+framing every  problem 
+as linear algebra The Cooper Union for the Advancement of Science and Art 
+Example: Stochastic Matrix 
+A stochastic matrix (also called transition matrix or 
+Markov matrix) summarizes the statistics of a 
+complex system by saying: 
+Given the current state, what is the probability of 
+each possible next state? 
+An example current state would be the current letter 
+in a word, and the possible next states are all the 
+letters that could follow it. The Cooper Union for the Advancement of Science and Art 
+Example: Stochastic Matrix 
+AVIMUT WAND MY WHE AD IT 
+D Y
+WOTO T THARSE H F THALS, AY, 
+IEES LDOM IET COOFUCISCAIUCL CLED. 
+AMOVE W         '      X      I           &      E      P 
+  '   [[0.   , 0.   , 0.008, ..., 0.   , 0.059, 0.   ], 
+  X    [0.034, 0.   , 0.243, ..., 0.   , 0.254, 0.073], 
+  I    [0.01 , 0.001, 0.002, ..., 0.   , 0.036, 0.005], 
+       ..., 
+  &    [0.   , 0.   , 0.   , ..., 0.   , 0.   , 0.   ], 
+  E    [0.006, 0.009, 0.01 , ..., 0.   , 0.041, 0.008], 
+  P    [0.002, 0.   , 0.056, ..., 0.   , 0.16 , 0.034]] 
+Every pair of letters has a probability P(next|current) Input Output The Cooper Union for the Advancement of Science and Art 
+Example: Stochastic Matrix 
+"THE FALSE STEWARD, THAT YOU ARE THEY DO SO? PAH! PUTS 
+HIM OUT; SPEAK TO OURSELVES IS IT MUST NOT GUILTY OF WIT, 
+WITH US GO TO WHAT REPLICATION SHOULD HAVE FOUND SO. 
+HAMLET O, TREBLE ON THE CASTLE. ENTER HAMLET SAFELY 
+STOWED. ROSENCRANTZ: GUILDENSTERN:"             SIR. EARTH BESPEAK CONTAGION LUNACIES DEMAND 
+  SIR.      [[0.,   0.,   0., ..., 0.,  0.,  0.], 
+  EARTH      [0.,   0.,   0., ..., 0.,  0.,  0.], 
+  BESPEAK    [0.,   0.,   0., ..., 0.,  0.,  0.], 
+             ..., 
+  CONTAGION  [0.,   0.,   0., ..., 0.,  0.,  0.], 
+  LUNACIES   [0.,   0.,   0., ..., 0.,  0.,  0.], 
+  DEMAND     [0.,   0.,   0., ..., 0.,  0.,  0.]] 
+Every pair of words has a probability P(next|current) Input Output The Cooper Union for the Advancement of Science and Art 
+Example: Stochastic Matrix 
+NEW LIGHTED ON A HEAVEN KISSING HILL A COMBINATION AND A 
+FORM INDEED WHERE EVERY GOD DID SEEM TO SET HIS SEAL TO GIVE 
+THE WORLD ASSURANCE OF A MAN THIS WAS YOUR HUSBAND. Every pair of word-triplets has a probability 
+P(next|current two words) 
+(Following the path of highest probability for the starting 
+word-triplet "NEW LIGHTED", the model has directly 
+copied these lines from Hamlet Act 3, Scene 4.) The Cooper Union for the Advancement of Science and Art 
+Linear Systems Vocabulary 
+•Linear system / matrix / vector 
+•Row vector / column vector 
+•Gaussian Elimination 
+•Row operation / augmented matrix The Cooper Union for the Advancement of Science and Art 
+More Linear Systems Vocabulary 
+•Square 
+•Linearly independent / dependent 
+•Rank 
+•Full rank / rank deficientThe Cooper Union for the Advancement of Science and Art 
+Motivation: Example PFD 
+•What are R and S in this diagram? 
+•What could xi represent? 
+•What if there are yi, zi, wi, ..., what are those? 
+The Cooper Union for the Advancement of Science and Art 
+Set up the mole balance equations for this 
+PFD, given that R & S operate so x3 = Rx2 and 
+x6 + x7 = Sx4. Then arrange in the form Ax = b. Activity: Mole/Mass Balance 
+The Cooper Union for the Advancement of Science and Art 
+Answer: Mole/Mass Balance 
+Write out the equations with variables in order 
+(x1, x2, x3, ...):
+Expand into matrix form with each equation as 
+a row (any absent variable = coefficient zero) 
+-x1 + x2 - x5 = 0
+-Rx2 + x3 = 0
+x3 - x4 - x5 = 0
+Sx4 - x6 - x7 = 0 The Cooper Union for the Advancement of Science and Art 
+•How many degrees of freedom do we have? 
+•What if the reactor equation is nonlinear?  
+What about the separator? 
+•How could we solve this linear system? Why 0? Answer: Mole/Mass Balance The Cooper Union for the Advancement of Science and Art 
+Gaussian Elimination for Ax = b 
+•Want to reduce matrix to identity matrix 
+•Three permissible row operations: 
+1.Multiply equation/row by scalar 
+2.Add scaled row to another equation/row 
+3.Move rows/equations around 
+•The pivot element  is the entry in A used to 
+scale the row operations to remove variables 
+•The number of operations for solving Ax = b is 
+O(n3) if A has size n×n (that’s a lot for big n) 
+•Does A have to be square? What rank? The Cooper Union for the Advancement of Science and Art 
+Gaussian Elimination Example 
+How would you start turning 
+matrix A into an identity matrix? 
+(Remember, you have to do the 
+same operations to b.) The Cooper Union for the Advancement of Science and Art 
+Gaussian Elimination Example 
+= pivot Augmented matrix 
+(A mashed into b) The Cooper Union for the Advancement of Science and Art 
+Example usage: cubic splines 
+For datapoints y0, y1, etc, the cubic spline 
+coefficients can be found by solving: 
+A tridiagonal  
+matrix 
+Boundary 
+conditions The Cooper Union for the Advancement of Science and Art 
+Matrix Pivoting Strategies 
+•There are a combinatorial # of ways to do any 
+given Gaussian elimination  - Why? 
+•If the matrix A is ill-conditioned  (one variable is 
+much smaller/bigger than the others) then it’s 
+hard to find the exact solution due to round-off 
+error (see p. 241 in F&B) 
+•Methods such as partial pivoting , scaled partial  
+pivoting , and total/full/maximal pivoting  can be 
+used to reduce round-off error , using O(N3) 
+extra flops ( Is that a lot in this context? )
+•Iterative methods  (coming soon) are better... The Cooper Union for the Advancement of Science and Art 
+Linear algebra is easy in numpy 
+b = np.array([ 1, 1, 1])  # Define vector b 
+A = np.array([[ 4, -1, 1], [-1, 4.25, 2.75], 
+[1, 2.75, 3.5]])  # Define matrix A 
+x = np.linalg.solve(A, b)  # Find Ax = b 
+C = A + B  # Find A plus B 
+D = A @ B  # Find A times B (matrix multiply) 
+E = A * B  # Find A times B COMPONENT-WISE 
+Bsq = B** 2  # Square each element of B ( ≠B@B)
+L = np.linalg.cholesky(A)  # Cholesky factor 
+Ainv = np.linalg.inv(A)  # Inverse (unwise) 
+Apnv = np.linalg.pinv(A)  # pseudo-inverse The Cooper Union for the Advancement of Science and Art 
+Summary and Problems 
+●Open Python Numerical Methods, go to 
+Chapter 14.7: Summary and Problems 
+https://pythonnumericalmethods.berkeley.edu
+/notebooks/chapter14.07-Summary-and-Prob
+lems.html 
+●Solve the problem beginning " Write a 
+function my_make_lin_ind(A) . . ." 
+○You might want to start with printing 
+the input matrix A column by column 

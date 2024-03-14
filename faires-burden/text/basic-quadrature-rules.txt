@@ -1,0 +1,383 @@
+C H A P T E R
+Numerical Integration andDifferentiation
+4.1 Introduction
+Many techniques aredescribed incalculus courses fortheexact evaluation ofintegrals ,but
+exact techniques failtosolve many problems thatarise inthephysical world .Forthese we
+need approximation methods ofthetype weconsider inthischapter .The basic techniques
+arediscussed inSection 4.2,andrefinements andspecial applications ofthese procedures
+aregiven inthenext sixsections .
+Section 4.9considers approximating thederivatives offunctions .Methods ofthistype
+willbeneeded inChapters 11and12forapproximating thesolutions toordinary andpartial
+differential equations .You might wonder why there issomuch more emphasis onapprox -
+imating integrals than onapproximating derivatives .Determining theactual derivative of
+afunction isaconstructive process thatleads tostraightforward rules forevaluation .Al-
+though thedefinition oftheintegral isalsoconstructive ,theprincipal toolforevaluating a
+definite integral istheFundamental Theorem ofCalculus .Toapply thistheorem ,wemust
+determine theantiderivative ofthefunction wewish toevaluate .This isnotgenerally a
+constructive process ,anditleads totheneed foraccurate approximation procedures .
+Inthischapter wewillalso discover oneofthemore interesting facts inthestudy of
+numerical methods .The approximation ofintegrals— atask thatisfrequently needed — 
+can usually beaccomplished very accurately andoften with little effort.The accurate
+approximation ofderivatives— which isneeded farlessfrequendy— isamore difficult
+problem .Wethink that there issomething sadsfying about asubject thatprovides good
+approximadon methods forproblems thatneed them ,butislesssuccessful forproblems
+thatdon’t.
+4.2 Basic Quadrature Rules
+Thebasic procedure forapproximating thedefinite integral ofafunction /ontheinterval
+[a,b]istodetermine aninterpolating polynomial that approximates /and then inte-
+grate thispolynomial .Inthissection wedetermine approximations thatarise when some
+basic polynomials areused fortheapproximations anddetermine error bounds forthese
+approximations .
+Theapproximations weconsider useinterpolating polynomials atequally spaced points
+intheinterval [a,b].The firstofthese istheMidpoint rule,which uses themidpoint of
+[a,b],
+^(a+b),asitsonly interpolation point.TheMidpoint ruleapproximation iseasy to
+generate geometrically ,asshown inFigure 4.1,buttoestablish thepattern forthehigher -
+order methods andtodetermine anerror formula forthetechnique ,wewill useabasic
+toolforthese derivations ,theNewton interpolatory divided -difference formula which we
+discussed onpage 76.
+107
+Copyright 20I2Cengagc Learning .AIR.ghu Reserved May rscabecopied .scanned .orduplicated .'»whole ormpan.Doc toelectronic rights .tone third party concent nu>besupprcsxd Trent theeBook and/oreChaptcnM .Editorial review h*>
+deemed thatany vupprc'-cdcontent dee *,notmaterials affect theoverall learning experience .Ceng ageLeant ngreverses theright torerrx'sradditional conceal atanytime ifsubvcijjcni nglxs restrictions require it.108 C H A P T E R 4 Numerical Integration andDifferentiation
+Figure 4.1
+y
+<
+/y---fix),
+p/r\/"ow
+a i(a+b) b x
+Suppose that/eCn+1[a,b),where [a,b]isaninterval thatcontains allthenodes
+*o,*i*  .»xn.The Newton interpolator^divided -difference formula states thattheinter-
+polating polynomial forthefunction /using thenodes xo,X\y...,x„ canbeexpressed in
+theform
+/>0.1nW=f[xo]+/[*0,X\](x-x0)+f[x0,Xi,x2](x-x0)(x-X i)+—
++flx0,xl,...,xn](x-xo)(x-x\)--(x-xn-\).
+Since thisisequivalent tothenthLagrange polynomial ,theerror formula hastheform
+/(*)“ PoAnMf(n+'\Hx ))
+in+1)!-x0)(x-Xi)-“ (x-x„ ),
+where f(x)isanumber ,depending onx,thatliesinthesmallest interval thatcontains all
+ofX,X0,X1,... yXn.
+Toderive theMidpoint rulewecould usetheconstant interpolating polynomial with
+x0=^(a+b)toproduce
+Jfix)dx%Jf[x0]d x=f[x0](b-a)=f ib~af
+Butwecould also usealinear interpolating polynomial with thisvalue ofxoandanarbitrary
+value ofX\.This isbecause theintegral ofthesecond term intheNewton interpolatory
+divided -difference formula iszero forourchoice ofxo,independent ofthevalue ofx\,and
+assuch docs notcontribute totheapproximation :
+[fixo ,*il(*-x0)dx=/[X°:-i](x-x0)2
+Ja ^a
+21bf[X o,X\]( a+CM
+2
+flXQ'X!]
+2
+f[X0,*l]
+22
+a
+Copyright 2012 Cc«£»fcLcarnin*.AIRighb Retorted .May ncabecopied .v.-aitncd .orAliened.»whole oemport .Doc 10electronic itfhu .*wtethird pur.yCOMCK may besuppreved from theeBook amtar cCh<xcn»l.Editorial toiew h*>
+deemed CutanyMpprcucd cement dee>notmaterial yalTccr theiAera'.lIcarmr .itexperience .Ccnitasc [.camon roerver therljtlu torerrxyve additional contort atanytime ifwtoeqjcoi nght »rotrictionc require It.4.2 Basic Quadrature Rules 109
+Wewould liketoderive approximation methods thathave high powers ofb— aintheerror
+term.Ingeneral ,thehigher thedegree oftheapproximation ,thehigher thepower ofb-ain
+theerror term,sowewillintegrate theerror forthelinear interpolation polynomial instead
+oftheconstant polynomial todetermine anerror formula fortheMidpoint rule.
+Suppose thatthearbitrary x\waschosen tobethesame value asXQ.(Infact,thisisthe
+only value thatwecannot have forxi,butwewillignore thisproblem forthemoment .)
+Then theintegral oftheerror formula fortheinterpolating polynomial Po.1(x)hastheform
+[h(x-x0)(x-X,) fh(x-Xo)2
+J 2 r(?(x))dx=J/(f(x))dx,
+where ,foreach x,thenumber f(x)liesintheinterval (a,b).
+The term (x— xo)2does notchange sign ontheinterval (a,b),sotheMean Value
+Theorem forIntegrals (seepage 8)implies thatanumber £,independent ofx,exists in
+(a,b)with
+dx=gwb
+a
+/"(f)Vbb+aY (ab+aY
+6y 2J(a2)
+/"(f) (fc-fl)3_/"(f),,_
+\3
+6 4 24v 7*
+Asaconsequence ,theMidpoint rulewith itserror formula hasthefollowing form:
+Midpoint Rule
+If/C~[a,b),then anumber £in(a,b)exists with
+jff(x)dx=(b-a)f ® (b-a)\
+The invalid assumption ,x\=xo,thatleads tothisresult canbeavoided bytaking x\
+close ,butnotequal ,toXQandusing limits toshow thattheerror formula isstillvalid.
+TheTrapezoidal Rule
+TheMidpoint ruleusesaconstant interpolating polynomial disguised asalinear interpolat -
+ingpolynomial .The next method weconsider uses atruelinear interpolating polynomial ,
+onewith thedistinct nodes xo=aandx\=b.This approximation isalsoeasy togenerate
+geometrically ,asshown inFigure 4.2onthefollowing page,andisaptly called theTrape -
+zoidal ,orTrapezium ,rule.Ifweintegrate thelinear interpolating polynomial with xo=a
+andx\=b,wealsoproduce thisformula :
+ b
+J/[xo]4-/[xo,Xj](x-x0)dx=f[a]x4f[a,b](x-a)
+22-\b
+a
+=f(a)(b-a)4f(b)-f(a)
+b— a’(b— a)2(a— a)2'
+2 2
+f(a)+f(b)
+2(b-a).
+Copyright 2012 Cc«£»fcLearn in*.AIRighb Rocncd May rotbecopied ,canned ,ocdaplicated.»whole oempan .Doc 10electronic itfhu.*wcthird pony content may besuppressed rrom theeBook and/orcCh<xcn»l.Editorial toiew h*>
+deemed Cutanysuppressed cement dees notmaterial yalTcct theiAcra'.llearnii?experience .C'cn*ape[.camon reserves thety-ht10remose additional conceal atanytimeiisuhvcyjcm rights restrictions requite It110 CH A PTER 4 Numerical Integration andDifferentiation
+Figure 4.2
+y
+-
+ya=f(xh
+* y=PM
+a=x0 xx_
+=b x
+Theerror fortheTrapezoidal rulefollows from integrating theerror term forPO,I(A:)
+when XQ=aandx\=b.Since (x-Jto)(*-*i)=(x-a)(x-b)isalways negative in
+theinterval (a,b),wecanagain apply theMean Value Theorem forIntegrals .Inthiscase
+itimplies thatanumber fin(a,b)exists with
+f h(x-a)(x-b) /"(?)/ *,%J^/(£(x))dx=— — J(*-«)[(*— a)— (b— d)]dx
+/"(f)[(*-a)3(x-a)\ LJ‘-r[— 3 2— b
+azyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA
+rm
+2
+rm
+12(b-a)3_(b-a)
+3 2
+(b-a)\2
+(b-a)
+This gives theTrapezoidal rulewith itserror formula .
+Trapezoidal Rule
+If/eC2[a,b],thenanumber fin(a,b)exists with
+l
+When weusetheterm trapezoid
+wemean afour-sided figure that
+hasatleast twoofitssides
+parallel .TheEuropean term for
+thisfigure istrapezium .Tofurther
+confuse theissue ,theEuropean
+word trapezoidal refers toa
+four-sided figure with nosides
+equal ,andtheAmerican word for
+thistype offigure istrapezium .Wecannot improve onthepower ofb— aintheerror formula fortheTrapezoidal rule,
+aswedidinthecase oftheMidpoint rule,because theintegral ofthenext higher term in
+theNewton interpolatory divided -difference formula is
+fflxo>xu x 2](x-x0)(x-x\)dx=flxo,xu x 2]f(x-a)(x-b)d x.
+J a Ja
+Since (jc-a)(;t-6)<0forallxin(a,b)ythisterm willnotbezero unless f[xo,*t,JC2]=0.
+Asaconsequence ,theerror formulas fortheMidpoint andtheTrapezoidal rules both involve
+(b-a)3,even though they arederived from interpolation formulas with error formulas
+thatinvolve b— aand (b— a)2,respectively .
+Copyright 2012 Cengagc Learn in*.AIRights Reversed Mayr*xbecopied.wanned .ocimplicated ,inwhole orinpar.Doctocjectronie rlghtv.some third pur.ycontent may besupplied rican theeBook and/orcChaptcnM .Editorial review h*>
+deemed Cutanysuppressed cement does notnuxtlaly alTcct theoverall learning experience .('engage [.camonreserves theright 10remove additional eonteatatanytime ifvutoeqjmi nghtv restrictions require It4.2 Basic Quadrature Rules 111
+Simpson 'sRule
+Next weconsider anintegration formula based onapproximating thefunction /bya
+quadratic polynomial thatagrees with/attheequally spaced points x0=a,x\=(a+b)/2,
+and*2=b.This formula isnoteasy togenerate geometrically ,although theapproximation
+isillustrated inFigure 4.3.
+Figure 4.3
+yi
+y=f(x)
+y=P M
+a=x0 x, x2=b x
+Toderive theformula ,weintegrate Po.uC*)-
+[P o.i,2(x)d x
+J a
+f W+fa+ba'~r -a
+\„ x ,,Ta+b](x-a)2'-m*+/«.-j-— C x-a)+f
+ba+b'
+a’2’h
+a
++fa’ajr'b\i(x-a)[(x-a)+{a-a-¥)\d x
+r,w, , ,/<*?>-m (b-a)2
+=f(a)(b-a)+ j z i
+2— a 2
+(^)-H=(*-«)/(«)+/
+,(J_\f/W-ZCS*)_/(-2*)-/(«)!rcfc~°)3_(*-a)3'
+V*—/1*? T|i 3 4-
+=(b-«)/("y*)+ [/<»-2/(^)+(fr-fl)3
+12'
+Copyright 2012 Cengagc Learning .AIRights Reversed May notbecopied ,canned ,orduplicated .inwhole orinp«.".Doctoelectronic rights.xvtic third pur.ycontent may bevuppreved rrom theeBook amtar cCh<xcn»l.Editorial nesie*h*>
+deemed Cutanysuppressed content does nottnaxrUXy alTcct theoverall learning experience .('engage [.camonrorntt theright 10remose additional conteatatanytime ifsubseqjcni nghts restrictions require It112 C H A P T E R 4 Numerical Integration andDifferentiation
+Thomas Simpson (1710-1761 )
+wasaself-taught mathematician
+who supported himself asa
+weaver during hisearly years.His
+primary interest wasprobability
+theory ,although in1750 he
+published atwo-volume calculus
+book entitled TheDoctrine and
+Application ofFluxions .Simplifying thisequation gives theapproximation method known asSimpson ’srule:
+s:f(x)d x%(b-a)
+6m+4/(^)+m.
+Anerror formula forSimpson ’srule involving (b— a)4canbederived byusing the
+error formula forthequadratic interpolating polynomial Po.\.i(x).However ,similar tothe
+case oftheMidpoint rule,theintegral ofthenext term intheNewton interpolatory divided -
+difference formula iszero.This implies thattheerror formula forthecubic interpolating
+polynomial /*0,1,2,3(*)canbeused toproduce anerror formula thatinvolves (b— a)5.When
+simplified ,Simpson ’srulewith thiserror formula isasfollows :
+Simpson 'sRule
+If/C4[a,b\ %thenanumber £in(a,b)exists with
+*b[f W d x
+J a(b-a)
+6f(a)+4/(*-£)+/(»/(4)(£)
+2880(b-a)5
+This higher power ofb-aintheerror term makes Simpson ’srulesignificantly superior
+totheMidpoint andTrapezoidal rules inalmost allsituations ,provided thatb-aissmall.
+This isillustrated inthefollowing example .
+Example 1Compare theMidpoint ,Trapezoidal ,andSimpson ’srules approximations to
+when/(*)is
+(a)x2 (b)x4(c)(x+1)-1
+(d)Vl+x2 (e)sinx (f)exJ:f(x)dx
+Solution On[0,2]theMidpoint ,Trapezoidal ,andSimpson ’srules have theforms
+Midpoint :ff(x)d x%2/(1),Trapezoidal :ff(x)d x ft*/(0)+/(2),
+Jo Jo
+and
+Simpson ’s:jff{x)d x«
+^[/(0)+4/(1)+/(2)].
+When f(x)=x2,they give
+Midpoint :[f(x)d x«2-1=2,Trapezoidal :[f(x)d x«024-22=4,
+Jo Jo1
+and
+Simpson ’s:[*f(x)d x*\[/(0)+4/(1)+/(2)]=V+4 l2+22)=JO 3 j 3
+Theapproximation from Simpson ’sruleisexact because itstruncation error involves /(4),
+which isidentically 0when f(x)=x2.
+Theresults tothree places forthefunctions aresummarized inTable 4.1.Notice that,
+ineach instance ,Simpson ’sruleissignificantly superior .
+Copyright 2012 Cengagc Learning .AIRights Reserved May notbecopied ,scanned ,orduplicated .inwhole orinpar.Doctoelectronic lights ,some third pur.ycontent may besuppress'd(ham theeBook and/oreClwptcrtsl .Editorial tesie*h*>
+deemed Cutanysuppressed content does notmaxtUly alTect theoverall [earning experience .('engage Learning reserves theright toremove additional conteatatanytime ifsubsequent rights restrictions require It.4.2 Basic Quadrature Rules 113
+Table 4.1(a) (b) (c) ( d) ( e) (0
+/(*) x2x4(X+1)-' \/l+*2 sin JC e*
+Exact value 2.667 6.400 1.099 2.958 1.416 6.389
+Midpoint 2.000 2.000 1.000 2.818 1.682 5.436
+Trapezoidal 4.000 16.000 1.333 3.326 0.909 8.389
+Simpson ’s 2.667 6.667 1.111 2.964 1.425 6.421
+Todemonstrate theerror terms fortheMidpoint ,Trapezoidal ,andSimpson ’smethods ,
+wewillfindbounds fortheerrors inapproximating >J1+x2d x.With f(x)=(l+x2)l/2,
+wehave
+=o+ijw ’ “ d =<TT^Tobound theerror oftheMidpoint method ,weneed todetermine maxo <*<2I/” (*)!This
+maximum willoccur ateither themaximum ortheminimum value off"on[0,2].Maximum
+andminimum values for/"on[0,2]canoccur only when x=0,x=2,orwhen/"(x)=0.
+Since f'\x)=0only when x=0,wehave
+max l/"(x)|=max {|/"(0)|,|/"(2)|)=max{l,5_3/2}=1.
+Soabound fortheerror intheMidpoint method is
+/"(£>
+24(b-a?
+The actual error iswithin thisbound ,since|2.958 — 2.818|=0.14 .FortheTrapezoidal
+method ,wehave theerror bound
+/"(f)
+12(b-a?<^(2— 0)3\=0.6,
+andtheactual error is12.958 -3.326|=0.368 .Weneed more derivatives forSimpson ’s
+rule:
+/(4)w=12x2— 3
+(l+x2)^and f{5)(x)45*-60x3
+(1+*2)9'2'
+Since f(5)(x)=0implies
+0=45*-60x3=15x(3-4*2),
+f(4)(x)hascritical points 0,±\/3/2.Evaluating thefourth derivative atthecritical points
+andendpoints wehave
+l/<4)(f)l<max|/(4)«|=max{|/<4>(0)|,|/<4)(N/3/2)|,|/(4,(2)|}
+0<x<2
+=max <768V79V5l=312401*125 f
+Copyright 2012 Cenytaoc Lcirni #*.AIRighb Rocncd May notbecopied .N.aitncd .ordaplicatod .»whole oempnn .Doc 10electronic itfhu .>omc third pur.ycontent may besupple-«dftem theeBook aml/ofcCh<xcn»l.Editorial toiew h*>
+deemed Cutany suppic-cdcontent dee>notmaterial yalTcct theiAera'.lIcamir .itexperience .C'cnitasc [.camon rexrvei therljtlu loremote additional contort atanytime ifwtoeqjcoi rights restrictions require It114 C H A P T E R 4 Numerical Integration andDifferentiation
+Theerror forSimpson ’sruleisconsequently bounded by
+/(4)(£)
+2880(b-a)5 3-2880(2-0)596
+28800.03 ,
+andtheactual error is|2.958 — 2.964|=0.006.
+Theerror formulas allcontain b— atoapower ,sothey aremost effective when the
+interval [a,bJissmall ,sothatb-aismuch smaller thanone.There areformulas thatcan
+beused toimprove theaccuracy when integrating over large intervals ,some ofwhich arc
+considered intheexercises .However ,abetter solution totheproblem isconsidered inthe
+next section .
+E X E R C I S E S E T 4 1
+l.
+2.
+3.
+4.
+5.
+6.
+7.
+8.
+9.
+10.
+11.
+12.UsetheMidpoint ruletoapproximate thefollowing integrals .
+a.[x*dx
+Jos
+c.
+e.
+8-f\.s
+Jx2\ixxdx
+['*2x
+Jx x2— 4
+ldx
+JCsinxdxdx
+e'dx.r*
+J o X-4
+4./V
+J o
+r.r*J o X2-4
+/ */4
+h./I
+Jodx
+e3xsinlxdx
+Usetheerror formula tofindabound fortheerror inExercise 1,andcompare thebound totheactual
+error.
+Repeat Exercise 1using theTrapezoidal rule.
+Repeat Exercise 2using theTrapezoidal rule andtheresults ofExercise 3.
+Repeat Exercise 1using Simpson ’srule.
+Repeat Exercise 2using Simpson ’sruleandtheresults ofExercise 5.
+Other quadrature formulas witherror terms aregiven by
+(i)/*f(x)dx=f[/(a)+3/(a+h)+3f(a+2h)+f(b)]-£/<*>«).where h=^;
+(u)£“ f(x)dx=f[/(a+h)+/(a+2/.)]+^/"(*),where h=
+Repeat Exercises 1using (a)Formula (i)and (b)Formula (ii).
+Repeat Exercises 2using (a)Formula (i)and (b)Formula (ii).
+TheTrapezoidal ruleapplied to/(x)dxgives thevalue 4,andSimpson ’srulegives thevalue 2.
+What is/(1)?
+TheTrapezoidal ruleapplied to f(x)dxgives thevalue 5,andtheMidpoint rulegives thevalue
+4.What value does Simpson ’srulegive?
+Find theconstants c0,c\,andx\sothatthequadrature formula
+ff(x)dx=co/(0)+c,/(x,)
+Jo
+gives exact results forallpolynomials ofdegree atmost 2.
+Find theconstants x0,x]tand C\sothatthequadrature formula
+f(x)dx=
+^/(*0)+Ci/( *!>
+gives exact results forallpolynomials ofdegree atmost 3.
+Copyright 2012 Ccngagc Learn in*.AIRights Reserved Mayr*xbecopied , wanned ,o*daplicated.»whole o tmpan.Doctoelectronic rights.some third pony content may besuppressed rrom theeBook and/orcOmptcrisl .Editorial nesiew h*>
+deemed Cutanysuppressed etntent decs notmaterial yalTcct theiAera'.lIcamir .itexperience .Ceng age[.camon reserves therijtlu lorerrxsse additional conceal atanytime i isubsequent rights restrictions require IL4.3 Composite Quadrature Rules 115
+13. Given thefunction /atthefollowing values :
+X 1.8 2.0 2.2 2.4 2.6
+f(x)3.12014 4.42569 6.04241 8.03014 10.46675
+a.Approximate /(x)dxusing each ofthefollowing .
+(i)theMidpoint rule (ii)theTrapezoidal rule (iii)Simpson ’srule
+b.Suppose thedata have round -offerrors given bythefollowing table:
+X 1.8 2.0 2.2 2.4 2.6
+Error inf(x)2x10"6-2x10“ -0.9x10“ -0.9x10“ 2x10“ 
+Calculate theerrors duetoround -offineach oftheapproximation methods .
+4.3 Composite Quadrature Rules
+Piecewise approximation isoften
+effective .Recall thatthiswas
+used forspline interpolation .The basic notions underlying numerical integration were derived intheprevious section ,
+butthetechniques given there arenotsatisfactory formost problems .Wesawanexample of
+thisattheendofthatsection ,where theapproximations were poor forintegrals offunctions
+ontheinterval [0,2].Toseewhy thisoccurs ,letusconsider Simpson ’smethod ,generally
+themost accurate ofthese techniques .Assuming that/eC4[a,b),Simpson ’smethod with
+itserror formula isgiven by
+ff(x)dx /(a)+4/(^)+/(t)(b-a)5
+2880/(4)(£)
+= +4/(a+h)+/00]-^/W(?)
+where h=(b-a)/2andfliessomewhere intheinterval (a,b).Since/eC4[a,b]
+implies that/(4)isbounded on[a,b\tthere exists aconstant Msuch that|/(4>(JC)|<M
+forallxin[a,b\.Asaconsequence ,
+*1/00+4/(.+*)+/(»>]-ff(x)dxh5
+— /<4)($)90JM,<<— h5.90
+Theerror term inthisformula involves M,abound forthefourth derivative of/,and
+h5
+tsowecanexpect theerror tobesmall provided that
+ thefourth derivative of/isnoterratic ,and
+ thevalue ofh=b— aissmall.
+Thefirstassumption wewillneed tolivewith,butthesecond might bequite unreasonable .
+There isnoreason ,ingeneral ,toexpect thattheinterval [a,b]over which theintegration
+isperformed issmall ,andifitisnot,theh5portion intheerror term willlikely dominate
+thecalculations .
+Wecircumvent theproblem involving alarge interval ofintegration bysubdividing the
+interval [a,b]intoacollection ofintervals thataresufficiently small sothattheerror over
+each iskept under control .
+Copyright 2012 Cenfajc Learn in*.AIR.(huRocncd Mayr*xbecopied.v.-aitned.o*implicated ,inwhole orinpar.Doctocjectronie rifhu.*wcthird pur.ycontent may besupplied rican theeBook and/orcChaptcnM .Editorial roiew h*>
+deemed CutanyMpprccscd content dce>notnuetlaXy afTcct theocerall Ieamir .itexperience .CcntJgc [.camon roenti theright Mremove additional conceal atanytime i!vubvcyjcm nghtv rotrictiots require It.

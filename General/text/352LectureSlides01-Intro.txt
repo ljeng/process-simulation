@@ -1,0 +1,141 @@
+The Cooper Union for the Advancement of Science and Art 
+ChE352 
+Numerical Techniques for Chemical Engineers 
+Professor Stevenson 
+Lecture 1 The Cooper Union for the Advancement of Science and Art 
+Professor Stevenson 
+Cooper Union 2011 Cornell 2016 
+The Cooper Union for the Advancement of Science and Art 
+My day job: Schrödinger, Inc 
+Electrolyte reacting with lithium metal The Cooper Union for the Advancement of Science and Art 
+Make a card to introduce yourself 
+J ames Stevenson 
+he/him 
+Coding comfort: 10/10 
+I want to learn more about biochemistry ●What is your name? 
+●What are your pronouns? 
+●Rate your comfort with coding (1-10) 
+●Topic you haven’t learned yet as an engineer, but want to? The Cooper Union for the Advancement of Science and Art 
+Things I Would Like From You 
+1.Bring problems to me ASAP 
+○Especially if you feel unprepared 
+○I might assume pre-reqs wrong 
+2.Remind me about jargon 
+○Some rare terms are common in my work 
+○Raise your hand when I use them in class 
+3.Be honest The Cooper Union for the Advancement of Science and Art 
+In 16 months, you will have a degree 
+that says “Chemical Engineering” on it 
+1.What does that mean? 
+2.What should you be able to do? 
+3.How do numerical methods & process 
+simulation fit in? The Cooper Union for the Advancement of Science and Art 
+A familiar kind of problem 
+What is the velocity profile v(r) of 
+a viscous fluid flowing in a pipe? 
+Assume radially symmetric, v=0 
+at the edges, vmax is at center 
+Side view Front view 
+V=0RThe Cooper Union for the Advancement of Science and Art 
+A familiar kind of problem 
+Differential equation General analytic solution 
+Solve for A & B 
+Side view Front view 
+V=0R
+Boundary conditions The Cooper Union for the Advancement of Science and Art 
+A familiar kind of problem 
+Differential equation General analytic solution 
+Solve for A & B 
+Side view Front view 
+V=0R
+Boundary conditions The Cooper Union for the Advancement of Science and Art 
+Slight change to the problem 
+What is the velocity profile v(r) of a 
+low-viscosity  fluid flowing in a pipe? 
+Side view Front view 
+V=0RThe Cooper Union for the Advancement of Science and Art 
+Slight change to the problem 
+No general analytic solution exists 
+outside of the simple laminar flow case 
+The Cooper Union for the Advancement of Science and Art 
+Why not use existing software? 
+•Whenever possible, you should! 
+•But... The Cooper Union for the Advancement of Science and Art 
+Why not use existing software? 
+•Whenever possible, you should! 
+•But... 
+•Numerical methods have hidden assumptions 
+•All software has unknown bugs, especially 
+technical software (narrow user base) 
+•Software makers  are often more in demand 
+than software users The Cooper Union for the Advancement of Science and Art 
+What to expect from this class 
+●~Weekly homework assignments 
+●One midterm exam 
+●One final project 
+Homework Midterm Final Project Class 
+participation 
+30% 30% 30% 10%
+●No more code than we need (but still a lot) 
+●Tools: Python language, Kaggle & Google 
+Colab notebooks The Cooper Union for the Advancement of Science and Art 
+Class materials 
+●Most topics are in your textbooks 
+●Topics that are part of the course, but NOT in 
+the textbooks, are labeled “Supp:” on the 
+syllabus 
+○I will give you supplemental sources as 
+needed 
+●Bring a laptop or tablet to class which you are 
+comfortable using to type code 
+●If you have issues getting a textbook or laptop to 
+use, let me know ASAP and I will help The Cooper Union for the Advancement of Science and Art 
+Office Hours 
+Wednesdays after class, 5:50pm - 6:20pm 
+Or by appointment (message me on Teams) 
+Email: james.stevenson@cooper.edu The Cooper Union for the Advancement of Science and Art 
+Coding environments 
+●Behind the scenes: in previous years, this class 
+has used a Python environment called Spyder 
+○Spyder runs on your laptop 
+○Each install is a little different 
+○Usually that doesn't matter, but in this class 
+we deal with error propagation 
+🦋
+ 🍃
+ 🌪
+The Cooper Union for the Advancement of Science and Art 
+Previous software experience 
+Show of hands: 
+●Who has used Google Colab? 
+●Who has used Kaggle? 
+●Who has used Github? 
+●Who has used Matlab (effectively)? 
+Any other software experience that might 
+be common among Cooper ChemEs? The Cooper Union for the Advancement of Science and Art 
+Coding with online notebooks 
+●Google Colab & Kaggle are based on a popular 
+Python environment called "Jupyter notebooks" 
+●Can write plain code, or embed chunks of 
+runnable code (called "cells") inside an 
+interactive document 
+●Code runs on the remote server, so everyone's 
+environment can be identical 
+○Used for machine learning competitions 
+○Also great for this kind of class The Cooper Union for the Advancement of Science and Art 
+Set up Kaggle 
+•Make a free account at kaggle.com 
+•Send me your Kaggle handle via Teams 
+–Mine is allaboutchemistry 
+•Go to kaggle.com/learn/python 
+The Cooper Union for the Advancement of Science and Art 
+Python warmup 
+●We need a baseline of Python skills for the 
+remainder of the course 
+●I will provide class time and help to work on 
+kaggle.com/learn/python  - today, next class, 
+and at office hours 
+●Graded by automated tests: you need all right 
+answers, but the only penalty is to keep trying 
+●Any parts you don't finish in class will become 
+HW #1 

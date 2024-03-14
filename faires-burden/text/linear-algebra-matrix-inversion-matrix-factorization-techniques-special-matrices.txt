@@ -1,0 +1,1304 @@
+6.4 Linear Algebra andMatrix Inversion 247
+9. Suppose that
+2x,4-x2+3*3=1
+4*i4-6x2+8x3=5
+6x1-t-ax24-IOX 3=5
+with|or|<10.Forwhich ofthefollowing values ofawillthere benorowinterchange required when
+solving thissystem using scaled partial pivoting ?
+a. or=6 b.a=9 c. or=— 3
+6.4 Linear Algebra andMatrix Inversion
+Early inthischapter weillustrated theconvenience ofmatrix notation forthestudy of
+linear systems ofequations ,butthere isawealth ofadditional material inlinear algebra
+thatfinds application inthestudy ofapproximation techniques .Inthissection weintroduce
+some basic notation andresults thatareneeded forboth theory andapplication .Allthe
+topics discussed here should befamiliar toanyone who hasstudied matrix theory atthe
+undergraduate level.This section could then beomitted ,butitisadvisable toreadthesection
+toseetheresults from linear algebra thatwillbefrequently called upon forservice ,andto
+beaware ofthenotation being used.
+Two matrices AandBareequal ifbothareofthesame size,say,nxm,andifay=by
+foreachi=1,2,...,nandj=1,2,...»m.
+This definition means ,forexample ,that
+23‘
+-1
+71
+0
+because they differ indimension .
+Matrix Arithmetic
+IfAandBarenxmmatrices and Aisarealnumber ,then
+ thesum ofAandB,denoted A4-B,isthenxmmatrix whose entries areay4-by,
+ thescalar product ofAandA,denoted AA,isthenxmmatrix whose entries are Aay.
+Example 1Determine A4-Band AAwhen
+A=2-1 7
+31 0*42-
+01 6’a n d A=-2.
+Solution Wehave
+andA+B=‘2 4-4-1+27-8 61-1
+3 4-0 1+10+6 32 6
+-2(2)— 2(— 1)-2(7) -4 2-14-2(3)-2(1)-2(0) -6-2 0
+Copyright 2012 Cengagc Learn in*.AIRight*Reserved Mayr*xbecopied.scanned .o*implicated ,inwhole orinpa.".Doctocjectronie rifhu.*wcthird pur.ycontent may besupplied rican theeBook and/orcChaptcnM .Editorial roiew h*>
+deemed CutanyMpprcucd content dce>notmaterialy afTcct theoverall [camire experience .Cette jpeI.cjm mgroervet theright Mremove additional conceal atanytime i!vutoeqjrni nghc >restrictions require It.248 C H A P T E R 6 Direct Methods forSolving Linear Systems
+Matrix -Matrix Products
+IfAisannxmmatrix andBisanmxpmatrix ,
+ thematrix product ofAandB,denoted AB,isannxpmatrix Cwhose entries cyare
+given by
+m
+Cij=^aikbkj =0,1+0,2^2;H Haimbmjt
+k=1
+foreach i=1,2,...ftandy=1,2,...,p.
+Thecomputation ofc,ycanbeviewed asthemultiplication oftheentries ofthe iihrow
+ofAwith corresponding entries intheythcolumn ofB,followed byasummation ;thatis,
+a«2»   .Aim]K
+bij
+b'mj.=ICij],
+where
+m
+=ai\b\j+o,2^2;H Haimbmj =^alkbkj.
+*=i
+This explains why thenumber ofcolumns ofAmust equal thenumber ofrows ofBforthe
+product ABtobedefined .
+Thefollowing example illustrates acommon matrix multiplying operation inthecase
+when thematrix ontheright ofthemultiplication hasonly onecolumn ,thatis,itisacolumn
+vector.
+32'
+Example 2Determine theproduct AbifA=-1 1
+64and b=J-1
+Solution Because Ahasdimension 3x2andbhasdimension 2x1,theproduct isdefined
+andis3x1,thatis,avector with three rows.These are
+3(3)+2(— 1)=7,(— 1)(3)+!(-!)=-4,and 6(3)+4(-l)=14.
+So
+'32'
+'X'7'
+-11j-1=-4
+64 14
+Inthenext example weconsider product operations invarious situations .
+Example 3Determine allpossible products ofthematrices
+32'
+21-1
+31 22101'
+A=-11,B= ,c=-1321
+14 1120and
+Copyright 2012 Cc«£»fcLearn in*.AIR.(huReversed Mayr*xbecopied ,canned ,ocdaplicated.»whole oempan.Doctoelectronic rtphtv.vonte third pony content may besuppressed ftem theeBook and/orcClupccnM .Editorial roiew h*>
+deemed Cutanysuppressed content dees notimxttaly alTect theoverall leamir*experience .C'c»i|tape Learnmp reserves thenjtht 10remove additional conceal atanytime i isubseqjcot npht »restrictions require It6.4 Linear Algebra andMatrix Inversion 249
+The term diagonal applied toa
+matrix refers totheentries inthe
+diagonal thatrunfrom thetopleft
+entry tothebottom right entry.
+IllustrationSolution Thesizes ofthematrices are
+A:3x2,B:2x3,C:3x4,a n d D:2x2.
+Theproducts thatcanbedefined ,andtheir dimensions ,are:
+AB:3x3,BA:2x2,AD:3x2,BC:2x4,DB:2x3,a n d DD:2x2.
+These products are
+AB=‘1251"
+103, BA=4 1, AD= o1r»
+— i
+145710 159-5
+BC=2403
+786410-
+1i-4and DD=-1 0
+0-1
+Square Matrices
+Wehave some special names andnotation formatrices with thesame number ofrows and
+columns .
+ Asquare matrix hasthesame number ofrows ascolumns .
+ Adiagonal matrix isasquare matrix whose only nonzero elements arealong themain
+diagonal .SoifD=[</,;]isadiagonal matrix ,then djj=0whenever i#j.
+ Theidentity matrix oforder n,In=[6j;],isadiagonal matrix with 1salong thediagonal .
+That is,
+In'10 0'
+o i
+Lo\\0
+   '0‘l.
+When thesizeof/„ isclear,thismatrix isgenerally written simply as7.Forexample ,
+theidentity matrix oforder three is
+'1 0 0'
+01 0 .
+001
+IfAisanynxnmatrix and 7=/„ ,then A1=IA=A.
+Consider theidentity matrix oforder three.
+/3=10 0
+010
+0 0 1
+IfAisany3x3matrix ,then
+A/3«11«12«13'10 0"«11«12«13
+«21«22«23 010= «21«22«23
+«31«32«33 001 fl31a32«33
+Copyright 2012 Cengagc Learn in*.AIRights Reserved Mayr*xbecopied.scanned .ocimplicated ,inwhole orinpa.".Doctocjectronie rights.some third pur.ycontent may besupplied rican theeBook and/orcChapccmi .Editorial review h*>
+deemed Cutanysuppressed content does notmaterialy alTcct theioera .1learning experience .('engage [.cammu reserves theright 10remove additional conceal atanytime ifsubsequent rights restrictions require It.250 C H A P T E R 6 Direct Methods forSolving Linear Systems
+Atriangular matrix isonethat
+hasallitsnonzero entries either
+onandabove (upper )oronand
+below (lower )themain diagonal
+Amatrix isdiagonal precisely
+when itisboth upper -and
+lower-triangular .An n xnupper -triangular matrix U=[K,;]hasallitsnonzero entries onorabove
+themain diagonal ,thatis,foreach j=1,2,...,n,theentries
+Uij=0,foreach i=j+1,j+2,...,n.
+Inasimilar manner ,alower -triangular matrix L=[/l;]hasallitsnonzero entries onor
+below themain diagonal ,thatis,foreach j=1,2,...,n,theentries
+lij=0,foreach i=1,2,...,j— 1.
+(Adiagonal matrix isboth upper andlower triangular .)
+InExample 3wefound that,ingeneral ,AB^BA,even when both products are
+defined .However ,theother arithmetic properties associated with multiplication dohold.
+Forexample ,when A,B,andCarematrices oftheappropriate sizeand Aisascalar ,we
+have
+ A(BC)=(Afl)C,
+ A(B+C)=AB+AC,and
+ A(Atf)=(AA)#=A(Afl).
+Inverse Matrices
+Theword singular means
+something thatdeviates from the
+ordinary .Hence asingular matrix
+docs nothave aninverse .Certain nxnmatrices have theproperty thatanother nxnmatrix ,which wewilldenote
+A-1,exists with AA-1=A-1A=/.Inthiscase Aissaidtobenonsingular ,o rinvertible ,
+andthematrix A-1iscalled theinverse ofA.Amatrix without aninverse iscalled singular ,
+ornoninvert ible.
+Example 4Let
+1 2-1'H i-n
+A= 21 0-11 2a n d B=
+i
+Wl
+—vOlX*1
+U»l
+—vOI*
+— U*l
+—vOlbJ
+ 
+Show thatB=A” 1,andthatthesolution tothelinear system described by
+X\+2x2-*3=2,
+2x{+x2 =3,
+— x\+xi+2x3=4.
+isgiven bytheentries inBb,where bisthecolumn vector with entries 2,3,and4.
+Solution First note that
+1 2-1'[-1I-1 1'1 0 0'
+AB= 21 0-11 2 l 1
+L-jiiJ— 010
+0 0 1
+Inasimilar manner ,BA=/3,soAand Bareboth nonsingular with B=A-1and
+A=B~K
+Now convert thegiven linear system tothematrix equation
+1 2-1'*i" '2'
+21 0 X2= 3-1 1 2.X3.4
+Copyright 2012 Cenfajc Learn in*.AIR.(huRocncd Mayr*xbecopied.v.-aitned.o*implicated ,inwhole orinpar.Doctocjectronie rifhu.*wcthird pur.ycontent may besupplied rican theeBook and/orcChaptcnM .Editorial roiew h*>
+deemed CutanyMpprccscd content dce>notnuetlaXy afTcct theoverall learnireexperience .Cenit apeI.cm/inroctvev theright Mremove additional conceal atanytime i!vutoeqjmi right*restriction*require It.6.4 Linear Algebra andMatrix Inversion 251
+Illustrationandmultiply both sides byB,theinverse ofA.Then wehave
+withB(Ax)=Bb,
+B(Ax)=(BA )x=2
+9
+4
+9
+3
+9I~k_I9
+3
+92
+9
+3
+9-12-1
+21
+-110
+2X=X
+and
+Bb=I
+1_!9
+i1-I
+i
+59
+12
+3
+47
+9
+139
+5
+This implies thatx=Bbandgives thesolution x\=7/9,x2=13/9,and*3=5/3.
+Thereason forintroducing thismatrix operation atthistime isthatthelinear system
+aux\+a]2x2+   +a]nxn=bu
+a21*1+022*2+ 1-a2n X n=b2y
+an\X\+an2*2+ 1-annxn=bny
+canbeviewed asthematrix equation Ax=b,where
+'auan   a\n’*i' 'bi
+A=anan    a^,x=*2,and b=b2
+.an,an2**’ann .- .bn.
+IfAisanonsingular matrix ,then thesolution xtothelinear system Ax=bisgiven
+by
+x=A!(;4X)=A*b.
+Ingeneral ,however ,itismore difficult todetermine A"1than itistosolve thesystem
+Ax=bbecause thenumber ofoperations involved indetermining A~]islarger .Even so,
+itisuseful from aconceptual standpoint todescribe amethod fordetermining theinverse
+ofamatrix .
+Todetermine theinverse ofthematrix
+A=12-1
+21 0-1 1 2
+Copyright 2012 Cc«£»fcLearn in*.AIR.(huReversed May r*xbecopied ,canned ,o*daplicated.»whole oempan .Doc toelectronic rtphtv .vontc third pony content may besupposed ftcan theeBook aml/ofcCh<xcn»l.Editorial roiew h*>
+deemed Cutanysupprewed content doev notimxttaly alTect theoverall leamir*experience .C'c»i|tape Learn oprexxvev thenjtht toremove additional conceal atanytime i ivutoeqjrni nphtv rotrictionv require It252 C H A P T E R 6 Direct Methods forSolving Linear Systems
+letusfirstconsider theproduct AB,where Bisanarbitrary 3x3matrix .
+AB=12-1
+21 0-1 1 2b\\b\2613
+^21bi2623
+bi\by2633
+b\1+2bi\— 63I &12+2/?22— ^>32^13+2623— 633
+= 2fcn+fc2l 2612+622 2613+623
+— 611+621+2631 — 612+622+2632 — 613+623+2633
+IfB=A"1,then AB=/,sowemust have
+611+2621-631=1, 612+2622— 632=0,
+26n+621 =0, 2612+622 =1»
+— 611+621+2631=0,— 612+622+2632=0,
+613+2623— 633=0
+2613+6 2 3 =0
+— 613+623+2633=1
+Notice thatthecoefficients ineach ofthesystems ofequations arethesame ;theonly change
+inthesystems occurs ontheright sideoftheequations .Asaconsequence ,thecomputations
+can beperformed onthelarger augmented matrix ,which isformed bycombining the
+matrices foreach ofthesystems
+12-1 10 0'
+21 0 0 10-1 1 2 0 0 1
+First,performing (£2— 2£j)-(£1)and(£3+E\) (£3)gives
+'1 2-1 10 0'
+0-3 2-210
+0 3 1 101
+Next,performing (£3+£2)-(£3)produces
+'1 2-1 10 0'
+0-3 2-210
+0 0 3-111
+Backward substitution isperformed oneach ofthethree augmented matrices ,
+1 2-1 f'1 2-1 0"1 2-1 0'
+0-3 2-2 0-3 2 190-3 2 0
+0 0 3-1 0 0 3 1 0 0 3 1
+toeventually give
+caiov1II-cT b\2— 1» 613=-
+II bn=— and 623=|,
+£II1
+U»|
+—bn=5, £>33=} 
+These aretheentries ofA1:
+“ ii1‘-2 5-1'
+i-5l 4-1 29 9 9
+1 1 1“ 9-3 3 3
+3 3 3J(6.3)
+Copyright 2012 Cenfajc Learn in*.AIRights Reversed Mayr*xbecopied.scanned .ocimplicated ,inwhole orinpar.Doctocjectronie rifhu.some third pur.ycontcir.may besuppressed rican theeBook and/orcChapccriM .Editorial review h*>
+deemed Cutanysuppressed content docs nottnaxrUXy alTcct theioera .1Icamir .itexperience .Ccagagc [.cannon reserves theright 10remove additional eonteatatanytime ifsubsequent rights restrictions require It.6.4 Linear Algebra andMatrix Inversion 253
+Illustration
+Transpose FactsTranspose ofaMatrix
+ Thetranspose ofannxmmatrix A=[a,y]isthemxnmatrix A1=[ay,].
+ Asquare matrix Aissymmetric ifA=A1.
+Thematrices
+A='72 0'
+35-1.B='2 4 7
+3-5-1,C=6 4-3'
+4-2 0
+05-6 -3 0 1
+have transposes
+'7 3 0‘ '2 3'
+A'= 2 5 5 ,Bl= 4-5.C'=
+0-1-6 7-1
+Thematrix Cissymmetric because Cl— C.Thematrices Aand Barenotsymmetric .
+The transpose notation isconvenient forexpressing column vectors inamore compact
+manner .Because thetranspose ofacolumn vector isarow vector .
+thecolumn vector x=*2isgenerally written intextas x=(xj,*2»   ,x„ )‘.
+L
+Thefollowing operations involving thetranspose ofamatrix hold whenever theoper-
+ation ispossible .
+(i)(A')'=A. (ii){AA-BY=A'+B'.
+(iii)(AB),=B,At. (iv)IfA-1exists ,(A-1)'=(A')-1.
+Matrix Determinants
+The determinant ofasquare matrix isanumber thatcanbeuseful indetermining the
+existence anduniqueness ofsolutions tolinear systems .Wewilldenote thedeterminant of
+amatrix AbydetA,butitisalso common tousethenotation |A|.
+Copyright 2012 Cc«£»fcLearn in*.AIR.(huReversed Mayr*xbecopied ,canned ,o*duplicated.»whole otmpan .Doctoelectronic rifhu.vomc third pony content may besupposed ftem theeBook and/orcCh<xcn»l.Editorial roiew h*>
+deemed Cutanyvuppicwcd content dee>nottmxtlaly alTecc theoverall Icamir .itexperience .Ccri|tapeLearn xiprexxvev therljtlu loremote additional conceal atanytime i ivutoeqjroi nghtv rotrictionv require It254 C H A P T E R 6 Direct Methods forSolving Linear Systems
+Determinant ofaMatrix
+(i)IfA=[a]isa1x1matrix ,then detA=a.
+(ii)IfAisannxnmatrix ,theminor Af,;isthedeterminant ofthe(n— 1)x
+(n— 1)submatrix ofAobtained bydeleting thei\hrowand jthcolumn of
+thematrix A.
+Then thedeterminant ofAisgiven either by
+orbydetA=Yl-iy+JatjMij forany i=1,2,...,a,
+y=i
+detA=y>1y+'ajjMjj foranyj=1,2,....n.
+j-i
+Thenotion ofadeterminant
+appeared independently in1683
+inJapan andEurope ,although
+neither Takakazu Scki Kowa
+(1642-1708 )norGottfried
+Leibniz (1646-1716 )appear to
+have used theterm determinant .Tocalculate thedeterminant ofageneral nxn matrix byexpanding byminors requires
+0(n!)multiplications /divisions andadditions /subtractions .Even forrelatively small values
+ofn,thenumber ofcalculations becomes unwieldy .Fortunately ,theprecise value ofthe
+determinant isseldom needed ,andthere areefficient ways toapproximate itsvalue .
+Although itappears thatthere arc2ndifferent definitions ofdetA,depending onwhich
+roworcolumn ischosen ,alldefinitions give thesame numerical result .Theflexibility inthe
+definition isused inthefollowing example .Itismost convenient tocompute detAacross
+therowordown thecolumn with themost zeros.
+Example 5Find thedeterminant ofthematrix
+'2-1 3 0’
+, 4-2 7 0A=-3-41 5
+6-6 8 0
+using theroworcolumn with themost zero entries .
+Solution Tocompute detA,itiseasiest tousethefourth column because three ofitsentries
+are0.
+detA=fll4(— 1)5A/14+fl24(— l)6Af24+fl34(— 1)7A/34+044(-1)8A/44=
+Eliminating thethird row andthefourth column ofAandexpanding theresulting 3x3
+matrix byitsfirst rowgives
+detA=-5det2-1 3
+4-27
+6-68
+=-5{2d e t-27
+-68— (— 1)det47
+68+3dete3]}
+=-5[2(— 16+42)+(32-42)+3(-24+12)]=-30.
+The following properties ofdeterminants areuseful inrelating linear systems and
+Gaussian elimination todeterminants .
+Copyright 2012 Cc«£»fcLearn in*.AIRighb Rescued May rotbecopied ,canned ,ocdaplicated.»whole oempan .Doc 10electronic ttfht ».*wcthird pony content may besuppressed riom sheeBook and/orcCh<xcn»l.Editorial roiew h*>
+deemed Cutanysuppressed content dees notmaterial yalTect theioera .1leamir*experience .C'enitapc Learn xipreserves thert|>httoremose additional conceal atanytimeiisuhvcqjcm rights restrictions require It6.4 Linear Algebra andMatrix Inversion 255
+Determinant Facts
+Suppose Aisannxnmatrix :
+(i)Ifanyroworcolumn ofAhasonly zero entries ,then detA— 0.
+(ii)IfAisobtained from Abytheoperation (£*) ( £*),with i^k,then
+detA=-detA.
+(iii)IfAhastworows ortwocolumns thesame ,then detA=0.
+(iv)IfAisobtained from Abytheoperation (A£,)-*(£, ),thendetA=kdetA.
+(v)IfAisobtained from Abytheoperation (£,+A£*)-(£,)with i^k,
+then detA=detA.
+(vi)If£isalsoannxnmatrix ,then detA£=detA detB.
+(vii)detA'=detA .
+(viii)IfA-1exists ,then detA-1=*.detA
+(ix)IfAisanupper triangular ,lower triangular ,ordiagonal matrix ,then
+detA=flu «22  *ann  
+Example 6Compute thedeterminant ofthematrix
+2 1-1 1‘
+.110 3A=-1 2 3-1
+3— i— i 2
+using Determinant Facts (ii),(iv),(v),and(ix),anddoing thecomputations inMATLAB .
+Solution Matrix Aisdefined inMATLAB by
+A*[21-11;1103;-123-1;3-1-12]
+Wewillusetheoperations inTable 6.2tofirstplace thematrix inupper -triangular form.
+Then wecanusethefinal determinant facttocontain theresult from theentries onthe
+diagonal .Wehave used some ofthese steps toillustrate thecommands inMATLAB .For
+example ,thefirstoperation would notnormally beperformed when placing thematrix in
+upper -triangular form.
+Table 6.2Operation MATLAB Command Effect
+-*£i Aid ,:)-A(l,:)/2 detA1=1detA
+Ei— E\— Ei A2(2,:)=A1(2,:)-Al(l,:) detA2=detA1=1detA
+£3+E,-£3 A3(3,:)=A2(3,:)+A2(l,:) detA3=detA2=
+^detA
+£4-3£j-£4 A4(4,:)aA3(4,:)-3*A3(l,:) detA4=detA3=\detA
+2£2-£2 A5(2,:)=2*A4(2,:) detA5=2detA4=detA
+tUJmin1en A6(3,:)=A5(3,:)-2.5*A5(2,:) detA6=detA5=detA
+£4+
+^£2“ £4 A7(4,:)=A6(4,:)+2.6*A6(2,:) detA7=detA6=detA
+£3£4 B=A7(3,:),A8(3,:)=A7(4,:),A8(4,:)=B detA8=-detA7=— detA
+Copyright 2012 Cenfajc Learn in*.AIRights Reversed Mayr*xbecopied.wanned .ocimplicated ,inwhole orinpar.Doctoelectronic rifhu.some third pur.ycontent may besupplied rican theeBook and/orcChaptcnM .Editorial review h*>
+deemed Cutanysuppressed content does notntaxtUly alTccc theoverall Icamii?experience .Ccagagc [.camme reserves theright 10remove additional conceal atanytime ifvubvcqjem rights restrictions require It256 C H A P T E R 6 Direct Methods forSolving Linear Systems
+After these operations areperformed ,thematrix willhave theform
+AS=42 2 2011 5
+00 3 13
+00 0-13
+By(ix),detAS=1 1 3(-13)=-39,sodetA=-delAS=39.
+The keyresult relating nonsingularity ,Gaussian elimination ,linear systems ,andde-
+terminants isthatthefollowing statements areequivalent .
+Equivalent Statements about ann xnMatrix A
+(i)Theequation Ax=0hastheunique solution x=0.
+(ii)Thesystem Ax=bhasaunique solution foranyn-dimensional column
+vector b.
+(iii)Thematrix Aisnonsingular ;thatis,A-1exists .
+(iv)detA/0.
+(v)Gaussian elimination with rowinterchanges canbeperformed onthesystem
+Ax=bforanyn-dimensional column vector btofindtheunique solution x.
+MATLAB hasnumerous commands thatcandirectly perform operations onmatrices .
+Forexample ,formatrices AandBandscalar a,when theoperations arepossible ,the
+following MATLAB commands canbeused.
+ Toadd AandB:A+B  Tomultiply AandB:A*B
+ Tomultiply Abya;a*A  Toobtain thetranspose ofA:A’
+ Toobtain theinverse ofA:inv(A)  Tofindthedeterminant ofA:det(A)
+EXERCISE SET 6.4
+1. Compute thefollowing matrix products .
+10 0‘ ‘1 0 0'1 00‘1-12
+a.-1 10  2 2 0 b. 2 10  0 13
+231 1-11 -2-11 0 0 2
+'1 0 0'i0 0'2-14‘ »3-34‘
+c. 0 10 . 2 10 d. 0-12 .0 11
+0-21-30 1 0 03 0 02
+2. Forthefollowing matrices :
+i.Find thetranspose ofthematrix .
+ii.Determine which matrices arenonsingular andcompute their inverses .
+4 2 6‘‘12 0'
+3 0 7 b. 21-1-2-1-3 31 1
+Copyright 2012 Cenpapc Learn in*.AIR.(huReversed May notbecopied ,canned ,o*duplicated.»whole oempan.Doctoelectronic rifhu.vomc third pony content may besupposed ftem theeBook and/orcCh<xcn»l.Editorial roiew h*>
+deemed Cutanyvuppicwcd content dee>notmaterial yalTect theoverall Icamir .itexperience .C'crtitape l.camzip reserve*thertpht loremote additional conceal atanytime i ivuhvajjcM nphtv roirictionv require It6.4 Linear Algebra andMatrix Inversion 257
+‘400 11-1 1'
+000 12-4-2
+003a.21 1 5-10-2--4
+'40 0 0' '2 012
+6700 r1 1 02
+911 10i.2-131
+541 1 3-143
+3. Compute thedeterminants ofthematrices inExercise 2andthedeterminants oftheinverse matrices
+ofthose thatarenonsingular .
+4. Consider thefour3x3linear systems having thesame coefficient matrix :
+2x\-3X2+*3=2, 2x\— 3X2+*3=6,
+*i+x2-x3=-1, X\4"x2-x3=4,
+—Xj+*2—3x3=0,—Xi+ X2-3x3=5,
+2xi-3x2+ X3=0, 2xi-3x2+xy=-l,
+X|4*X2- X3=1, X|4-X2-x3=0,
+— x[+x2-3X3=-3,-x,+x2-3x3=0.
+a.Solve thelinear systems byapplying Gaussian elimination totheaugmented matrix
+2-3 1 26 0-1'
+1 1-1-14 1 0-1 1-3 05-3 0
+b.Solve thelinear systems byfinding andmultiplying bytheinverse of
+A=2-3 1'
+1 1-1-1 1-3
+c.Which method requires more operations ?
+5. Show thatthefollowing statements aretrueorprovide counterexamples toshow theyarenot.
+a.Theproduct oftwosymmetric matrices issymmetric .
+b.Theinverse ofanonsingular symmetric matrix isanonsingular symmetric matrix .
+c.IfAandBarenxnmatrices ,then (AB)‘=A'B'.
+6. a.Show thattheproduct oftwonxnlower triangular matrices islower triangular .
+b.Show thattheproduct oftwonxnupper triangular matrices isupper triangular .
+c.Show thattheinverse ofanonsingular nxnlower triangular matrix islower triangular .
+7. Thesolution byCramer ’srule tothelinear system
+011*1+012*2+ <*13*3=
+021*14-022*2+023*3=b2,
+031*1+032*2+033*3=^3
+has
+*1— detDb\012 0|3
+bl 022 023
+by 032 033
+*2-detD011^1013
+021 b20 2 3
+031 by 033D’
+Di
+D'
+Copyright 2012 Cenfajc Learn in*.AIRights Reversed Mayr*xbecopied.vcaitncd .ocimplicated ,inwhole orinpa.".Doctocjectronie rifhu.some third pur.yCOMCK may besuppressed ftem theeBook and/orcChapccriM .Editorial review h*>
+deemed Cutanysuppre-edcontent docs nottnaxrUXy alTcct theioera .1Icamir .itexperience .Ccagagc [.camonreserves theright toremove additional eonteatatanytime iisuhvcqjcM rights restrictions require It258 C H A P T E R 6 Direct Methods forSolving Linear Systems
+and
+*31.— detDan ax2bx
+a2\a22b2
+Oil ay2byDy
+D'
+where
+D=detflll fl12 al3
+a2Xan a23
+on o32a33
+a.UseCramer ’sruletofindthesolution tothelinear system
+2xi+3*2-x3=4,
+*i— 2*2+*3=6,
+*i—12*2+5*3=10.
+b.Show thatthelinear system
+2*i+3*2-*3=4,
+*i-2*2+*3=6,
+*i-12*2+5*3=9
+does nothave asolution .Compute D\,D2,andD3.
+c.Show thatthelinear system
+2*,+3*2-*3=4,
+*i-2*2+*3=6,
+— *i— 12*2+5*3=10
+hasaninfinite number ofsolutions .Compute Dx,D2,and Dy.
+d.Suppose thata3x3linear system with D— 0hassolutions .Explain why wemust also have
+D\— D2=Dy=0.
+8. Inapaper entitled “ Population Waves ,"Bemadelli [Ber]hypothesizes atype ofsimplified beetle ,
+which hasanatural lifespan of3years .Thefemale ofthisspecies hasasurvival rateof\inthefirst
+year oflife,hasasurvival rateof|from thesecond tothird years ,andgives birth toanaverage ofsix
+newfemales before expiring attheendofthethird year.Amatrix canbeused toshow thecontribution
+anindividual female beetle makes ,inaprobabilistic sense ,tothefemale population ofthespecies
+byletting atJinthematrix A=[ai;1denote thecontribution thatasingle female beetle ofagejwill
+make tothenext year’sfemale population ofagei;thatis,
+A=0 0 6
+J0 0
+0A0
+a.Thecontribution thatafemale beetle makes tothepopulation 2years hence isdetermined from
+theentries ofA:,of3years hence from A3,andsoon.Construct A2and A3,andtrytomake
+ageneral statement about thecontribution ofafemale beetle tothepopulation innyears ’time
+foranypositive integral value ofn.
+b.Useyour conclusions from part (a)todescribe what willoccur infuture years toapopulation
+ofthese beetles thatinitially consists of6000 female beetles ineach ofthethree agegroups .
+c.Construct A~landdescribe itssignificance regarding thepopulation ofthisspecies .
+Cop>?i£tu2012 Cc«£»fcLearn in*.AIR.(huRocncd Mayr*xbecopied ,canned ,o*daplicaied.»whole o»mpan .Doctoelectronic rifhu.*wcthird pony contcac may besoppre ^tedftem theeBook and/orcCh<xcn»l.Editorial roiew h*>
+deemed CutanyMpprccscd content dee>notimtctlaly alTecc theoverall Icamir .itexperience .C'enitape l.camzip roervei thertpht lorenxwe additional conceal atanytime i isubvoyjem npht »roirletionc require IL6.4 Linear Algebra andMatrix Inversion 259
+9. Thestudy offood chains isanimportant topic inthedetermination ofthespread andaccumulation
+ofenvironmental pollutants inliving matter .Suppose thatafood chain hasthree links.Thefirstlink
+consists ofvegetation oftypes V\,V2,...,vn,which provide allthefood requirements forherbivores of
+species hlth2,...,hminthesecond link.Thethird linkconsists ofcarnivorous animals ci,c2,...,c*,
+which depend entirely ontheherbivores inthesecond linkfortheir food supply .Thecoordinate ay
+ofthematrix
+0||0J2* *a\m
+a2la22    02*
+.0»!10*2*’*0fl«
+represents thetotal number ofplants oftype u,eaten bytheherbivores inthespecies hj,whereas
+byin
+b\\b\2   b[k
+b2\b22    bu
+.bmi bm2    bmk
+describes thenumber ofherbivores inspecies hithataredevoured bytheanimals oftype cj.
+a.Show thatthenumber ofplants oftype v,thateventually endupintheanimals ofspecies Cjis
+given bytheentry intheithrowand y'thcolumn ofthematrix AB.
+b.What physical significance isassociated with thematrices A-1,B and(AB)~]=B~lA~lf!
+10. InSection 3.6wefound that theparametric form (x(t),y(t))ofthecubic Hermite polynomials
+through (x(0),y(0»=(x0,y0)and(*(1),y(l))=(xlty,)with guidepoints (*0+or0,y0+fio)and
+(*i-Gfi,yi-^|),respectively ,isgiven by
+x(t)=[2(*o-Xi)+(a0+a,)]f3+[3(x,-jq,)-cr,-2a<,]r2+a0t+x0
+and
+y<»)=[2(>b-y,)+(A+A)l»3+[3(y.-y„ )-A-2Al»2+A*+y0-
+TheB6ziercubic polynomials have theform
+Jc(f)=[2(xo— *i)+3(ao+ai)]f3+[3(*i-xo)-3(ai+2ao)]f2-f3ao*+xo
+and
+y(t)=(2(yo—yi)+3(fio4-0i)]t3+[3(yi—yo)—3(/?i+2ffa)]r+3fot+yo.
+a.Show thatthematrix
+7 4 40-6-3-60A0 0 30
+0 0 0 1
+maps theHermite polynomial coefficients onto theBdzier polynomial coefficients ,
+b.Determine amatrix Bthatmaps theB6zierpolynomial coefficients onto theHermite polynomial
+coefficients .
+11. Consider the2x2linear system (A+i/?)(x+iy)=c+idwith complex entries incomponent form:
+(flu+i*ii)(xi+iyi)+(0i2+ibl2)(x2+iy2>=c,+idu
+(02i+ib2i)(xt+iyi)+(022+ib22)(x2+i'y2)=c2+id2.
+Copyright 2012 Cengagc Learning .AIRights Reversed May notbecopied ,canned ,orduplicated .inwhole orinp«.".Doctoelectronic rights.xvtic third pur.ycontent may bevuppftved rrom theeBook and/wcCh<xcn»l.Editorial roiew h*>
+deemed Cutanysuppressed content does nottnaxrUXy alTcct theoverall learning experience .Collage [.camonreserve*theright*>rerrxyve additional conteatatanytime ifsubseqjcnt right*restrictions require It2 6 0 C H A P T E R 6 Direct Methods forSolving Linear Systems
+a.Usetheproperties ofcomplex numbers toconvert thissystem totheequivalent 4x4reallinear
+system
+Real part: Ax-By=c,
+imaginary part: Bx+Ay=d.
+b.Solve thelinear system
+(1-2i)(x\+*>,)+(3+2i)(*2+iy2)=5+2/,
+(2+i)(x,+!>,)+(4+3/)(X2+iy2)=4-i.
+6.5Matrix Factorization
+Matrix factorization isanother of
+theimportant techniques that
+Gauss seems tobethefirstto
+have discovered .Itisincluded in
+histwo-volume treatise on
+celestial mechanics Theoria
+motuscorporum coelestium in
+sectionibus conicis Solem
+ambientium ,which was
+published in1809.Gaussian elimination istheprincipal toolinthedirect solution oflinear systems ofequations ,
+soitshould benosurprise thatitappears inother guises.Inthissection wewillseethat
+thesteps used tosolve asystem oftheform Ax=bcanbeused tofactor amatrix .The
+factorization isparticularly useful when ithastheform A=LU,where Lislower triangular
+andUisupper triangular .Although notallmatrices have thistype ofrepresentation ,many
+dothatoccur frequently intheapplication ofnumerical techniques .
+InSection 6.2wefound thatGaussian elimination applied toanarbitrary linear system
+Ax=brequires 0(n3/3)arithmetic operations todetermine x.However ,tosolve alinear
+system thatinvolves anupper -triangular system requires only backward substitution ,which
+takes0(n2)operations .The number ofoperations required tosolve alower-triangular
+system issimilar .
+Suppose that Ahasbeen factored intothetriangular form A=LU,where Lislower
+triangular andUisupper triangular .Then wecaneasily solve forxusing atwo-stepprocess .
+ First define thetemporary vector y=Uxandsolve thelower triangular system Ly=bfor
+y.Since Listriangular ,determining yfrom thisequation requires only0(n2)operations .
+ Once yisknown ,theupper triangular system Ux=yrequires only anadditional 0(n2)
+operations todetermine thesolution x.
+Solving alinear system Ax=binfactored form means that thenumber ofoperations
+needed tosolve thesystem Ax=bisreduced from0{n3/3)to0(2n2).
+Example 1Compare theapproximate number ofoperations required todetermine thesolution toa
+linear system using atechnique requiring 0(n3/3)operations andonerequiring 0(2n2)
+when n=20,n=100,andn=1000.
+Solution Table 6.3gives theresults ofthese calculations .
+Table 6.3 „ n3/3 2n2Reduction
+10 3.3x102 2x102 40%
+100 3.3x105 2x104 94%
+1000 3.3x10* 2x106 99.4%
+Astheexample illustrates ,thereduction factor increases dramatically with thesizeof
+thematrix .Notsurprisingly ,thereductions from thefactorization come atacost;determin -
+ingthespecific matrices LandUrequires 0(n3/3)operations .Butonce thefactorization
+Copyright 2012 Cengagc Learn in*.AIRight*Reserved Mayr*xbecopied.scanned .ocimplicated ,inwhole orinpar.Doctocjectronie rights.some third pur.ycontent may besuppreved rrom theeBook and/orcChaptcnM .Editorial review h*>
+deemed Cutanysuppressed content dees notmaterial yafTcct theoverall learn ireexperience .CcntJgc I.cm/inroctvev theright Mremove additional conteatatanytime i!vuhvcyjcw right*restriction*require It.6.5 Matrix Factorization 261
+isdetermined ,systems involving thematrix Acanbesolved inthissimplified manner for
+anynumber ofvectors b.
+Toobtain theLUfactorization ofannxnmatrix A:
+ useGaussian elimination tosolve alinear system oftheform Ax=b.
+ ifGaussian elimination canbeperformed without rowinterchanges ,then
+-theupper triangular matrix Uisthematrix thatresults when Gaussian elimination
+iscomplete ,
+-thelower triangular matrix LhasIsonitsmain diagonal ,andeach entry below the
+main diagonal isthemultiplier thatwasneeded toplace azero inthatentry when
+Gaussian elimination wasperformed .
+Theprocess isoutlined inthefollowing example .
+Example 2Determine theLUfactorization formatrix
+A=110 3
+2 1-1 1
+3-1-1 2-1 2 3 -1
+Solution Asystem involving thematrix Asystem wasconsidered intheIllustration of
+Section 6.2(seepage 230),where wesaw thatthesequence ofoperations
+(E2-2E x)-(E2),(£3-3Ei)-(£3),(£4-(-l)Et)-(£4,)
+followed by
+(£3—4£2)— (£3)and (£4-(-3)£2)-(£4)
+converts thesystem tothetriangular system
+*1+*2 +3*4= 4,
+-x2-*3-5x4=-7,
+3X3+13X4=13,
+-13x4=-13.
+Asaconsequence ,theupper triangular matrix inthefactorization is
+U=110 3
+0-1-1-5
+0 0 3 13
+0 0 0 -13
+Themultipliers used inGaussian elimination were
+m21=2,m3i=3,m4]=— 1,m32=4,m42=— 3,and m43=0,
+sothelower triangular matrix is
+L=1 0 0 0
+2 1 0 0
+3 410-1-301
+Copyright 2012 Cengagc Learn in*.AIRights Reserved May notbecopied ,canned ,ocimplicated ,inwhole orinpa.".Doctocjectronie rights.some third puny content may besupplied rican theeBook and/orcChapccmi .Editorial review h*>
+deemed Cutanysuppressed content does notmaterialy alTcct theoverall learning experience .('engage [.cammu reserves theright loremove additional conceal atanytime ifsubsequent nghts restrictions require IL262 C H A P T E R 6 Direct Methods forSolving Linear Systems
+Hence theLUfactorization ofAis
+1 1 0 3'
+2 1-1 1
+3-1-1 2-1 2 3-1—»ooo‘1 1 0 3‘
+210 0 o1 1 1LA
+3 410 0 0 3 13
+1-3 0 1 0 0 0-1 3
+The next example uses thefactorization intheprevious tosolve alinear system .
+Example 3Usethefactorization found inExample 2tosolve thesystem
+*1+*2 +3*4=8,
+2*1+*2-*3+*4=7,
+3*1-*2-*3+2*4=14,
+-*1+2*2+3*3-*4=-7.
+Solution Tosolve
+Ax=LUx=1 000' ’1 1 0 3'x\ 8'
+2 100 0-1-1-5 *2 7
+3 410 0 0 3 13 *3 14-1-301 0 0 0 -13 *4 -7
+wefirstintroduce thetemporary vector y=Ux.Then b=L{Ux)=L y.That is.
+1 00 0'y\"8'
+210 0 yi 7
+3 410 y$ 14-1-3 0 1 .y<.-7
+This system issolved forybyasimple forward -substitution process :
+y\=8;
+2yi+yi=7, soy2=7-2y, =-9;
+3yi+4y2+73=14,soy3=14-3yi-4y2=26;-y\-3y2+>4=-7,soy4=-7+yY+3y2=-26.
+Wethen solve Ux=yforx,thesolution oftheoriginal system ;thatis.
+'1 1 0 3'*i"8'
+0-1-1-5 *2 -9
+0 0 3 13 *3 26
+0 0 0-13 *4 -26
+Using backward substitution weobtain *4=2,*3=0,*2=— 1,*1=3.
+Theprogram LUFACT 64
+performs theLU
+Factorization .Although new matrices L=[ly]and U=[u y]areconstructed bytheprogram
+LUFACT 64,thevalues generated replace thecorresponding entries ofAthat areno
+longer needed .Thus ,thenew matrix hasentries a y=lyforeach i=2,3,...,nand
+j=1,2,...,1— 1anda y=u yforeachi=1,2,...,nandj=i+1,1+2,...,n.
+Thefactorization isparticularly useful when anumber oflinear systems involving A
+must besolved because most oftheoperations ,those involving theGaussian Elimination ,
+need tobeperformed only once.
+Copyright 2012 Cengagc Learn in*.AIRights Reversed Mayr*xbecopied.scanned .o*implicated ,inwhole orinpar.Doctocjectronie rlghtv.some third pur.yCOMCK may besuppressed rican theeBook and/orcChapccriM .Editorial review h*>
+deemed Cutany suppic-edcontent does nottnaxrUXy alTcct theoverall learning experience .('engage [.cannon reserves theright 10remove additional eonteatatanytime ifsubsequent rights restrictions require It6.5 Matrix Factorization 263
+Illustration
+Thematrix multiplication PA
+permutes rows ofA.
+Thematrix multiplication AP
+permutes columns ofA.
+Example 4Permutation Matrices
+Intheprevious discussion weassumed that Aissuch thatalinear system oftheform
+Ax=bcanbesolved using Gaussian elimination thatdoes notrequire rowinterchanges .
+From apractical standpoint ,thisfactorization isuseful only when rowinterchanges are
+notrequired tocontrol theround -offerror resulting from theuseoffinite -digit arithmetic .
+Although many systems weencounter when using approximation methods areofthistype,
+factorization modifications must bemade when rowinterchanges arerequired .Webegin
+thediscussion with theintroduction ofaclass ofmatrices thatareused torearrange ,or
+permute ,rows ofagiven matrix .
+Annxnpermutation matrix Phasprecisely oneentry ineach column andeach row
+whose value is1,andallofwhose other entries are0.
+Thematrix
+P=100
+0 0 1
+010
+isa3x3permutation matrix .Forany3x3matrix A,multiplying ontheleftbyPhasthe
+effect ofinterchanging thesecond andthird rows ofA:
+10 0'
+011 012 013 011 012 013
+0 0 1 021 022 023 = 031 032 033
+010 fl31a32 033 <22I022 023
+Similarly ,multiplying Aontheright byPinterchanges thesecond andthird columns ofA.
+There arctwouseful properties ofpermutation matrices thatrelate toGaussian elimi-
+nation .The firstofthese wasshown intheIllustration .
+ Ifk\,...,knisapermutation oftheintegers 1,...,nandthepermutation matrix P=
+[p i j]isdefined by
+fl,ifj=k,,
+[0,otherwise ,then0*1.10*1.2 * * 0*j.n
+P A=0*2.10*2.2**'0*2."
+.°kn.10*n.2 * * 0*„ ./i.
+Thesecond is
+ IfPisapermutation matrix ,then P~[exists andP"1=P1.
+Determine afactorization intheform A=(P1L)Uforthematrix
+A=0 0 -1 1
+1 1-1 2-1-1 20
+1 2 02
+Copyright 2012 Cengagc Learn in*.AIRights Reserved Mayr*xbecopied.scanned .ocimplicated ,inwhole orinpar.Doctocjectronie rights.some third puny content may besupplied ftom theeBook and/orcChapccmi .Editorial review h*>
+deemed Cutanysuppressed content does notmaterialy alTcct theoverall learning experience .('engage l.cammu reserves theright 10remove additional conceal atanytime ifsubsequent nghts restrictions require It.264 C H A P T E R 6 Direct Methods forSolving Linear Systems
+Solution Thematrix Adoes nothave anLUfactorization because an=0.However ,using
+therowinterchange (£i)++(£2),followed by(£3+E\)-(£3)and(£4-£1)-(£4),
+produces
+1 1-1 2
+0 0-1 1
+00 12*
+0110
+Then therowinterchange (£2)«->(£4),followed by(£4+£3)->(£4),gives thematrix
+'1 1-1 2 1
+00 03
+The permutation matrix associated with therowinterchanges (£j) ( £2)and (£2)«-
+(£4)is
+and'10 0 0' '0100' '010 0'
+00 0 1 10 0 0 0001
+0 0 10 0 0 10 0 0 10
+010 0 00 0 1 1 00 0
+PA=1 1-1 2
+1 2 02-1-1 2 0
+0 0-1 1
+Gaussian elimination isperformed onPAusing thesame operations asonA,except without
+therow interchanges .That is,(£2— £1)-(£2),(£3+£1)-(£3),followed by
+(£4+£3)-(£4).Thenonzero multipliers forPAarc,consequently .
+mu=1»m3i=— 1,and m43=— 1,
+andtheLUfactorization of£Ais
+PA=
+Multiplying byP~l=P*produces thefactorization1 0 0 0
+1 1 0 0
+-10 10
+0 0-1 11 1-1 2
+01 1 0
+0 0 1 2
+0 0 0 3
+A=P~l(LU)=P'(LU)=(P'L)U=0 0-1 1
+1 0 0 0-1 0 1 0
+1 1 0 0LU.
+1 1-1 2
+01 1 0
+0 0 1 2
+0 0 03
+MATLAB hasthecommand lu(A)toobtain anLUfactorization ofamatrix Ainthe
+form A=PLU ,where Uisupper triangular ,Lislower triangular ,and£isapermutation
+Copyright 2012 Cenfajc Learn in*.AIRights Reversed Mayr*xbecopied.scanned .o*implicated ,inwhole orinpar.Doctocjectronie rifhu.some third pur.ycontcir.may besupplied rican theeBook and/orcChapccriM .Editorial review h*>
+deemed Cutanysuppressed content docs nottnaxrUXy alTcct theoverall Icamir .itexperience .Ccagagc [.cannon reserves theright 10remove additional eonteatatanytime ifsubsequent rights restrictions require It.6.5 Matrix Factorization 265
+matrix .Notice thatthepermutation matrix PthatMATLAB constructs isthematrix that
+wewould callP‘.Weapply thiscommand tothematrix inExample 4byfirstdefining
+A=[00-11;11-12;-1-110;1202]
+andthen calling
+[L,U,P]=lu(A)
+MATLAB responds with
+10 00' '1 1-12' '0 0 0 1'
+11 00 01 1 0,and P=10 0 0-10 10,u= 0 0 12 0 0 10
+0 0-1 1 0 0 0 3 010 0
+Forthese matrices L,U,and P,wehave A=PL\J.
+EXERCISE SET 6.5
+1. Solve thefollowing linear systems .
+10 0‘2 3-1 X\ 2
+210 0 -2 1 X2-1-101 0 0 3 .*3 1
+20 0'111 X\ -1'
+-11 0 0 12 *2 3
+32-1 001 *3 0
+2. Factor thefollowing matrices intotheLUdecomposition withlit=1foralli.
+'2-1 1'1.012-2.132 3.104
+a. 3 3 9 b.-2.132 4.096-7.013
+3 35 3.104-7.013 0.014
+‘2 0 0 0‘
+1 1.5 0 0c.0-3 0.5 0
+2-2 1 1
+2.1756 4.0231 -2.1732 5.1967-4.0231 6.0000 0 1.1973-1.0000-5.2107 1.1111 0
+6.0235 7.0000 0 -4.1561
+3. Obtain factorizations oftheform A=P'LUforthefollowing matrices .
+a.A=
+c.A=0 2 3'
+1 1-1
+0-1 1
+1-23 0
+3-69 3
+2 1 4 1
+1-2 2-2b.A=
+d.A=1
+1
+2
+1
+1
+1
+22
+2-1
+-2-2-2
+1-1
+3
+4
+3 0
+3 1
+2-2
+3-1
+Copyright 2012 Cengagc Learn in*.AIRighto Rciceved .May rotbecopied.*-anncd.o*implicated ,inwhole orinpa.".Doctocjectronie rlghu.*wcthird pur.ycontent may besupplied ftem theeBook and/orcChaptenM .Editorial roiew h*>
+deemed Cutany Mjppic-cdcotticrti docs notnuxtlaly alTcct theoverall Icarmr .itexperience .('engage [.cammureserve*theright 10remote additional eonteatatanytime ifsubvoyjem nght >mtrictiooa require It266 C H A P T E R 6 Direct Methods forSolving Linear Systems
+4. Suppose A=P'LU,where Pisapermutation matrix ,Lisalower -triangular matrix with Isonthe
+diagonal ,andUisanupper -triangular matrix .
+a.Count thenumber ofoperations needed tocompute P'LUforagiven matrix A.
+b.Show thatifPcontains krow interchanges ,then
+delP=detP‘=(-1)*.
+c.UsedetA=delP1 detL detU— (-1)*detUtocount thenumber ofoperations fordeter -
+mining detAbyfactoring .
+d.Factor AasP'LUandusethisfactorization tocompute det/1and tocount thenumber of
+operations when
+0 2 1 4 -1 3
+1 2 -1 3 4 0
+0 1 1-1 2-1
+2 3-4 2 0 5
+1 1 1 3 0 2-1-1 2 -1 2 0
+5. UsetheLUfactorization obtained inExercise 2tosolve thefollowing linear systems .
+a.2x\- X2+*3=-1,
+3*i4-3x24-9x3=0,
+3xi4-3x24-5x3=4.
+c.2x, =3,
+X|+1.5X2 =4.5,
+3X24-0.5X3 =-6.6,b. 1.012 xi-2.132 x2+3.104 x3=1.984 ,
+-2.132 x14-4.096 x2-7.013 x3=-5.049 ,
+3.104 x1-7.013 x2+0.014 x3=-3.895 .
+2xj 2X2+ x3+x4=0.8.
+d. 2.1756 x,+4.0231 x2-2.1732 X3+5.1967 x4=17.102 ,
+-4.023 lx,+6.0000 x2 +1.1973*=-6.1593 ,
+— l.OOOOx ,-5.2107 x2+1.1111 x3 =3.0004 ,
+6.0235 xi+7.0000 x2 -4.1561 x4=0.0000 .
+6.6 Techniques forSpecial Matrices
+Although thischapter hasbeen concerned primarily with theeffective application ofGauss -
+ianelimination forfinding thesolution toalinear system ofequations ,many oftheresults
+have wider application .Itmight besaid thatGaussian elimination isthehubabout which
+thechapter revolves ,butthewheel itself isofequal interest andhasapplication inmany
+forms inthestudy ofnumerical methods .Inthissection weconsider some matrices thatare
+ofspecial types ,forms thatwillbeused inother chapters ofthebook.
+Each main diagonal entry ina
+strictly diagonally dominant
+matrix hasamagnitude thatis
+strictly greater than thesum of
+themagnitudes ofalltheother
+entries inthatrow.Strict Diagonal Dominance
+Thenxnmatrix Aissaid tobestrictly diagonally dominant when
+|a„ |>^2lfl«ylholds foreach i=1,2,...,n.
+7-1.
+j#
+Copyright 2012 Cc«£»fcLearn in*.AIRights Reserved Mayr*xbecopied.scanned .o*implicated ,inwhole orinpar.Doctoelectronic rights.some third pur.ycontent may besuppteved rrom theeBook and/orcChaptcnM .Editorial tesiew h*>
+deemed Cutany suppic-cdcontent does notmaterial yalTcct theovera’.IIcamir*experience .Ccagagc [.cammureserves thety-ht10remote additional conceal atanytime ifsubvcqjem rights restrictions requite It6.6 Techniques forSpecial Matrices 267
+Illustration C o n s i d e r t h em a t r i c e s
+‘72 0' '6 4-3"
+35-1 a n d B= 4-2 0
+05-6 -3 0 1
+T h enonsymmetric matrix Aisstrictly diagonally dominant because
+|7|>|2|+|0|,|5|>|3|+|-1|,and|-6|>|0|+|5|.
+Thesymmetric matrix Bisnotstrictly diagonally dominant because ,forexample ,inthe
+firstrowtheabsolute value ofthediagonal element is|6|<|4|+1-3|=7.Itisinteresting
+tonote thatA'isnotstrictly diagonally dominant because themiddle rowofAris(25 5],
+nor,ofcourse ,isBlbecause B‘=B.
+Strictly Diagonally Dominant Matrices
+Astrictly diagonally dominant matrix Ahasaninverse .Moreover ,Gaussian elimination
+canbeperformed onanylinear system oftheform Ax=btoobtain itsunique solution
+without roworcolumn interchanges ,andthecomputations arestable with respect tothe
+growth ofround-offerror.
+Positive Definite Matrices
+Thename positive definite refers Amatrix Aispositive definite ifitissymmetric andifx'Ax>0forevery n-dimensional
+tothefactthatthenumber x'Ax column vector X^0.
+must bepositive whenever x^o. Using thedefinition todetermine whether amatrix ispositive definite canbedifficult .
+Fortunately ,there aremore easily verified criteria foridentifying members thatareandare
+notofthisimportant class.
+Positive Definite Matrix Properties
+IfAisannxnpositive definite matrix ,then
+(i)Ahasaninverse ;
+(ii)an>0foreach i=1,2,. ..,n\
+(iii)maxi <kj<n\akj\<max^*|a«|;
+(iv)(atj)2<auajj foreach i^j.
+Ourdefinition ofpositive definite requires thematrix tobesymmetric ,butnotallauthors
+make thisrequirement .Forexample ,Golub andVanLoan [GV],astandard reference in
+matrix methods ,requires only thatx'Ax>0foreach nonzero vector x.Matrices thatwe
+callpositive definite arecalled symmetric positive definite in[GV].Keep thisdiscrepancy
+inmind ifyouareusing material from other sources .
+The next result parallels thestrictly diagonally dominant result presented previously .
+Copyright 2012 Cengagc Learn in*.AIRights Reserved Mayr*xbecopied.scanned .ocimplicated ,inwhole orinpar.Doctocjectronie rights.some third puny content may besupplied rican theeBook and/orcChapccmi .Editorial review h*>
+deemed Cutanysuppressed content does notmaterialy alTcct theoverall learning experience .('engage l.cammu reserves theright 10remove additional conceal atanytime ifsubsequent nghts restrictions require It.268 C H A P T E R 6 Direct Methods forSolving Linear Systems
+Positive Definite Matrix Equivalences
+Thefollowing areequivalent foranynxnsymmetric matrix A:
+(i)Aispositive definite .
+(ii)Gaussian elimination without row interchanges canbeperformed onthelin-
+earsystem Ax=bwith allpivot elements positive .(This ensures that the
+computations arestable with respect tothegrowth ofround -offerror .)
+(iii)Acanbefactored intheform LL\where Lislower triangular with positive
+diagonal entries .
+(iv)Acanbefactored intheform LDL\where Lislower triangular with Ison
+itsdiagonal and Disadiagonal matrix with positive diagonal entries .
+(v)Foreach i=1,2,. . .,n,wehave
+detan a12
+<221a22au
+<*2i
+>0.
+<2,i <2,2 <2„ 
+The next examples illustrate portions ofthisresult .First wewillconsider (v).
+Example 1Show thatthesymmetric matrix
+ispositive definite .
+Solution WehaveA=2-1 0-1 2-1
+0-1 2
+det[2]=2>0,det
+and
+det2-1 0-1 2-1
+0-1 22det2-1-1 2
+2-1-1 2=4-1=3>0,
+-(-l)d e t-1-1
+0 2
+=2(4— 1)+(— 2+0)=4>0,
+Theprogram LDLFCT 65
+performs theLDV
+Factorization .so,by(v),Aispositive definite .
+The next example illustrates how theLDL 'factorization ofapositive definite matrix
+described in(iv)oftheresult isformed .
+Example 2Determine theLDL1factorization ofthepositive definite matrix
+A=4-1 1-1 4.25 2.75
+1 2.75 3.5
+Copyright 2012 Cc«£»fcLearn in*.AIR.(huReversed Mayr*xbecopied ,canned ,o*duplicated.»whole o tmpan .Doctoelectronic rifhu.vomc third pony contcac may besJJppre ^tedftem theeBook and/orcCh<xcn»l.Editorial roiew h*>
+deemed CutanyMpprcucd content dee>notnuxtiily alTca theoverall Icamir .itexperience .C'cnitasc[.cannon roentt therljtlu 10renxyve additional conceal atanytime i isubvoyjem nghev rotrictiooc require It6.6 Techniques forSpecial Matrices 269
+Solution TheLDV factorization hasIsonthediagonal ofthelower triangular matrix L
+soweneed tohave
+a\i <221 <231'100' 'di00‘1*21*31'
+<221 <222 <232=*21 10 0 d20 0 1*32
+<231 <232 <233*31*32 1 00*.00 1
+d\d\li\ <*i*3i
+<*i*2i <*2+</i*2i </2*32+</l*21*31
+<*1*31 <*1*21*31+<*2*32 <*1*31+<*2*32+**3
+Thus
+au:4=d]=>d]=4, fl2i:-l=<*i*2i=>/21=-0.25
+<231:l=d\l$\*31=0.25, fl22:4.25=</2+d\l\x d2=4
+a$2:2.75=</1/21/31+</2/32=>/32=0.75,033:3.5=<*1*3j+</2/32+<*3 <*3=1.
+andwehave
+1 0 0‘ ‘400' *1-0.25 0.25'
+A=LDL'=-0.25 1 0 0 40 0 1 0.75
+0.25 0.75 1 0 0 1 0 0 1
+Andrc -Louis Cholesky
+(1875-1918 )wasaFrench
+military officer involved in
+geodesy andsurveying inthe
+early 1900s.Hedeveloped this
+factorization method tocompute
+solutions toleast squares
+problems .Any symmetric matrix Aforwhich Gaussian elimination canbeapplied without row
+interchanges canbefactored intotheform LDL *.Inthisgeneral case,Lislower triangular
+with Isonitsdiagonal ,andDisthediagonal matrix with theGaussian elimination pivots
+onitsdiagonal .This result iswidely applied because symmetric matrices arecommon and
+easily recognized .
+Thefactorization inpart (iii)ofthepositive definite matrix equivalences ,thatis,A=
+LVy isknown asCholesky ’sfactorization .Thenext example shows how thisisdone.
+Example 3Determine theCholesky LLlfactorization ofthepositive definite matrix
+A=4-1 1-1 4.25 2.75
+1 2.75 3.5
+Theprogram CHOLFC 66
+performs theLV
+Factorization .Solution TheLLlfactorization does notnecessarily have Isonthediagonal ofthelower
+triangular matrix Lsoweneed tohave
+<2ll <221 <231 ^nOo*11*21*31
+fl2i <222 <232=*21*220 0/22*32
+<231 <232 <233*31*32*33 00*33.
+*?,*11*21*11*31“ 
+=*11*21*21+*22 *21*31+*22*32
+*11*31*21*31+*22*32*31+*32+*33
+Thus
+a\\\4=/,, /11=2,
+<231:1=/u/31=>/31=0.5,
+fl32:2.75=/21/31+*22*32=* *32=1*5<221:— 1=*11*21*21— — 0.5
+<222:4.25=*2,+*22=>*22=2
+<233:3.5=/32,+/f2+*323=>/33=1
+Copyright 2012 Cenfajc Learn in*.AIRights Reversed Mayr*xbecopied.scanned .o*implicated ,inwhole orinpa.".Doctocjectronie rifhu.some third pur.ycontcir.may besuppressed rican theeBook and/orcChapccriM .Editorial review h*>
+deemed Cutanysuppre-edcontent docs nottnaxrUXy alTcct theioera .1Icamir .itexperience .Ccagagc [.camonreserves theright 10remove additional eonteatatanytime iivubveqjcnt rights restrictions require It270 C H A P T E R 6 Direct Methods forSolving Linear Systems
+Thename fewaband matrix
+comes from thefactthatallthe
+nonzero entries lieinaband that
+iscentered onthemain diagonal .a n dw eh a v e
+'2 0 0' '2-0.5 0.5'
+II-JII -0.5 2 0 0 2 1.5
+0.5 1.5 1 0 0 1
+MATLAB commands areavailable forcomputing both theL D L1(ldl)andCholesky
+(LU )(chol )factorizations .Forexample ,forthematrix Adefined by
+A=[4-11;-14.25 2.75 ;12.75 3.5]
+wehave
+[L,D]=ldl(A)
+giving
+L=1.000000000000000-0.250000000000000
+0.2500000000000000
+1.000000000000000
+0.7500000000000000
+0
+D=40 0
+040
+0 0 1and
+and
+L=chol (A)
+giving
+L=2.000000000000000 -0.500000000000000 0.500000000000000
+0 2.000000000000000 1.500000000000000
+0 01.000000000000000
+Band Matrices
+Thelastspecial matrices considered areband matrices .Inmany applications ,band matrices
+arealsostrictly diagonally dominant orpositive definite .This combination ofproperties is
+very useful.
+A n n x «matrix iscalled aband matrix ifintegers pandq,with 1<p,q<w,exist
+with theproperty thataij=0whenever p<j— iorq<i— j.Thenumber pdescribes
+thenumber ofdiagonals above ,andincluding ,themain diagonal onwhich nonzero entries
+may lie.Thenumber qdescribes thenumber ofdiagonals below ,andincluding ,themain
+diagonal onwhich nonzero entries may lie.Inmost applications ,p=qandthenonzero
+entries areevenly banded about themain diagonal .
+Thebandwidth oftheband matrix isw=p+q-1,which tells ushow many ofthe
+diagonals cancontain nonzero entries .The 1issubtracted from thesumofpandqbecause
+both ofthese numbers count themain diagonal .
+Forexample ,thematrix
+'72 1 0'
+35-3-2
+04 6-1
+° °5 8
+isaband matrix with p=3andq=2,soithasbandwidth 34-2— 1=4.
+Copyright 2012 Cengagc Learn in*.AIRights Reserved Mayr*xbecopied.scanned .ocimplicated ,inwhole orinpar.Doctocjectronie rights.some third pur.ycontent may besupplied rican theeBook and/orcChapccmi .Editorial review h*>
+deemed CutanyMpprcucd content does notmaterial yalTcct theoverall Icamir*experience .Ceagage l.cammureserves theright*>remove additional conteatatanytime ifvutoeqjcni nghtv restrictions require It6.6 Techniques forSpecial Matrices 271
+Tridiagonal Matrices
+Band matrices concentrate alltheir nonzero entries about thediagonal .Two special cases
+ofband matrices thatoccur often have p=q=2and p=q=4.Matrices ofbandwidth
+3thatoccur when p=q=2arecalled tridiagonal because they have theform
+A=
+0flu a12 0*.* 0
+a2\a22 <*23
+P.032.a33.^34.
+"* .’* ,‘&n— l,/i
+*  0^n-l.n
+Theprogram CRTRLS 67
+performs Crout
+Factorization .Tridiagonal matrices willappear inChapter 11inconnection with thestudy ofpiecewise
+linear approximations toboundary -value problems .Thecase ofp=q=4willalso be
+used inthatchapter forthesolution ofboundary -value problems ,when theapproximating
+functions assume theform ofcubic splines .
+Thefactorization methods canbesimplified considerably inthecase ofband matrices
+because alarge number ofzeros appear inregular patterns .Ofparticular interest istheCrout
+factorization ,where A=LUwith Uhaving allIsonitsdiagonal .
+Crout factorization isillustrated inthefollowing example .
+Example 4Determine theCrout factorization ofthesymmetric tridiagonal matrix
+'2-1 0 0'
+-1 2 -1 0
+0-1 2-1*
+0 0-1 2
+Solution The LUfactorization ofAhastheform
+an 0 0 0 /11 0 0 0'1012 0 0
+<*21 <*22 <*23 0 0 0fN 0 1023 0
+0 <232 033 aM
+0 0 043 0440
+-3on
+nrJ?
+°O
+O0 0 1034
+0 0 0 1_
+/ll /11M12 0 0
+/21^22+^21^12^22*^23 0
+0 /32/33+^32«23 /33M34
+0 0 /43/44+/43M34
+Thus
+0»:2=1..==>111=2, 012:— l=/l l0 1 2=>0 1 2=
+<*21:1 IIKT"i111 «22*2=/22+^21^12=> /2 2=| »
+<*23*— 1=/22^23=>u23=— 3» f l32*— 1=/32=>/32=— 1.
+033:2=/33+/32W23= /33= 034:— 1=/33034=>«34=— 4,
+043: 1 IIS"115"111044:2=/444-/43W34=>/44=|-
+Copyright 2012 Cengagc Learn in*.AIRight*Reversed Mayr*xbecopied ,canned ,o*daplicated.»whole o tmpan.Doctoelectronic rtghtv.vomc third pony content may besupposed ftem theeBook and/orcCh<xcn»l.Editorial roiew h*>
+deemed Cutanyvuppicwed content dee*notmaterial yalTect theoverall learning experience .C'cngagc Learning rexrvev theright lorenxyve additional conceal atanytime i ivubveqjrni right*roiriciionv require It272 C H A P T E R 6 Direct Methods forSolving Linear Systems
+This gives theCrout factorization
+'2-1 0 0'
+K>Ooo'1-1 0 0'
+-1 2 -1 0 -1\0 0 0 1 0
+0-1 2-1 0-150 0 0 1-1
+0 0 -1 2 0o-1I. 0 0 0 1
+Thenext example shows how alinear system issolved once theCrout factorization is
+known .
+Example 5UsethisCrout factorization found inExample 4tosolve thelinear system
+2x\-x2 =1,-X\+1x2-*3 =0,- X2+2x3-*4=0,- X3+2*4=1.
+Solution First weintroduce atemporary vector y=Uxanduseforward substitution to
+solve thesystem
+This givesLy=2 0-1I0-1
+0 00 0'
+0 0>1’ ‘1'
+>2 0
+>3 0
+.>4.1
+2y\=1
+3-lyi+2yi=0
+4y24"-ys=o
+“ >3+“ >4=14*=2’1
+2
+1
+>2=
+>3=
+>4=1,3
+1
+4’
+"'-(iii1) 
+Then using backward substitution tosolve Ux=y,
+Ux='11
+20 0'*1'1
+Efcl
+—Wl-K>l
+—1
+0
+01
+02
+3
+1O
+e*i1s»1*2
+*3=
+0 0 0 1 .*4. 1
+Copyright 2012 Cenfajc Learn!#*.AIRights Reversed May ncabecopied ,canned ,ordedicated.inwhole orinpar.Doctoelectronic ilfhu.xvtic third pur.ycontent may bevuppreved rrom theeBook amtar eChaptcnnl .Editorial roiew h*>
+deemed Cutanysuppressed content does nottnaxrUXy alTect theoverall learning experience .Ccagagc [.camonreserve*theright»remose additional conteatatanytime iivutoeqjcni rights restrictions require It6.6 Techniques forSpecial Matrices 273
+gives
+*4=1,
+3 1
+*3--*4=T=>*3=1,4 4
+2 1_.^-3^=3=*12=Jl
+1 1_.
+2 2
+andx=(1,1,1,1)'.
+Thetridiagonal factorization canbeapplied whenever /,^0foreach i=1,2 n.
+Two conditions ,either ofwhich ensure thatthisistrue,arethatthecoefficient matrix ofthe
+system ispositive definite orthatitisstrictly diagonally dominant .Anadditional condition
+thatensures thismethod canbeapplied isasfollows .
+N o n s i n g u l a r T r i d i a g o n a l M a t r i c e s
+Suppose thatAistridiagonal witha ,tl_
+i^0anda,,+i/0foreach /=2,3,...,n— 1.
+IfMill >M12I*Mm.I>Kn-il,and\au\>|a,
+#,_i|+k.,+i|foreach 1=2,3
+#i— l,then Aisnonsingular ,andthevalues of/,arcnonzero foreach i=1,2,
+E X E R C I S E S E T 6 . 6
+1.
+2.Determine which ofthefollowing matrices are(i)symmetric ,(ii)singular ,(iii)strictly diagonally
+dominant ,and(iv)positive definite .
+a.
+c.
+e.
+R-‘2 1 0'
+030
+1 0 4
+'4 2 6'
+3 0 7-2-1-3
+'40 0 0
+6700
+91 1 10
+541 1b.
+d.
+f.
+h.-2 1
+1“ 3
+'2 1 0'
+032
+1 2 4
+'2-10‘
+-1 42
+0 2 2
+'2 3 1 2'
+-2 4-1 5
+3 7 1 . 5 1
+6-9 37
+Find afactorizaton oftheform A=LDV forthefollowing symmetric matrices :
+2-1 0' '4 1 11'
+a.A=-1 2-1h A1 3-11
+0-1 2D./i— 1-1 20
+1 1 02
+'6 2 1-1
+241 0
+1 1 4-1-1 0-1 34 1-10
+1 3-10d.A= -1-1 52
+0 0 24
+Copyright 2012 Cc«£»fcLearn in*.AIRighb Rocncd May natbecopied ,canned ,ocdaplica '.cd.»whole oempan .Doc 10electronic itfhu.*wtethird pony content may besuppressed rrom theeBook and/orcCh<xcn»l.Editorial toiew h*.
+deemed Cutanysuppressed cement dee>notmaterial yalTcct theoverall Icamir*experience .C'cnitapc [.camon reserves thety-ht10remose additional conceal atanytime i isubvoyjcm nRhts restrictions requite It274 C H A P T E R 6 Direct Methods forSolving Linear Systems
+3. Find afactorization oftheform A=LL‘forthematrices inExercise 2.
+4.
+5.
+6.
+7.
+8.Usethefactorization inExercise 2tosolve thefollowing linear systems .
+a.2*i— x2 =3,
+— X1-f2X2— *3=— 3,
+— X2+2X3=1.
+c. 4*i4-X2— *3 =7,
+X\4-3X2- X3 =8,
+xi-x2+5x3+2X4=-4,
+2x3-I-4x4=6.b.4xj4-x24-x34-x4=0.65 ,
+xi+3x2— x3-{x4=0.05 ,
+X|— X24-2X3 =0,
+Xi4-x2 4-2X4=0.5.
+d.6xi4-2x24-x3— x4=0,
+2xi4-4X24-X3 =7,
+x\4-x24-4x3-x4=-1,
+— xi — x34-3X4=— 2.
+UseCrout factorization fortridiagonal systems tosolve thefollowing linear systems .
+a. Xj— x2 =0,
+-2x,4-4X2-2X3=-1,
+— x24"2x3~1.5.
+c. 2xj— x2 =3,-x,4-2x2-x3=-3,
+— x24-2X3=1.b.3xj4-x2 =— 1,
+2x,4-4X24-x3=7,
+2X24-5x3=9.
+d. 0.5xi4-0.25 X2 =0.35 ,
+0.35x|4-0.8X2+0.4X3 =0.77 ,
+0.25 X24-x34-0.5X4=— 0.5,
+x3-2x4=-2.25 .
+LetAbethe10x10tridiagonal matrix given bya„ =2,a,j+1=ou-i=— 1,foreach i=2,. ..,9,
+anda n=ato.10=2.a i2=aio.9=— 1-Letbbethe10-dimensional column vector given by
+bx— b\Q— 1andbt=0foreach i=2,3,. . .,9.Solve Ax=busing theCrout factorization for
+tridiagonal systems .
+Suppose thatAandBarepositive definite nxnmatrices .
+a.Must — Aalsobepositive definite ?
+b.Must A'alsobepositive definite ?
+c.Must A4-Balso bepositive definite ?
+d.Must A;alsobepositive definite ?
+e.Must A-Balso bepositive definite ?
+Let
+A=1 0-1'
+01 1-1 1 a
+Find allvalues ofaforwhich
+a.Aissingular .
+b.Aisstrictly diagonally dominant .
+c.Aissymmetric .
+d.Aispositive definite .
+9. Let
+A=a 10
+P2 1
+012
+Find allvalues ofaandpforwhich
+a.Aissingular .
+b.Aisstrictly diagonally dominant .
+Copyright 2012 Cc«£»fcLearn in*.AIR.(huReversed May rotbecopied ,canned ,o*duplicated.»whole oempan.Doctoelectronic rifhu.vontc third pony content may bevuppreved Trent theeBook and/orcCh<xcn»l.Editorial roiew h*>
+deemed Cutanyvuppicwed content doev notmaterialy alTcct theoverall Icamir*experience .C'criitapeLearn xtprexrvev thertpltt lorenxyve additional conceal atanytimeiiVUHVOJJCM nphtv rotrictionv require It6.7 Survey ofMethods andSoftware 275
+c. Aissymmetric .
+d.Aispositive definite .
+10. Suppose AandBcommute ;thatis,AB=BA.Must A'andBalso commute ?
+11. Inapaper byDorn andBurdick [DoBJ ,itisreported that theaverage wing length thatresulted
+from mating three mutant varieties offruit flies (Drosophila melanogaster )canbeexpressed inthe
+symmetric matrix form
+1.59 1.69 2.13
+1.69 1.31 1.72
+2.13 1.72 1.85
+whereatJdenotes theaverage wing length ofanoffspring resulting from themating ofamale oftype
+iwith afemale oftype j.
+a.What physical significance isassociated with thesymmetry ofthismatrix ?
+b.Isthismatrix positive definite ?Ifso,prove it;ifnot,findanonzero vector xforwhich xMx <0.
+6.7 Survey ofMethods andSoftware
+Inthischapter wchave looked atdirect methods forsolving linear systems .Alinear system
+consists ofnequations innunknowns expressed inmatrix notation asAx=b.These
+techniques useafinite sequence ofarithmetic operations todetermine theexact solution of
+thesystem subject only toround-offerror.Wcfound thatthelinear system Ax=bhasa
+unique solution ifandonly ifA-1exists ,which isequivalent todetA^0.Thesolution of
+thelinear system isthevector x=A_
+1b.
+Pivoting techniques were introduced tominimize theeffects ofround -offerror ,which
+candominate thesolution when using direct methods .Westudied partial pivoting ,scaled
+partial pivoting ,andtotal pivoting .Wcrecommend thepartial orscaled partial pivoting
+methods formost problems because these decrease theeffects ofround -offerror without
+adding much extra computation .Total pivoting should beused ifround -offerror issuspected
+tobelarge.InSection 7.6wewillseesome procedures forestimating thisround -offerror.
+Gaussian elimination wasshown toyield afactorization ofthematrix Ainto LU,where
+Lislower triangular with Isonthediagonal andUisupper triangular .(This process is
+sometimes called Doolittle ’sfactorization .)Notallnonsingular matrices canbefactored this
+way,butapermutation oftherows willalways giveafactorization oftheform PA=LU,
+where Pisthepermutation matrix used torearrange therows ofA.Theadvantage ofthe
+factorization isthatthework isreduced when solving linear systems Ax=bwith thesame
+coefficient matrix Aanddifferent vectors b.
+Factorizations takeasimpler form when thematrix Aispositive definite .Forexample ,
+theCholesky factorization hastheform A=LLl,where Lislower triangular .Asymmetric
+matrix thathasanLUfactorization canalso befactored intheform A=LDL\where
+Disdiagonal andLislower triangular with Isonthediagonal .With these factorizations ,
+manipulations involving Acanbesimplified .IfAistridiagonal ,theLUfactorization takes a
+particularly simple form ,with Uhaving Isonthemain diagonal anditsonly other nonzero
+entries onthediagonal immediately above .Inaddition ,Lhasitsonly nonzero entries
+onthemain diagonal andonthediagonal immediately below .Another important matrix
+factorization technique isthesingular value decomposition considered inSection 9.6.
+Thedirect methods arethemethods ofchoice formost linear systems .Fortridiagonal ,
+banded ,and positive definite matrices ,thespecial methods arerecommended .Forthe
+general case,Gaussian elimination orLUfactorization methods ,which allow pivoting ,are
+recommended .Inthese cases ,theeffects ofround -offerror should bemonitored .InSection
+7.6wediscuss estimating errors indirect methods .
+Copyright 2012 Cengagc Learn in*.AIR.ghtsReserved Mayr*xbecopied ,canned ,oeduplicated.»whole o tmpan.Doctoelectronic rights .some third pony content may besuppressed from theeBook and/orcClupccris !.Editorial review h*>
+deemed Cut artysuppressed content dees notmaterial'.yafTcct theoverall learnire experience .Cenitape Learning reserves theright Mremove additional conceal atanytime ifsuhsajjcni right*restrictions require It.
